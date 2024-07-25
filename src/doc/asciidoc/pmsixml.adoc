@@ -129,7 +129,7 @@ Dans la majorité des cas, il n'est pas nécessaire de fournir votre fichier
 métadonnées, les fichiers qui sont en _resource_ sont suffisants. Mais la
 possibilité existe, et permet par exemple de donner un format qui n'aurait
 pas encore été fourni par Pmsixml (il en manque encore pas mal à vrai dire,
-si il y a des volontaires pour s'occuper des fichiers HAD et PSY...).
+si il y a des volontaires pour s'occuper des fichiers HAD et PSY par exemple ...).
 
 
 == First level heading
