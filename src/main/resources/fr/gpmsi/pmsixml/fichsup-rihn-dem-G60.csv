@@ -1,0 +1,10 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+RID;Finess établissement payeur ;FINESS;9;1;9;O;A;A;NA/NA;;;
+RID;Type de fichier ;TYPFIC;3;10;12;O;A;A;NA/NA;G60 ;;
+RID;Année ;ANNEE;4;13;16;O;N;N;NA/NA;format AAAA ;;
+RID;Période ;PER;2;17;18;O;N;N;droite/zéro;12 pour M12 ;;
+RID;Finess établissement producteur ;FINESP;9;19;27;O;A;A;gauche/espace;LABO99999 si labo privé  \n99999999 si établissement de santé et Finess inconnu \nN° Finess sinon (établissement de santé)(*);;
+RID;Code Acte ;CDACT;4;28;31;O;A;A;NA/NA;Suivant le référentiel RIHN et LC publié en vigueur au moment de la réalisation de l’acte selon le codage de l’acte sur la facture \nSi pas de code détaillé, utiliser le chapitre du référentiel en annexe mentionné sur la facture \nSi pas de code alors indiquer 9999;;
+RID;Nombre ;NBACT;10;32;41;O;N;N;NA/NA;Correspond au nombre d’actes sauf si code acte 9999 alors correspond au nombre de factures;;
+RID;Montant ;MNTACT;10;42;51;O;N;N;droite/zéro;Montant total pour cet acte (si 9999 alors montant total pour ce regroupement d’actes par ce fournisseur) \n8+2 (ex : renseigner 0001000050 pour indiquer 10000,50€);;8+2
+S:;MONO;;;;;;;;;;;

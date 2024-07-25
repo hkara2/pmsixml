@@ -1,0 +1,634 @@
+
+Le format NX entraîne significativement plus de complexité que les autres
+formats PMSI.
+Pour cela, les métadonnées seront mises dans un fichier XML.
+Par contre le fichier XML est très pénible si l'on veut comparer ligne à ligne
+avec les documents fournis par l'assurance maladie.
+
+Il y a donc utilisation parfois d'un format intermédiaire, de type table qui
+correspond avec les documents AMELI, avec une étape qui va transformer et
+agréger ces documents en métadonnées XML.
+
+Elements de métadonnée XML
+
+Document de base :
+Bases Normes d'échange - 22.03.pdf
+version 22, numéro d'ordre 03
+
+disponible sur :
+https://www.ameli.fr/essonne/entreprise/documentation-technique/t2a-ccam-lpp
+
+code         description
+ENR          Enregistrement
+@TYPENR       Type enregistrement (ex : enregistrement de type 999)
+@NRUB         Numéro de rubrique
+@NSEQ         Numéro de séquence. Si "1", alors il n'y aura que 1 enregistrement possible et obligatoire. Sinon de la forme x-y, par ex 0-1 ou 0-99, ou 1-99.  
+
+CHAMP        Métatonnée pour un champ
+@NOMPLEIN    Nom entier du champ (correspond à la colonne "champs")
+@NOM         Nom XML et en base de données du champ. Si un export en DBF existe dans AMELI, chercher le champ à cet endroit.
+@TYPE        Type A (alpha), N (numérique), D (date seule), DT (date + temps)
+@LNG         Longueur totale admise
+@ECH         Echelle ("Scale") : nombre de chiffre décimaux derrière la virgule, correspond à 2 lorsqu'on a "8+2" dans la description
+@PRESENCE    Présence : O (obligatoire), F (facultatif)
+@REMARQUES   Correspond à la colonne "remarques"
+@DEFINITION  Correspond à la colonne "définition/utilisation"
+@UTILISATION Lettres donnant l'utilisation : STCI ([S]aisis sur un support de facturation, Présents en domaine production pour consultation [T]ransactionnel (poste technicien), Présents en domaine production pour [C]ontrôle avant paiement, Présents en domaine [I]nformationnel)
+
+
+Exemple :
+
+Enregistrement code reference LPP
+<ENR NOM="LPP_FICHE_TOT" NOMLONG="Code référence LPP" TYP="101" RUB="01">
+  <CHAMP NOM="CODE_TIPS" NOMLONG="Code référence LPP" TYPE="A" LNG="13" ECH="1" DESCRIPTION="code référence LPP + clé" />
+  <CHAMP NOM="NOM_COURT" NOMLONG="Libellé réduit" TYPE="A" LNG="80" DESCRIPTION="Traduction en clair du code LPP" />
+  <CHAMP NOM="RMO1" NOMLONG="Numéro de référence médicale 1" TYPE="A" LNG="5" DESCRIPTION="Facultatif" />
+  <CHAMP NOM="RMO2" NOMLONG="Numéro de référence médicale 2" TYPE="A" LNG="5" DESCRIPTION="Facultatif" />
+  <CHAMP NOM="RMO3" NOMLONG="Numéro de référence médicale 3" TYPE="A" LNG="5" DESCRIPTION="Facultatif" />
+  <CHAMP NOM="RMO4" NOMLONG="Numéro de référence médicale 4" TYPE="A" LNG="5" DESCRIPTION="Facultatif" />
+  <CHAMP NOM="RMO5" NOMLONG="Numéro de référence médicale 5" TYPE="A" LNG="5" DESCRIPTION="Facultatif" />
+</ENR>
+
+On voit les noms utilisés dans le fichier AMELI au format DBF, ex :
+lpp_fiche_tot778.dbf
+On déduit que le nom de la table sera "LPP_FICHE_TOT",
+que le nom de la colonne pour "Code référence LPP" sera "CODE_TIPS",
+etc.
+
+Ex. de definition d'enregistrement de contituation qui suit l'enregistrement 101-01
+<ENR NOM="LPP_FICHE_TOT" NOMLONG="Code référence LPP" TYP="101" RUB="02" LIEN="101-01">
+  <CHAMP NOM="DATE_FIN" NOMLONG="Date fin de validité" TYPE="D" LNG="8" DESCRIPTION="LPP n°12, SSAAMMJJ – facultatif" />
+  <CHAMP NOM="AGE_MAX" NOMLONG="Age maximal" TYPE="N" LNG="3" DESCRIPTION="LPP n°13.1, Facultatif" />
+  <CHAMP NOM="TYPE_PREST" NOMLONG="Type de prestation fournie" TYPE="A" LNG="1" DESCRIPTION="LPP n°13.2, A (achat), E (entretien), L (location), etc." />
+  <CHAMP NOM="INDICATION" NOMLONG="Indication médicale" TYPE="A" LNG="1" DESCRIPTION="LPP n°4, O=Oui, N=Non" />
+  <CHAMP NOM="ARBO1" NOMLONG="Arborescence 1" TYPE="N" LNG="6" DESCRIPTION="LPP n°5, Niveau hiérarchique dans le classement LPP" />
+  <CHAMP NOM="ARBO2" NOMLONG="Arborescence 2" TYPE="N" LNG="6" DESCRIPTION="LPP n°5, Niveau hiérarchique dans le classement LPP" />
+  <CHAMP NOM="ARBO3" NOMLONG="Arborescence 3" TYPE="N" LNG="6" DESCRIPTION="LPP n°5, Niveau hiérarchique dans le classement LPP" />
+  <CHAMP NOM="ARBO4" NOMLONG="Arborescence 4" TYPE="N" LNG="6" DESCRIPTION="LPP n°5, Niveau hiérarchique dans le classement LPP" />
+  <CHAMP NOM="ARBO5" NOMLONG="Arborescence 5" TYPE="N" LNG="6" DESCRIPTION="LPP n°5, Niveau hiérarchique dans le classement LPP" />
+  <CHAMP NOM="ARBO6" NOMLONG="Arborescence 6" TYPE="N" LNG="6" DESCRIPTION="LPP n°5, Niveau hiérarchique dans le classement LPP" />
+  <CHAMP NOM="ARBO7" NOMLONG="Arborescence 7" TYPE="N" LNG="6" DESCRIPTION="LPP n°5, Niveau hiérarchique dans le classement LPP" />
+  <CHAMP NOM="ARBO8" NOMLONG="Arborescence 8" TYPE="N" LNG="6" DESCRIPTION="LPP n°5, Niveau hiérarchique dans le classement LPP" />
+  <CHAMP NOM="ARBO9" NOMLONG="Arborescence 9" TYPE="N" LNG="6" DESCRIPTION="LPP n°5, Niveau hiérarchique dans le classement LPP" />
+  <CHAMP NOM="ARBO10" NOMLONG="Arborescence 10" TYPE="N" LNG="6" DESCRIPTION="LPP n°5, Niveau hiérarchique dans le classement LPP" />  
+  <CHAMP NOM="PLACE" NOMLONG="Niveau le plus bas dans l’arborescence" TYPE="N" LNG="12" ECH="6" DESCRIPTION="LPP n°6, Place (n° ordre) dans le niveau hiérarchique du classement LPP" />
+  <CHAMP NOM="PROTHESE" NOMLONG="Code identifiant de prothèse" TYPE="A" LNG="4" DESCRIPTION="LPP n°7, Titre III uniquement" />
+  <CHAMP NOM="OLD_CODE" NOMLONG="Ancien code" TYPE="A" LNG="20" DESCRIPTION="LPP n°13, Initialisé à blanc" />
+</ENR>
+
+Ex. de définition d'enregistrement avec sous-champs, table TB03 de la CCAM :
+<ENR NOM="TB03" NOMLONG="Table TB03" TYP="003" RUB="1-99" SEQ="1-99">
+  <SOUS-ENR NOM="TB03" NBMAX="5">
+    <CHAMP NOM="GRILLE_COD" NOMLONG="GRILLE TARIFAIRE" TYPE="N" LNG="3" DESCRIPTION="Code de Grille Tarifaire à laquelle sont rattachés les champs suivants" />
+    <CHAMP NOM="COD_REGLE" NOMLONG="Règle tarifaire" TYPE="A" LNG="1" DESCRIPTION="" />
+    <CHAMP NOM="DT_DEBUT" NOMLONG="Date début" TYPE="N" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+    <CHAMP NOM="DT_FIN" NOMLONG="Date fin" TYPE="N" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+    <CHAMP NOM="COEF" NOMLONG="Coefficient" TYPE="N" LNG="4" ECH="1" DESCRIPTION="" />
+  </SOUS-ENR>
+</ENR>
+
+
+Ex. de définition d'enregistrement variable selon une valeur, table TB20 de la CCAM :
+<ENR NOM="TB20" NOMLONG="Table TB20" TYP="020" RUB="01" SEQ="1-99">
+  <SOUS-ENR NOM="TB20" NBMAX="4">
+    <CHAMP NOM="" NOMLONG="Numéro de concept" TYPE="N" LNG="2" DESCRIPTION="Valeur 01 à 22" />
+    <CHAMP NOM="" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+    <CHAMP NOM="" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+    <CHAMP NOM="" NOMLONG="Valeurs du concept" TYPE="A" LNG="10" DESCRIPTION="type et nombre variables selon le numéro de concept !" />
+    <!--
+    Selon le concept :
+- concept 01 à 02      CCAM n°9     A   1 (10 occ.)    10 occurrences de types d’acte                                                               
+- concept 03 à 05      CCAM n°12    A   2 (5 occ.)     5 occurrences de catégories médicales                                                        
+- concept 06 à 08      CCAM n°22    N   1 (10 occ.)    10 occurrences d’admissions au remboursement                                                 
+- concept 11 à 12      CCAM n°41    A   1 (10 occ.)    10 occurrences de frais de déplacement                                                       
+- concept 13 à 17, 22  CCAM n°25    N   1 (10 occ.)    10 occurrences de code « exonération TM »                                                                              
+- concept 18 à 21                   A   1 (10 occ.)    10 occurrences de "code association non prévue"
+    -->
+  </SOUS-ENR>
+</ENR>
+
+Ici il vaut mieux stocker le champ qui fait 10 caractères et faire un traitement spécial
+dans le code car je n'ai pas vu d'autres traitements de ce type.
+
+Ex. de définition d'enregistrement qui se répète, avec toujours rubrique 01 et sequence 01
+<ENR NOM="R_CONTEXT_PS" NOMLONG="Table de codification des contextes PS" TYP="085" RUB="01" SEQ="01">
+  <CHAMP NOM="COD_CONTXT" NOMLONG="Contexte PS" TYPE="N" LNG="4" DESCRIPTION="Code du Contexte PS" />
+  <CHAMP NOM="LIBELLE" NOMLONG="Libellé" TYPE="A" LNG="117" DESCRIPTION="Libellé du Contexte PS" />
+</ENR>
+
+Exemples d'enregistrements :
+
+08501010001secteur 1 adhérent, Toutes specialites medicales                                                                     
+08501010002secteur 1, Toutes specialites medicales                                                                              
+08501010003secteur 1 OC avec ou sans DP, Toutes specialites medicales                                                           
+08501010004secteur 1DP adhérent, Toutes specialites medicales                                                                   
+08501010005secteur 1DP, Toutes specialites medicales                                                                            
+08501010006secteur 2 OC, Toutes specialites medicales                                                                           
+08501010007secteur 2 adhérent, Toutes specialites medicales                                                                     
+08501010008secteur 2 ,Toutes specialites medicales                                                                              
+08501010009non conventionné, Toutes specialites medicales                                                                       
+08501010010conventionné, Chirurgiens dentistes                                                                                  
+...
+
+Exemple de définition d'enregistrements qui composent l'enregistrement final
+en plusieurs fois :
+
+CHAMPS DBF DE R_ACTE :
+COD_ACTE,C,13
+DT_MODIF,D
+MENU_COD,N,6,0
+FRAIDP_COD,C,1
+REMBOU_COD,N,1,0
+TYPE_COD,N,1,0
+COD_STRUCT,C,13
+NOM_COURT,C,70
+NOM_LONG,C,254
+NOM_LONG0,C,254
+NOM_LONG1,C,254
+NOM_LONG2,C,254
+NOM_LONG3,C,254
+NOM_LONG4,C,254
+NOM_LONG5,C,254
+NOM_LONG6,C,254
+NOM_LONG7,C,254
+NOM_LONG8,C,254
+NOM_LONG9,C,254
+NOM_LONGA,C,254
+NOM_LONGB,C,254
+NOM_LONGC,C,254
+NOM_LONGD,C,254
+NOM_LONGE,C,254
+SEXE,N,1,0
+DT_CREATIO,D
+DT_FIN,D
+ENTENTE,C,1
+DT_EFFET,D
+DT_ARRETE,D
+DT_JO,D
+MFIC_PLACE,N,13,6
+PRECEDENT,C,13
+SUIVANT,C,13
+
+Séquence dans la doc :
+
+101 01 01 Code de l'acte A1 (début)
+101 02 01 Code de l'acte A1 (suite et fin)
+101 03 01 Code de l'acte A1 (suite et fin)
+101 04 01 50 premières classes de DMT
+101 04 02 3 dernières classes de DMT
+101 50 01 Début du libellé long pour A1
+101 50 02 Suite du libellé long pour A1
+101 50 03 Suite et fin du libellé long pour A1
+101 51 01 30 premières occurrences de conditions générales pour A1
+101 51 02 4 dernières occurrences de conditions générales pour A1
+101 52 01 1ère note pour A1
+101 52 02 Suite et fin de la 1ère note pour A1
+101 52 01 2ème note pour A1
+110 01 01 Historique 1 pour A1 (début)
+120 01 01 9 premières procédures
+120 01 02 3 dernières procédures
+130 01 01 8 premiers codes incompatibles
+130 01 02 8 codes incompatibles suivants
+130 01 03 4 derniers codes incompatibles
+140 01 01 Forfaits CMUC autorisés
+140 01 02 Forfaits CMUC autorisés
+110 01 01 Historique 2 pour A1 (début)
+130 01 01 7 codes incompatibles
+
+<ENR NOM="" NOMLONG="CODE DE L'ACTE" TYP="101" RUB="01" SEQ="01">
+  <DESCRIPTION>
+    L’enregistrement de type 101 et de rubrique 01 est obligatoire et présent une seule fois
+    pour chacun des codes de l'acte. Il identifie le code de l'acte ainsi que ses informations
+    stables à destination de la production et/ou de l’informationnel.
+    Ces occurrences sont triées par code de l'acte croissant.
+  </DESCRIPTION>
+  <CHAMP NOM="" NOMLONG="Code de l'acte" TYPE="A" LNG="13" DESCRIPTION="CCAM n°1, Code de l'acte CCAM" />
+  <CHAMP NOM="" NOMLONG="Libellé court" TYPE="A" LNG="70" DESCRIPTION="CCAM n°7, Traduction en clair du code de l'acte" />
+  <CHAMP NOM="" NOMLONG="Type d'acte" TYPE="N" LNG="1" DESCRIPTION="CCAM n°9, Caractère associable d'un acte :\n0 – acte isolé\n1 – procédure\n2 – acte complémentaire\nSexe compatible CCAM n°15 N 1 Facultatif\n- 1 : homme\n- 2 : femme\n" />
+  <CHAMP NOM="" NOMLONG="Date de création" TYPE="N" LNG="8" DESCRIPTION="CCAM n°18, Format SSAAMMJJ" />
+  <CHAMP NOM="" NOMLONG="Date de fin" TYPE="N" LNG="8" DESCRIPTION="CCAM n°19,Facultatif – format SSAAMMJJ" />
+</ENR>
+
+<ENR NOM="" NOMLONG="CODE DE L'ACTE" TYP="101" RUB="02" SEQ="01" COMPLETE="101-01-01">
+  <DESCRIPTION>
+    L’enregistrement de type 101 et de rubrique 02 est obligatoire et présent une seule fois
+    pour chacun des codes de l'acte. Il identifie les informations stables du code de l’acte à
+    destination de la production et/ou de l’informationnel.
+  </DESCRIPTION>
+  <SOUS-ENR MIN="1" MAX="10">
+    <CHAMP NOM="" NOMLONG="Nature d'assurance permise" TYPE="A" LNG="2" DESCRIPTION="CCAM n°30.1, 1ère occurrence obligatoire : AS (maladie), AT (accident du travail), MA, PS, DC , PM" />
+  </SOUS-ENR>
+  <CHAMP NOM="" NOMLONG="Frais de déplacement" TYPE="A" LNG="1" DESCRIPTION="CCAM n°41, A (autorise des frais de déplacement), B (autorise des indemnités de déplacement), C, I" />
+</ENR>
+
+<ENR NOM="" NOMLONG="CODE DE L'ACTE" TYP="101" RUB="03" SEQ="01" COMPLETE="101-01-01">
+  <DESCRIPTION>
+    L’enregistrement de type 101 et de rubrique 03 est obligatoire et présent une seule fois
+    pour chacun des codes de l'acte. Il identifie les informations stables du code de l’acte à
+    destination de la production et/ou de l’informationnel.
+  </DESCRIPTION>
+  <SOUS-ENR MIN="0" MAX="10" NOM="" NOMLONG="Niveaux d'arborescence">
+    <CHAMP NOM="" NOMLONG="Arborescence" TYPE="N" LNG="6" DESCRIPTION="CCAM n°16, Niveau hiérarchique dans le classement CCAM" />
+  </SOUS-ENR>
+  <CHAMP NOM="" NOMLONG="Place dans l'arborescence" TYPE="N" LNG="12" ECH="6" DESCRIPTION="CCAM n°17, Place (n° ordre) dans le niveau hiérarchique du classement CCAM" />
+  <CHAMP NOM="" NOMLONG="Code structuré de l’acte" TYPE="A" LNG="13" DESCRIPTION="CCAM n°5, Facultatif" />
+  <CHAMP NOM="" NOMLONG="Code de l’acte précédent" TYPE="A" LNG="13" DESCRIPTION="CCAM n°49, Facultatif" />
+  <CHAMP NOM="" NOMLONG="Code de l’acte suivant" TYPE="A" LNG="13" DESCRIPTION="CCAM n°50, Facultatif" />
+</ENR>
+
+<ENR NOM="" NOMLONG="CODE DE L'ACTE" TYP="101" RUB="04" SEQMIN="01" SEQMAX="99" COMPLETE="101-01-01">
+  <DESCRIPTION>
+    L’enregistrement de type 101 et de rubrique 04 est facultatif. Il identifie les informations
+    stables du code l’acte à destination de la production et/ou de l’informationnel.
+    S’il y a plus de 50 occurrences de classes de DMT autorisées pour le code de l’acte, un
+    enregistrement de même type est créé avec un numéro de séquence incrémenté de 1,
+    sachant qu’il peut évoluer de 01 à 99. Il est donc possible d’associer jusqu’à 50 * 99 =
+    4950 classes de DMT à un code de l’acte.
+  </DESCRIPTION>
+  <SOUS-ENR MIN="0" MAX="50">
+    <CHAMP NOM="" NOMLONG="Classe de DMT autorisé" TYPE="A" LNG="2" DESCRIPTION="CCAM n°41.1, Classes de Discipline Médico-Tarifaire autorisée pour la réalisation de l’acte" />
+  </SOUS-ENR>
+</ENR>
+
+<ENR NOM="" NOMLONG="CODE DE L'ACTE" TYP="101" RUB="50" SEQMIN="01" SEQMAX="99" ETEND="101-01-01">
+  <DESCRIPTION>
+    L’enregistrement de type 101 et de rubrique 50 est obligatoire. Il identifie l'information
+    stable "libellé long" du code de l'acte.
+    Si le libellé long contient plus de 100 caractères, un enregistrement de même type est
+    créé avec un numéro de séquence incrémenté de 1, pouvant évoluer de 01 à 99. Il est
+    donc possible d’associer jusqu’à 100 * 99 = 9900 caractères pour un libellé long.
+  </DESCRIPTION>
+  <CHAMP NOM="" NOMLONG="Libellé long" TYPE="A" LNG="100" DESCRIPTION="CCAM n°8, Fractionnement du libellé exhaustif du code de l'acte" />
+</ENR>
+
+<ENR NOM="" NOMLONG="" TYP="101" RUB="50" SEQ="01">
+  <CHAMP NOM="" NOMLONG="" TYPE="" LNG="" DESCRIPTION="" />
+</ENR>
+
+<ENR NOM="" NOMLONG="CODE DE L'ACTE" TYP="101" RUB="51" SEQMIN="01" SEQMAX="99" ETEND="101-01-01">
+  <DESCRIPTION>
+    L’enregistrement de type 101 et de rubrique 51 est facultatif. Il identifie l'information
+    stable "Conditions générales" du code de l'acte.
+    Si le code de l'acte comporte plus de 30 conditions générales, un enregistrement de
+    même type est créé avec un numéro de séquence incrémenté de 1, pouvant évoluer de
+    01 à 99. Il est donc possible d’associer jusqu’à 30 * 99 = 2970 conditions générales à un
+    code de l'acte.
+    Remarque : le texte associé à chaque condition générale est présent dans les tables de
+    codification du fichier (voir enregistrement correspondant)
+  </DESCRIPTION>
+  <REPETITION NOM="R_ACTE_COND_GEN" NOMLONG="" MIN="00" MAX="30">
+    <CHAMP NOM="CONDGE_COD" NOMLONG="Code Condition générale" TYPE="N" LNG="4" DESCRIPTION="CCAM n°10, Code de la condition générale appliquée à l'acte" />
+  </REPETITION>
+</ENR>
+
+<ENR NOM="" NOMLONG="Historique niveau code de l’acte" TYP="110" RUB="01" SEQ="01" LIEN="101-01-01">
+  <DESCRIPTION>
+    Cet enregistrement regroupe les informations concernant les données historisées relatives à un code de l'acte.
+    La présence d’au moins un enregistrement de type 110 et de rubrique 01 par code de l'acte est impérative.
+    S’il y a plus d’un historique, un enregistrement de même type est créé. Il est donc possible d’associer jusqu’à 99 historiques à un code de l’acte.
+    Si plusieurs historiques sont présents, ils sont présents dans l’ordre des dates d’effet décroissantes .
+  </DESCRIPTION><!--HK: ce sont bien tout le temps des 110-01-01 dans le fichier-->
+  <CHAMP NOM="" NOMLONG="Date d'effet" TYPE="D" LNG="8" DESCRIPTION="CCAM n°26, Sous la forme SSAMMJJ" />
+  <CHAMP NOM="" NOMLONG="Date de l’arrêté ministériel" TYPE="D" LNG="8" DESCRIPTION="CCAM n°27, Sous la forme SSAAMMJJ" />
+  <CHAMP NOM="" NOMLONG="Date de publication au J.O." TYPE="D" LNG="8" DESCRIPTION="CCAM n°28, Sous la forme SSAAMMJJ" />
+  <CHAMP NOM="" NOMLONG="Admission au remboursement" TYPE="N" LNG="1" DESCRIPTION="CCAM n°22, 1 : acte remboursable\n2 : acte non remboursable\n3 : acte remboursable ou non suivant circonstances" />
+  <CHAMP NOM="" NOMLONG="Entente préalable" TYPE="A" LNG="1" DESCRIPTION="CCAM n°24, O = oui, N = non" />
+  <SOUS-ENR MIN="1" MAX="5" NOM="" NOMLONG="Codes exonération du ticket modérateur" DESCRIPTION="1ère occurrence obligatoire : 1, 2, 3, 4 , 5, 7\n2ème occurrence facultative ou à 7\n3ème, 4ème et 5ème occurrences actuellement à zéro">
+    <CHAMP NOM="" NOMLONG="Code exonération du ticket modérateur" TYPE="N" LNG="1" DESCRIPTION="CCAM n°25, 1, 2, 3, 4 , 5, 7" />
+  </SOUS-ENR>
+  <SOUS-ENR MIN="1" MAX="10" NOM="" NOMLONG="Classes spécialités prescripteur permises" DESCRIPTION="1ère occurrence obligatoire, autres occurrences facultatives">
+    <CHAMP NOM="" NOMLONG="Classe 'spécialité prescripteur permise'" TYPE="A" LNG="2" DESCRIPTION="CCAM n°31, Classe de la spécialité autorisée à prescrire l’acte" />
+  </SOUS-ENR>
+  <SOUS-ENR MIN="0" MAX="10" NOM="" NOMLONG="Types de forfait" DESCRIPTION="Facultatif">
+    <CHAMP NOM="" NOMLONG="Type de forfait" TYPE="A" LNG="1" DESCRIPTION="CCAM n°34, type de forfait (technique ou consommable) applicable à l'acte." />
+  </SOUS-ENR>
+</ENR>
+
+<ENR NOM="" NOMLONG="Procédures" TYP="120" RUB="01" SEQMIN="01" SEQMAX="99" LIEN="110-01-01">
+  <DESCRIPTION>
+    Cet enregistrement, qui est facultatif, regroupe toutes les procédures auxquelles le code de l’acte appartient.
+    Ces informations sont historisées et rattachées à une date d'effet via l'enregistrement 110-01-01 les précédant
+    S’il y a plus de 8 procédures, un enregistrement de même type est créé avec un numéro de séquence incrémenté de 1, sachant qu’il peut évoluer de 01 à 99. Il est donc possible d’associer jusqu’à 8 * 99 = 792 procédures à un code l’acte.
+    Les occurrences sont triées par procédure croissante.
+  </DESCRIPTION>
+  <REPETITION MIN="0" MAX="8" NOM="" NOMLONG="Procédures" DESCRIPTION="Procédures auxquelles le code de l’acte appartient.">
+    <CHAMP NOM="" NOMLONG="Procédure" TYPE="A" LNG="13" DESCRIPTION="CCAM n°9.1, Procédure à laquelle le code de l’acte appartient." />
+  </REPETITION>
+</ENR>
+
+--------------------------------------------------------------------------------
+
+
+Liaison entre ENR et entité XML générée
+
+Ajout à l'enregistrement  : COMPLETE=""
+  Chaque champ est ajouté en tant que nouveau champ, si il y avait déjà un champ de même nom, ce champ est ajouté à nouveau.
+  Si la valeur qui écrase est différente, un message est émis.
+  
+Ajout à l'enregistrement  : ETEND=""
+  L'enregistrement est ajoute en tant que tel,
+  Exemple :
+  101-01-01 : Code de l'acte, ex : JKFA029 (hystérect. part. +annexect. +suspens post. +cervicocystopexie laparo)
+  Est suivi un peu plus loin par :
+  1015001Hystérectomie subtotale avec annexectomie unilatérale ou bilatérale, suspension postérieure du col d                     
+  1015002e l'utérus [colposuspension] et cervicocystopexie indirecte au ligament pectinéal [de Cooper], par l                     
+  1015003aparotomie               
+  Dans la définition, on a : ETEND="101-01-01" avec un champ LIBELLE_LONG
+  Donc lors de la lecture du 1015001 il y aura création du champ LIBELLE_LONG dans l'enregistrement 1010101 du JKFA029
+  Lors de la lecture du 1015002 le contenu du champ LIBELLE_LONG sera mis à la suite du contenu
+  Idem pour le 1015003.       
+  Pour les enregistrements 10152, ils peuvent survenir plusieurs fois.
+  Ex :
+  101520103Avec ou sans : résection partielle de la trompe utérine                                                                
+  101520113Indication : femme présentant un à trois myomes maximum dont la taille reste inférieure à 10 cm pour                   
+  101520213 le plus gros, n'ayant plus de désir de grossesse et pour laquelle cet abord est le plus simple
+  La première ligne est une note de type 03, avec pour contenu "Avec ou sans : résection partielle de la trompe utérine"
+  La deuxième ligne est une note de type 13, avec pour contenu "Indication : femme présentant un à trois myomes maximum dont la taille reste inférieure à 10 cm pour"
+  La troisième ligne est la suite de la ligne précédente, avec SEQ à 02 et pour contenu " le plus gros, n'ayant plus de désir de grossesse et pour laquelle cet abord est le plus simple"
+  Ex :
+  Pour des enregistrements TB60 Enregistrement « Table de codification des activités» - type 060, tous
+  les enregistrements ont rub 01 et seq 01, on observe par exemple les lignes suivantes :
+  060010111° activité chir/med                                                                                                    
+  060010122° activité chir/med                                                                                                    
+  060010133° activité chir/med                                                                                                    
+  06001014anesthésie                                                                                                              
+  06001015circulation extracorporelle [CEC]                                                                                       
+  061010199Valeur sans signification                                                                                              
+  -> il faut créer une collection "maitre" ?
+  Ex :
+  Pour des enregistrement 110, ils sont tous de rubrique 01 et sequence 01. Ex :
+  11001012022040120210922202109251N10000TS                                                                                        
+  11001012018010120170927201712011N10000TS                                                                                        
+  11001012017061520110726201212071N10000TS                                                                                        
+  11001012015010120110726201212071N10000TS                                                                                        
+  11001012013070120130408201305311N10000TS                                                                                        
+  11001012011012520101116201012261N10000TS
+  -> je les mets en "lien" ?                                                                                        
+  
+  
+                          
+                                                                                           
+  
+Ajout à l'enregistrement : LIEN=""
+  Un enregistrement est créé, mais relié (en tant qu'enfant) au plus récent du type donnée.
+  Ex : champ 2010101 (code activité), créé individuellement, mais ajouté en tant qu'enfant au 101-01-01
+  Et pour le champ 3010101 il sera ajouté en tant qu'enfant au 201-01-01.  
+
+Fusion à l'enregistrement courant à l'aide des SEQ (le plus souvent pour completer les libelles) : FUSION="092-01"
+
+Extention des champs d'un enregistrement, par exemple pour compléter le libellé d'un acte : ETEND="101-01-01"
+Lorsqu'on étend un champ, si il y a une répétition nommée, cela veut dire qu'on ajoute dans
+la collection du champ en question.
+Par exemple :
+
+1010101AALA004      implant. sscut 1générateur stimul. céréb.                             002005030100000000                    
+1010201ASATMASG            A                                                                                                    
+1010301000001000004000001000000000000000000000000000000000000000000000006000000                                                 
+1015001Implantation souscutanée d'un générateur de stimulation cérébrale                                                        
+1015101000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+101520117Facturation: ne peut pas être facturé dans le cadre de la stimulation corticale cérébrale                              
+11001012022040120210922202109251N10000TS                                                                                        
+1200101AAKA001      AELB001                                                                                                     
+11001012018010120170927201712011N10000TS                                                                                        
+1200101AAKA001      AELB001                                                                                                     
+11001012016031720151216201602161N10000TS                                                                                        
+1200101AAKA001      AELB001                                                                                                     
+
+
+--------------------------------------------------------------------------------
+
+Exemple d'une séquence complète de déclaration d'un acte :
+
+1010101AAJH002      évac. hématome céréb. non trauma transcrân. guid scan                 002005030100000000                    
+1010201ASATMASG            N                                                                                                    
+1010301000001000002000001000004000000000000000000000000000000000000000006000000                                                 
+1015001Évacuation d'hématome intracérébral non traumatique, par voie transcrânienne avec guidage scanograph                     
+1015002ique                                                                                                                     
+1015101000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+11001012022040120210922202109251N10000TS                                                                                        
+11001012018010120170927201712011N10000TS                                                                                        
+11001012017061520110726201212071N10000TS                                                                                        
+11001012015010120110726201212071N10000TS                                                                                        
+11001012011012520101116201012261N10000TS                                                                                        
+11001012007122820071221200712271N10000TS                                                                                        
+11001012007091220070725200707251N10000TS                                                                                        
+11001012005090120050718200507181N10000TS                                                                                        
+11001012005032520050311200503111N10000TS                                                                                        
+1300101ABHB001      ABHB002      ACQH001      ACQH002      ACQH003      ACQH004      ACQK001      AFLB006                       
+1300102AFLB007      GELD002      GELD004      GELE004                                                                           
+20101011                                                                                                                        
+2100101202204012021092220210925FJKPSTU   99TS                  ADC                                                              
+2100101201801012017092720171201FJKPSTU   99TS                  ADC                                                              
+2100101201706152011072620121207FJKPSTU   99TS                  ADC                                                              
+2100101201501012011072620121207FJKPSU    99TS                  ADC                                                              
+2100101201101252010111620101226FJKPSU    99TS                  ADC                                                              
+2100101200712282007122120071227FJKPSU    99TS                  ADC                                                              
+2100101200709122007072520070725FJKPSU    99TS                  ADC                                                              
+2100101200509012005071820050718FJKPSU    99TS                  ADC                                                              
+2100101200503252005031120050311FU          TS                  ADC                                                              
+3010101000000000                                                                                                                
+30150010251Y                                                                                                                    
+3100101202204012021092220210925005.3000000 1030103010301030000000                                                               
+3200101003025080004025080005025080006025080007025080008025080009025080010025080011025080012025080013025080014025080015025080    
+3200102016025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100102201801012017092720171201005.3000000 1000100010001000000000                                                               
+3200101003025080004025080005025080006025080007025080008025080009025080010025080011025080012025080013025080014025080015025080    
+3200102016025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100103201706152011072620121207005.3000000 1000100010001000000000                                                               
+3200101001025080002025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100104201501012011072620121207005.3000000 1000100010001000000000                                                               
+3200101001025080002025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100105201101252010111620101226005.3000000 1000100010001000000000                                                               
+3200101000025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100106200712282007122120071227005.3000000 1000100010001000000000                                                               
+3200101000025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100107200709122007072520070725005.3000000 1000100010001000000000                                                               
+3200101000025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100108200509012005071820050718005.3000000 1000100010001000000000                                                               
+3200101000025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100109200503252005031120050311005.3000000 1000100010001000000000                                                               
+3200101000025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+350010120220401000000000000                                                                                                     
+350010220180101000000000000                                                                                                     
+350010320170615000000000000                                                                                                     
+350010420150101000000000000                                                                                                     
+350010520110125000000000000                                                                                                     
+350010620071228000000000000                                                                                                     
+350010720070912000000000000                                                                                                     
+350010820050901000000000000                                                                                                     
+350010920050325000000000000                                                                                                     
+399010100032                                                                                                                    
+299010100043                                                                                                                    
+20101014                                                                                                                        
+2100101202204012021092220210925AFPSU     99TS                  ADA                                                              
+2200101GELE001      4YYYY041      4                                                                                    66       
+2100101201801012017092720171201AFPSU     99TS                  ADA                                                              
+2200101GELE001      4YYYY041      4                                                                                    66       
+2100101201706152011072620121207AFPSU     99TS                  ADA                                                              
+2200101GELE001      4YYYY041      4                                                                                    66       
+2100101201501012011072620121207AFPSU     99TS                  ADA                                                              
+2200101GELE001      4YYYY041      4                                                                                    66       
+2100101201101252010111620101226AFPSU     99TS                  ADA                                                              
+2200101GELE001      4YYYY041      4                                                                                    66       
+2100101200712282007122120071227AFPSU     99TS                  ADA                                                              
+2200101GELE001      4YYYY041      4                                                                                    66       
+2100101200709122007072520070725AFPSU     99TS                  ADA                                                              
+2200101GELE001      4YYYY041      4                                                                                    66       
+2100101200509012005071820050718AFPSU     99TS                  ADA                                                              
+2200101GELE001      4YYYY041      4                                                                                    66       
+2100101200503252005031120050311AFU         TS                  ADA                                                              
+2200101GELE001      4YYYY041      4                                                                                    66       
+3010101000000000                                                                                                                
+30150010104Y                                                                                                                    
+3100101202204012021092220210925005.3000000 1030103010301030000000                                                               
+3200101003023155004023155005023155006023155007023155008023155009023155010023155011023155012023155013023155014023155015023155    
+3200102016023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100102201801012017092720171201005.3000000 1000100010001000000000                                                               
+3200101003023155004023155005023155006023155007023155008023155009023155010023155011023155012023155013023155014023155015023155    
+3200102016023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100103201706152011072620121207005.3000000 1000100010001000000000                                                               
+3200101001023155002023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100104201501012011072620121207005.3000000 1000100010001000000000                                                               
+3200101001023155002023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100105201101252010111620101226005.3000000 1000100010001000000000                                                               
+3200101000023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100106200712282007122120071227005.3000000 1000100010001000000000                                                               
+3200101000023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100107200709122007072520070725005.3000000 1000100010001000000000                                                               
+3200101000021325000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100108200509012005071820050718005.3000000 1000100010001000000000                                                               
+3200101000018580000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+3100109200503252005031120050311005.3000000 1000100010001000000000                                                               
+3200101000018580000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+350010120220401000000000000                                                                                                     
+350010220180101000000000000                                                                                                     
+350010320170615000000000000                                                                                                     
+350010420150101000000000000                                                                                                     
+350010520110125000000000000                                                                                                     
+350010620071228000000000000                                                                                                     
+350010720070912000000000000                                                                                                     
+350010820050901000000000000                                                                                                     
+350010920050325000000000000                                                                                                     
+399010100032                                                                                                                    
+299010100052                                                                                                                    
+199010100113                                                                                                                    
+
+
+Idem mais avec '-' pour séparer les éléments et ': ' à la fin :
+
+101-01-01: AAJH002      évac. hématome céréb. non trauma transcrân. guid scan                 002005030100000000                    
+101-02-01: ASATMASG            N                                                                                                    
+101-03-01: 000001000002000001000004000000000000000000000000000000000000000006000000                                                 
+101-50-01: Évacuation d'hématome intracérébral non traumatique, par voie transcrânienne avec guidage scanograph                     
+101-50-02: ique                                                                                                                     
+101-51-01: 000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+110-01-01: 2022040120210922202109251N10000TS                                                                                        
+110-01-01: 2018010120170927201712011N10000TS                                                                                        
+110-01-01: 2017061520110726201212071N10000TS                                                                                        
+110-01-01: 2015010120110726201212071N10000TS                                                                                        
+110-01-01: 2011012520101116201012261N10000TS                                                                                        
+110-01-01: 2007122820071221200712271N10000TS                                                                                        
+110-01-01: 2007091220070725200707251N10000TS                                                                                        
+110-01-01: 2005090120050718200507181N10000TS                                                                                        
+110-01-01: 2005032520050311200503111N10000TS                                                                                        
+130-01-01: ABHB001      ABHB002      ACQH001      ACQH002      ACQH003      ACQH004      ACQK001      AFLB006                       
+130-01-02: AFLB007      GELD002      GELD004      GELE004                                                                           
+201-01-01: 1                                                                                                                        
+210-01-01: 202204012021092220210925FJKPSTU   99TS                  ADC                                                              
+210-01-01: 201801012017092720171201FJKPSTU   99TS                  ADC                                                              
+210-01-01: 201706152011072620121207FJKPSTU   99TS                  ADC                                                              
+210-01-01: 201501012011072620121207FJKPSU    99TS                  ADC                                                              
+210-01-01: 201101252010111620101226FJKPSU    99TS                  ADC                                                              
+210-01-01: 200712282007122120071227FJKPSU    99TS                  ADC                                                              
+210-01-01: 200709122007072520070725FJKPSU    99TS                  ADC                                                              
+210-01-01: 200509012005071820050718FJKPSU    99TS                  ADC                                                              
+210-01-01: 200503252005031120050311FU          TS                  ADC                                                              
+301-01-01: 000000000                                                                                                                
+301-50-01: 0251Y                                                                                                                    
+310-01-01: 202204012021092220210925005.3000000 1030103010301030000000                                                               
+320-01-01: 003025080004025080005025080006025080007025080008025080009025080010025080011025080012025080013025080014025080015025080    
+320-01-02: 016025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-02: 201801012017092720171201005.3000000 1000100010001000000000                                                               
+320-01-01: 003025080004025080005025080006025080007025080008025080009025080010025080011025080012025080013025080014025080015025080    
+320-01-02: 016025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-03: 201706152011072620121207005.3000000 1000100010001000000000                                                               
+320-01-01: 001025080002025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-04: 201501012011072620121207005.3000000 1000100010001000000000                                                               
+320-01-01: 001025080002025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-05: 201101252010111620101226005.3000000 1000100010001000000000                                                               
+320-01-01: 000025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-06: 200712282007122120071227005.3000000 1000100010001000000000                                                               
+320-01-01: 000025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-07: 200709122007072520070725005.3000000 1000100010001000000000                                                               
+320-01-01: 000025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-08: 200509012005071820050718005.3000000 1000100010001000000000                                                               
+320-01-01: 000025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-09: 200503252005031120050311005.3000000 1000100010001000000000                                                               
+320-01-01: 000025080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+350-01-01: 20220401000000000000                                                                                                     
+350-01-02: 20180101000000000000                                                                                                     
+350-01-03: 20170615000000000000                                                                                                     
+350-01-04: 20150101000000000000                                                                                                     
+350-01-05: 20110125000000000000                                                                                                     
+350-01-06: 20071228000000000000                                                                                                     
+350-01-07: 20070912000000000000                                                                                                     
+350-01-08: 20050901000000000000                                                                                                     
+350-01-09: 20050325000000000000                                                                                                     
+399-01-01: 00032                                                                                                                    
+299-01-01: 00043                                                                                                                    
+201-01-01: 4                                                                                                                        
+210-01-01: 202204012021092220210925AFPSU     99TS                  ADA                                                              
+220-01-01: GELE001      4YYYY041      4                                                                                    66       
+210-01-01: 201801012017092720171201AFPSU     99TS                  ADA                                                              
+220-01-01: GELE001      4YYYY041      4                                                                                    66       
+210-01-01: 201706152011072620121207AFPSU     99TS                  ADA                                                              
+220-01-01: GELE001      4YYYY041      4                                                                                    66       
+210-01-01: 201501012011072620121207AFPSU     99TS                  ADA                                                              
+220-01-01: GELE001      4YYYY041      4                                                                                    66       
+210-01-01: 201101252010111620101226AFPSU     99TS                  ADA                                                              
+220-01-01: GELE001      4YYYY041      4                                                                                    66       
+210-01-01: 200712282007122120071227AFPSU     99TS                  ADA                                                              
+220-01-01: GELE001      4YYYY041      4                                                                                    66       
+210-01-01: 200709122007072520070725AFPSU     99TS                  ADA                                                              
+220-01-01: GELE001      4YYYY041      4                                                                                    66       
+210-01-01: 200509012005071820050718AFPSU     99TS                  ADA                                                              
+220-01-01: GELE001      4YYYY041      4                                                                                    66       
+210-01-01: 200503252005031120050311AFU         TS                  ADA                                                              
+220-01-01: GELE001      4YYYY041      4                                                                                    66       
+301-01-01: 000000000                                                                                                                
+301-50-01: 0104Y                                                                                                                    
+310-01-01: 202204012021092220210925005.3000000 1030103010301030000000                                                               
+320-01-01: 003023155004023155005023155006023155007023155008023155009023155010023155011023155012023155013023155014023155015023155    
+320-01-02: 016023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-02: 201801012017092720171201005.3000000 1000100010001000000000                                                               
+320-01-01: 003023155004023155005023155006023155007023155008023155009023155010023155011023155012023155013023155014023155015023155    
+320-01-02: 016023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-03: 201706152011072620121207005.3000000 1000100010001000000000                                                               
+320-01-01: 001023155002023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-04: 201501012011072620121207005.3000000 1000100010001000000000                                                               
+320-01-01: 001023155002023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-05: 201101252010111620101226005.3000000 1000100010001000000000                                                               
+320-01-01: 000023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-06: 200712282007122120071227005.3000000 1000100010001000000000                                                               
+320-01-01: 000023155000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-07: 200709122007072520070725005.3000000 1000100010001000000000                                                               
+320-01-01: 000021325000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-08: 200509012005071820050718005.3000000 1000100010001000000000                                                               
+320-01-01: 000018580000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+310-01-09: 200503252005031120050311005.3000000 1000100010001000000000                                                               
+320-01-01: 000018580000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000    
+350-01-01: 20220401000000000000                                                                                                     
+350-01-02: 20180101000000000000                                                                                                     
+350-01-03: 20170615000000000000                                                                                                     
+350-01-04: 20150101000000000000                                                                                                     
+350-01-05: 20110125000000000000                                                                                                     
+350-01-06: 20071228000000000000                                                                                                     
+350-01-07: 20070912000000000000                                                                                                     
+350-01-08: 20050901000000000000                                                                                                     
+350-01-09: 20050325000000000000                                                                                                     
+399-01-01: 00032                                                                                                                    
+299-01-01: 00052                                                                                                                    
+199-01-01: 00113                                                                                                                    
+----------------
+000  00000001000000CODCAMCT00000001000000CCAM  NACAC20240209                        000861140107500                             
+999  00000001000000CODCAMCT00000001000000CCAM  NACAC0000882069000534008518013687013718                                          

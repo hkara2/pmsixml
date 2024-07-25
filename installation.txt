@@ -1,0 +1,6 @@
+:encoding=UTF-8:
+PMSIXML est une librairie, il n'y a pas lieu de l'installer, il faut juste
+utiliser le jar dans un projet.
+Voir le projet gpmsi, qui utilise pmsixml pour écrire des scripts qui traitent
+des fichiers PMSI.
+

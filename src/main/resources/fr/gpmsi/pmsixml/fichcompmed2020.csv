@@ -1,0 +1,12 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+FCM;Numéro FINESS d’inscription ePMSI;FINESS;9;1;9;;A;A;Gauche/Espace;;;
+FCM;Type de prestation;TYPPR;2;10;11;;A;A;Gauche/Espace;Hors ATU : 06 et sous ATU : 09;;
+FCM;Numéro administratif local de séjour;NADL;20;12;31;;A;A;Gauche/Espace;;;
+FCM;Date d'administration;DTADM;8;32;39;;N;D;Gauche/Espace;;;
+FCM;Code UCD;CUCD;15;40;54;;A;A;Gauche/Espace;;;
+FCM;Nombre administré éventuellement fractionnaire (7+3);NBADM;10;55;64;;N;N;Gauche/Espace;7+3;;7+3
+FCM;Prix d'achat multiplié par le nombre administré (7+3);PXACH;10;65;74;;N;N;Gauche/Espace;7+3;;7+3
+FCM;Validation initiale de la prescription par un centre de référence ou de compétence;VCR;1;75;75;;A;A;Gauche/Espace;1: oui, 2:Non;;
+FCM;Indication;INDIC;7;76;82;;A;A;Gauche/Espace;Obligatoire au 1er septembre 2018, pour les Hors ATU;;
+FCM;Filler;FLR83;23;83;105;;A;A;Gauche/Espace;Réservé à un usage futur;;
+S:;MONO;;;;;;;;;;;

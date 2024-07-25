@@ -1,0 +1,217 @@
+= PMSIXML
+Harry KARADIMAS <harry.karadimas@wanadoo.fr>
+3.0, July 29, 2022: documentation PMSIXML
+:toc: 
+:toc-title: Table des matières
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+Pmsixml est un projet dont le but est de rendre l'analyse et le traitement des fichiers PMSI aussi facile que de traiter un fichier XML.
+
+== Introduction
+
+Le PMSI a des origines très lointaines (début des années 80), et 
+à l'époque la façon la plus efficace de traiter les fichiers était
+d'avoir une structure à _enregistrements fixes_.
+Ce format d'enregistrements à largeur fixe est très efficace, et
+très rapide à traiter. Mais il manque cruellement de flexibilité ; si
+l'on décale un enregistrement, _cela décale tous les enregistrements
+suivants_, et il faut réécrire les programmes pour s'adapter au nouveau
+format.
+Pour les traitements statistiques ponctuels, il est suffisant
+et on entre manuellement les nouvelles positions lorsque les
+formats changent. De plus la plupart des programmes d'analyse
+statistiques ont été prévus pour pouvoir traiter ce type de données,
+on s'en est donc accomodé jusqu'à maintenant.
+
+Mais si l'on veut _automatiser_ les traitements, soit on utilise R
+et il y a des packages pour charger les métadonnées, soit on part
+de zéro (c'est à dire faire du copier-coller depuis les fichiers
+excel de l'ATIH). C'est ce qui a été fait avec PmsiXml (excepté qu'en
+2016 l'ATIH ne publiait que des fichiers PDF), et en le mettant
+en publication open source, nous espérons que cela évitera à d'autres
+d'avoir à repartir de zéro.
+
+== La structure d'un enregistrement PMSI
+
+Un enregistrement PMSI est une suite de caractères qui tient sur une
+ligne.
+Un champ de cet enregistrement est un nombre fixe de caractères,
+qui est à un endroit fixe.
+
+La description des champs et des endroits où ils peuvent être trouvés
+est maintenant publiée par l'ATIH annuellement, par exemple pour l'année
+2024 on retrouve les formats à cette adresse :
+https://www.atih.sante.fr/formats-pmsi-2024-0 .
+Il y 10 ans la situation était plus compliquée, pour avoir ces formats
+il fallait parcourir des documents disparates et publiés au format PDF,
+et recopier ces descriptions de champs à la main.
+Mais même encore maintenant, ces descriptions ne sont pas disponibles
+de façon à être analysées directement par un programme.
+
+Voici par exemple un extrait du fichier `formats_mco_2024.xlsx`, dans l'onglet "RSS non groupé format 022" :
+
+image::extrait-format-mco-2024.png[Extrait pour MCO 2024]
+
+On voit bien qu'il y a des champs fusionnés, des cellules à plusieurs lignes, en gros tout cela n'obéit pas à une structure prévisible.
+
+== La structure des métadonnées PMSI
+
+Dans Pmsixml, les métadonnées PMSI sont enregistrées au format .ods 
+(format table Libre Office), et au format .csv, avec un un nombre fixe
+de colonnes.
+Le but est d'avoir des métadonnées que l'on peut placer directement à
+côté du fichier PDF ou du fichier excel distribué par l'ATIH, et de
+pouvoir ainsi faire la vérifiation rapidement et fiablement, voire
+même de faire du copier-coller.
+
+Voici un extrati du contenu du fichier `rss022.ods` qui a été construit
+à partir des métadonnées publiées par l'ATIH :
+
+image::extrait-format-rss022.png[Extrait de rss022.xml]
+
+Quelques colonnes ont été ajoutées :
+
+.Colonnes supplémentaires
+* *Typ* : un code de type d'enregistrement ou de sous-enregistrement
+* *Nomc* : "nom court" : donne un nom unique qui permet de désigner ce champ.
+(Ce nom est arbitrairement attribué, il n'a rien à voir avec l'ATIH)
+* *TypePref* : le type préféré pour le champ. Permet de mettre un type différent
+que celui donnée par l'ATIH. Introduit aussi un type qui n'est pas donnée 
+par l'ATIH, le type D (pour les dates)
+* *Remarques* : les remarques qui sont sur le document ATIH
+* *Compteur* : lorsqu'il y a un compteur de champs, 
+* *Format* : donne des informations supplémentaires sur le format du champ.
+
+Voici l'ensemble des colonnes qui doivent être présentes dans un fichier de métadonnées pour un format PMSI :
+
+. Typ : 
+. Libellé : 
+. Nomc : 
+. Taille : 
+. Début : 
+. Fin : 
+. Obligatoire[1] : 
+. Type[2] : 
+. TypePref : 
+. Cadrage/Remplissage[3] : 
+. Remarques : 
+. Compteur : 
+. Format : 
+
+
+== Les métadonnées pour le format NX
+
+Le format NX (produit par AMELI, l'assurance-maladie obligatoire) est
+également un format où les champs occupent une position fixe, mais
+sa complexité est bien plus grande que les formats PMSI.
+
+Les métadonnées dans Pmsixml pour le format NX sont entrées dans
+un format XML, qui décrit chaque champ dans chaque enregistrement,
+mais précise également comment chaque enregistrement doit être
+ajouté, par rapport aux enregistrements précédents.
+
+``` pikchr
+box
+```
+
+== Chargement des métadonnées
+
+Les classes de Pmsixml chargent les métadonnées lorsqu'elles en ont
+besoin.
+
+Pour cela on donne à la classe un répertoire dans lequel rechercher la métadonnée nécessaire.
+Si cette métadonnée n'est pas retrouvée dans le répertoire, on la cherche alors
+en "_resource_", c'est à dire dans les fichiers qui ont été distribués avec
+pmsixml.
+
+Dans la majorité des cas, il n'est pas nécessaire de fournir votre fichier
+métadonnées, les fichiers qui sont en _resource_ sont suffisants. Mais la
+possibilité existe, et permet par exemple de donner un format qui n'aurait
+pas encore été fourni par Pmsixml (il en manque encore pas mal à vrai dire,
+si il y a des volontaires pour s'occuper des fichiers HAD et PSY...).
+
+
+== First level heading
+
+This is a paragraph with a *bold* word and an _italicized_ word.
+
+.Image caption
+image::sample-image.png[I am the image alt text.]
+
+This is another paragraph.footnote:[I am footnote text and will be displayed at the bottom of the article.]
+
+=== Second level heading
+
+.Unordered list title
+* list item 1
+** nested list item
+*** nested nested list item 1
+*** nested nested list item 2
+* list item 2
+
+This is a paragraph.
+
+.Example block title
+====
+Content in an example block is subject to normal substitutions.
+====
+
+.Sidebar title
+****
+Sidebars contain aside text and are subject to normal substitutions.
+****
+
+==== Third level heading
+
+[#id-for-listing-block]
+.Listing block title
+----
+Content in a listing block is subject to verbatim substitutions.
+Listing block content is commonly used to preserve code input.
+----
+
+===== Fourth level heading
+
+.Table title
+|===
+|Column heading 1 |Column heading 2
+
+|Column 1, row 1
+|Column 2, row 1
+
+|Column 1, row 2
+|Column 2, row 2
+|===
+
+====== Fifth level heading
+
+[quote, firstname lastname, movie title]
+____
+I am a block quote or a prose excerpt.
+I am subject to normal substitutions.
+____
+
+[verse, firstname lastname, poem title and more]
+____
+I am a verse block.
+  Indents and endlines are preserved in verse blocks.
+____
+
+== First level heading
+
+TIP: There are five admonition labels: Tip, Note, Important, Caution and Warning.
+
+// I am a comment and won't be rendered.
+
+. ordered list item
+.. nested ordered list item
+. ordered list item
+
+The text at the end of this sentence is cross referenced to <<_third_level_heading,the third level heading>>
+
+== First level heading
+
+This is a link to the https://docs.asciidoctor.org/home/[Asciidoctor documentation].
+This is an attribute reference {url-quickref}[that links this text to the AsciiDoc Syntax Quick Reference].
+

@@ -1,0 +1,11 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+RIP;Finess établissement ;FINESS;9;1;9;O;A;A;NA/NA;;;
+RIP;Type de fichier ;TYPFIC;3;10;12;O;A;A;NA/NA;G59 ;;
+RIP;Année ;ANNEE;4;13;16;O;N;N;NA/NA;format AAAA ;;
+RIP;Période ;PER;2;17;18;O;N;N;droite/zéro;12 pour M12 ;;
+RIP;Identification du bénéficiaire ;IDBEN;9;19;27;O;A;A;gauche/espace;Dans le cas de l'interne coder : INTERNE Dans le cas d'un laboratoire privé ou un cabinet libéral : coder LABO99999 Dans le cas d'un établissement tiers : noter son numéro FINESS(*) ;;
+RIP;Code de l'acte ;CDACT;4;28;31;O;A;A;NA/NA;Suivant le référentiel RIHN et LC publié en vigueur au moment de la réalisation de l’acte ;;
+RIP;Nombre d’actes réalisés ;NBAR;10;32;41;O;N;N;NA/NA;(**) ;;
+RIP;Nombre d’actes facturés ;NBAF;10;42;51;O;N;N;NA/NA;0 pour l’interne  \n Peut-être différent du « nombre réalisés » si des actes gratuits sont réalisés pour un bénéficiaire donné;;
+RIP;Montant facturé ;MNTF;10;52;61;O;N;N;droite/zéro;0 pour l’interne \n 8+2 (ex : renseigner 0001000050 pour indiquer 10000,50€);;8+2
+S:;MONO;;;;;;;;;;;

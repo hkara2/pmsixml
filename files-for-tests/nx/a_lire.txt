@@ -1,0 +1,3 @@
+CCAM1.txt
+	quelques codes et leur enregistrement pour tester les principales analyses.
+	AAFA007, YYYY061, YYYY062, ZZQX628

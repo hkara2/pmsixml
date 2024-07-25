@@ -1,0 +1,192 @@
+:encoding=UTF-8:
+
+Historique des versions :
+
+1.0 160906 hk
+    Creation. Export des rss au format csv
+
+1.1 Ajout de l'export des RSA
+
+1.2 161127 hk
+    Ajout d'un niveau supplementaire, le SLI (Session Locale d'Importation) qui
+    permet de grouper les elements explicitement.
+1.3
+1.4 170104 hk
+    Correction du bug qui ne mettait pas un "K" devant la cl� SLI.
+    Ajout du format de date fran�ais, avec une option "useidf" pour utiliser si
+    besoin le format de date international.
+1.5
+    Correction de bugs.
+    Ajout de script Groovy. 
+1.6
+    Fiabilisation de la lecture des metafichiers. Priorite des metafichiers externes
+    lorsqu'ils existent. Ajout d'une colonne de type preferee.
+    Ajout de metaproprietes pour avoir une syntaxe plus simple dans la metaprogrammation
+    Groovy
+1.6.1
+    Ajout d'un test pour voir si date vide, auquel cas FszField.getValueAsEuropeanDate
+    retournera null.
+1.6.2
+    Correction d'un bug qui empêchait d'analyser des nombres précédés d'un espace.
+1.7.0
+    Ajout de la possibilité d'enlever des élément dans un noeud, pour pouvoir enlever
+    les actes, par exemple. Ajout de code pour afficher le numero de ligne en cas d'erreur
+    dans une injection de StringTable. Ajout de code pour gérer le null dans l'injection de
+    StringTable. Implémentation de Rss2Xml. Implémentation du traitement des RHS.
+1.8.0 170726 hk
+    Ajout des formats de rss 018 et 118.
+1.8.1 170803 hk
+    Correction d'un bug de StringTable qui ne mettait pas à jour les index lorsque l'on changeait
+    une valeur dans la table.
+1.9.2 180529 hk
+    Dans CsvDestination, à la ligne 84, transformation de l'appel en : csvw.writeNext(nextLine, false);
+    pour n'avoir de guillemets que en cas de besoin.
+    Ajout du traitement des RSF-ACE au format 2017.
+1.9.3 180613 hk
+    Ajout du format vidhosp V012
+1.9.4 180803 hk
+    Ajout de la librairie Apache POI et ses dépendances, qui rajoute plus de 15 MO, mais
+    permet de produire dans les scripts des fichiers Excel xls et xlsx directement
+1.9.5 180810 hk
+    Creation du RhsWriter. Corrections sur codes de formatage en mode debug. Corrections cosmétiques.
+    Ajout des formats rhsm0b et rhsm1b.
+1.10.0 180823 hk
+    Ajout de la méthode FszField.getValueAsText(). Modification de inits.groovy pour
+    que la méthode txt<champ> renvoie getValuesAsText() plutôt que getValue().
+    Ceci casse la compatibilité des scripts puisque les valeurs sont "taillées"
+    (à l'aide de la méthode trim()) au lieu d'être laissées telles quelles.
+    Pour garder la compatibilité dans les anciens scripts, il faut changer les 
+    txtXXX en XXX.value,
+    notamment pour : txtDP,txtDR,txtTDA,txtTDAD,txtNADL,txtCCCA,txtCCCAM.
+    Par la suite on préfèrera leur version "taillée" moins sujette à erreur
+    mais il faut corriger les valeurs en base aussi. Les scripts dans
+    "groovy-samples" ont été adaptés pour tenir compte du changement.
+    Ajout d'une transformation "trim" dans les StringTransformers
+    Ajout de méthodes get/set TruncatedInputAccepted dans la plupart des
+    objets qui lisent du format fixe. Par défaut maintenant les champs tronqués sont acceptés
+    (alors qu'avant par défaut c'était le contraire).
+1.10.1 181030 hk
+    Ajout dans StringTables d'équivalents de méthodes qui prennent en argument un
+    nom de colonne au lieu du numéro de colonne.
+1.10.2 181114 hk
+    Ajout de ColumnNotFoundException qui est plus propre que de juste retourner null.
+    Ajout de métaprogrammation dans StringTable pour pouvoir utiliser les noms de
+    colonne directement dans des Closure.
+    Transformation des messages de sortie en messages de debogage pour pouvoir envoyer
+    la sortie vers stdout directement sans caractères parasites.
+1.10.3 181217 hk
+    Ajouts pour avoir un traitement plus naturel des colonnes csv, notamment un objet CsvRow qui
+    aide à avoir les valeurs par l'en-tête de colonne.
+    Ajout de CsvRow.getAt(Integer) qui permet d'utiliser à nouveau les index dans Groovy.
+    Ajout de méthodes pour améliorer l'utilisation de StringTable.
+1.10.4 190531 hk
+    Ajout d'un algorithme de phonemisation Phonex trouve sur Internet
+    Correction de méthodes, ajout de documentation.
+1.10.5 190812 hk
+    Ajout ressource anohospV013
+1.10.6 191203 hk
+    Ajout "scriptPath" dans le binding Groovy
+1.10.7 200129 hk
+    Ajout de la méthode fr.gpmsi.pmsixml.FszField.getFormattedValue() pour avoir une
+    sortie correcte formattée dans un format compatible avec le CSV des valeurs des champs.
+1.11.0 200212 hk
+    Abandon de log4j et passage en log4j2 à cause de la fin du support pour log4j
+    De ce fait changement du logging dans toutes les classes qui l'utilisaient.
+    Rétablissement des niveaux -debug avec log4j2
+    Création de la classe Log4j2Utils qui permet facilement le changement de Level d'un Logger
+    et l'ajout simple d'un FileAppender, tout cela à l'intérieur d'un script.
+    Changement du mode d'exécution des scripts ; chaque pas ("Step", c'est à dire un bloc comme
+    rss ou csv ou vh) du script est exécuté dès qu'il a été déclaré et pas à la fin du script comme
+    avant. Ceci rend l'exécution plus claire et naturelle. La variable de script "steps" existe
+    toujours mais n'a pas d'utilité. Sans doute disparaîtra-t-elle dans une version prochaine.
+    Ajout de la possibilité d'attribuer une valeur ("setter") dans un StringTableRow (auparavant
+    il n'y avait que le "getter" via Groovy).
+    Ajout d'exemple de Logs dans le répertoire "exemples_groovy". La sortie des exemples se fera dans
+    un sous-répertoire "tmp" qui sera vidé avant chaque déploiement.
+    Ajout de la variable de script userHome qui permet d'avoir plus facilement accès au répertoire .pmsixml
+    Ajout du chemin prédéfini ~/.pmsixml/scripts dans le chemin des scripts,
+    pour pouvoir ajouter des objets partagés par tous les scripts.
+    Ajout du préfixe de valeur ?p pour demander interactivement un mot de passe
+    
+1.11.1 200430 hk
+    Correction bug qui ne vérifiait pas dans la ligne CSV si la valeur était bien disponible
+    renvoie maintenant "" si le tableau n'est pas assez grand                         
+
+1.12.0 200522 hk
+    Unification de la lecture des champs ; suppression de la methode "readTwoLevels" qui était trop
+    bricolée.
+1.12.1 200605 hk
+    Ajout de methodes statiques utilitaires pour date et localdate.
+    Ajout de methodes qui renvoient des LocalDate pour se mettre à la page des nouveautés de java 8
+1.12.2 200722 hk
+    Ajout de messages d'erreur supplementaires pour les champs inexistants
+1.12.3 200812 hk
+    Changement du format de dump pour avoir plus d'informations.
+1.12.4 201202 hk
+    Ajout de possibilité de définir pour le csv le caractere d'echappement (esc) et de delimiteur
+    de texte (quote).
+    210517 hk
+    Ajout de StringUtils pour avoir isEmpty(), isTrimEmpty() 
+1.12.5 210825 hk
+    Ajout du constructeur StringTable(name, file)
+1.12.6 211001 hk
+    Ajout de la ressource infoum1 pour gérer les autorisations d'UM pour GENRSA
+1.13.1 211011 hk
+    Changement du comportement du lanceur de script qui lance maintenant des exceptions.
+    (auparavant le code de retour etait 0 meme si le script s'arrêtait avec une exception)
+1.14.1 211123 hk           
+    Possibilité de chaîner les ScriptStep les uns derrière les autres
+    grâce à la possibilité de déclarer une étable enfant.
+    Ajout de la possibilite de mettre directement un Reader et/ou un Writer
+    dans un ScriptStep pour plus de flexibilite.
+    Changement du traitement de ScriptStep pour qu'il soit plus modulaire.
+1.14.2 211213 hk
+    Ajout du numéro de ligne dans différentes actions pour avoir le numéro de
+    la ligne concernée en cas d'erreur.
+1.14.3 220107 hk
+    Documentation supplementaire de csvrow.
+    Ajout de divers scripts drag and drop.
+    Ajout de repertoires de scripts non locaux qui sont intéressants à distribuer
+    Ajout du script d'extraction des actes d'accouchement avec les da de naissance
+    Ajout des formats de RSS 021 et 121
+1.14.4 220509 hk
+    Ajout du Vidhosp format 014
+1.14.5 220812 hk
+    Ajout du RHS format M1C
+    Verification du groupe SC dans RSA : il est bien traité. Il reste à construire un
+    cas de test pour voir si le groupe est bien traité.
+    Changement du traitement du groupe AG de RSA qui devient optionnel.
+1.14.6 221027 hk
+    Ajout des librairies apache commons io et aagbl
+2.0.1 221122 hk
+    Refactoring pour avoir tout ce qui concerne groovy dans fr.karadimas.gpmsi
+    Cela va casser les scripts pmsi actuels.
+2.0.2 230102 hk
+    Ajout rsa227
+2.1.0 230115 hk
+    Ajout du traitement du format nx
+2.1.1 230310 hk
+    Mise à jour de fichcompmed2020
+2.1.2 230503 hk
+    Ajout RSS groupés 122 et non groupés 022
+2.2.0 230512 hk
+    Ajout RSA forma 228
+2.3.0 230908 hk
+    Passage à Gradle 8.
+2.3.1 230926 hk
+    Essai d'ajout d'expression de sélection de CCAM.
+2.3.2 231107 hk
+    Ajout du 'formatage' des remarques (on remplace les \n par des retours chariot)
+    Ajout d'instructions pour mettre des valeurs dans les champs, en tenant compte du formatage des nombres,
+    du remplissage et de l'alignement.
+3.0.0 240509 hk
+    Passage sur git.
+    Changement des noms de paquet qui sont maintenant org.gpmsi.pmsixml
+    pmsixml fait maintenant partir de gpmsi, en tant que sous-projet séparé.
+    
+_
+
+
+
+
+

@@ -1,0 +1,11 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+ATU;Numéro FINESS d’inscription ePMSI ;FINESS;9;1;9;;;;Droite/Zéro;;;
+ATU;Type de prestation ;TYPPREST;2;10;11;;;;Droite/Zéro;6;;
+ATU;Numéro administratif local de séjour ;NADL;20;12;31;;;;Droite/Zéro;;;
+ATU;Date d'administration ;DAADM;8;32;39;;;;Droite/Zéro;;;
+ATU;Code UCD ;CDEUCD;15;40;54;;;;Droite/Zéro;13 caractères à renseigner conseillé ;;
+ATU;Nombre administré éventuellement fractionnaire (7+3) ;NBADM;10;55;64;;;;Droite/Zéro;7+3 ;;7+3
+ATU;Prix d'achat multiplié par le nombre administré (7+3) ;PXACH;10;65;74;;;;Droite/Zéro;7+3 ;;7+3
+ATU;Validation initiale de la prescription par un centre de référence ou de compétence ;VIREF;1;75;75;;;;Droite/Zéro;1: oui, 2:Non ;;
+ATU;Filler ;FILR76;30;76;105;;;;Gauche/Espace;Réservé à un usage futur ;;
+S:;MONO;;;;;;;;;;;

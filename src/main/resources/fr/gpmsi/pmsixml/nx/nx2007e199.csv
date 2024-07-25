@@ -1,0 +1,8 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+NX;Type d’enregistrement ;TYP;3;1;3;O;Num ;N;Droite/Zéro;Valeur ‘199’ ;;
+NX;Rubrique;RUB;2;4;5;O;Num ;N;Droite/Zéro;Valeur ‘01’ ;;
+NX;Séquence ;SEQ;2;6;7;O;Num ;N;Droite/Zéro;Valeur ‘01’ ;;
+NX;Nombre d’enregistrements « libellé » ;NEN;2;8;9;O;Num ;N;Droite/Zéro;Nombre d’enregistrements de type 101 pour le GHS/Secteur ;;
+NX;Nombre d’historiques ;NHI;3;10;12;O;Num ;N;Droite/Zéro;Nombre d’enregistrements de type 110 (historiques) pour le GHS/Secteur ;;
+NX;Inutilisé ;ZI1;116;13;128;O;Alpha ;A;Gauche/Espace;Initialisé à blanc ;;
+S:;MONO;;;;;;;;;;;

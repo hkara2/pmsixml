@@ -1,0 +1,117 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+000;Type d’enregistrement;TYENR;3;1;3;; N; N;Droite/Zéro;Valeur ‘000’;;
+000;Type d’émetteur;TYEM;2;4;5;;A;A;NA/NA;Non contrôlé;;
+000;Numéro d’émetteur;NOEM;14;6;19;;N;N;Droite/Zéro;Valeur ‘0000000100000’;;
+000;Programme émetteur;PREM;6;20;25;;A;A;NA/NA;Valeur ‘CODTIP’;;
+000;Type de destinataire;TYDEST;2;26;27;;A;A;NA/NA;Valeur ‘CT’;;
+000;Numéro de destinataire;NODEST;14;28;41;;N;N;NA/NA;Valeur ‘00000001000000’;;
+000;Programme destinataire;PRDEST;6;42;47;;A;A;NA/NA;Valeur ‘NAX210’;;
+000;Application - type d’échange;APP;2;48;49;;A;A;NA/NA;Valeur ‘NA’;;
+000;Identification du fichier;IDFIC;3;50;52;;A;A;NA/NA;Valeur ‘TIP’;;
+000;Date de création du fichier;DACRF;6;53;58;;N;D;Droite/Zéro;Sous la forme AAMMJJ;;
+000;Informations NOEMIE;INFNOEM;24;59;82;;A;A;NA/NA;Inutilisé;;
+000;Numéro chronologie;NOCHRO;5;83;87;;N;N;Droite/Zéro;Valeur > 00000;;
+000;Type de fichier;TYFIC;1;88;88;;N;N;NA/NA;Valeur ‘0’ = mise à jour, ‘1’ = fichier en annule et remplace;;
+000;Unité monétaire;UNIMON;1;89;89;;A;A;NA/NA;Valeur ‘F’ = Franc, ‘E’ = Euro;;
+000;Numéro de version de norme;NVERN;4;90;93;;N;N;Droite/Zéro;;;
+000;Zone inutilisée;ZI94;35;94;128;;A;A;NA/Espace;Initialisé à blanc;;
+10101;Type d’enregistrement;TYENR;3;1;3;;N;N;Droite/Zéro;Valeur ‘101’;;
+10101;Rubrique;RUB;2;4;5;;N;N;Droite/Zéro;Valeur ‘01’;;
+10101;Séquence;SEQ;2;6;7;;N;N;Droite/Zéro;Valeur ‘01’;;
+10101;Code référence LPP;CREF;13;8;20;;A;A;Gauche/Espace;#F12+1#code référence LPP + clé;;12+1
+10101;Libellé réduit;LIBR;80;21;100;;A;A;Gauche/Espace;Traduction en clair du code LPP;;
+10101;Numéros de référence médicale 1;NREF1;5;101;105;F;A;A;Gauche/Espace;Facultatif;;
+10101;Numéros de référence médicale 2;NREF2;5;106;110;F;A;A;Gauche/Espace;Facultatif;;
+10101;Numéros de référence médicale 3;NREF3;5;111;115;F;A;A;Gauche/Espace;Facultatif;;
+10101;Numéros de référence médicale 4;NREF4;5;116;120;F;A;A;Gauche/Espace;Facultatif;;
+10101;Numéros de référence médicale 5;NREF5;5;121;125;F;A;A;Gauche/Espace;Facultatif;;
+10101;Inutilisé;ZI126;3;126;128;;A;A;NA/Espace;Initialisé à blanc;;
+10102;Type d’enregistrement;TYENR;3;1;3;;N;N;Droite/Zéro;Valeur ‘101’;;
+10102;Rubrique;RUB;2;4;5;;N;N;Droite/Zéro;Valeur ‘02’;;
+10102;Séquence;SEQ;2;6;7;;N;N;Droite/Zéro;Valeur ‘01’;;
+10102;Date fin de validité;DFVAL;8;8;15;F;N;D;Droite/Zéro;SSAAMMJJ – facultatif;;
+10102;Age maximal;AGEMAX;3;16;18;F;N;N;Droite/Zéro;Facultatif;;
+10102;Type de prestation fournie;TYPRF;1;19;19;;A;A;Gauche/Espace;A (achat), E (entretien), L (location), etc.…;;
+10102;Indication médicale;INDMED;1;20;20;;A;A;NA/NA;O=Oui, N=Non;;
+10102;Arborescence;NH1;6;21;26;;N;N;Droite/Zéro;Niveau hiérarchique dans le classement LPP;;
+10102;Arborescence;NH2;6;27;32;;N;N;Droite/Zéro;Niveau hiérarchique dans le classement LPP;;
+10102;Arborescence;NH3;6;33;38;;N;N;Droite/Zéro;Niveau hiérarchique dans le classement LPP;;
+10102;Arborescence;NH4;6;39;44;;N;N;Droite/Zéro;Niveau hiérarchique dans le classement LPP;;
+10102;Arborescence;NH5;6;45;50;;N;N;Droite/Zéro;Niveau hiérarchique dans le classement LPP;;
+10102;Arborescence;NH6;6;51;56;;N;N;Droite/Zéro;Niveau hiérarchique dans le classement LPP;;
+10102;Arborescence;NH7;6;57;62;;N;N;Droite/Zéro;Niveau hiérarchique dans le classement LPP;;
+10102;Arborescence;NH8;6;63;68;;N;N;Droite/Zéro;Niveau hiérarchique dans le classement LPP;;
+10102;Arborescence;NH9;6;69;74;;N;N;Droite/Zéro;Niveau hiérarchique dans le classement LPP;;
+10102;Arborescence;NH10;6;75;80;;N;N;Droite/Zéro;Niveau hiérarchique dans le classement LPP;;
+10102;Niveau le plus bas dans l’arborescence;NORDCH;12;81;92;;N;N;Droite/Zéro;#F6+6#Place (n° ordre) dans le niveau hiérarchique du classement LPP;;6+6
+10102;Code identifiant de prothèse;CIDP;4;93;96;;A;A;Gauche/Espace;Titre III uniquement;;
+10102;Inutilisé;ZI97;32;97;128;;A;A;NA/Espace;Initialisé à blanc;;
+11001;Type d’enregistrement;TYENR;3;1;3;;N;N;Droite/Zéro;Valeur ‘110’;;
+11001;Rubrique;RUB;2;4;5;;N;N;Droite/Zéro;Valeur ‘01’;;
+11001;Séquence;SEQ;2;6;7;;N;N;Droite/Zéro;Valeur ‘01’ à ‘99’;;
+11001;Date d'effet / début de validité;DDVAL;8;8;15;O;N;D;Droite/Zéro;Sous la forme SSAMMJJ;;
+11001;Date fin d'historique;DFHIS;8;16;23;;N;D;Droite/Zéro;Sous la forme SSAMMJJ, Facultatif;;
+11001;Nature de prestation;NATPR;3;24;26;;A;A;Gauche/Espace;Cf. paragraphe « Respect de la norme d’échange »;;
+11001;Top entente préalable;TOPEP;1;27;27;;A;A;NA/NA;O=Oui, N=Non;;
+11001;Date de l’arrêté ministériel;DARRM;8;28;35;;N;N;Droite/Zéro;Sous la forme SSAAMMJJ;;
+11001;Date de publication au J.O.;DPUBJO;8;36;43;;N;N;Droite/Zéro;Sous la forme SSAAMMJJ;;
+11001;Indication PU sur devis;IPUSD;1;44;44;;N;N;NA/NA;Valeur : ‘1’ si facturation hors montant précisé au LPP, ‘0’ sinon;;
+11001;Tarif de référence;TARREF;10;45;54;;N;N;Droite/Zéro;#F8+2#Tarif de référence (valeur : ‘0’ si indication PU sur facture à ‘1’);;8+2
+11001;Coefficients de majorations des DOM 1;CMDOM1;4;55;58;;N;N;Droite/Zéro;#F1+3#coefficient de majoration de tarif applicable à chacun des DOM (971,972,973 et 974) Valeur par défaut : 1;;1+3
+11001;Coefficients de majorations des DOM 2;CMDOM2;4;59;62;;N;N;Droite/Zéro;#F1+3#coefficient de majoration de tarif applicable à chacun des DOM (971,972,973 et 974) Valeur par défaut : 1;;1+3
+11001;Coefficients de majorations des DOM 3;CMDOM3;4;63;66;;N;N;Droite/Zéro;#F1+3#coefficient de majoration de tarif applicable à chacun des DOM (971,972,973 et 974) Valeur par défaut : 1;;1+3
+11001;Coefficients de majorations des DOM 4;CMDOM4;4;67;70;;N;N;Droite/Zéro;#F1+3#coefficient de majoration de tarif applicable à chacun des DOM (971,972,973 et 974) Valeur par défaut : 1;;1+3
+11001;Coefficients de majorations des DOM 5;CMDOM5;4;71;74;;N;N;Droite/Zéro;#F1+3#coefficient de majoration de tarif applicable à chacun des DOM (971,972,973 et 974) Valeur par défaut : 1;;1+3
+11001;Coefficients de majorations des DOM 6;CMDOM6;4;75;78;;N;N;Droite/Zéro;#F1+3#coefficient de majoration de tarif applicable à chacun des DOM (971,972,973 et 974) Valeur par défaut : 1;;1+3
+11001;Quantité maximale;QMAX;3;79;81;;N;N;Droite/Zéro;Quantité maximale pour une facture - 0 si pas de maximum;;
+11001;Montant maximal;MMAX;10;82;91;;N;N;Droite/Zéro;#F8+2#Montant maximal pour une facture – 0 si pas de maximum;;8+2
+11001;Prix unitaire réglementé;PUREG;10;92;101;;N;N;Droite/Zéro;#F8+2#Prix unitaire utilisé pour vérifier les montants facturés – 0 si pas de PU réglementé;;8+2
+11001;Prise en charge particulière 1;PECP1;2;102;103;;A;A;Gauche/Espace;"3 occurrences de prise en charge particulière - ""00"" par défaut";;
+11001;Prise en charge particulière 2;PECP2;2;104;105;;A;A;Gauche/Espace;"3 occurrences de prise en charge particulière - ""00"" par défaut";;
+11001;Prise en charge particulière 3;PECP3;2;106;107;;A;A;Gauche/Espace;"3 occurrences de prise en charge particulière - ""00"" par défaut";;
+11001;Inutilisé;ZI100;21;108;128;;A;A;NA/Espace;Initialisé à blanc;;
+12001;Type d’enregistrement;TYENR;3;1;3;;N;N;Droite/Zéro;Valeur ‘120’;;
+12001;Rubrique;RUB;2;4;5;;N;N;Droite/Zéro;Valeur ‘01’;;
+12001;Séquence;SEQ;2;6;7;;N;N;Droite/Zéro;Valeur ‘01’ à ‘99’;;
+12001;Code référence LPP incompatible 1;CLPPI1;13;8;20;;A;A;Gauche/Espace;;;
+12001;Code référence LPP incompatible 2;CLPPI2;13;21;33;;A;A;Gauche/Espace;;;
+12001;Code référence LPP incompatible 3;CLPPI3;13;34;46;;A;A;Gauche/Espace;;;
+12001;Code référence LPP incompatible 4;CLPPI4;13;47;59;;A;A;Gauche/Espace;;;
+12001;Code référence LPP incompatible 5;CLPPI5;13;60;72;;A;A;Gauche/Espace;;;
+12001;Code référence LPP incompatible 6;CLPPI6;13;73;85;;A;A;Gauche/Espace;;;
+12001;Code référence LPP incompatible 7;CLPPI7;13;86;98;;A;A;Gauche/Espace;;;
+12001;Code référence LPP incompatible 8;CLPPI8;13;99;111;;A;A;Gauche/Espace;;;
+12001;Code référence LPP incompatible 9;CLPPI9;13;112;124;;A;A;Gauche/Espace;;;
+12001;Inutilisé;ZI125;4;125;128;;A;A;NA/Espace;Initialisé à blanc;;
+13001;Type d’enregistrement;TYENR;3;1;3;;N;N;Droite/Zéro;Valeur ‘130’;;
+13001;Rubrique;RUB;2;4;5;;N;N;Droite/Zéro;Valeur ‘01’;;
+13001;Séquence;SEQ;2;6;7;;N;N;Droite/Zéro;Valeur ‘01’ à 99;;
+13001;Code référence LPP compatible 1;CLPPC1;13;8;20;;A;A;Gauche/Espace;;;
+13001;Code référence LPP compatible 2;CLPPC2;13;21;33;;A;A;Gauche/Espace;;;
+13001;Code référence LPP compatible 3;CLPPC3;13;34;46;;A;A;Gauche/Espace;;;
+13001;Code référence LPP compatible 4;CLPPC4;13;47;59;;A;A;Gauche/Espace;;;
+13001;Code référence LPP compatible 5;CLPPC5;13;60;72;;A;A;Gauche/Espace;;;
+13001;Code référence LPP compatible 6;CLPPC6;13;73;85;;A;A;Gauche/Espace;;;
+13001;Code référence LPP compatible 7;CLPPC7;13;86;98;;A;A;Gauche/Espace;;;
+13001;Code référence LPP compatible 8;CLPPC8;13;99;111;;A;A;Gauche/Espace;;;
+13001;Code référence LPP compatible 9;CLPPC9;13;112;124;;A;A;Gauche/Espace;;;
+13001;Inutilisé;ZI125;4;125;128;;A;A;NA/Espace;Initialisé à blanc;;
+19901;Type d’enregistrement;TYENR;3;1;3;;N;N;Droite/Zéro;Valeur ‘199’;;
+19901;Séquence;RUB;2;4;5;;N;N;Droite/Zéro;Valeur ‘01’;;
+19901;Rubrique;SEQ;2;6;7;;N;N;Droite/Zéro;Valeur ‘01’;;
+19901;Nombre d’enregistrements;NBENR;5;8;12;;N;N;Droite/Zéro;Nombre d’enregistrements de type 101 à 199 pour le code référence LPP;;
+19901;Inutilisé;ZI13;116;13;128;;A;A;NA/Espace;Initialisé à blanc;;
+999;Type d’enregistrement;TYENR;3;1;3;;N;N;Droite/Zéro;Valeur ‘999’;;
+999;Type d’émetteur;TYEM;2;4;5;;A;A;Gauche/Espace;Non contrôlé;;
+999;Numéro d’émetteur;NOEM;14;6;19;;N;N;Droite/Zéro;Valeur ‘0000000100000’;;
+999;Programme émetteur;PREM;6;20;25;;A;A;Gauche/Espace;Valeur ‘CODTIP’;;
+999;Type de destinataire;TYDEST;2;26;27;;A;A;Gauche/Espace;Valeur ‘CT’;;
+999;Numéro de destinataire;NODEST;14;28;41;;N;N;Droite/Zéro;Valeur ‘00000001000000’;;
+999;Programme destinataire;PRDEST;6;42;47;;A;A;Gauche/Espace;Valeur ‘NAX210’;;
+999;Application - type d’échange;APP;2;48;49;;A;A;Gauche/Espace;Valeur ‘NA’;;
+999;Identification du fichier;IDFIC;3;50;52;;A;A;Gauche/Espace;Valeur ‘TIP’;;
+999;Nombre total d’enregistrements;NBTOTE;8;53;60;;N;N;Droite/Zéro;Nombre d’enregistrements du fichier (types 000 et 999 compris);;
+999;Nombre de codes référence LPP;NBE101;6;61;66;;N;N;Droite/Zéro;Nombre d'enregistrements de type 101-01-01.;;
+999;Sceau du fichier;SCEAUF;10;67;76;;N;N;Droite/Zéro;Somme de Contrôle du fichier basée sur les données des enregistrements;;
+999;Inutilisé;ZI67;52;77;128;;A;A;NA/Espace;Initialisé à blanc;;
+S:;NX;;;;;;;;;;;

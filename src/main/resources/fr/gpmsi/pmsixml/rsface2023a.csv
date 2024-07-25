@@ -1,0 +1,58 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+RSFA;Type d'enregistrement;TENR;1;1;1;O;A;A;NA/NA;NA -  - Valeur=A;;
+RSFA;Numéro FINESS d’inscription ePMSI;FINESS;9;2;10;O;A;A;NA/NA;RSS non groupé -  - ;;
+RSFA;Numéro FINESS géographique;FINESG;9;11;19;O;A;A;NA/NA; -  - ;;
+RSFA;Sexe;SEXE;1;20;20;O;A;A;NA/NA;RSS non groupé -  - ;;
+RSFA;Code civilité;CCIV;1;21;21;O;N;N;NA/NA;Type 2B - 40 - Recodage : M=1/MME=2:MLE=2/SAN=3;;
+RSFA;N° immatriculation assuré;NIA;13;22;34;F;A;A;Gauche/Espace;Type 2 CP - 12 - ;;
+RSFA;Clé du n° immatriculation;CNI;2;35;36;F;A;A;NA/NA;Type 2 CP - 25 - ;;
+RSFA;Rang de bénéficiaire;RGB;3;37;39;F;A;A;NA/NA;Type 2 CP - 27 - ;;
+RSFA;N° d'entrée;NENT;9;40;48;F;A;A;NA/NA;Type 2 CP - 40 - ;;
+RSFA;N° immatriculation individuel;NII;13;49;61;F;A;A;Gauche/Espace;Type 2S CP - 50 - A renseigner si l’information est présente sur la carte Vitale, l’attestation de droits ou la prise en charge;;
+RSFA;Clé du n° immatriculation individuel;CNII;2;62;63;F;A;A;NA/NA;Type 2S CP - 63 - A prendre sur le même support que le n° immatriculation. Clé à contrôler après la saisie, cf. annexe 5 de la norme B2;;
+RSFA;Indicateur du parcours de soins;IPS;1;64;64;F;A;A;NA/NA;Type 2S CP - 121 - Valeurs acceptées {' ', A, B, D, H, J, M, N, O, R, S, T, U};;
+RSFA;Nature opération;NOP;1;65;65;F;A;A;NA/NA;Type 2 CP - 39 - ;;
+RSFA;Nature assurance;NAS;2;66;67;F;A;A;NA/NA;Type 2 CP - 77 - Valeurs acceptées {10, 13, 30, 41, 90};;
+RSFA;Type de contrat souscrit auprès d'un organisme complémentaire;TCOC;2;68;69;F;A;A;NA/NA;Type 2 CP - 117 - ;;
+RSFA;Justification d'exonération du TM;JETM;1;70;70;F;A;A;NA/NA;Type 2 CP - 79 - ;;
+RSFA;Séjour facturable à l'assurance maladie;SFA;1;71;71;O;A;A;NA/NA;Note n°1 -  - Valeurs acceptées {0, 1, 2, 3};;
+RSFA;Filler;F72;1;72;72;F;A;A;NA/NA; -  - ;;
+RSFA;Motif de non facturation à l’assurance maladie;MNFAM;1;73;73;F;N;N;Droite/Zéro;Note n°2  -  - Valeurs acceptées {' ', 1, 2, 3, 4, 5, 6, 9};;
+RSFA;Code Gd régime;CGR;2;74;75;F;A;A;NA/NA;Type 2 CP - 49 - Valeurs acceptées {' ', 10, 02, 03, 04, 05, 06, 07, 08, 09, 10, 12, 14, 15, 16, 17, 80 ,90 ,91, 92, 93, 94, 95, 96, 99};;
+RSFA;Date Naissance;DNAIS;8;76;83;O;N;D;NA/NA;Type 2 CP - 96 - Modification liée au format de la date (JJMMAAAA);;
+RSFA;Rang de naissance;RNAIS;1;84;84;F;A;A;NA/NA;Type 2 CP - 102 - ;;
+RSFA;Date d'entrée;DENT;8;85;92;O;N;D;NA/NA;Type 2 CP - 103 - Modification liée au format de la date (JJMMAAAA);;
+RSFA;Date de sortie;DSOR;8;93;100;F;N;D;NA/NA;Type 2 CP - 109 - Modification liée au format de la date (JJMMAAAA);;
+RSFA;Code postal du lieu de résidence du patient;CPLR;5;101;105;F;A;A;NA/NA;Type 2C - 91 - ;;
+RSFA;Total Base Remboursement Prestation hospitalière;TBRPH;8;106;113;F;N;N;Droite/Zéro;Type 5 CP - 42 - Total des lignes de type 3 (RSF B et P) : 6+2;;6+2
+RSFA;Total remboursable AMO Prestation hospitalières;TRAPH;8;114;121;F;N;N;Droite/Zéro;Type 5 CP - 50 - Id 6+2;;6+2
+RSFA;Total honoraire Facturé;THFACT;8;122;129;F;N;N;Droite/Zéro;Type 5 CP - 58 - Total des lignes de type 4 (RSF C et M) 6+2;;6+2
+RSFA;Total honoraire remboursable AM;THRA;8;130;137;F;N;N;Droite/Zéro;Type 5 CP - 66 - Id 6+2;;6+2
+RSFA;Total participation assuré avant OC;TPAAO;8;138;145;F;N;N;Droite/Zéro;Type 5 CP - 74 - Total des lignes de type 3 (RSF B et P) : 6+2;;6+2
+RSFA;Total remboursable OC pour les PH;TROPH;8;146;153;F;N;N;Droite/Zéro;Type 5 CP - 82 - 6+2;;6+2
+RSFA;Total remboursable OC pour les honoraires;TROHO;8;154;161;F;N;N;Droite/Zéro;Type 5 CP - 90 - 6+2;;6+2
+RSFA;Montant total facturé pour PH;MTFAPH;8;162;169;F;N;N;Droite/Zéro;Type 5 CP - 115 - 6+2;;6+2
+RSFA;Filler;F170;1;170;170;F;A;A;NA/NA; -  - ;;
+RSFA;Patient bénéficiaire de la CMU;PCMU;1;171;171;F;N;N;Droite/Zéro;NA -  - 0 : Non | 1 : Oui, laisser à vide si pas d'information;;
+RSFA;Valorisé par FIDES;VFID;1;172;172;O;A;A;NA/NA;NA -  - ;;
+RSFA;Code gestion;CGES;2;173;174;O;A;A;NA/NA;NA -  - Reporter l’information figurant dans la zone « régime obligatoire » de la carte vitale;;
+RSFA;Filler;F175;9;175;183;F;A;A;NA/NA; -  - ;;
+RSFA;N° d’organisme complémentaire;NOC;10;184;193;F;A;A;NA/NA;Type 2 CP - 119 - L’organisme obligatoire peut selon conventions régler directement la part de l’organisme complémentaire à l’établissement ou à l’assuré ou transmettre l’image de son décompte à l’organisme complémentaire. Lorsque l’établissement pratique un tiers payant sur la part complémentaire, il doit obligatoirement positionner le n° de l’organisme complémentaire, cadré à droite, et complété par des zéros à gauche, ou le top mutualiste «M » en position 128, la zone étant complétée par des blancs.;;
+RSFA;Numéro accident du travail ou date d’accident de droit commun;NAT;9;194;202;F;A;A;NA/NA;Type 2 CP - 86 - Obligatoire en cas d’accident. Lorsque la Nature d’Assurance est AT (41) : indiquer le numéro de l’AT (pour le RG, AAMMJJ + code CRAM + clé à contrôler, voir annexe 5) ou la date de l’AT (AAMMJJ, cadrée à droite et complétée par 3 zéros). Lorsque la Nature d'Assurance est AS (10 ou 13): indiquer la date d’accident de droit commun (AAMMJJ, cadrée à droite et complétée par 3 zéros);;
+RSFA;Montant total du séjour facturé au patient;MTSFP;8;203;210;F;N;N;Droite/Zéro;Facultatif Indicateur Simphonie Montant facturé au titre de la part patient;;
+RSFA;Rejet AMO;REJAMO;1;211;211;O;N;N;NA/NA;Obligatoire Indicateur Simphonie Nombre de fois où FT AMO a été rejetée (0 à 9);;
+RSFA;Date de facturation AMO;DFAMO;8;212;219;F;N;D;NA/NA;Facultatif Indicateur Simphonie Date de l’envoi de la FT AMO;;
+RSFA;Date de facturation AMC;DFAMC;8;220;227;F;N;D;NA/NA;Facultatif Indicateur Simphonie Date de l’envoi de la FT AMC;;
+RSFA;Date de facturation patient;DFPAT;8;228;235;F;N;D;NA/NA;Facultatif Indicateur Simphonie Date de l’envoi de la FT patient;;
+RSFA;Date de paiement AMO;DPAMO;8;236;243;F;N;D;NA/NA;Facultatif Indicateur Simphonie Date à laquelle la FT AMO est payée en totalité (statut S16);;
+RSFA;Date de paiement AMC;DPAMC;8;244;251;F;N;D;NA/NA;Facultatif Indicateur Simphonie Date à laquelle la FT AMC est payée en totalité (statut S16);;
+RSFA;Date de paiement patient;DPPAT;8;252;259;F;N;D;NA/NA;Facultatif Indicateur Simphonie Date à laquelle la FT patient est payée en totalité (statut S16);;
+RSFA;Statut FT AMO;SFTAMP;1;260;260;O;N;N;NA/NA;Obligatoire 0 : avant FT validée (statut S2 à S5) 1 : FT validée (statut S6 à S12, S14, S19, et S20) 2 : FT en NiNi (statut S13) 3 : FT payée (S15+S16+S17+S) 9 : sans objet;;
+RSFA;Statut FT AMC;SFTAMC;1;261;261;O;N;N;NA/NA;Obligatoire 0 : avant FT validée (statut S2 à S5) 1 : FT validée (statut S6 à S12, S14, S19, et S20) 2 : FT en NiNi (statut S13) 3 : FT payée (S15+S16+S17+S18) 9 : sans objet;;
+RSFA;Statut FT patient;SFTPAT;1;262;262;O;N;N;NA/NA;Obligatoire 0 : avant FT validée (statut S2 à S5) 1 : FT validée (statut S6 à S12, S14, S19, et S20) 2 : FT en NiNi (statut S13) 3 : FT payée (S15+S16+S17+S18) 9 : sans objet;;
+RSFA;Pays d’assurance social;PASOC;3;263;265;F;A;A;Gauche/Espace;Code INSEE à 5 chiffres, sans les deux premiers chiffres 99. Ou bien code ISO ISO 3166-1 Alpha-3. Pour renseigner cette donnée, il est important de prendre en compte le contexte assurantiel du patient (et non son pays d’origine).Par exemple, un patient français peut avoir une assurance étrangère (anglaise, américaine ou autre…). De même, un patient américain peut avoir une assurance anglaise ou autre. Le code pays à renseigner est bien le code pays de l’assurance du patient. Mettre 000 ou laisser à blanc quand l’information n’est pas disponible.;;
+RSFA;Numéro d’identification permanent du patient (IPP);IPP;20;266;285;F;A;A;Gauche/Espace;;;
+RSFA;Identifiant national de santé (INS);INS;15;286;300;F;A;A;Gauche/Espace;;;
+RSFA;ART51;ART51;1;301;301;F;A;A;Gauche/Espace;;;
+RSFA;Numéro facture;NFACT;9;302;310;F;A;A;Gauche/Espace;Type 2 CP - 30 - ;;
+S:;MONO;;;;;;;;;;;

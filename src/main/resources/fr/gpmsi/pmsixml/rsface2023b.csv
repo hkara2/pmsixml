@@ -1,0 +1,30 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+RSFB;Type d'enregistrement;TENR;1;1;1;O;A;A;Gauche/Espace;na - na - Valeur=B;;
+RSFB;Numéro FINESS d’inscription ePMSI;FINESS;9;2;10;F;A;A;Gauche/Espace;RSS non groupé - 1;;
+RSFB;Numéro FINESS géographique;FINESG;9;11;19;F;A;A;Gauche/Espace;;;
+RSFB;N° immatriculation assuré;NIA;13;20;32;F;A;A;Gauche/Espace;Type 2 CP - 12;;
+RSFB;Clé du n° immatriculation;CNI;2;33;34;F;A;A;Gauche/Espace;Type 2 CP - 25;;
+RSFB;Rang de bénéficiaire;RGB;3;35;37;F;A;A;Gauche/Espace;Type 2 CP - 27;;
+RSFB;N° d’entrée;NENT;9;38;46;F;A;A;Gauche/Espace;Type 2 CP - 40;;
+RSFB;N° immatriculation individuel;NII;13;47;59;F;A;A;Gauche/Espace;Type 2 CP - 50 - A renseigner si l’information est présente sur la carte Vitale, l’attestation de droits ou la prise en charge.;;
+RSFB;Clé du n° immatriculation individuel;CNII;2;60;61;F;A;A;Gauche/Espace;Type 2 CP - 63 - A prendre sur le même support que le n° immatriculation. Clé à contrôler après la saisie, cf. annexe 5 de la norme B2;;
+RSFB;Mode de traitement;MTT;2;62;63;F;A;A;Gauche/Espace;Type 3 CP - 39;;
+RSFB;Discipline de prestation (ex DMT);DPR;3;64;66;F;A;A;Gauche/Espace;Type 3 CP - 41;;
+RSFB;Justification exo TM;JETM;1;67;67;F;A;A;Gauche/Espace;Type 3 CP - 64;;
+RSFB;Spécialité exécutant;SPEX;2;68;69;F;A;A;Gauche/Espace;na - na - Blancs;;
+RSFB;Date des soins;DSOI;8;70;77;F;A;D;Gauche/Espace;Type 3 CP - 44 - Modification liée au format de la date (JJMMAAAA);;
+RSFB;Code acte;CACT;5;78;82;F;A;A;Gauche/Espace;Type 3 CP - 56 - 4+1;;4+1
+RSFB;Quantité;QTE;3;83;85;F;A;A;Gauche/Espace;Type 3 CP - 61 - Compléter par « 0 » devant;;
+RSFB;Coefficient;COEF;6;86;91;F;A;A;Gauche/Espace;Type 3 CP - 65 - 4+2. Attention format différent : compléter par 0 devant;;4+2
+RSFB;Type de prestation intermédiaire;TPI;1;92;92;F;A;A;Gauche/Espace;Note 1 -  - http://www.atih.sante.fr/notice-technique-pmsi-2017;;
+RSFB;Coefficient MCO;CMCO;5;93;97;F;A;A;Gauche/Espace;Type 3 CP - 71 - 1+4 changement position;;1+4
+RSFB;Dénombrement;DENB;2;98;99;F;A;A;Gauche/Espace;na - na - Blancs;;
+RSFB;Prix Unitaire;PU;7;100;106;F;A;A;Gauche/Espace;Type 3 CP - 76 - 5+2;;5+2
+RSFB;Montant Base remboursement;MBR;8;107;114;F;A;A;Gauche/Espace;Type 3 CP - 83 - 6+2;;6+2
+RSFB;Taux applicable à la prestation;TXAP;3;115;117;F;A;A;Gauche/Espace;Type 3 CP - 91;;
+RSFB;Montant Remboursable par la caisse (AMO);MRAMO;8;118;125;F;A;A;Gauche/Espace;Type 3 CP - 94 - 6+2;;6+2
+RSFB;Montant des honoraire (dépassement compris) ou Montant total de la dépense pour PH;MHOT;8;126;133;F;A;A;Gauche/Espace;Type 3 CP - 102 - 6+2;;6+2
+RSFB;Montant remboursable par l'organisme complémentaire (AMC);MRAMC;7;134;140;F;A;A;Gauche/Espace;Type 3 CP - 122 - 5+2;;5+2
+RSFB;Filler;F141;15;141;155;F;A;A;Gauche/Espace;;;
+RSFB;Numéro facture;NFACT;9;156;164;F;A;A;Gauche/Espace;Type 2 CP 30;;
+S:;MONO;;;;;;;;;;;

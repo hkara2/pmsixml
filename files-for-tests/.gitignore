@@ -1,0 +1,2 @@
+# Ignorer tout le répertoire tmp-out et son contenu
+tmp-out/**

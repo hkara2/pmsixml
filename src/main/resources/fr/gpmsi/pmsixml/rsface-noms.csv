@@ -1,0 +1,192 @@
+RSFM;Activité;ACT
+RSFL;Code acte 1;CA1
+RSFL;Code acte 2;CA2
+RSFL;Code acte 3;CA3
+RSFL;Code acte 4;CA4
+RSFL;Code acte 5;CA5
+RSFB;Code acte;CACT
+RSFC;Code acte;CACT
+RSFM;Code association d'actes non prévue;CANP
+RSFM;Code CCAM;CCAM
+RSFA;Code civilité;CCIV
+RSFA;Code gestion;CGES
+RSFA;Code Gd régime;CGR
+RSFB;Coefficient MCO;CMCO
+RSFC;Coefficient MCO;CMCO
+RSFA;Clé du n° immatriculation;CNI
+RSFB;Clé du n° immatriculation;CNI
+RSFC;Clé du n° immatriculation;CNI
+RSFH;Clé du n° immatriculation;CNI
+RSFL;Clé du n° immatriculation;CNI
+RSFM;Clé du n° immatriculation;CNI
+RSFP;Clé du n° immatriculation;CNI
+RSFA;Clé du n° immatriculation individuel;CNII
+RSFB;Clé du n° immatriculation individuel;CNII
+RSFC;Clé du n° immatriculation individuel;CNII
+RSFH;Clé du n° immatriculation individuel;CNII
+RSFL;Clé du n° immatriculation individuel;CNII
+RSFM;Clé du n° immatriculation individuel;CNII
+RSFP;Clé du n° immatriculation individuel;CNII
+RSFB;Coefficient;COEF
+RSFC;Coefficient;COEF
+RSFH;Coefficient de fractionnement;COEFF
+RSFA;Code postal du lieu de résidence du patient;CPLR
+RSFP;Code référence LPP;CRLPP
+RSFM;Code remboursement sous condition;CRSC
+RSFH;Code UCD;CUCD
+RSFM;Date de l'acte;DA
+RSFL;Date de l'acte 1;DA1
+RSFL;Date de l'acte 2;DA2
+RSFL;Date de l'acte 3;DA3
+RSFL;Date de l'acte 4;DA4
+RSFL;Date de l'acte 5;DA5
+RSFH;Date de début de séjour;DDSEJ
+RSFP;Date de début de séjour;DDSEJ
+RSFB;Dénombrement;DENB
+RSFC;Dénombrement;DENB
+RSFA;Date d'entrée;DENT
+RSFA;Date Naissance;DNAIS
+RSFB;Discipline de prestation (ex DMT);DPR
+RSFC;Discipline de prestation (ex DMT);DPR
+RSFL;Discipline de prestation (ex DMT);DPR
+RSFM;Discipline de prestation (ex DMT);DPR
+RSFB;Date des soins;DSOI
+RSFC;Date des soins;DSOI
+RSFA;Date de sortie;DSOR
+RSFC;Filler;F135
+RSFB;Filler;F141
+RSFA;Filler;F170
+RSFA;Filler;F175
+RSFA;Filler;F72
+RSFA;Numéro FINESS géographique;FINESG
+RSFB;Numéro FINESS géographique;FINESG
+RSFC;Numéro FINESS géographique;FINESG
+RSFH;Numéro FINESS géographique;FINESG
+RSFL;Numéro FINESS géographique;FINESG
+RSFM;Numéro FINESS géographique;FINESG
+RSFP;Numéro FINESS géographique;FINESG
+RSFA;Numéro FINESS d’inscription ePMSI;FINESS
+RSFB;Numéro FINESS d’inscription ePMSI;FINESS
+RSFC;Numéro FINESS d’inscription ePMSI;FINESS
+RSFH;Numéro FINESS d’inscription ePMSI;FINESS
+RSFL;Numéro FINESS d’inscription ePMSI;FINESS
+RSFM;Numéro FINESS d’inscription ePMSI;FINESS
+RSFP;Numéro FINESS d’inscription ePMSI;FINESS
+RSFA;Indicateur du parcours de soins;IPS
+RSFA;Justification d'exonération du TM;JETM
+RSFB;Justification exo TM;JETM
+RSFC;Justification exo TM;JETM
+RSFM;Modificateur 1;MA1
+RSFM;Modificateur 2;MA2
+RSFM;Modificateur 3;MA3
+RSFM;Modificateur 4;MA4
+RSFB;Montant Base remboursement;MBR
+RSFC;Montant Base remboursement;MBR
+RSFB;Montant des honoraire (dépassement compris) ou Montant total de la dépense pour PH;MHOT
+RSFC;Montant des honoraire (dépassement compris) ou Montant total de la dépense pour PH;MHOT
+RSFA;Motif de non facturation à l’assurance maladie;MNFAF
+RSFB;Montant remboursable par l'organisme complémentaire (AMC);MRAMC
+RSFC;Montant remboursable par l'organisme complémentaire (AMC);MRAMC
+RSFB;Montant Remboursable par la caisse (AMO);MRAMO
+RSFC;Montant Remboursable par la caisse (AMO);MRAMO
+RSFH;Montant total de l'écart indemnisable;MTEI
+RSFP;Montant total de l'écart indemnisable;MTEI
+RSFH;Montant total facturé TTC;MTF
+RSFP;Montant total facturé;MTF
+RSFA;Montant total facturé pour PH;MTFAPH
+RSFB;Mode de traitement;MTT
+RSFC;Mode de traitement;MTT
+RSFL;Mode de traitement;MTT
+RSFM;Mode de traitement;MTT
+RSFH;Montant unitaire de l'écart indemnisable;MUEI
+RSFP;Montant unitaire de l'écart indemnisable;MUEI
+RSFA;Nature assurance;NAS
+RSFA;Numéro accident du travail ou date d’accident de droit commun;NAT
+RSFM;N° dent 1;ND1
+RSFM;N° dent 10;ND10
+RSFM;N° dent 11;ND11
+RSFM;N° dent 12;ND12
+RSFM;N° dent 13;ND13
+RSFM;N° dent 14;ND14
+RSFM;N° dent 15;ND15
+RSFM;N° dent 16;ND16
+RSFM;N° dent 2;ND2
+RSFM;N° dent 3;ND3
+RSFM;N° dent 4;ND4
+RSFM;N° dent 5;ND5
+RSFM;N° dent 6;ND6
+RSFM;N° dent 7;ND7
+RSFM;N° dent 8;ND8
+RSFM;N° dent 9;ND9
+RSFA;N° d'entrée;NENT
+RSFB;N° d’entrée;NENT
+RSFC;N° d’entrée;NENT
+RSFH;N° d'entrée;NENT
+RSFL;Numéro d'entrée;NENT
+RSFM;N° d’entrée;NENT
+RSFP;N° d'entrée;NENT
+RSFA;N° immatriculation assuré;NIA
+RSFB;N° immatriculation assuré;NIA
+RSFC;N° immatriculation assuré;NIA
+RSFH;N° immatriculation assuré;NIA
+RSFL;N° immatriculation assuré;NIA
+RSFM;N° immatriculation assuré;NIA
+RSFP;N° immatriculation assuré;NIA
+RSFA;N° immatriculation individuel;NII
+RSFB;N° immatriculation individuel;NII
+RSFC;N° immatriculation individuel;NII
+RSFH;N° immatriculation individuel;NII
+RSFL;N° immatriculation individuel;NII
+RSFM;N° immatriculation individuel;NII
+RSFP;N° immatriculation individuel;NII
+RSFA;N° d’organisme complémentaire;NOC
+RSFA;Nature opération;NOP
+RSFH;Prix d'achat unitaire TTC;PAU
+RSFP;Prix d'achat unitaire;PAU
+RSFA;Patient bénéficiaire de la CMU;PCMU
+RSFM;Phase;PHA
+RSFB;Prix Unitaire;PU
+RSFC;Prix Unitaire;PU
+RSFL;Quantité acte 1;QA1
+RSFL;Quantité acte 2;QA2
+RSFL;Quantité acte 3;QA3
+RSFL;Quantité acte 4;QA4
+RSFL;Quantité acte 5;QA5
+RSFB;Quantité;QTE
+RSFC;Quantité;QTE
+RSFH;Quantité;QTE
+RSFP;Quantité;QTE
+RSFA;Rang de bénéficiaire;RGB
+RSFB;Rang de bénéficiaire;RGB
+RSFC;Rang de bénéficiaire;RGB
+RSFH;Rang de bénéficiaire;RGB
+RSFL;Rang de bénéficiaire;RGB
+RSFM;Rang de bénéficiaire;RGB
+RSFP;Rang de bénéficiaire;RGB
+RSFA;Rang de naissance;RNAIS
+RSFA;Sexe;SEXE
+RSFA;Séjour facturable à l'assurance maladie;SFA
+RSFB;Spécialité exécutant;SPEX
+RSFC;Spécialité exécutant;SPEX
+RSFA;Total Base Remboursement Prestation hospitalière;TBRPH
+RSFA;Type de contrat souscrit auprès d'un organisme complémentaire;TCOC
+RSFA;Type d'enregistrement;TENR
+RSFB;Type d'enregistrement;TENR
+RSFC;Type d'enregistrement;TENR
+RSFH;Type d'enregistrement;TENR
+RSFL;Type d'enregistrement;TENR
+RSFM;Type d'enregistrement;TENR
+RSFP;Type d'enregistrement;TENR
+RSFA;Total honoraire Facturé;THFACT
+RSFA;Total honoraire remboursable AM;THRA
+RSFA;Total participation assuré avant OC;TPAAO
+RSFB;Type de prestation intermédiaire;TPI
+RSFA;Total remboursable AMO Prestation hospitalières;TRAPH
+RSFP;Tarif référence LPP ou Prix Unitaire sur devis;TRLPP
+RSFA;Total remboursable OC pour les honoraires;TROHO
+RSFA;Total remboursable OC pour les PH;TROPH
+RSFC;Type d’unité fonctionnelle de consultations;TUFC
+RSFB;Taux applicable à la prestation;TXAP
+RSFC;Taux applicable à la prestation;TXAP
+RSFA;Valorisé par FIDES;VFID
+RSFM;Extension documentaire;XTD

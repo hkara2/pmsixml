@@ -1,0 +1,20 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+RSFP;Type d'enregistrement;TENR;1;1;1;O;A;A;NA/NA;na Valeur=P;;
+RSFP;Numéro FINESS d’inscription ePMSI;FINESS;9;2;10;F;A;A;NA/NA;;;
+RSFP;Numéro FINESS géographique;FINESG;9;11;19;F;A;A;NA/NA;;;
+RSFP;N° immatriculation assuré;NIA;13;20;32;F;A;A;NA/NA;Type 2 CP 12;;
+RSFP;Clé du n° immatriculation;CNI;2;33;34;F;A;A;NA/NA;Type 2 CP 25;;
+RSFP;Rang de bénéficiaire;RGB;3;35;37;F;A;A;NA/NA;Type 2 CP 27;;
+RSFP;N° d'entrée;NENT;9;38;46;F;A;A;NA/NA;Type 2 CP 40 Changement position dans le format;;
+RSFP;N° immatriculation individuel;NII;13;47;59;F;A;A;NA/NA;Type 2S CP 50 A renseigner si l’information est présente sur la carte Vitale, l’attestation de droits ou la prise en charge.;;
+RSFP;Clé du n° immatriculation individuel;CNII;2;60;61;F;A;A;NA/NA;Type 2S CP 63 A prendre sur le même support que le n° immatriculation. Clé à contrôler après la saisie, cf. annexe 5 de la norme B2;;
+RSFP;Date de début de séjour;DDSEJ;8;62;69;F;A;D;NA/NA;Type 3 CP 44 Attention format de date différent (JJMMAAAA);;
+RSFP;Code référence LPP;CRLPP;13;70;82;F;A;A;NA/NA;Type 3F 43;;
+RSFP;Quantité;QTE;2;83;84;F;A;A;NA/NA;Type 3F 70 ;;
+RSFP;Tarif référence LPP ou Prix Unitaire sur devis;TRLPP;7;85;91;F;A;A;NA/NA;Type 3F 72 5+2;;5+2
+RSFP;Montant total facturé;MTF;7;92;98;F;A;A;NA/NA;Type 3F 79 0 par défaut (5+2);;5+2
+RSFP;Prix d'achat unitaire;PAU;7;99;105;F;A;A;NA/NA;Type 3F 86 5+2;;5+2
+RSFP;Montant unitaire de l'écart indemnisable;MUEI;7;106;112;F;A;A;NA/NA;Type 3F 93 5+2;;5+2
+RSFP;Montant total de l'écart indemnisable;MTEI;7;113;119;F;A;A;NA/NA;Type 3F 100 5+2;;5+2
+RSFP;Numéro de facture;NFACT;9;120;128;F;A;A;NA/NA;Type 2 CP 30;;
+S:;MONO;;;;;;;;;;;

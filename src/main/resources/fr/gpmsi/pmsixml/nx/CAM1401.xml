@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE NX><!-- Ajouté pour ne pas avoir de warning dans Eclipse. Plus tard je ferait peut être un document .xsd pour spécifier la structure. -->
+<!--
+Définition de ce qu'il faut lire comme contenu NX d'un fichier CCAM.
+Note :
+Les éléments peuvent contenir '-' comme séparateur, mais les noms qui sont dans l'attribut NOM utilisent toujour '_' car ils peuvent être transformés en nom de colonne et là le '-' est beaucoup moins pratique. 
+-->
+		<!-- 
+		<CHAMP NOM="" NOMLONG="" TYPE="A" LNG="" DESCRIPTION="" />
+		-->
+<NX><!-- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="NX-CCAM-22-03.xsd" -->
+	<ENR TYP="000" NOM="DEBUT" NOMLONG="Début de fichier">
+		<CHAMP NOM="TYPE_EMETTEUR" NOMLONG="Type d’émetteur" TYPE="A" LNG="2" DESCRIPTION="Non contrôlé" />		
+		<CHAMP NOM="NUMERO_EMETTEUR" NOMLONG="Numéro d’émetteur" TYPE="N" LNG="14" DESCRIPTION="Valeur ‘0000000100000’" />
+		<CHAMP NOM="PROGRAMME_EMETTEUR" NOMLONG="Programme émetteur" TYPE="A" LNG="6" DESCRIPTION="Valeur ‘CODCAM’" />
+		<CHAMP NOM="TYPE_DESTINATAIRE" NOMLONG="Type de destinataire" TYPE="A" LNG="2" DESCRIPTION="Valeur ‘CT’" />
+		<CHAMP NOM="NUMERO_DESTINATAIRE" NOMLONG="Numéro de destinataire" TYPE="A" LNG="14" DESCRIPTION="Valeur ‘00000001000000’" />
+		<CHAMP NOM="PROGRAMME_DESTINATAIRE" NOMLONG="Programme destinataire" TYPE="A" LNG="6" DESCRIPTION="Valeur ‘NAX310’" />
+		<CHAMP NOM="TYPE_ECHANGE" NOMLONG="Application - type d’échange" TYPE="A" LNG="2" DESCRIPTION="Valeur ‘NA’" />
+		<CHAMP NOM="IDENTIFICATION_FICHIER" NOMLONG="Identification du fichier" TYPE="A" LNG="3" DESCRIPTION="Valeur ‘CAM’" />
+		<CHAMP NOM="DATE_CREATION_FICHIER" NOMLONG="Date de création du fichier" TYPE="N" LNG="8" DESCRIPTION="Sous la forme SSAAMMJJ" />
+		<CHAMP NOM="INFORMATIONS_NOEMIE" NOMLONG="Informations NOEMIE" TYPE="A" LNG="24" DESCRIPTION="Inutilisé" />
+		<CHAMP NOM="NUMERO_CHRONOLOGIQUE" NOMLONG="Numéro chronologie" TYPE="N" LNG="5" DESCRIPTION="Valeur &gt; 00000" />
+		<CHAMP NOM="TYPE_FICHIER" NOMLONG="Type de fichier" TYPE="N" LNG="1" DESCRIPTION="Valeur ‘0’ = mise à jour, ‘1’ = fichier en annule et remplace" />
+		<CHAMP NOM="NUMERO_VERSION" NOMLONG="Numéro de version" TYPE="N" LNG="4" DESCRIPTION="Valeur '1401' Format AAVV (AA = Année, VV = N° dans l’année) Version de structure de Base" />
+	</ENR>
+	
+	<!-- Pour copier/coller (debut) ++>
+	<ENR TYP="" RUB="01" SEQ="01" NOM="" NOMLONG="">
+	  <DESCRIPTION>
+	  </DESCRIPTION>
+	  <CHAMP NOM="" NOMLONG="" TYPE="" LNG="" DESCRIPTION="" />
+	</ENR>
+	<!++ Pour copier/coller (fin) -->
+	
+	<ENR TYP="001" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB01" NOMLONG="table TB01 - 'Modes de traitement impliquant un taux d'hospitalisation'">
+	  <DESCRIPTION>
+ 		    Cet enregistrement, qui est facultatif, regroupe toutes les informations contenues dans la
+			table TB01 – "Modes de traitement impliquant un taux d'hospitalisation".\n
+			En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+			évoluer de 01 à 99.
+			Le nombre maximum d'enregistrements de type 001 est de 99.
+			Il est donc possible d’associer jusqu’à 6 * 99 = 594 occurrences d’éléments pour la table
+			TB01.
+			Les occurrences sont triées par mode de traitement croissant puis date début
+			décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="6" NOM="ENR_TB01" NOMLONG="Enregistrements TB01">
+	    <CHAMP NOM="MODE_TRAIT" NOMLONG="Mode de traitement" TYPE="N" LNG="2" DESCRIPTION="" />
+	    <CHAMP NOM="DATE_DEBUT" NOMLONG="Date de début" TYPE="D" LNG="8" DESCRIPTION="" />
+	    <CHAMP NOM="DATE_FIN" NOMLONG="Date de fin" TYPE="D" LNG="8" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR>
+
+	<ENR TYP="002" RUBMIN="01" RUBMAX="99" SEQMIN="01" SEQMAX="99" NOM="TB02" NOMLONG="TB02 – Association 'Code association non prévue' &amp; 'Coefficient'">
+	  <DESCRIPTION>
+		  Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		  informations contenues dans la table TB02 – Association «Code association non prévue»
+		  &amp; «Coefficient».
+		  En fonction du nombre d'occurrences d'éléments composant la table, la "Rubrique" peut
+		  évoluer de 01 à 99 et, pour chaque valeur de la "Rubrique", la "Séquence" peut évoluer
+		  de 01 à 99.
+		  Le nombre maximum d'enregistrements de type 002 est de 99 * 99 = 9801.
+		  Il est donc possible d’associer jusqu’à 5 * 99 * 99 = 49005 occurrences d’éléments pour
+		  la table TB02.
+		  Les occurrences sont triées par "GRILLE TARIFAIRE" croissant, puis "code association"
+		  croissant, puis "date début" décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="5" NOM="ENR-TB02" NOMLONG="Enregistrements TB02">
+		<CHAMP NOM="GRILLE_TARIF" NOMLONG="Grille tarifaire" TYPE="N" LNG="3" DESCRIPTION="Code de Grille Tarifaire à laquelle sont rattachés les champs suivants : Code association, Date début, Date fin, Coefficient" />
+		<CHAMP NOM="CODE_ASSOC" NOMLONG="Code association" TYPE="A" LNG="1" DESCRIPTION="" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="COEFF" NOMLONG="Coefficient" TYPE="N" LNG="4" ECH="1" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="003" RUBMIN="01" RUBMAX="99" SEQMIN="01" SEQMAX="99" NOM="TB03" NOMLONG="TB03 – Règle tarifaire &amp; Coefficient'">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB03 – «Règle tarifaire» &amp; «Coefficient».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Rubrique" peut
+		évoluer de 01 à 99 et, pour chaque valeur de la "Rubrique", la "Séquence" peut évoluer
+		de 01 à 99.
+		Le nombre maximum d'enregistrements de type 003 est de 99 * 99 = 9801.
+		Il est donc possible d’associer jusqu’à 5 * 99 * 99 = 49005 occurrences d’éléments pour
+		la table TB03.
+		Les occurrences sont triées par "GRILLE TARIFAIRE" croissant, puis "Règle tarifaire"
+		croissante, puis "Date début" décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="5" NOM="ENR-TB03" NOMLONG="Enregistrements TB03">
+		<CHAMP NOM="GRILLE_TARIF" NOMLONG="Grille tarifaire" TYPE="N" LNG="3" DESCRIPTION="Code de Grille Tarifaire à laquelle sont rattachés les champs suivants : Règle tarifaire, Date début, Date fin, Coefficient" />
+		<CHAMP NOM="REGLE_TARIF" NOMLONG="Règle tarifaire" TYPE="A" LNG="1" DESCRIPTION="" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="COEFF" NOMLONG="Coefficient" TYPE="N" LNG="4" ECH="1" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="004" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB04" NOMLONG="TB04">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB04 – Regroupement de spécialités.
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 004 est de 99.
+		Il est donc possible d’associer jusqu’à 6 * 99 = 594 occurrences d’éléments pour la table
+		TB04.
+		Les occurrences sont triées par "Spécialité" croissante puis "Date début" décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="6" NOM="ENR-TB04" NOMLONG="Enregistrement TB04">
+		<CHAMP NOM="SPECIALITE" NOMLONG="Spécialité" TYPE="N" LNG="2" DESCRIPTION="" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="CLASSE_SPE" NOMLONG="Classe de spécialité" TYPE="A" LNG="2" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="005" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB05" NOMLONG="TB05 - 'Code nature de prestation' &amp; 'Type de forfait'">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB05 – Association «Code nature de prestation» &amp;
+		«Type de forfait».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 005 est de 99.
+		Il est donc possible d’associer jusqu’à 6 * 99 = 594 occurrences d’éléments pour la table
+		TB05.
+		Les occurrences sont triées par "Nature de prestation" croissante puis "Date de début"
+		décroissante.		  
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="6" NOM="ENR-TB05" NOMLONG="Enregistrement TB05">
+		<CHAMP NOM="NAT_PRESTF_CCAM" NOMLONG="Nature de prestation de type forfait CCAM" TYPE="A" LNG="3" DESCRIPTION="" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="TYPE_FORFT" NOMLONG="Type de forfait" TYPE="A" LNG="1" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="006" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB06" NOMLONG="TB06 - Code modificateur &amp; Age du bénéficiaire">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, regroupe toutes les informations contenues dans la
+		table TB06 – Comptabilité «Code modificateur» &amp; «Age du bénéficiaire».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 006 est de 99.
+		Il est donc possible d’associer jusqu’à 4 * 99 = 396 occurrences d’éléments pour la table
+		TB06.
+		Les occurrences sont triées par "Code modificateur" décroissant puis "Date début"
+		décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="4" NOM="ENR-TB06" NOMLONG="Enregistrement TB06">
+		<CHAMP NOM="CODE_MODIF" NOMLONG="Code modificateur" TYPE="A" LNG="1" DESCRIPTION="" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="UNITE_AGEMIN" NOMLONG="Unité de temps de l’âge minimum" TYPE="A" LNG="1" DESCRIPTION="J = jour, A = année" />
+		<CHAMP NOM="AGEMIN" NOMLONG="Age minimum" TYPE="N" LNG="3" DESCRIPTION="0 = pas de minimum" />
+		<CHAMP NOM="UNITE_AGEMAX" NOMLONG="Unité de temps de l’âge maximum" TYPE="A" LNG="1" DESCRIPTION="J = jour, A = année" />
+		<CHAMP NOM="AGEMAX" NOMLONG="Age maximum" TYPE="N" LNG="3" DESCRIPTION="0 = pas de minimum" />
+	  </SOUS-ENR>
+	</ENR> 
+	
+	<ENR TYP="007" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB07" NOMLONG="TB07 - Seuil minimum pour exonération TM">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB07 – «Seuil minimum pour exonération TM».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 007 est de 99.
+		Il est donc possible d’associer jusqu’à 2 * 99 = 198 occurrences d’éléments pour la table
+		TB07.
+		Les occurrences sont triées par "Date début" décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="2" NOM="ENR-TB07" NOMLONG="Enregistrement TB07">
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="" />
+		<CHAMP NOM="SEUIL_METROPOLE" NOMLONG="Seuil métropole" TYPE="N" LNG="7" ECH="2" DESCRIPTION="" />
+		<CHAMP NOM="SEUIL_ANTILLES" NOMLONG="Seuil Antilles (Guadeloupe et Martinique)" TYPE="N" LNG="7" ECH="2" DESCRIPTION="" />
+		<CHAMP NOM="SEUIL_REUNION" NOMLONG="Seuil Réunion" TYPE="N" LNG="7" ECH="2" DESCRIPTION="" />
+		<CHAMP NOM="SEUIL_GUYANE" NOMLONG="Seuil Guyane" TYPE="N" LNG="7" ECH="2" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR> 
+	
+	<ENR TYP="008" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB08" NOMLONG="TB08 - Table jours fériés nationaux et spécifiques par caisse">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB08 – «Table jours fériés nationaux et spécifiques
+		par caisse».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 008 est de 99.
+		Il est donc possible d’associer jusqu’à 4 * 99 = 396 occurrences d’éléments pour la table
+		TB08.
+		Les occurrences sont triées par "Caisse" croissante puis "Date début" décroissante.
+	  </DESCRIPTION>	  
+	  <SOUS-ENR MIN="1" MAX="4" NOM="ENR-TB08" NOMLONG="Enregistrement TB08">
+		<CHAMP NOM="CAISSE" NOMLONG="Caisse" TYPE="N" LNG="3" DESCRIPTION="000 = toute caisse" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="Facultatif – format SSAAMMJJ" />
+		<CHAMP NOM="TYPE_JF" NOMLONG="Type du jour férié" TYPE="A" LNG="1" DESCRIPTION="F = fixe, V = variable" />
+		<!-- Mis en numérique pour éviter les problèmes de calculs de date avec année 0000 -->
+		<CHAMP NOM="JF_SPECIF" NOMLONG="Jour férié spécifique" TYPE="N" LNG="8" DESCRIPTION="0000MMJJ pour un jour férié fixe, SSAAMMJJ pour un jour férié variable selon les années" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="009" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB09" NOMLONG="TB09 - ">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, regroupe toutes les informations contenues dans la
+		table TB09 – «Compatibilité entre modificateurs».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 009 est de 99.
+		Il est donc possible d’associer jusqu’à 6 * 99 = 594 occurrences d’éléments pour la table
+		TB09.
+		Les occurrences sont triées par "Code modificateur" croissants puis "Code modificateur
+		compatible" croissants puis "Date début de compatibilité" décroissantes.
+	  </DESCRIPTION>	  
+	  <SOUS-ENR MIN="1" MAX="6" NOM="ENR-TB09" NOMLONG="Enregistrement TB09">
+		<CHAMP NOM="CODE_MOD" NOMLONG="Code modificateur" TYPE="A" LNG="1" DESCRIPTION="" />
+		<CHAMP NOM="CODE_MOD_COMP" NOMLONG="Code modificateur compatible" TYPE="A" LNG="1" DESCRIPTION="" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début de compatibilité" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin de compatibilité" TYPE="D" LNG="8" DESCRIPTION="Facultatif – format SSAAMMJJ" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="010" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB10" NOMLONG="TB10 - Cohérence des modificateurs entre les différents codes activité d’un même acte">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB10 – «Cohérence des modificateurs entre les
+		différents codes activité d’un même acte».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 010 est de 99.
+		Il est donc possible d’associer jusqu’à 6 * 99 = 594 occurrences d’éléments pour la table
+		TB10.
+		Les occurrences sont triées par "Code modificateur" croissant puis "Date début"
+		décroissante.
+	  </DESCRIPTION>	  
+	  <SOUS-ENR MIN="1" MAX="6" NOM="ENR-TB10" NOMLONG="Enregistrement TB10">
+		<CHAMP NOM="CODE_MODIF" NOMLONG="Code modificateur" TYPE="A" LNG="1" DESCRIPTION="" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="format SSAAMMJJ" />
+		<CHAMP NOM="TOP_CTRL_COHER" NOMLONG="Top contrôle cohérence" TYPE="A" LNG="1" DESCRIPTION="O = Oui, N = Non" />
+		<CHAMP NOM="TOP_PRES_MULT" NOMLONG="Top présence multiple" TYPE="A" LNG="1" DESCRIPTION="O = Oui, N = Non" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="011" RUBMIN="01" RUBMAX="99" SEQMIN="01" SEQMAX="99" NOM="TB11" NOMLONG="TB11 - Association Code modificateur &amp; Coefficient ou Forfait">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB11 – «Association Code modificateur &amp;
+		Coefficient ou Forfait».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Rubrique" peut
+		évoluer de 01 à 99 et, pour chaque valeur de la "Rubrique", la "Séquence" peut évoluer
+		de 01 à 99.
+		Le nombre maximum d'enregistrements de type 011 est de 99 * 99 = 9801.
+		Il est donc possible d’associer jusqu’à 3 * 99 * 99 = 29403 occurrences d’éléments pour
+		la table TB11.
+		Les occurrences sont triées par " GRILLE TARIFAIRE" croissant, puis "Code
+		modificateur" croissant, puis "Date début" décroissante.
+	  </DESCRIPTION>	  
+	  <SOUS-ENR MIN="1" MAX="3" NOM="ENR-TB11" NOMLONG="Enregistrement TB11">
+		<CHAMP NOM="GRILLE_TARIF" NOMLONG="Code de Grille Tarifaire" TYPE="N" LNG="3" DESCRIPTION="" />
+		<CHAMP NOM="CODE_MODIF" NOMLONG="Code modificateur" TYPE="A" LNG="1" DESCRIPTION="" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="FORFAIT" NOMLONG="Forfait" TYPE="N" LNG="7" ECH="2" DESCRIPTION="Facultatif" />
+		<CHAMP NOM="COEFF" NOMLONG="Coeff" TYPE="N" LNG="4" ECH="3" DESCRIPTION="Facultatif" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="012" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB12" NOMLONG="TB12 - Réduction base de remboursement pour non conventionnés">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB12 – «Réduction base de remboursement pour
+		non conventionnés».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 012 est de 99.
+		Il est donc possible d’associer jusqu’à 4 * 99 = 396 occurrences d’éléments pour la table
+		TB12.
+		Les occurrences sont triées par "Date début" décroissante.
+	  </DESCRIPTION>	  
+	  <SOUS-ENR MIN="1" MAX="4" NOM="ENR-TB12" NOMLONG="Enregistrement TB12">
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="format SSAAMMJJ" />
+		<CHAMP NOM="FORFAIT" NOMLONG="Forfait" TYPE="N" LNG="7" ECH="2" DESCRIPTION="Facultatif" />
+		<CHAMP NOM="COEFF" NOMLONG="Coefficient" TYPE="N" LNG="4" ECH="3" DESCRIPTION="Facultatif" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="013" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB13" NOMLONG="TB13 - Natures de prestation caractérisant le codage CCAM">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB13 – «Natures de prestation caractérisant le
+		codage CCAM».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 013 est de 99.
+		Il est donc possible d’associer jusqu’à 6 * 99 = 594 occurrences d’éléments pour la table
+		TB13.
+		Les occurrences sont triées par "Code nature prestation" croissante puis "Date début"
+		décroissante.
+	  </DESCRIPTION>	  
+	  <SOUS-ENR MIN="1" MAX="6" NOM="ENR-TB13" NOMLONG="Enregistrement TB13">
+		<CHAMP NOM="CODE_NAT_PREST" NOMLONG="Code nature prestation" TYPE="A" LNG="3" DESCRIPTION="" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="format SSAAMMJJ" />
+		<CHAMP NOM="TOP_EQUIV_LETCLE" NOMLONG="Top équivalent lettre-clé" TYPE="A" LNG="1" DESCRIPTION="O = Oui, N = Non" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="014" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB14" NOMLONG="TB14 - Association Discipline médico-tarifaire &amp; Classe de discipline">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB14 –«Association Discipline médico-tarifaire &amp;
+		Classe de discipline».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 014 est de 99.
+		Il est donc possible d’associer jusqu’à 5 * 99 = 495 occurrences d’éléments pour la table
+		TB14.
+		Les occurrences sont triées par "Discipline médico-tarifaire" croissante puis par "Date
+		début" décroissante.
+	  </DESCRIPTION>	  
+	  <SOUS-ENR MIN="1" MAX="5" NOM="ENR-TB14" NOMLONG="Enregistrement TB14">
+		<CHAMP NOM="DMT" NOMLONG="Discipline médicotarifaire" TYPE="N" LNG="3" DESCRIPTION="" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="CLASSE_DISC" NOMLONG="Classe de discipline" TYPE="A" LNG="2" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="015" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB15" NOMLONG="TB15 - Modificateur donnant lieu à information aux OC">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB15 –«Modificateur donnant lieu à information aux
+		OC».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 015 est de 99.
+		Il est donc possible d’associer jusqu’à 6 * 99 = 594 occurrences d’éléments pour la table
+		TB15.
+		Les occurrences sont triées par "Modificateur" croissant puis par "Date début"
+		décroissante.
+	  </DESCRIPTION>	  
+	  <SOUS-ENR MIN="1" MAX="6" NOM="ENR-TB15" NOMLONG="Enregistrement TB15">
+		<CHAMP NOM="MODIFICATEUR" NOMLONG="Modificateur" TYPE="A" LNG="1" DESCRIPTION="Code Modificateur" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="Facultatif - Format SSAAMMJJ" />
+		<CHAMP NOM="CODE_MODIFICATEUR_OC" NOMLONG="Code modificateur OC" TYPE="A" LNG="1" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="017" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB17" NOMLONG="TB17 - Dates d’obligation du codage CCAM pour les natures de prestation NGAP">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB17 –«Dates d’obligation du codage CCAM pour
+		les natures de prestation NGAP».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 017 est de 99.
+		Il est donc possible d’associer jusqu’à 9 * 99 = 891 occurrences d’éléments pour la table
+		TB17.
+		Les occurrences sont triées par "Code nature de prestation" croissante puis par
+		"Spécialité" croissante.
+	  </DESCRIPTION>	  
+	  <SOUS-ENR MIN="1" MAX="9" NOM="ENR-TB17" NOMLONG="Enregistrement TB17">
+		<CHAMP NOM="CODE_NATURE_PRESTA" NOMLONG="Code nature de prestation" TYPE="A" LNG="3" DESCRIPTION="" />
+		<CHAMP NOM="SPECIALITE" NOMLONG="Spécialité" TYPE="N" LNG="2" DESCRIPTION="Valeur 00 (zéro) : toute spécialité" />
+		<CHAMP NOM="DATE_OBLIGATION" NOMLONG="Date d’obligation" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="018" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB18" NOMLONG="TB18 - Localisation de dents">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB18 –«Localisation de dents».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 018 est de 99.
+		Il est donc possible d’associer jusqu’à 6 * 99 = 594 occurrences d’éléments pour la table
+		TB18.
+		Les occurrences sont triées par "Date début" décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="6" NOM="ENR-TB18" NOMLONG="Enregistrement TB18">
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="LOCALISATION_DENT" NOMLONG="Localisation de dent" TYPE="A" LNG="2" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="019" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB19" NOMLONG="TB19 - Nombre de modificateurs tarifants">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB19 –«Nombre de modificateurs tarifant».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 019 est de 99.
+		Il est donc possible d’associer jusqu’à 7 * 99 = 693 occurrences d’éléments pour la table
+		TB19.
+		Les occurrences sont triées par "Date début" décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="7" NOM="ENR-TB19" NOMLONG="Enregistrement TB19">
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="NOMBRE_DE_MODIFICATEURS_TARIFANTS" NOMLONG="Nombre de modificateurs tarifant" TYPE="N" LNG="1" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="020" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB20" NOMLONG="TB20 - Concepts divers CCAM">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB20 –«Concepts divers CCAM».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 020 est de 99.
+		Il est donc possible d’associer jusqu’à 4 * 99 = 396 occurrences d’éléments pour la table
+		TB20.
+		Les occurrences sont triées par "Numéro de concept" croissant, puis "Date début"
+		décroissante.
+		
+		Codage selon le concept :
+		- concept 01 à 02 CCAM n°9  A 1 (10 occ.) 10 occurrences de types d’acte
+		- concept 03 à 05 CCAM n°12 A 2 (5 occ.)  5 occurrences de catégories médicales
+		- concept 06 à 08 CCAM n°22 N 1 (10 occ.) 10 occurrences d’admissions au remboursement
+		- concept 11 à 12 CCAM n°41 A 1 (10 occ.) 10 occurrences de frais de déplacement
+		- concept 13 à 17 CCAM n°25 N 1 (10 occ.) 10 occurrences de code « exonération TM »
+		  concept 22
+		- concept 18 à 21           A 1 (10 occ.) 10 occurrences de "code association non prévue"
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="4" NOM="ENR-TB20" NOMLONG="Enregistrement TB20">
+		<CHAMP NOM="NUMERO_CONCEPT" NOMLONG="Numéro de concept" TYPE="N" LNG="2" DESCRIPTION="Valeur 01 à 22" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="VALEURS_CONCEPT" NOMLONG="Valeurs du concept" TYPE="A" LNG="10" DESCRIPTION="" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="021" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB21" NOMLONG="TB21 - Forfait CMUC">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB21 –«Forfait CMUC».
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Séquence" peut
+		évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 021 est de 99.
+		Il est donc possible d’associer jusqu’à 4 * 99 = 396 occurrences d’éléments pour la table
+		TB21.
+		Les occurrences sont triées par "Forfait CMUC" croissant, puis "Indice Tarifaire" croissant
+		puis "Date début" décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="4" NOM="ENR-TB21" NOMLONG="Enregistrement TB21">
+		<CHAMP NOM="CLE_FORFAITAIRE" NOMLONG="Clé Forfaitaire" TYPE="N" LNG="4" DESCRIPTION="Clé d'identification de l'historique du Forfait CMUC" />
+		<CHAMP NOM="FORFAIT_CMUC" NOMLONG="Forfait CMUC" TYPE="A" LNG="3" DESCRIPTION="CCAM n° 52, Code du Forfait CMUC" />
+		<CHAMP NOM="INDICE_TARIFAIRE" NOMLONG="Indice Tarifaire" TYPE="A" LNG="2" DESCRIPTION="CCAM n° 53, Valeur de l'indice tarifaire" />
+		<CHAMP NOM="DATE_DEBUT" NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN" NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="022" RUBMIN="01" RUBMAX="99" SEQMIN="01" SEQMAX="99" NOM="TB22" NOMLONG="TB22 - Affectation de grille aux contextes">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB22 –«Affectation de grille aux contextes». Permet
+		de connaître la grille tarifaire à utiliser en fonction de la situation
+		(Contexte PS/Contexte Bénéficiaire).
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Rubrique" peut
+		évoluer de 01 à 99 et, pour chaque valeur de la "Rubrique", la "Séquence" peut évoluer
+		de 01 à 99.
+		Le nombre maximum d'enregistrements de type 022 est de 99 * 99 = 9801.
+		Il est donc possible d’associer jusqu’à 4 * 99 * 99 = 39204 occurrences d’éléments pour
+		la table TB22.
+		Les occurrences sont triées par "Contexte PS" croissant, puis "Contexte BN" croissant,
+		puis "Date début" décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="4" NOM="ENR-TB22" NOMLONG="Enregistrement TB22">
+		<CHAMP NOM="CONTEXTE_PS"  NOMLONG="Contexte PS" TYPE="N" LNG="4" DESCRIPTION="Code du Contexte PS" />
+		<CHAMP NOM="CONTEXTE_BN"  NOMLONG="Contexte BN" TYPE="N" LNG="4" DESCRIPTION="Code du Contexte Bénéficiaire" />
+		<CHAMP NOM="DATE_DEBUT"   NOMLONG="Date début" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="DATE_FIN"     NOMLONG="Date fin" TYPE="D" LNG="8" DESCRIPTION="Format SSAAMMJJ" />
+		<CHAMP NOM="GRILLE_TARIF" NOMLONG="Grille Tarifaire" TYPE="N" LNG="3" DESCRIPTION="Code de la Grille tarifaire à utiliser pour le couple ContextePS/ContexteBN" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="023" RUBMIN="01" RUBMAX="99" SEQMIN="01" SEQMAX="99" NOM="TB23" NOMLONG="TB23 - Grille Tarifaire">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire pour un fichier total, regroupe toutes les
+		informations contenues dans la table TB23 –«Grille Tarifaire». Table de codification de la
+		grille tarifaire.
+		En fonction du nombre d'occurrences d'éléments composant la table, la "Rubrique" peut
+		évoluer de 01 à 99 et, pour chaque valeur de la "Rubrique", la "Séquence" peut évoluer
+		de 01 à 99.
+		Le nombre maximum d'enregistrements de type 023 est de 99 * 99 = 9801.
+		Il est donc possible d’associer jusqu’à 999 occurrences d’éléments pour la table TB23.
+		Les occurrences sont triées par Grille Tarifaire croissant.		  
+	  </DESCRIPTION>
+      <CHAMP NOM="GRILLE_TARIF" NOMLONG="Grille Tarifaire" TYPE="N" LNG="3" DESCRIPTION="Code de la Grille tarifaire" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé" TYPE="A" LNG="100" DESCRIPTION="Libellé de la Grille" />
+	</ENR>
+	
+	<ENR TYP="050" RUB="01" SEQ="01" NOM="TB50" NOMLONG="TB50 - Table de codification des types de note">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte le libellé d'un type de note (CCAM n°11).
+		Il existe autant d'enregistrements 050-01-01 que de types de note.
+		Les occurrences sont triées par code du type de note croissant.		
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_TYP_NOTE" NOMLONG="Code du type de note" TYPE="N" LNG="2" DESCRIPTION="CCAM n°11, Code du type de note" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du type de note" TYPE="A" LNG="100" DESCRIPTION="Libellé du type de note" />
+	</ENR>
+	
+	<ENR TYP="051" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB51" NOMLONG="TB51 - Table de codification des conditions générales">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte le texte d'une condition générale (CCAM
+		n°10). Il existe autant d'enregistrements 051-01-01 que de conditions générales.
+		Si le code condition générale a un texte de plus de 100 caractères, un enregistrement de
+		même type est créé avec un numéro de séquence incrémenté de 1 pouvant évoluer de 1
+		à 99. Il est donc possible d'associer un texte pouvant comporter jusqu'à 100x99 = 9900
+		caractères.
+		Les occurrences sont triées par code de condition générale croissant.		  
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_COND_GEN" NOMLONG="Code condition générale" TYPE="N" LNG="4" DESCRIPTION="Code de la condition générale" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Texte de la condition générale" TYPE="A" LNG="100" DESCRIPTION="Libellé de la condition générale" />
+	</ENR>
+	
+	<ENR TYP="052" RUB="01" SEQ="01" NOM="TB52" NOMLONG="TB52 - Table de codification des classes de DMT">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte les libellés des classes de DMT (CCAM
+		n°41.1). Il existe autant d'enregistrements 052-01-01 que de classes de DMT.
+		Les occurrences sont triées par classe de DMT croissante.		  
+	  </DESCRIPTION>
+      <CHAMP NOM="CLASSE_DMT" NOMLONG="Classe de DMT" TYPE="A" LNG="2" DESCRIPTION="Classe de DMT" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé de la classe de DMT" TYPE="A" LNG="100" DESCRIPTION="Libellé de la classe de DMT" />
+	</ENR>
+	
+	<ENR TYP="053" RUB="01" SEQ="01" NOM="TB53" NOMLONG="TB53 - Table de codification des exonérations TM">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des exonérations du ticket
+		modérateur (CCAM n°25). Il existe autant d'enregistrements 053-01-01 que
+		d'exonérations TM.
+		Les occurrences sont triées par code exonération TM croissant.		  
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_EXO_TM" NOMLONG="Code exonération TM" TYPE="N" LNG="1" DESCRIPTION="Code exonération du ticket modérateur" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du code exonération TM" TYPE="A" LNG="80" DESCRIPTION="Libellé du code exonération TM" />
+	</ENR>
+	
+	<ENR TYP="054" RUB="01" SEQ="01" NOM="TB54" NOMLONG="TB54 - Table de codification des natures d'assurance">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des natures d'assurance
+		(CCAM n°30.1). Il existe autant d'enregistrements 054-01-01 que de natures
+		d'assurance.
+		Les occurrences sont triées par code nature d'assurance croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_NAT_ASS" NOMLONG="Nature d'assurance" TYPE="A" LNG="2" DESCRIPTION="Nature d'assurance" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé de la nature d'assurance" TYPE="A" LNG="100" DESCRIPTION="Libellé de la nature d'assurance" />
+	</ENR>
+	
+	<ENR TYP="055" RUB="01" SEQ="01" NOM="TB55" NOMLONG="TB55 - Table de codification des codes admission au remboursement">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés du code admission au
+		remboursement (CCAM n° 22) . Il existe autant d'enregistrements 055-01-01 que
+		d'admission au remboursement.
+		Les occurrences sont triées par code admission au remboursement croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_ADM_REMB" NOMLONG="Admission au remboursement" TYPE="N" LNG="1" DESCRIPTION="Code de l'admission au remboursement" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé de l'admission au remboursement" TYPE="A" LNG="80" DESCRIPTION="Libellé de l'admission au remboursement" />
+	</ENR>
+	
+	<ENR TYP="056" RUB="01" SEQ="01" NOM="TB56" NOMLONG="TB56 - Table de codification des frais de déplacement">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des codes frais de
+		déplacement (CCAM n° 41) . Il existe autant d'enregistrements 056-01-01 que de code
+		frais de déplacement
+		Les occurrences sont triées par code frais de déplacement croissant.		  
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_FRAIS_DEPL" NOMLONG="Frais de déplacement" TYPE="A" LNG="1" DESCRIPTION="Code du frais de déplacement" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du frais de déplacement" TYPE="A" LNG="80" DESCRIPTION="Libellé du frais de déplacement" />
+	</ENR>
+	
+	<ENR TYP="057" RUB="01" SEQ="01" NOM="TB57" NOMLONG="TB57 - Table de codification des types d'acte">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés du type d'acte (CCAM n° 9) .
+		Il existe autant d'enregistrements 057-01-01 que de types d'acte.
+		Les occurrences sont triées par type d'acte croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="TYPE_ACTE" NOMLONG="Type d'acte" TYPE="A" LNG="1" DESCRIPTION="Code du type d'acte" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du type d'acte" TYPE="A" LNG="80" DESCRIPTION="Libellé du type d'acte" />
+	</ENR>
+	
+	<ENR TYP="058" RUB="01" SEQ="01" NOM="TB58" NOMLONG="TB58 - Table de codification des types de forfait">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte les libellés des types de forfait (CCAM n°
+		34) . Il existe autant d'enregistrements 058-01-01 que de types de forfait.
+		Les occurrences sont triées par type de forfait croissant.		  
+	  </DESCRIPTION>
+      <CHAMP NOM="TYPE_FORF" NOMLONG="Type de forfait" TYPE="A" LNG="1" DESCRIPTION="Code du type de forfait" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du type de forfait" TYPE="A" LNG="100" DESCRIPTION="Libellé du type de forfait" />
+	</ENR>
+	
+	<ENR TYP="059" RUB="01" SEQ="01" NOM="TB59" NOMLONG="TB59 - Table de codification des extensions documentaires">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte les libellés des extensions documentaires
+		(CCAM n°3) . Il existe autant d'enregistrements 059-01-01 que d'extensions
+		documentaires.
+		Les occurrences sont triées par extension documentaire croissante.		  
+	  </DESCRIPTION>
+      <CHAMP NOM="EXT_DOC" NOMLONG="Extension documentaire" TYPE="A" LNG="1" DESCRIPTION="Code de l'extension documentaire" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé de l' extension documentaire" TYPE="A" LNG="100" DESCRIPTION="Libellé de l' extension documentaire" />
+	</ENR>
+	
+	<ENR TYP="060" RUB="01" SEQ="01" NOM="TB60" NOMLONG="TB60 - Table de codification des activités">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte les libellés des activités (CCAM n°2) . Il
+		existe autant d'enregistrements 060-01-01 que d'activités.
+		Les occurrences sont triées par activité croissante.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_ACTIVITE" NOMLONG="Code activité" TYPE="A" LNG="1" DESCRIPTION="Code activité" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du code activité" TYPE="A" LNG="100" DESCRIPTION="Libellé du code activité" />
+	</ENR>
+	
+	<ENR TYP="061" RUB="01" SEQ="01" NOM="TB61" NOMLONG="TB61 - Table de codification des catégories médicales">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte les libellés des catégories médicales
+		(CCAM n°12) . Il existe autant d'enregistrements 061-01-01 que de catégories
+		médicales.
+		Les occurrences sont triées par catégorie médicale croissante.
+	  </DESCRIPTION>
+      <CHAMP NOM="CAT_MED" NOMLONG="Catégorie médicale" TYPE="A" LNG="2" DESCRIPTION="Code de la catégorie médicale" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé de la catégorie médicale" TYPE="A" LNG="100" DESCRIPTION="Libellé de la catégorie médicale" />
+	</ENR>
+	
+	<ENR TYP="062" RUB="01" SEQ="01" NOM="TB62" NOMLONG="TB62 - Table de codification des codes regroupement">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des codes regroupement
+		(CCAM n°42) . Il existe autant d'enregistrements 062-01-01 que de codes regroupement.
+		Les occurrences sont triées par code regroupement croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_REGR" NOMLONG="Code regroupement" TYPE="A" LNG="3" DESCRIPTION="Code regroupement" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du code regroupement" TYPE="A" LNG="100" DESCRIPTION="Libellé du code regroupement" />
+	</ENR>
+	
+	<ENR TYP="063" RUB="01" SEQ="01" NOM="TB63" NOMLONG="TB63 - Table de codification des catégories de spécialités">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des classes de spécialités
+		(CCAM n°31 et CCAM n°32) . Il existe autant d'enregistrements 063-01-01 que de
+		classes de spécialité.
+		Les occurrences sont triées par classe de spécialité croissante.
+	  </DESCRIPTION>
+      <CHAMP NOM="CLASSE_SPE" NOMLONG="Classe de spécialité" TYPE="A" LNG="2" DESCRIPTION="Classe de spécialité" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé de la classe de spécialité" TYPE="A" LNG="100" DESCRIPTION="Libellé de la classe de spécialité" />
+	</ENR>
+	
+	<ENR TYP="064" RUB="01" SEQ="01" NOM="TB64" NOMLONG="TB64 - Table de codification des agréments radio">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte les libellés des types d'agrément radio
+		(CCAM n°40) . Il existe autant d'enregistrements 064-01-01 que de types d'agrément
+		radio.
+		Les occurrences sont triées par type d'agrément radio croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="TYPE_AGR_RAD" NOMLONG="Type d'agrément radio" TYPE="A" LNG="2" DESCRIPTION="Type d'agrément radio" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du type d'agrément radio" TYPE="A" LNG="100" DESCRIPTION="Libellé du type d'agrément radio" />
+	</ENR>
+	
+	<ENR TYP="065" RUB="01" SEQ="01" NOM="TB65" NOMLONG="TB65 - Table de codification des codes paiement séance/période">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte les libellés des codes paiement des
+		séances (CCAM n°33) . Il existe autant d'enregistrements 065-01-01 que de codes
+		paiement des séances.
+		Les occurrences sont triées par code paiement croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_PAIEMENT" NOMLONG="Code paiement" TYPE="A" LNG="1" DESCRIPTION="Code paiement" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du code paiement" TYPE="A" LNG="80" DESCRIPTION="Libellé du code paiement" />
+	</ENR>
+	
+	<ENR TYP="066" RUB="01" SEQ="01" NOM="TB66" NOMLONG="TB66 - Table de codification des codes phase de traitement">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des phases de traitement
+		(CCAM n°4) . Il existe autant d'enregistrements 066-01-01 que de phases de traitement.
+		Les occurrences sont triées par code phase de traitement croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_PHASE" NOMLONG="Code phase de traitement" TYPE="N" LNG="1" DESCRIPTION="Code phase de traitement" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du code phase de traitement" TYPE="A" LNG="80" DESCRIPTION="Libellé du code phase de traitement" />
+	</ENR>
+	
+	<ENR TYP="067" RUB="01" SEQ="01" NOM="TB67" NOMLONG="TB67 - Table de codification des numéros de dents incompatibles">
+	  <DESCRIPTION>
+Cet enregistrement, qui est facultatif, comporte les libellés des numéros de dent (CCAM
+n°44) . Il existe autant d'enregistrements 067-01-01 que de numéros de dent.
+Les occurrences sont triées par numéro de dent croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="NUM_DENT" NOMLONG="Numéro de dent" TYPE="N" LNG="2" DESCRIPTION="Numéro de dent" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du numéro de dent" TYPE="A" LNG="80" DESCRIPTION="Libellé du numéro de dent" />
+	</ENR>
+	
+	<ENR TYP="068" RUB="01" SEQ="01" NOM="TB68" NOMLONG="TB68 - Table de codification des caisses des départements d'outre-mer">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des caisses DOM . Il existe
+		autant d'enregistrements 068-01-01 que de caisses DOM.
+		Les occurrences sont triées par numéro de caisse DOM croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="NUM_DOM" NOMLONG="Numéro de DOM"  TYPE="N" LNG="3"  DESCRIPTION="Numéro de caisse DOM" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du DOM" TYPE="A" LNG="50" DESCRIPTION="Libellé de la caisse DOM" />
+	</ENR>
+	
+	<ENR TYP="080" RUB="01" SEQ="01" NOM="TB80" NOMLONG="TB80 - Table de codification des codes association non prévue">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des codes association non
+		prévue (table TB02) . Il existe autant d'enregistrements 080-01-01 que de codes
+		association non prévue.
+		Les occurrences sont triées par code association non prévue croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_ASSOC_NON_PREVUE" NOMLONG="Code de l'association non prévue" TYPE="A" LNG="1" DESCRIPTION="Code de l'association non prévue" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé du code de l'association non prévue" TYPE="A" LNG="100" DESCRIPTION="Libellé du code de l'association non prévue" />
+	</ENR>
+	
+	<ENR TYP="081" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB81" NOMLONG="TB81 - Table de codification des règles tarifaires">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des règles tarifaires (table
+		TB03) . Il existe autant d'enregistrements 081-01-01 que de règle tarifaire.
+		Si la règle tarifaire a un libellé de plus de 100 caractères, un enregistrement de même
+		type est créé avec un numéro de séquence incrémenté de 1 pouvant évoluer de 1 à 99.
+		Il est donc possible d'associer un libellé pouvant comporter jusqu'à 100x99 = 9900
+		caractères.
+		Les occurrences sont triées par règle tarifaire croissante.
+	  </DESCRIPTION>
+      <CHAMP NOM="REGLE_TARIF" NOMLONG="Règle tarifaire" TYPE="A" LNG="1" DESCRIPTION="Règle tarifaire" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé de la règle tarifaire" TYPE="A" LNG="100" DESCRIPTION="Libellé de la règle tarifaire" />
+	</ENR>
+	
+	<ENR TYP="082" RUB="01" SEQ="01" NOM="TB82" NOMLONG="TB82 - Table de codification des spécialités">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des codes spécialités (table
+		TB04) . Il existe autant d'enregistrements 082-01-01 que de code spécialité.
+		Les occurrences sont triées par code spécialité croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_SPE" NOMLONG="Spécialité"               TYPE="N" LNG="2"   DESCRIPTION="Code de la spécialité" />
+	  <CHAMP NOM="LIBELLE"  NOMLONG="Libellé de la spécialité" TYPE="A" LNG="100" DESCRIPTION="Libellé de la spécialité" />
+	</ENR>
+
+	<ENR TYP="083" RUB="01" SEQ="01" NOM="TB83" NOMLONG="TB83 - Table de codification des modificateurs">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte les libellés des modificateurs (table
+		TB11) . Il existe autant d'enregistrements 083-01-01 que de modificateurs.
+		Les occurrences sont triées par code modificateur croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_MODIF" NOMLONG="Modificateur"            TYPE="A" LNG="1"   DESCRIPTION="Code du modificateur" />
+	  <CHAMP NOM="LIBELLE"    NOMLONG="Libellé du modificateur" TYPE="A" LNG="100" DESCRIPTION="Libellé du modificateur" />
+	</ENR>
+	
+	<ENR TYP="084" RUB="01" SEQ="01" NOM="TB84" NOMLONG="TB84 - Table de codification des DMT">
+	  <DESCRIPTION>
+Cet enregistrement, qui est obligatoire, comporte les libellés des Disciplines Médico
+Tarifaire (table TB14) . Il existe autant d'enregistrements 084-01-01 que de DMT.
+Les occurrences sont triées par DMT croissante.
+	  </DESCRIPTION>
+Code de la DMT N 3 Code de la Discipline Médico Tarifaire
+Libellé de la DMT A 100 Libellé de la Discipline Médico Tarifaire
+      <CHAMP NOM="CODE_DMT" NOMLONG="Code de la DMT"    TYPE="N" LNG="3"   DESCRIPTION="Code de la Discipline Médico Tarifaire" />
+	  <CHAMP NOM="LIBELLE"  NOMLONG="Libellé de la DMT" TYPE="A" LNG="100" DESCRIPTION="Libellé de la Discipline Médico Tarifaire" />
+	</ENR>
+	
+	<ENR TYP="085" RUB="01" SEQ="01" NOM="TB85" NOMLONG="TB85 - Table de codification des contextes PS">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte le libellé d'un contexte PS.
+		Il existe autant d'enregistrements 085-01-01 que de contexte PS.
+		Il est donc possible d’associer jusqu’à 9999 occurrences d’éléments.
+		Les occurrences sont triées par "Contexte PS" croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CONTEXTE_PS" NOMLONG="Contexte PS" TYPE="N" LNG="4" DESCRIPTION="Code du Contexte PS" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé" TYPE="A" LNG="117" DESCRIPTION="Libellé du Contexte PS" />
+	</ENR>
+	
+	<ENR TYP="086" RUB="01" SEQ="01" NOM="TB86" NOMLONG="TB86 - Table de codification des contextes Bénéficiaires">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte le libellé d'un contexte Bénéficiaire.
+		Il existe autant d'enregistrements 086-01-01 que de contexte Bénéficiaire.
+		Il est donc possible d’associer jusqu’à 9999 occurrences d’éléments.
+		Les occurrences sont triées par "Contexte BN" croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CONTEXTE_BN" NOMLONG="Contexte BN" TYPE="N" LNG="4" DESCRIPTION="Code du Contexte Bénéficiaire" />
+	  <CHAMP NOM="LIBELLE" NOMLONG="Libellé" TYPE="A" LNG="117" DESCRIPTION="Libellé du Contexte Bénéficiaire" />
+	</ENR>
+	
+	<ENR TYP="090" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB90" NOMLONG="TB90 - Table de compatibilité des exonérations TM">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte les compatibilités des exonérations TM
+		(CCAM n°25) deux à deux.
+		S'il y a plus de 60 occurrences de compatibilité, un enregistrement de même type est
+		créé avec un numéro de séquence incrémenté de 1, sachant qu'il peut évoluer de 01 à
+		99. Il est donc possible d'associer jusqu'à 60 x 99 = 5940 compatibilités de codes
+		exonération TM.
+		Les occurrences sont triées par code exonération TM n°1 puis n°2 croissant.
+		Remarque : les informations présentes dans ces enregistrements ne sont pas
+		symétriques (si X est noté compatible avec Y, alors Y n'est pas noté compatible avec X)
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="60" NOM="CODES_EXO_TM" NOMLONG="Couples codes exonération TM compatibles">
+	      <CHAMP NOM="CODE_EXO_TM_1" NOMLONG="Code exonération TM n°1" TYPE="N" LNG="1" DESCRIPTION="Code exonération TM" />
+		  <CHAMP NOM="CODE_EXO_TM_2" NOMLONG="Code exonération TM n°2" TYPE="N" LNG="1" DESCRIPTION="Code exonération TM compatible" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<!-- VOIR SI LA FUSION FONCTIONNE BIEN -->
+	<ENR TYP="091" RUB="01" SEQMIN="01" SEQMAX="99" FUSIONNE-SUR="SEQ" NOM="TB91" NOMLONG="TB91 - Table détaillée de l'arborescence">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte la description des niveaux
+		d'arborescence. Il existe autant d'enregistrements 091-01-01 que de niveau
+		d'arborescence.
+		Si un niveau d'arborescence comporte un libellé de plus de 100 caractères, un
+		enregistrement de même type est créé avec un numéro de séquence incrémenté de 1,
+		sachant qu'il peut évoluer de 01 à 99. Il est donc possible d'associer un libellé pouvant
+		comporter jusqu'à 100 x 99 = 9900 caractères.
+		Les occurrences sont triées par code menu croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_MENU" NOMLONG="Code menu"            TYPE="N" LNG="6"   DESCRIPTION="Code du niveau de l'arborescence" />
+      <CHAMP NOM="CODE_PERE" NOMLONG="Code père"            TYPE="N" LNG="6"   DESCRIPTION="Code du niveau supérieur de l'arborescence" />
+      <CHAMP NOM="RANG"      NOMLONG="Rang"                 TYPE="N" LNG="6"   DESCRIPTION="Rang du niveau dans la liste des éléments ayant le même père" />
+	  <CHAMP NOM="LIBELLE"   NOMLONG="Libellé du code menu" TYPE="A" LNG="100" DESCRIPTION="Libellé du niveau de l'arborescence" TRAITER-CRLF="Y" />
+	</ENR>
+	
+	<!-- VOIR SI LA FUSION FONCTIONNE BIEN -->
+	<ENR TYP="092" RUB="01" SEQMIN="01" SEQMAX="99" FUSIONNE-SUR="SEQ" NOM="TB92" NOMLONG="TB92 - Table des notes d'arborescence">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, comporte les notes associées aux différents
+		niveaux d'arborescence. Il existe autant d'enregistrements 092-01-01 que de notes.
+		Si un niveau d'arborescence comporte un texte de plus de 100 caractères, un
+		enregistrement de même type est créé avec un numéro de séquence incrémenté de 1,
+		sachant qu'il peut évoluer de 01 à 99. Il est donc possible d'associer un texte pouvant
+		comporter jusqu'à 100 x 99 = 9900 caractères.
+		Les occurrences sont triées par code menu croissant, puis par ordre de priorité
+		d'affectation des notes.
+	  </DESCRIPTION>
+      <CHAMP NOM="CODE_MENU"      NOMLONG="Code menu"            TYPE="N" LNG="6"   DESCRIPTION="Code du niveau de l'arborescence" />
+      <CHAMP NOM="CODE_TYPE_NOTE" NOMLONG="Code du type de note" TYPE="N" LNG="2"   DESCRIPTION="Code du type de note" />
+	  <CHAMP NOM="TEXTE_NOTE"     NOMLONG="Texte de la note"     TYPE="A" LNG="100" DESCRIPTION="Texte de la note" TRAITER-CRLF="Y" />
+	</ENR>
+	
+	<ENR TYP="093" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB93" NOMLONG="TB93 - Table des valeurs d'unité d'oeuvre">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte la description des unités d'oeuvre.
+		S'il y a plus de 7 occurrences, un enregistrement de même type est créé avec un numéro
+		de séquence incrémenté de 1, sachant qu'il peut évoluer de 01 à 99. Il est donc possible
+		d'associer jusqu'à 7 x 99 = 693 valeurs d'unité d'oeuvre.
+		Les occurrences sont triées par code de l'unité d'oeuvre croissant puis date d'effet
+		décroissante.
+	  </DESCRIPTION>
+	  <SOUS-ENR MIN="1" MAX="7" NOM="ENR_UNITE_OEUVRE" NOMLONG="Enregistrement unités d'oeuvre">
+	      <CHAMP NOM="CODE_UO"    NOMLONG="Code de l'unité d'oeuvre"   TYPE="A" LNG="3"         DESCRIPTION="Code de l'unité d'oeuvre" />
+	      <CHAMP NOM="DATE_EFFET" NOMLONG="Date d'effet"               TYPE="D" LNG="8"         DESCRIPTION="Date d'effet (date à partir de laquelle la valeur est valide) - format SSAAMMJJ" />
+		  <CHAMP NOM="VAL_UO"     NOMLONG="Valeur de l'unité d'oeuvre" TYPE="N" LNG="6" ECH="2" DESCRIPTION="Coefficient associé à l'unité d'ouvre à la date d'effet" />
+	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="099" RUB="01" SEQMIN="01" SEQMAX="99" FUSIONNE-SUR="SEQ" NOM="TB99" NOMLONG="TB99 - Liste des mots">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, comporte la description des mots de 2 caractères
+		minimum présents dans les libellés des codes de l'acte (CCAM n°7 et n°8), dans les
+		textes des notes (CCAM n°11), les libellés du niveau d'arborescence et du texte des
+		notes associés à un niveau d'arborescence.
+		Il y a autant d'enregistrements 099-01-01 que de mots.
+		Si le mot comporte une définition de plus de 50 caractères, un enregistrement de même
+		type est créé avec un numéro de séquence incrémenté de 1, pouvant évoluer de 01 à 99.
+		Il est donc possible d'associer une définition de 50 * 99 = 4950 caractères u maximum.
+		Les occurrences sont triées par mot croissant.
+	  </DESCRIPTION>
+      <CHAMP NOM="MOT"        NOMLONG="Mot"               TYPE="A" LNG="50" DESCRIPTION="Mot - cadré à gauche et complété par des blancs" TRAITER-CRLF="Y" />
+	  <CHAMP NOM="DEFINITION" NOMLONG="Définition du mot" TYPE="A" LNG="50" DESCRIPTION="Définition du mot - non renseigné aujourd'hui" TRAITER-CRLF="Y" />
+	</ENR>
+	
+	<ENR TYP="101" RUB="01" SEQ="01" NOM="ACTE_CCAM" NOMLONG="CODE DE L'ACTE" >
+	  <DESCRIPTION>
+	    L’enregistrement de type 101 et de rubrique 01 est obligatoire et présent une seule fois
+	    pour chacun des codes de l'acte. Il identifie le code de l'acte ainsi que ses informations
+	    stables à destination de la production et/ou de l’informationnel.
+	    Ces occurrences sont triées par code de l'acte croissant.
+	  </DESCRIPTION>
+	  <CHAMP NOM="CODE_ACTE" NOMLONG="Code de l'acte" TYPE="A" LNG="13" DESCRIPTION="CCAM n°1, Code de l'acte CCAM" />
+	  <CHAMP NOM="LIBELLE_COURT" NOMLONG="Libellé court" TYPE="A" LNG="70" DESCRIPTION="CCAM n°7, Traduction en clair du code de l'acte" TRAITER-CRLF="Y"/>
+	  <CHAMP NOM="TYPE_ACTE" NOMLONG="Type d'acte" TYPE="N" LNG="1" DESCRIPTION="CCAM n°9, Caractère associable d'un acte :\n0 – acte isolé\n1 – procédure\n2 – acte complémentaire\nSexe compatible CCAM n°15 N 1 Facultatif\n- 1 : homme\n- 2 : femme\n"  TRAITER-CRLF="Y"/>
+	  <CHAMP NOM="SEX_COMP" NOMLONG="Sexe compatible" TYPE="N" LNG="1" DESCRIPTION="CCAM n°15, facultatif"/>
+	  <CHAMP NOM="DATE_CREATION" NOMLONG="Date de création" TYPE="D" LNG="8" DESCRIPTION="CCAM n°18, Format SSAAMMJJ" />
+	  <CHAMP NOM="DATE_FIN" NOMLONG="Date de fin" TYPE="D" LNG="8" DESCRIPTION="CCAM n°19,Facultatif – format SSAAMMJJ" />
+	</ENR>
+
+	<ENR TYP="101" RUB="02" SEQ="01" NOM="CODE_ACTE_INFOS_STABLES_2" NOMLONG="CODE DE L'ACTE - Infos stables 2" ETEND="101-01-01">
+	  <DESCRIPTION>
+	    L’enregistrement de type 101 et de rubrique 02 est obligatoire et présent une seule fois
+	    pour chacun des codes de l'acte. Il identifie les informations stables du code de l’acte à
+	    destination de la production et/ou de l’informationnel.
+	  </DESCRIPTION>
+	  <REPETITION NOM="R_ACTE_NAT_ASS" NOMLONG="" MIN="1" MAX="10">
+	    <CHAMP NOM="NATASS_COD" NOMLONG="Nature d'assurance permise" TYPE="A" LNG="2" DESCRIPTION="CCAM n°30.1, 1ère occurrence obligatoire : AS (maladie), AT (accident du travail), MA, PS, DC , PM" />
+	  </REPETITION>
+	  <CHAMP NOM="FRAIS_DEPL" NOMLONG="Frais de déplacement" TYPE="A" LNG="1" DESCRIPTION="CCAM n°41, A (autorise des frais de déplacement), B (autorise des indemnités de déplacement), C, I" />
+	</ENR>
+
+	<ENR TYP="101" RUB="03" SEQ="01" NOM="CODE_ACTE_INFOS_STABLES_3" NOMLONG="CODE DE L'ACTE - Infos stables 3" ETEND="101-01-01">
+	  <DESCRIPTION>
+	    L’enregistrement de type 101 et de rubrique 03 est obligatoire et présent une seule fois
+	    pour chacun des codes de l'acte. Il identifie les informations stables du code de l’acte à
+	    destination de la production et/ou de l’informationnel.
+	  </DESCRIPTION>
+	  <REPETITION MIN="0" MAX="10" NOM="NIVEAUX_ARBO" NOMLONG="Niveaux d'arborescence"  NUMEROTER="Y">
+	    <CHAMP NOM="NIV" NOMLONG="Arborescence" TYPE="N" LNG="6" DESCRIPTION="CCAM n°16, Niveau hiérarchique dans le classement CCAM" />
+	  </REPETITION>
+	  <CHAMP NOM="PLACE_ARBO" NOMLONG="Place dans l'arborescence" TYPE="N" LNG="12" ECH="6" DESCRIPTION="CCAM n°17, Place (n° ordre) dans le niveau hiérarchique du classement CCAM" />
+	  <CHAMP NOM="CODE_STRUCT" NOMLONG="Code structuré de l’acte" TYPE="A" LNG="13" DESCRIPTION="CCAM n°5, Facultatif" />
+	  <CHAMP NOM="CODE_PREC" NOMLONG="Code de l’acte précédent" TYPE="A" LNG="13" DESCRIPTION="CCAM n°49, Facultatif" />
+	  <CHAMP NOM="CODE_SUIV" NOMLONG="Code de l’acte suivant" TYPE="A" LNG="13" DESCRIPTION="CCAM n°50, Facultatif" />
+	</ENR>
+
+    <!-- NB Je n'ai pas trouve d'enregistrement 101-04 dans le CACTO -->
+	<ENR TYP="101" RUB="04" SEQMIN="01" SEQMAX="99" NOM="CODE_ACTE_INFOS_STABLES_4" NOMLONG="CODE DE L'ACTE - Infos stables 4" ETEND="101-01-01">
+	  <DESCRIPTION>
+	    L’enregistrement de type 101 et de rubrique 04 est facultatif. Il identifie les informations
+	    stables du code l’acte à destination de la production et/ou de l’informationnel.
+	    S’il y a plus de 50 occurrences de classes de DMT autorisées pour le code de l’acte, un
+	    enregistrement de même type est créé avec un numéro de séquence incrémenté de 1,
+	    sachant qu’il peut évoluer de 01 à 99. Il est donc possible d’associer jusqu’à 50 * 99 =
+	    4950 classes de DMT à un code de l’acte.
+	  </DESCRIPTION>
+	  <REPETITION NOM="CLASSES_DMT" NOMLONG="" MIN="0" MAX="50">
+	    <CHAMP NOM="CL_DMT" NOMLONG="Classe de DMT autorisé" TYPE="A" LNG="2" DESCRIPTION="CCAM n°41.1, Classes de Discipline Médico-Tarifaire autorisée pour la réalisation de l’acte" />
+	  </REPETITION>
+	</ENR>
+	
+	<ENR NOM="LIB_LONG_ACTE" NOMLONG="CODE DE L'ACTE" TYP="101" RUB="50" SEQMIN="01" SEQMAX="99" ETEND="101-01-01">
+	  <DESCRIPTION>
+	    L’enregistrement de type 101 et de rubrique 50 est obligatoire. Il identifie l'information
+	    stable "libellé long" du code de l'acte.
+	    Si le libellé long contient plus de 100 caractères, un enregistrement de même type est
+	    créé avec un numéro de séquence incrémenté de 1, pouvant évoluer de 01 à 99. Il est
+	    donc possible d’associer jusqu’à 100 * 99 = 9900 caractères pour un libellé long.
+	  </DESCRIPTION>
+	  <CHAMP NOM="LIBELLE_LONG" NOMLONG="Libellé long" TYPE="A" LNG="100" DESCRIPTION="CCAM n°8, Fractionnement du libellé exhaustif du code de l'acte"  TRAITER-CRLF="Y"/>
+	</ENR>
+
+	<ENR NOM="COND_GEN_ACTE" NOMLONG="CODE DE L'ACTE" TYP="101" RUB="51" SEQMIN="01" SEQMAX="99" ETEND="101-01-01">
+	  <DESCRIPTION>
+	    L’enregistrement de type 101 et de rubrique 51 est facultatif. Il identifie l'information
+	    stable "Conditions générales" du code de l'acte.
+	    Si le code de l'acte comporte plus de 30 conditions générales, un enregistrement de
+	    même type est créé avec un numéro de séquence incrémenté de 1, pouvant évoluer de
+	    01 à 99. Il est donc possible d’associer jusqu’à 30 * 99 = 2970 conditions générales à un
+	    code de l'acte.
+	    Remarque : le texte associé à chaque condition générale est présent dans les tables de
+	    codification du fichier (voir enregistrement correspondant)
+	  </DESCRIPTION>
+	  <REPETITION NOM="R_ACTE_COND_GEN" NOMLONG="" MIN="00" MAX="30">
+	    <CHAMP NOM="CONDGE_COD" NOMLONG="Code Condition générale" TYPE="N" LNG="4" DESCRIPTION="CCAM n°10, Code de la condition générale appliquée à l'acte" />
+	  </REPETITION>
+	</ENR>
+
+	<ENR TYP="101" RUB="52" SEQMIN="01" SEQMAX="99" NOM="NOTES" NOMLONG="Notes du code de l'acte" LIEN="101-01-01" FUSIONNE-SUR="SEQ"><!-- FUSIONNE SUR SEQUENCE SUPERIEURE A LA SEQUENCE PRECEDENTE -->
+	  <DESCRIPTION>
+		L’enregistrement de type 101 et de rubrique 52 est facultatif et trié selon l'ordre de priorité d'affectations des notes. Il identifie l'information stable "Notes" du code de l'acte. Si le code de l'acte comporte plusieurs notes, il y aura autant d'enregistrements 101-52-01 que de notes.
+		Si le code de l'acte comporte une note ayant un texte de plus de 100 caractères, un enregistrement de même type est créé avec un numéro de séquence incrémenté de 1, pouvant évoluer de 01 à 99. Il est donc possible d’associer à une note un libellé pouvant comporter jusqu'à 100 * 99 = 9900 caractères.
+		Remarque : le texte associé à chaque code du type de note est présent dans les tables de codification du fichier (voir enregistrement correspondant)		  
+	  </DESCRIPTION>
+	  <CHAMP NOM="CODE_TYPE" NOMLONG="Code du type de note" TYPE="N" LNG="2" DESCRIPTION="CCAM n°11, Code du type de la note" />
+	  <CHAMP NOM="TEXTE_NOTE" NOMLONG="Texte de la note" TYPE="A" LNG="100" DESCRIPTION="CCAM n°11, Texte de la note"  TRAITER-CRLF="Y"/>
+	</ENR>
+
+	<ENR TYP="110" RUB="01" SEQ="01" NOM="HISTO_NIV_ACTE" NOMLONG="Historique niveau code de l’acte" LIEN="101-01-01">
+	  <DESCRIPTION>
+	    Cet enregistrement regroupe les informations concernant les données historisées relatives à un code de l'acte.
+	    La présence d’au moins un enregistrement de type 110 et de rubrique 01 par code de l'acte est impérative.
+	    S’il y a plus d’un historique, un enregistrement de même type est créé. Il est donc possible d’associer jusqu’à 99 historiques à un code de l’acte.
+	    Si plusieurs historiques sont présents, ils sont présents dans l’ordre des dates d’effet décroissantes .
+	  </DESCRIPTION><!--HK: ce sont bien tout le temps des 110-01-01 dans le fichier-->
+	  <CHAMP NOM="DT_EFFET" NOMLONG="Date d'effet" TYPE="D" LNG="8" DESCRIPTION="CCAM n°26, Sous la forme SSAMMJJ" />
+	  <CHAMP NOM="DT_ARRETE" NOMLONG="Date de l’arrêté ministériel" TYPE="D" LNG="8" DESCRIPTION="CCAM n°27, Sous la forme SSAAMMJJ" />
+	  <CHAMP NOM="DT_JO" NOMLONG="Date de publication au J.O." TYPE="D" LNG="8" DESCRIPTION="CCAM n°28, Sous la forme SSAAMMJJ" />
+	  <CHAMP NOM="ADM_REMB" NOMLONG="Admission au remboursement" TYPE="N" LNG="1" DESCRIPTION="CCAM n°22, 1 : acte remboursable\n2 : acte non remboursable\n3 : acte remboursable ou non suivant circonstances" />
+	  <CHAMP NOM="EP" NOMLONG="Entente préalable" TYPE="A" LNG="1" DESCRIPTION="CCAM n°24, O = oui, N = non" />
+	  <SOUS-ENR MIN="1" MAX="5" NOM="CODES_EXO_TICK_MOD" NOMLONG="Codes exonération du ticket modérateur" DESCRIPTION="1ère occurrence obligatoire : 1, 2, 3, 4 , 5, 7\n2ème occurrence facultative ou à 7\n3ème, 4ème et 5ème occurrences actuellement à zéro">
+	    <CHAMP NOM="CODE_EXO_TICK_MOD" NOMLONG="Code exonération du ticket modérateur" ZERO="VIDE" TYPE="N" LNG="1" DESCRIPTION="CCAM n°25, 1, 2, 3, 4 , 5, 7" />
+	  </SOUS-ENR>
+	  <SOUS-ENR MIN="1" MAX="10" NOM="CLASSES_SPEC_PRESC_PERM" NOMLONG="Classes spécialités prescripteur permises" DESCRIPTION="1ère occurrence obligatoire, autres occurrences facultatives">
+	    <CHAMP NOM="CLSPPP" NOMLONG="Classe 'spécialité prescripteur permise'" TYPE="A" LNG="2" DESCRIPTION="CCAM n°31, Classe de la spécialité autorisée à prescrire l’acte" />
+	  </SOUS-ENR>
+	  <SOUS-ENR MIN="0" MAX="10" NOM="TYPES_FORFAIT" NOMLONG="Types de forfait" DESCRIPTION="Facultatif">
+	    <CHAMP NOM="TYP_FORF" NOMLONG="Type de forfait" TYPE="A" LNG="1" DESCRIPTION="CCAM n°34, type de forfait (technique ou consommable) applicable à l'acte." />
+	  </SOUS-ENR>
+	</ENR>
+
+	<ENR TYP="120" RUB="01" SEQMIN="01" SEQMAX="99" NOM="PROCEDURES" NOMLONG="Procédures"  ETEND="110-01-01">
+	  <DESCRIPTION>
+	    Cet enregistrement, qui est facultatif, regroupe toutes les procédures auxquelles le code de l’acte appartient.
+	    Ces informations sont historisées et rattachées à une date d'effet via l'enregistrement 110-01-01 les précédant
+	    S’il y a plus de 8 procédures, un enregistrement de même type est créé avec un numéro de séquence incrémenté de 1, sachant qu’il peut évoluer de 01 à 99. Il est donc possible d’associer jusqu’à 8 * 99 = 792 procédures à un code l’acte.
+	    Les occurrences sont triées par procédure croissante.
+	  </DESCRIPTION>
+	  <REPETITION MIN="0" MAX="8" NOM="PROCEDURES" NOMLONG="Procédures" DESCRIPTION="Procédures auxquelles le code de l’acte appartient.">
+	    <CHAMP NOM="PROC" NOMLONG="Procédure" TYPE="A" LNG="13" DESCRIPTION="CCAM n°9.1, Procédure à laquelle le code de l’acte appartient." />
+	  </REPETITION>
+	</ENR>
+	
+	<ENR TYP="130" RUB="01" SEQMIN="01" SEQMAX="99" NOM="INCOMPATIBILITES" NOMLONG=""  ETEND="110-01-01">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, regroupe tous les codes de l'acte qui ont une
+		incompatibilité réglementaire avec le code de l'acte.
+		Ces informations sont historisées et rattachées à une date d'effet via l'enregistrement
+		110-01-01 les précédents.
+		S’il y a plus de 8 codes incompatibles, un enregistrement de même type est créé avec un
+		numéro de séquence incrémenté de 1, sachant qu’il peut évoluer de 01 à 99. Il est donc
+		possible d’associer jusqu’à 8 * 99 = 792 codes incompatibles à un code de l'acte.
+		Les occurrences sont triées par code de l'acte croissant.		  
+	  </DESCRIPTION>
+	  <REPETITION MIN="0" MAX="8" NOM="ACTES_INCOMPATIBLES" NOMLONG="Actes incompatibles" DESCRIPTION="">
+	    <CHAMP NOM="ACTE_COD" NOMLONG="Code de l' acte incompatible" TYPE="A" LNG="13" DESCRIPTION="CCAM n°14, Occurrence de 8 codes incompatibles avec le code de l’acte" />
+	  </REPETITION>
+	</ENR>
+	
+	<ENR TYP="140" RUB="01" SEQMIN="01" SEQMAX="99" NOM="FORFAITS_CMUC" NOMLONG=""  ETEND="110-01-01">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, regroupe tous les forfaits CMUC autorisés pour le
+		code de l'acte.
+		Ces informations sont historisées et rattachées à une date d'effet via l'enregistrement
+		110-01-01 les précédents.
+		S’il y a plus de 30 occurrences de Forfait CMUC, un enregistrement de même type est
+		créé avec un numéro de séquence incrémenté de 1, sachant qu’il peut évoluer de 01 à
+		99. Il est donc possible d’autoriser jusqu’à 30 * 99 = 2970 Forfaits CMUC à un code de
+		l'acte.
+		Les occurrences sont triées par " Forfait CMUC" croissant.		  
+	  </DESCRIPTION>
+	  <REPETITION MIN="0" MAX="30" NOM="FORFAITS_CMUC" NOMLONG="" DESCRIPTION="">
+	    <CHAMP NOM="CMUC" NOMLONG="Forfait CMUC" TYPE="N" LNG="4" DESCRIPTION="Clé d'identification du Forfait CMUC (TB21)" />
+	  </REPETITION>
+	</ENR>
+	
+	<ENR TYP="201" RUB="01" SEQ="01" NOM="CODES_ACTIVITE" NOMLONG="CODE ACTIVITE" LIEN="101-01-01">
+	  <DESCRIPTION>
+		Cet enregistrement regroupe les informations stables (non historisées) d'un code activité
+		pour un code de l'acte.
+		L’enregistrement de type 201 et de rubrique 01 est obligatoire et présent une seule fois
+		pour chacun des codes activités. Il identifie le code activité ainsi que ses informations
+		stables à destination de la production et/ou de l’informationnel.
+		Ces occurrences sont triées par code activité croissant.		  
+	  </DESCRIPTION>
+	  <CHAMP NOM="CODE_ACTIVITE" NOMLONG="Code activité" TYPE="A" LNG="1" DESCRIPTION="CCAM n°2, Code activité (cf. différents intervenants)" />
+	  <REPETITION MIN="0" MAX="10" NOM="EXTS_DOC" NOMLONG="" DESCRIPTION="">
+	    <CHAMP NOM="EXT_DOC" NOMLONG="Code extension documentaire" TYPE="A" LNG="1" DESCRIPTION="CCAM n°3, Facultatif – affine le code de l’acte" />
+	  </REPETITION>
+	  <REPETITION MIN="0" MAX="5" NOM="RECOS_MEDICALES" NOMLONG="" DESCRIPTION="">
+	    <CHAMP NOM="NUM_RECO_MED" NOMLONG="Numéro de recommandation médicale" TYPE="A" LNG="5" DESCRIPTION="CCAM n°20, Facultatif" />
+	  </REPETITION>
+	  <REPETITION MIN="0" MAX="10" NOM="TYPES_AGREMENT_RADIO" NOMLONG="" DESCRIPTION="CCAM n°40, Facultatif - lié à l’appareil utilisé pour l’exécution de l’acte">
+	    <CHAMP NOM="TAR" NOMLONG="Type d'agrément radio" TYPE="A" LNG="2" DESCRIPTION="" />
+	  </REPETITION>
+	</ENR>
+
+	<ENR TYP="210" RUB="01" SEQ="01" NOM="DONNEES_HISTO_ACTE" NOMLONG="Donnees historisees de l'acte" LIEN="201-01-01">
+		<DESCRIPTION>
+			Cet enregistrement regroupe les informations concernant les données historisées relatives à un code de l'acte /activité.
+La présence d’au moins un enregistrement de type 210 par code de l'acte / activité (enregistrement de type 201) est impérative.
+S’il y a plus d’un historique, un enregistrement de même type est créé.
+Si plusieurs historiques sont présents, ils sont présents dans l’ordre des dates d’effet décroissantes .
+		</DESCRIPTION>
+		<CHAMP NOM="DATE_EFFET" NOMLONG="Date d'effet" TYPE="D" LNG="8" DESCRIPTION="CCAM n°26,Sous la forme SSAMMJJ" />
+		<CHAMP NOM="DATE_ARRETE" NOMLONG="Date de l’arrêté ministériel" TYPE="D" LNG="8" DESCRIPTION="CCAM n°27, Sous la forme SSAAMMJJ" />
+		<CHAMP NOM="DATE_JO" NOMLONG="Date de publication au J.O." TYPE="D" LNG="8" DESCRIPTION="CCAM n°28, Sous la forme SSAAMMJJ" />
+		<REPETITION MIN="0" MAX="10" NOM="CODES_MODIFIC">
+			<CHAMP NOM="CODE_MODIFIC" NOMLONG="Code modificateur" TYPE="A" LNG="1" DESCRIPTION="CCAM n°6, (10 occ.) Facultatif – liste des modificateurs applicables à l’acte U = Urgence, A : ASA, N = Nuit, F = Férié" /> 			
+		</REPETITION>
+		<CHAMP NOM="CAT_MED" NOMLONG="Catégorie médicale" TYPE="A" LNG="2" DESCRIPTION="CCAM n°12, Facultatif - catégorie médicale à laquelle appartient le code" />
+		<REPETITION MIN="1" MAX="10" NOM="CLASSES_SPE_EX">
+			<CHAMP NOM="CLASSE_SPE_EX" NOMLONG="Classe 'spécialité exécutant permise'" TYPE="A" LNG="2" DESCRIPTION="CCAM n°32, 1ère occurrence obligatoire, Autres occurrences facultatives, Liste des spécialités autorisées à exécuter l’acte" />
+		</REPETITION>
+		<CHAMP NOM="CODE_REGR" NOMLONG="Code regroupement" TYPE="A" LNG="3" DESCRIPTION="CCAM n°42, Code regroupement à destination des Organismes Complémentaires" />
+	</ENR>
+	
+	<ENR TYP="220" RUB="01" SEQMIN="01" SEQMAX="99" NOM="ASSOCIABILITES" NOMLONG="Associabilités" ETEND="210-01-01">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est facultatif, regroupe tous les codes de l'acte / code activité associables médicalement avec le code de l'acte / code activité. Ces informations sont historisées et rattachées à une date d'effet via l'enregistrement 210-01-01 les précédents.
+		S’il y a plus de 8 codes associables, un enregistrement de même type est créé avec un numéro de séquence incrémenté de 1, sachant qu’il peut évoluer de 01 à 99. Il est donc possible d’avoir techniquement jusqu’à 8 * 99 = 792 associations pour un code de l'acte / code activité.
+		Les occurrences sont triées par code de l'acte/activité croissant.		  
+	  </DESCRIPTION>
+	  <REPETITION NOM="CODES_ACTES_ACTIV_COMP" NOMLONG="" MIN="0" MAX="8" NUMEROTER="Y">
+		  <CHAMP NOM="CODE_ACTES_ACTIV_COMP" NOMLONG="Code de l'acte /activité compatible" TYPE="A" LNG="14" ECH="1" DESCRIPTION="CCAM n°13, Codes de l’acte / activité associables médicalement" />
+	  </REPETITION>
+	  <REPETITION NOM="REGLES_TARIF_ACTIV_COMP" NOMLONG="" MIN="0" MAX="8" NUMEROTER="Y">
+		  <CHAMP NOM="REGLE_TARIF_ACTIV_COMP" NOMLONG="Règle tarifaire" TYPE="A" LNG="1" DESCRIPTION="CCAM n°36, 8 occurrences de règles tarifaire" />		  
+	  </REPETITION>
+	</ENR>
+	
+	<ENR TYP="301" RUB="01" SEQ="01" NOM="PHASE_TRAIT" NOMLONG="PHASE DE TRAITEMENT" LIEN="201-01-01">
+	  <DESCRIPTION>
+		Cet enregistrement regroupe les informations stables (non historisées) d'une phase de traitement pour un code de l'acte / activité.
+		L’enregistrement de type 301 et de rubrique 01 est obligatoire et présent une seule fois pour chacune des phases de traitement d’un code de l'acte / activité. Il identifie la phase de traitement ainsi que ses informations stables à destination de la production et/ou de l’informationnel.
+		Ces occurrences sont triées par phase de traitement croissante.		  
+	  </DESCRIPTION>
+	  <CHAMP NOM="PHASE_TRAIT" NOMLONG="Phase de traitement" TYPE="N" LNG="1" DESCRIPTION="CCAM n°4, Identifie les différentes phases d’un traitement – 0 = valeur par défaut" />
+	  <CHAMP NOM="NB_DENTS" NOMLONG="Nombre de dents traitées" TYPE="A" LNG="2" DESCRIPTION="CCAM n°43, Facultatif\nActes non dentaire : blanc\nActes dentaires :\n- 00 : pas de dents,\n- de 01 à 16 : nombre maximum de dents traités, \n- MA = maxillaire," />
+	  <CHAMP NOM="AGE_MIN" NOMLONG="Age minimal" TYPE="N" LNG="3" DESCRIPTION="CCAM n°45, 0 par défaut - Pour les actes dentaires" />
+	  <CHAMP NOM="AGE_MAX" NOMLONG="Age maximal" TYPE="N" LNG="3" DESCRIPTION="CCAM n°46, 0 par défaut - Pour les actes dentaires" />
+	</ENR>
+	
+	<ENR TYP="301" RUB="02" SEQ="01" NOM="DENTS_INCOMPATIBLES" NOMLONG="" ETEND="301-01-01">
+	  <DESCRIPTION>
+		L’enregistrement de type 301 et de rubrique 02 est facultatif. Il identifie les informations stables du code l’acte à destination de la production et/ou de l’informationnel.
+		S’il y a plus de 60 occurrences de dents incompatibles pour le code de l’acte, un enregistrement de même type est créé avec un numéro de séquence incrémenté de 1, sachant qu’il peut évoluer de 01 à 99. Il est donc possible d’associer jusqu’à 60 * 99 = 5940 occurrences.	  
+	  </DESCRIPTION>
+      <REPETITION MIN="0" MAX="60" NOM="DENTS_INCOMPATIBLES" NOMLONG="Dents incompatibles">
+	  	<CHAMP NOM="NUM_DENT" NOMLONG="Numéro de dent" TYPE="N" LNG="2" DESCRIPTION="CCAM n°44, liste des numéros de dents incompatibles avec l’acte" />		  
+	  </REPETITION>	  
+	</ENR>
+	
+	<ENR TYP="301" RUB="50" SEQ="01" NOM="PHASE_TRAIT" NOMLONG="PHASE DE TRAITEMENT/ICR" ETEND="301-01-01">
+	  <DESCRIPTION>
+		L’enregistrement de type 301 et de rubrique 50 identifie l'Indice de Coût Relatif (ICR) et le Caractère Classant de la phase de traitement.
+		Il est facultatif et présent une seule fois pour chacune des phases de traitement d’un code de l'acte / activité
+	  </DESCRIPTION>
+	  <CHAMP NOM="ICR" NOMLONG="ICR" TYPE="N" LNG="4" DESCRIPTION="CCAM n°48, Indice de coût relatif" />
+	  <CHAMP NOM="CLASSANT" NOMLONG="Caractère classant" TYPE="A" LNG="1" DESCRIPTION="CCAM n°51,Valeur possibles : Y (par défaut blanc)" />
+	</ENR>
+	
+	<ENR TYP="310" RUB="01" SEQMIN="01" SEQMAX="99" NOM="HISTO_PHASE" NOMLONG="Historique niveau code de l’acte/activité/phase" LIEN="301-01-01">
+	  <DESCRIPTION>
+		Cet enregistrement regroupe les informations concernant les données historisées relatives à un code de l'acte /activité/ phase de traitement.
+		La présence d’au moins un enregistrement de type 310 par code de l'acte/activité/phase de traitement est impérative.
+		S’il y a plus d’un historique, un enregistrement de même type est créé.
+		Si plusieurs historiques sont présents, ils sont présents dans l’ordre des dates d’effet décroissantes .	  
+	  </DESCRIPTION>
+ 	  <CHAMP NOM="DATE_EFFET" NOMLONG="Date d'effet" TYPE="D" LNG="8" DESCRIPTION="CCAM n°26, Sous la forme SSAMMJJ" />
+ 	  <CHAMP NOM="DATE_ARRETE" NOMLONG="Date de l’arrêté ministériel" TYPE="D" LNG="8" DESCRIPTION="CCAM n°27, Sous la forme SSAAMMJJ" />
+ 	  <CHAMP NOM="DATE_JO" NOMLONG="Date de publication au J.O." TYPE="D" LNG="8" DESCRIPTION="CCAM n°28, Sous la forme SSAAMMJJ" />
+ 	  <CHAMP NOM="NB_MAX_SEANCES" NOMLONG="Nombre maximal de séances/période" TYPE="N" LNG="2" DESCRIPTION="CCAM n°23, Facultatif" />
+ 	  <CHAMP NOM="UNITE_OEUVRE" NOMLONG="Unité d'oeuvre" TYPE="A" LNG="3" DESCRIPTION="CCAM n°29" />
+ 	  <CHAMP NOM="COEFF_UO" NOMLONG="Coefficient associé à l'unité d'oeuvre" TYPE="N" LNG="6" ECH="2" DESCRIPTION="CCAM n°30" />
+ 	  <CHAMP NOM="CODE_PAIEMENT" NOMLONG="Code paiement séances/périodes" TYPE="A" LNG="1" DESCRIPTION="CCAM n°33, Facultatif\n1=séance\n2=mois\n3=trimestre\n4=semestre\n5=année\n6=en une seule fois" />
+ 	  <REPETITION MIN="0" MAX="4" NOM="COEFFS_MAJ_DOM" NOMLONG="Coefficients de majorations des DOM" NUMEROTER="Y">
+	  	<CHAMP NOM="COEFF" NOMLONG="Coefficient" TYPE="N" LNG="4" ECH="1" DESCRIPTION="CCAM n°47, coefficient de majoration de tarif applicable à chacun des DOM (971,972,973 et 974), Valeur par défaut : 1" />   
+      </REPETITION>
+	  <CHAMP NOM="SUPP_CHARGES_CAB" NOMLONG="Supplément de charges en cabinet" TYPE="N" LNG="6" ECH="2" DESCRIPTION="CCAM n°39, Facultatif - Montant monétaire de charges supplémentaires liées à l’exécution de l’acte en cabinet" />
+	</ENR>
+	
+	<ENR TYP="320" RUBMIN="01" RUBMAX="99" SEQMIN="01" SEQMAX="99" NOM="PRIX_UNITAIRES" NOMLONG="PU de base" ETEND="310-01">
+	  <DESCRIPTION>
+		Cet enregistrement, qui est obligatoire, regroupe tous les Prix unitaires de base de l'acte/activité/Phase en fonction des grilles tarifaires. Ces informations sont historisées et rattachées à une date d'effet via l'enregistrement 310-01-xx les précédents.
+		La présence d’au moins un enregistrement de type 320 par code de l'acte/activité/phase de traitement est impérative.
+		S’il y a plus d’un historique, un enregistrement de même type est créé. La "Rubrique" peut évoluer de 01 à 99 et, pour chaque valeur de la "Rubrique", la "Séquence" peut évoluer de 01 à 99.
+		Le nombre maximum d'enregistrements de type 320 est de 99 * 99 = 9801.
+		Il est donc possible d’associer jusqu’à 13 * 99 * 99 = 127413 occurrences d’éléments.
+		Les occurrences sont triées par "Date d'effet" décroissantes, puis "Grille Tarifaire" croissante.		  
+	  </DESCRIPTION>	  
+ 	  <SOUS-ENR MIN="0" MAX="13" NOM="STRUCT_PU" NOMLONG="Structure Prix Unitaire">
+	  	<CHAMP NOM="GRILLE_TARIF" NOMLONG="Grille Tarifaire" TYPE="N" LNG="3" DESCRIPTION="Code de la Grille tarifaire" />
+	  	<CHAMP NOM="PU_BASE" NOMLONG="Prix unitaire de base" TYPE="N" LNG="6" ECH="2" DESCRIPTION="CCAM n°37, Prix unitaire de base associé à la Grille Tarifaire" />
+ 	  </SOUS-ENR>
+	</ENR>
+	
+	<ENR TYP="350" RUB="01" SEQMIN="01" SEQMAX="99" NOM="HISTO_PHASE_COMPL" NOMLONG="Historique complémentaire niveau code de l’acte/activité/phase" LIEN="310-01">
+	  <DESCRIPTION>
+		L’enregistrement de type 350 et de rubrique 01 identifie l'information historisée "Score de travail médical" et "Coût de la pratique" d'une phase de traitement activité pour un code de l'acte/activité. Il est obligatoire.
+		S’il y a plus d’un historique, un enregistrement de même type est créé.
+		Si plusieurs historiques sont présents, ils sont présents dans l’ordre des dates d’effet décroissantes .
+		Remarque : le nombre d'enregistrement de type 350 est égal au nombre d'enregistrement de type 310. Les dates d'effet sont identiques.		  
+	  </DESCRIPTION>
+	  <CHAMP NOM="DATE_EFFET" NOMLONG="Date d'effet" TYPE="D" LNG="8" DESCRIPTION="CCAM n°26, Sous la forme SSAMMJJ" />
+	  <CHAMP NOM="SCORE_TRAV_MED" NOMLONG="Score de travail médical" TYPE="N" LNG="6" ECH="2" DESCRIPTION="CCAM n°37.1, Score de travail médical permettant de situer l'acte par rapport à un autre acte" /> 
+	  <CHAMP NOM="COUT_DE_PRAT" NOMLONG="Coût de la pratique" TYPE="N" LNG="6" ECH="2" DESCRIPTION="CCAM n°37.2, Coût de la pratique regroupant les charges générales réparties au prorata du travail" />
+	</ENR>
+	
+	<ENR TYP="399" RUB="01" SEQ="01" NOM="FIN_PHASE" NOMLONG="Fin code phase de traitement" ETEND="301-01-01">
+	  <DESCRIPTION>
+		Cet enregistrement indique la fin de la description d’un code phase de traitement pour un code de l’acte/activité.
+		Il est obligatoire et doit être présent une seule fois par code phase de traitement. Il permet de vérifier l’intégrité sur le nombre d’enregistrements pour un code phase de traitement.
+	  </DESCRIPTION>
+
+	  <CHAMP NOM="NBENR" NOMLONG="Nombre d’enregistrements" TYPE="N" LNG="5" DESCRIPTION="Nombre d’enregistrements de type 301, 310, 320 et 399 pour le code phase de traitement" />
+	</ENR>
+	
+	<ENR TYP="299" RUB="01" SEQ="01" NOM="FIN_ACTIV" NOMLONG="Fin code activité" ETEND="201-01-01">
+	  <DESCRIPTION>
+		Cet enregistrement indique la fin de la description d’un code activité pour un code de l’acte.
+		Il est obligatoire et doit être présent une seule fois par activité. Il permet de vérifier l’intégrité sur le nombre d’enregistrements pour un code de activité.		  
+	  </DESCRIPTION>
+	  <CHAMP NOM="NBENR" NOMLONG="Nombre d’enregistrements" TYPE="N" LNG="5" DESCRIPTION="Nombre d’enregistrements de type 201, 210, 220, 301, 310, 320, 399 et 299 pour les code activité / phase de traitement" />
+	</ENR>
+	
+	<ENR TYP="199" RUB="01" SEQ="01" NOM="FIN_ACTE" NOMLONG="Fin code de l'acte CCAM" ETEND="101-01-01">
+	  <DESCRIPTION>
+		Cet enregistrement indique la fin de la description d’un code de l’acte.
+		Il est obligatoire et doit être présent une seule fois par code de l’acte. Il permet de vérifier l’intégrité sur le nombre d’enregistrements pour un code de l’acte.		  
+	  </DESCRIPTION>
+	  <CHAMP NOM="NBENR" NOMLONG="Nombre d’enregistrements" TYPE="N" LNG="5" DESCRIPTION="Nombre d’enregistrements de type 101, 110, 120, 130, 140, 201, 210, 220, 301, 310, 320, 399, 299 et 199 pour le code de l'acte" />
+	</ENR>
+	
+	<ENR TYP="999" NOM="FIN" NOMLONG="Fin de fichier" >
+		<CHAMP NOM="TYPE_EMETTEUR" NOMLONG="Type d’émetteur" TYPE="A" LNG="2" DESCRIPTION="Non contrôlé" />		
+		<CHAMP NOM="NUMERO_EMETTEUR" NOMLONG="Numéro d’émetteur" TYPE="N" LNG="14" DESCRIPTION="Valeur ‘0000000100000’" />
+		<CHAMP NOM="PROGRAMME_EMETTEUR" NOMLONG="Programme émetteur" TYPE="A" LNG="6" DESCRIPTION="Valeur ‘CODCAM’" />
+		<CHAMP NOM="TYPE_DESTINATAIRE" NOMLONG="Type de destinataire" TYPE="A" LNG="2" DESCRIPTION="Valeur ‘CT’" />
+		<CHAMP NOM="NUMERO_DESTINATAIRE" NOMLONG="Numéro de destinataire" TYPE="A" LNG="14" DESCRIPTION="Valeur ‘00000001000000’" />
+		<CHAMP NOM="PROGRAMME_DESTINATAIRE" NOMLONG="Programme destinataire" TYPE="A" LNG="6" DESCRIPTION="Valeur ‘NAX310’" />
+		<CHAMP NOM="TYPE_ECHANGE" NOMLONG="Application - type d’échange" TYPE="A" LNG="2" DESCRIPTION="Valeur ‘NA’" />
+		<CHAMP NOM="IDENTIFICATION_FICHIER" NOMLONG="Identification du fichier" TYPE="A" LNG="3" DESCRIPTION="Valeur ‘CAM’" />
+		<CHAMP NOM="NOMBRE_TOTAL_ENREGISTREMENTS" NOMLONG="Nombre total d’enregistrements" TYPE="N" LNG="10" DESCRIPTION="Nombre d’enregistrements du fichier (types 000 et 999 compris)" />
+		<CHAMP NOM="NOMBRE_ENREGISTREMENTS_TABLES" NOMLONG="Nombre d’enregistrements tables" TYPE="N" LNG="6" DESCRIPTION="Nombre d’enregistrements du type 002 à 023" />
+		<CHAMP NOM="NOMBRE_CODES_ACTE" NOMLONG="Nombre de codes de l'acte" TYPE="N" LNG="6" DESCRIPTION="Nombre d'enregistrements de type 101-01-01." />
+		<CHAMP NOM="NOMBRE_CODES_ACTE_ACTIVITE" NOMLONG="Nombre de codes de l'acte/activité" TYPE="N" LNG="6" DESCRIPTION="Nombre d'enregistrements de type 201-01-01." />
+		<CHAMP NOM="NOMBRE_CODES_ACTE_ACTIVITE_PHASE" NOMLONG="Nombre de codes de l'acte/activité/phase" TYPE="N" LNG="6" DESCRIPTION="Nombre d'enregistrements de type 301-01-01." />
+	</ENR>
+	
+</NX>

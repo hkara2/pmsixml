@@ -1,0 +1,11 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+FC;Numéro FINESS d’inscription ePMSI;FINES;9;1;9;;N;N;Droite/Zéro;;;
+FC;Type de prestation;TYPP;2;10;11;;N;N;Droite/Zéro;53;;
+FC;Numéro administratif local de séjour;NADL;20;12;31;;N;A;Gauche/Espace;"Sans doute une erreur dans la specification ; j'ai aussi changé le remplissage pour avoir Droite/Zéro";;
+FC;Date d’entrée du séjour;DESJ;8;32;39;;D;D;Droite/Zéro;;;
+FC;Date sortie du séjour;DSSJ;8;40;47;;D;D;Droite/Zéro;;;
+FC;Nombre IVG antérieures;NIVGA;2;48;49;;N;N;Droite/Zéro;;;
+FC;Année de l’IVG précédente;AIVGP;4;50;53;;N;N;Droite/Zéro;Format AAAA;;
+FC;Nombre de naissances vivantes antérieures;NNVA;2;54;55;;N;N;Droite/Zéro;;;
+FC;Filler;FLR56;30;56;85;;A;A;NA/NA;Pour un usage futur;;
+S:;MONO;;;;;;;;;;;

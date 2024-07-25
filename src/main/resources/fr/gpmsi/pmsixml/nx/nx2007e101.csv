@@ -1,0 +1,10 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+NX;Type d’enregistrement ;TYP;3;1;3;O;N;N;Droite/Zéro;Valeur ‘101’  ;;
+NX;Rubrique;RUB;2;4;5;O;N;N;Droite/Zéro;Valeur ‘01’;;
+NX;Séquence ;SEQ;2;6;7;O;N;N;Droite/Zéro;Valeur ‘01’ ;;
+NX;Numéro de GHS ;GHS-NRO ;4;8;11;O;N;N;Droite/Zéro;Numéro de GHS ;;
+NX;Secteur ;GHS-SEC ;1;12;12;O;N;N;Droite/Zéro;Le GHS relève du secteur : 1 = Public 2 = Privé ;;
+NX;Date de création du GHS ;DAT-CRE ;8;13;20;O;N;N;Droite/Zéro;Date de création / inscription à la nomenclature par arrêté.  SSAAMMJJ ;;
+NX;Date fin du GHS ;DAT-FIN ;8;21;28;O;N;N;Droite/Zéro;Date unique correspondant à la suppression du GHS. SSAAM MJJ A zéro dans le cas où il n’y a pas de date fin. ;;
+NX;Libellé du GHS ;GHS-LIB ;100;29;128;O;A;A;Gauche/Espace;100 premiers caractères du libellé du GHS ;;
+S:;MONO;;;;;;;;;;;

@@ -1,0 +1,25 @@
+﻿A faire :
+
+170512 Un mode permissif qui permet d'avoir un groupe qui déclare un certain nombre
+       d'enfants, mais ces enfants sont absents. Ex : un RSS duquel les actes ont été
+       enlevés
+180920 Mettre le mode "acceptTruncated" non pas au niveau de l'InputString mais au niveau du Reader lui-même
+181011 Faire une méthode qui crée un dictionnaire de listes à partir de ~/pmsixml/lists (le nom de la liste
+       est le nom du fichier moins le .txt final, les entrées de la liste sont les lignes). Le dictionnaire
+       est global et chargé au moment de l'appel.
+/190531 OK, FAIT Executer chaque bloc immédiatement après sa déclaration ; actuellement
+       chaque bloc est stocké puis la liste des blocs est exécutée à la fin
+       du programme. Cela entraîne de la confusion car les éléments entre les
+       blocs sont exécutés avant les blocs eux-même même si leur position est
+       après le bloc.
+200605 Faire en sorte que les noeuds Fsz puissent etre compares voire etre utilises en tant
+       que cle dans une map. Ceci pour eviter des bugs si les utilisateurs le font alors que
+       les classes ne sont pas faites pour cela.
+220816 Vérifier que le compteur des zones de radiothérapie dans les RSA
+       est bien pris en compte et bien déclaré partout              
+/221122 OK, FAIT Séparer la partie qui fait du traitement du PMSI proprement dit de la partie qui fait du
+       scripting groovy pour la mettre dans un projet séparé gpmsixml. Ainsi la distribution
+       de ce qui est purement pmsixml sera plus facile et n'aura pas de dépendance.
+221226 Créer un fichier de métadonnées Ameli NX et une stratégie de lecture de ces
+       métadonnées.       
+              

@@ -1,0 +1,10 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+FCMS;Numéro FINESS d’inscription ePMSI;FINESS;9;1;9;;A;A;NA/NA;;;
+FCMS;Type de prestation;TYPPR;2;10;11;;A;A;NA/NA;08;;
+FCMS;Numéro administratif local de séjour;NADL;20;12;31;;A;A;Gauche/Espace;;;
+FCMS;Date d'administration;DTADM;8;32;39;;N;D;NA/NA;JJMMAAAA;;
+FCMS;Code UCD;CUCD;15;40;54;;A;A;Gauche/Espace;Code à13 caractères conseillé ;;
+FCMS;Nombre administré éventuellement fractionnaire (7+3);NBADM;10;55;64;;N;N;Droite/Zéro;7+3;;7+3
+FCMS;Prix d'achat multiplié par le nombre administré (7+3);PXACH;10;65;74;;N;N;Droite/Zéro;7+3;;7+3
+FCMS;Filler;FLR75;30;75;104;;A;A;;Réservé à un usage futur;;
+S:;MONO;;;;;;;;;;;

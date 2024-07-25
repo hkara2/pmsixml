@@ -1,0 +1,10 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+FST;Numéro FINESS d’inscription ePMSI ;FINESS;9;1;9;O;A;A;Gauche/Espace;;;
+FST;Type de fichier;TYPFIC;3;10;12;O;A;A;Gauche/Espace;G68;;
+FST;Année de la période de transmission ;ANPT;4;13;16;O;N;N;Droite/Zéro;Format AAAA ;;
+FST;Mois de la période de transmission;MOPT;2;17;18;O;N;N;Droite/Zéro;Ex : 10 pour la transmission d’octobre;;
+FST;Code;CODE;3;19;21;O;A;A;Gauche/Espace;TDE ou TSE ;;
+FST;Classe de distance;CLDIST;2;22;23;O;N;N;Droite/Zéro;- pour TDE et TSE, valeur égale à 00 pour les transports de janvier-février - pour TDE, valeur égale à : 01 : [0-25 km[ 02 : [25-75 km[ 03 : [75-150 km[ 04 : [150-300 km[ 05 : [300-∞ km[ - pour TSE, valeur égale à : 06 : [0-40 km[ 07 : [40-80 km[ 08 : [80-160 km[ 09 : [160-∞ km[ ;;
+FST;Mois du transport;MOTR;2;24;25;O;N;N;Droite/Zéro;01 pour janvier, 02 pour février, etc… 12 pour décembre Mois de la date de transport aller;;
+FST;Nombre de suppléments;NBSUP;10;26;35;O;A;A;Droite/Espace;compléter par des espaces pour atteindre les 10 caractères;;
+S:;MONO;;;;;;;;;;;

@@ -1,0 +1,50 @@
+Pour le format du fichier de metadonnees, voir la documentation.
+
+Le but est toujours d'avoir un fichier de métadonnées qui est le plus
+proche possible de ce que l'on peut lire dans la documentation en pdf.
+
+Cela se vérifie pour les fichiers PMSI.
+Par contre pour les fichiers NX cela ne ressemble pas.
+Pour cela la recopie des fichiers NX se fait dans des fichiers "saisie-nx-..."
+et ensuite une seconde recopie se fait par copier-coller.
+
+Les fichiers n'étant pas disponibles directement au format texte, la 
+méthode suivante est utilisée :
+
+Copie d'une partie du tableau depuis Acrobat Reader
+Collage dans une fenetre de jEdit.
+Chaque colonne se trouve sur une ligne séparée.
+Enregistrement d'une macro ou on prend la ligne du dessous,
+et on la joint avec la ligne du dessus
+
+Voici ce que donne la macro enregistrée :
+
+textArea.goToNextLine(false);
+textArea.setSelectedText(";");
+textArea.goToPrevCharacter(false);
+textArea.backspace();
+textArea.goToNextLine(false);
+textArea.goToStartOfWhiteSpace(false);
+textArea.goToPrevLine(false);
+
+On rejoue la macro, ligne par ligne, à l'aide de CTRL-M CTRL-P
+puis CTRL-space
+
+Une fois les lignes a peu pres formatees, on peut les reouvrir dans
+Libre Office (qui supporte les csv au format unicode !) et retravailler
+le tableau pour qu'il soit conforme.
+
+Toujours travailler sur une version .ods, puis lorsque les modifs sont finies,
+l'exporter en csv avec encodage utf-8 et separateur ';'.
+
+
+Une autre méthode possible, mais plus fastidieuse :
+
+Copie d'une partie du tableau depuis Acrobat Reader
+Collage dans un tableau open office calc
+
+Utilisation des commandes "scinder les cellules" et "supprimer..." avec 
+décalage vers la gauche.
+
+
+

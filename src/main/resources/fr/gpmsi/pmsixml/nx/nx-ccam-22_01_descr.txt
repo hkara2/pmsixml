@@ -1,0 +1,6 @@
+:encoding=UTF-8:
+Métadonnées NX CCAM v.22 numéro d'ordre 01
+Doocument 
+https://www.ameli.fr/sites/default/files/Documents/750030/document/2018-03-bases-normes-echange-t2a-ccam-lpp.pdf
+
+

@@ -1,0 +1,9 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+TRA;Numéro de RSA;NRSA;10;1;10;;A;A;Gauche/Espace;;;
+TRA;Numéro de RSS;NRSS;20;11;30;;A;A;Gauche/Espace;;;
+TRA;Numéro de RUM;NRUM;10;31;40;;A;A;Gauche/Espace;;;
+TRA;Numéro de dossier administratif local de séjour ;NDOSS;20;41;60;;A;A;Gauche/Espace;;;
+TRA;Date d’entrée (dans l'hôpital);DENTR;8;61;68;;A;A;Gauche/Espace;;;
+TRA;CMD;CMD;6;69;74;;A;A;Gauche/Espace;;;
+TRA;Date de sortie (de l'hôpital);DSOR;8;75;82;;A;A;Gauche/Espace;;;
+S:;MONO;;;;;;;;;;;

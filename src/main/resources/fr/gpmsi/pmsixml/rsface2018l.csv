@@ -1,0 +1,28 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+RSFL;Type d'enregistrement;TENR;1;1;1;O;A;A;NA/NA;NA Valeur=L;;
+RSFL;Numéro FINESS d’inscription ePMSI;FINESS;9;2;10;F;A;A;NA/NA;;;
+RSFL;Numéro FINESS géographique;FINESG;9;11;19;F;A;A;NA/NA;;;
+RSFL;N° immatriculation assuré;NIA;13;20;32;F;A;A;NA/NA;Type 2 CP 12;;
+RSFL;Clé du n° immatriculation;CNI;2;33;34;F;A;A;NA/NA;Type 2 CP 25;;
+RSFL;Rang de bénéficiaire;RGB;3;35;37;F;A;A;NA/NA;Type 2 CP 27;;
+RSFL;Numéro d'entrée;NENT;9;38;46;F;A;A;NA/NA;Type 2 CP 40 Changement position dans le format;;
+RSFL;N° immatriculation individuel;NII;13;47;59;F;A;A;NA/NA;Type 2S CP 50 A renseigner si l’information est présente sur la carte Vitale, l’attestation de droits ou la prise en charge.;;
+RSFL;Clé du n° immatriculation individuel;CNII;2;60;61;F;A;A;NA/NA;Type 2S CP 63 A prendre sur le même support que le n° immatriculation. Clé à contrôler après la saisie, cf. annexe 5 de la norme B2;;
+RSFL;Mode de traitement;MTT;2;62;63;F;A;A;NA/NA;Type 4 CP 39;;
+RSFL;Discipline de prestation (ex DMT);DPR;3;64;66;F;A;A;NA/NA;Type 4 CP 41;;
+RSFL;Date de l'acte 1;DA1;8;67;74;F;A;D;NA/NA;Type 4 B 49 Modification liée au format de la date (JJMMAAAA);;
+RSFL;Quantité acte 1;QA1;2;75;76;F;A;A;NA/NA;Type 4 B 55;;
+RSFL;Code acte 1;CA1;8;77;84;F;A;A;NA/NA;Type 4 B 57;;
+RSFL;Date de l'acte 2;DA2;8;85;92;F;A;D;NA/NA;Type 4 B 65 Modification liée au format de la date (JJMMAAAA);;
+RSFL;Quantité acte 2;QA2;2;93;94;F;A;A;NA/NA;Type 4 B 71;;
+RSFL;Code acte 2;CA2;8;95;102;F;A;A;NA/NA;Type 4 B 73;;
+RSFL;Date de l'acte 3;DA3;8;103;110;F;A;D;NA/NA;Type 4 B 81 Modification liée au format de la date (JJMMAAAA);;
+RSFL;Quantité acte 3;QA3;2;111;112;F;A;A;NA/NA;Type 4 B 87;;
+RSFL;Code acte 3;CA3;8;113;120;F;A;A;NA/NA;Type 4 B 89;;
+RSFL;Date de l'acte 4;DA4;8;121;128;F;A;D;NA/NA;Type 4 B 97 Modification liée au format de la date (JJMMAAAA);;
+RSFL;Quantité acte 4;QA4;2;129;130;F;A;A;NA/NA;Type 4 B 103;;
+RSFL;Code acte 4;CA4;8;131;138;F;A;A;NA/NA;Type 4 B 105;;
+RSFL;Date de l'acte 5;DA5;8;139;146;F;A;D;NA/NA;Type 4 B 113 Modification liée au format de la date (JJMMAAAA);;
+RSFL;Quantité acte 5;QA5;2;147;148;F;A;A;NA/NA;Type 4 B 119;;
+RSFL;Code acte 5;CA5;8;149;156;F;A;A;NA/NA;Type 4 B 121;;
+S:;MONO;;;;;;;;;;;

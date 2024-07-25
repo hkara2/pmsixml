@@ -1,0 +1,17 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+NX;Type d’enregistrement ;TYP;3;1;3;O;N;N;Droite/Zéro;;;
+NX;Type d’émetteur ;TEM;2;4;6;O;A;A;Gauche/Espace;;;
+NX;Numéro d’émetteur ;NEM;14;6;8;O;N;N;Droite/Zéro;;;
+NX;Programme émetteur ;PEM;6;20;22;O;A;A;Gauche/Espace;;;
+NX;Type de destinataire ;TDE;2;26;28;O;A;A;Gauche/Espace;;;
+NX;Numéro de destinataire ;NDE;14;28;30;O;N;N;Droite/Zéro;;;
+NX;Programme destinataire ;PDE;6;42;44;O;A;A;Gauche/Espace;;;
+NX;Application - type d’échange ;ATE;2;48;50;O;A;A;Gauche/Espace;;;
+NX;Identification du fichier ;IFI;3;50;52;O;A;A;Gauche/Espace;;;
+NX;Date de création du fichier ;DCF;8;53;55;O;N;N;Droite/Zéro;;;
+NX;Zone inutilisée ;ZI1;24;61;63;O;A;A;Gauche/Espace;;;
+NX;Numéro chronologie ;NCH;5;85;87;O;N;N;Droite/Zéro;;;
+NX;Type de fichier ;TFI;1;90;92;O;N;N;Droite/Zéro;;;
+NX;Numéro de version ;NVE;4;91;93;O;N;N;Droite/Zéro;;;
+NX;Zone inutilisée ;ZI2;34;95;97;O;A;A;Gauche/Espace;;;
+S:;MONO;;;;;;;;;;;

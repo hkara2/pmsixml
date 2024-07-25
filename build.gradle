@@ -1,0 +1,113 @@
+
+plugins {
+  id 'java'
+  id 'distribution'
+}
+
+//https://github.com/gradle/gradle/issues/17236
+task sourcesJar(type: Jar) {
+  duplicatesStrategy = 'include'
+  //classifier = 'sources'
+  from sourceSets.main.allSource
+}
+
+//en cas de doublon de fichier, ne pas déclencher d'erreur, juste écraser
+processResources.duplicatesStrategy='include'
+
+java {
+  //pour java, nous voulons que l'exécution puisse se faire sur java 8
+  sourceCompatibility = JavaVersion.VERSION_1_8
+  targetCompatibility = JavaVersion.VERSION_1_8
+  withJavadocJar()
+  withSourcesJar() //nous voulons aussi un jar avec le code source
+}
+
+//le numero de version est construit a partir des deux proprietes presentes dans 
+//gradle.properties (qui est lu automatiquement par Gradle)
+//N.B. Chacune des deux propriétés suivantes comporte leurs points
+version = "$PROJECT_VERSION$PROJECT_SUB_VERSION"
+
+repositories {
+    flatDir {
+        dirs 'lib'
+    }
+    mavenCentral()
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+	implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+
+    // implementation fileTree(include: ['*.jar'], dir: 'lib')
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs "src/main/resources"
+        }
+    }
+    test {
+        resources {
+            srcDirs "src/main/resources"
+        }
+    }
+}
+
+task myJavadocs(type: Javadoc) {
+   source = sourceSets.main.allJava
+}
+
+/**
+ * Tâche qui exécute jekyll en tant que commande (doit être installé et dans le PATH)
+ */
+task jekyll(type: Exec) {
+    println "Starting Jekyll generation"
+    commandLine = ['cmd', '/C', 'jekyll', 'build', '--destination', '../../build/docs'] 
+    workingDir = file('./src/doc/')
+}
+
+/**
+ * Construire la distribution
+ */
+task dist {
+    doLast {
+        ant {
+            destdir = "v$version"
+
+            //copier les librairies notamment le jar de pmsixml
+            mkdir(dir: "dist/$destdir/lib")
+
+            //copy(todir: "dist/$destdir/lib", preservelastmodified: true) {
+            //    fileset(dir: "lib")
+            //}
+
+            copy(file: "build/libs/pmsixml-${version}.jar", todir: "dist/$destdir/lib", preservelastmodified: true)
+
+            //copier le repertoire des javadocs dans les docs de sortie
+
+            mkdir(dir: "dist/$destdir/docs/javadoc")
+
+            //le créer au cas où il n'existerait pas encore (si "javadoc" n'a pas été lancé)
+            mkdir(dir: "build/docs/javadoc/")
+
+            copy(todir: "dist/$destdir/docs/javadoc", filtering: "false", overwrite: "true", preservelastmodified: true) {
+                fileset(dir: "build/docs/javadoc/")
+            }
+            
+            //copier les documents générés manuellement
+            copy(todir: "dist/$destdir/docs", filtering: "false", overwrite: "true", preservelastmodified: true) {
+                fileset(dir:  "src/doc/asciidoc")
+                //filelist(dir: "src/doc/asciidoc", 
+                //         files: "pmsixml.adoc,pmsixml.html,pmsixml.pdf")
+            }
+
+        }//ant
+    }//doLast
+}//task dist

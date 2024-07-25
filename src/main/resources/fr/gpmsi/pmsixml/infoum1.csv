@@ -1,0 +1,8 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+IUM;N° de l’unité médicale ;NUM;4;1;4;O;A;A;Gauche/Espace;Notation identique à celle du fichier RSS. A partir de M3 2013, consignes particulières pour les types 30 et 60 (cf. note ci-dessous) ;;
+IUM;N° FINESS Géographique ;FGEO;9;5;13;O;A;A;Gauche/Espace;Obligatoire depuis 2012 ;;
+IUM;Type d’autorisation ;TYAUT;3;14;16;O;A;A;Gauche/Espace;Cadré à gauche. La nomenclature utilisée sera diffusée ultérieurement. Exemple : pour réanimation hors pédiatrie : mettre « 01_ », où _ signifie « blanc ». ;;
+IUM;Date d’effet de l’autorisation ;DEAUT;8;17;24;O;N;D;Droite/Zéro;Format de date jjmmaaaa ;;
+IUM;Nombre de lits ;NBLITS;3;25;27;F;A;A;Gauche/Espace;3 caractères « espace » si pas d’autorisation, sinon au format « 000 » (par exemple pour un chiffre 2, écrire « 002 » ;;
+IUM;Mode d’hospitalisation ;MODHOSP;1;28;28;O;A;A;Gauche/Espace;'=c : hc -- =p : hp  -- =m : mixte;;
+S:;MONO;;;;;;;;;;;

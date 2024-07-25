@@ -1,0 +1,10 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+FCT;Numéro FINESS d’inscription ePMSI ;FINESS;9;1;9;;A;A;Gauche/Espace;;;
+FCT;Type de prestation ;TYPPR;2;10;11;;N;N;Droite/Zéro;Valeur fixée à 15 ;;
+FCT;Numéro administratif local de séjour ;NADL;20;12;31;;A;A;Gauche/Espace;;;
+FCT;Numéro Finess géographique ;FINESG;9;32;40;;A;A;Droite/Zéro;;;
+FCT;Date de transport aller ;DTALL;8;41;48;;N;D;Droite/Zéro;JJMMAAAA ;;
+FCT;Code forfait ;CFFT;3;49;51;;A;A;Gauche/Espace;TDE ou TSE ;;
+FCT;Classe de distance ;CLDIST;2;52;53;;N;N;Droite/Zéro;- pour TDE et TSE, valeur égale à 00 pour les transports de janvier-février - pour TDE, valeur égale à : 01 : [0-25 km[ 02 : [25-75 km[ 03 : [75-150 km[ 04 : [150-300 km[ 05 : [300-∞ km[ - pour TSE, valeur égale à : 06 : [0-40 km[ 07 : [40-80 km[ 08 : [80-160 km[ 09 : [160-∞ km[ ;;
+FCT;Filler ;FLR63;10;54;63;;A;A;Gauche/Espace;réservé à un usage futur ;;
+S:;MONO;;;;;;;;;;;

@@ -1,0 +1,7 @@
+#230822 hk
+Copier coller depuis le PDF vers le fichier texte nx-ccam-22_01_saisie_tables.txt
+et premiers nettoyages.
+#230823hk
+Import dans le fichier Excel nx-ccam-22_01_saisie_tables.xlsx
+nettoyage des colonnes, numérotation des occurences.
+(en cours)

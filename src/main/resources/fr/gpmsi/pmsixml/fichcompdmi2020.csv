@@ -1,0 +1,11 @@
+Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
+FCD;N° FINESS ;FINESS;9;1;9;O;A;A;Gauche/Espace;;;
+FCD;Type de prestation ;TYPPR;2;10;11;O;A;A;NA/NA;Fixe, 02;;
+FCD;N° Identifiant de séjour ;NADL;20;12;31;O;A;A;Gauche/Espace;;;
+FCD;N° de RUM ;NRUM;10;32;41;F;A;A;Gauche/Espace;Non utilise pour DMI;;
+FCD;Date de début (JJMMAAAA) ;DDEB;8;42;49;O;N;D;Droite/Zéro;Date de pose;;
+FCD;Date de fin (JJMMAAAA) ;DFIN;8;50;57;F;N;D;NA/NA;Non utilise pour DMI;;
+FCD;Code ;CDE;15;58;72;O;A;A;Gauche/Espace;Code LPP;;
+FCD;Nombre ;NB;10;73;82;O;N;N;Droite/Zéro;Nombre posé (10+0);;10+0
+FCD;Montant payé ;MNTP;10;83;92;O;N;N;Droite/Zéro;Prix d’achat par le nombre posé (7+3);;7+3
+S:;MONO;;;;;;;;;;;
