@@ -37,7 +37,7 @@ AH;Code retour contrôle ' N° d’entrée ' ;RNENT;1;110;110;O;A;A;;;;
 AH;Code retour contrôle ' Rang de naissance ' ;RRGN;1;111;111;O;A;A;;;;
 AH;Code retour contrôle ' Rang du bénéficiaire ' ;RRGB;1;112;112;O;A;A;;;;
 AH;Code retour contrôle ' N° caisse gestionnaire ' ;RNCAG;1;113;113;O;A;A;;;;
-AH;Code retour contrôle ' N° centre gestionnaire ' ;NCEG;1;114;114;O;A;A;;;;
+AH;Code retour contrôle ' N° centre gestionnaire ' ;RNCEG;1;114;114;O;A;A;;;;
 AH;Code retour contrôle ' Confirmation de la prise en charge dans le cadre du dispositif des soins urgents ' ;RCPECU;1;115;115;O;A;A;;;;
 AH;Code retour contrôle ' Numéro accident du travail ou date d’accident de droit commun' ;RNAT;1;116;116;O;A;A;;;;
 AH;Code retour contrôle ' N° d’organisme complémentaire' ;RNOCO;1;117;117;O;A;A;;;;
