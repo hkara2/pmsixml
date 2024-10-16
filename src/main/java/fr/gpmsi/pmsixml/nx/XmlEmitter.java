@@ -26,7 +26,7 @@ public class XmlEmitter {
 	public XmlEmitter()
 			throws ParserConfigurationException
 	{
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newDefaultInstance();
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
 		doc = db.newDocument();
 		root = doc.createElement("NX"); //a mettre en parametre

@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -286,7 +287,14 @@ public class Nx2Xml {
 			throws MissingMetafileException, ParserConfigurationException, SAXException, IOException, NxMetaParseException, NxParseException, TransformerException
 	{
 		//chargement du fichier au format ISO-8859-1 (obligatoire pour la norme NX)
-		try(BufferedReader br = new BufferedReader(new FileReader(nxFile, Charset.forName("ISO-8859-1")))) {
+		
+		
+		try(BufferedReader br = new BufferedReader(
+				    new InputStreamReader(
+				    		    new FileInputStream(nxFile), Charset.forName("ISO-8859-1")
+				    ) 
+			)
+		){
 			String line = br.readLine();
 			lineNr = 1;
 			if (TRACE_LECT_LIGNES) lg.debug(">"+lineNr+">"+line+"<<");
@@ -298,7 +306,7 @@ public class Nx2Xml {
 				metaFileName = champs000.get("IDENTIFICATION_FICHIER") + champs000.get("NUMERO_VERSION") + ".xml";
 				//charger metadonnee
 				MetaFileLoader mfl = new MetaFileLoader();
-				DocumentBuilderFactory fac = DocumentBuilderFactory.newDefaultInstance();
+				DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
 				DocumentBuilder builder = fac.newDocumentBuilder();
 				InputSource isrc;
 				if (metaFilePath != null) {

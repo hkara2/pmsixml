@@ -49,7 +49,7 @@ public class NxTextMark {
 		//charger metadonnee fixe pour l'instant (mise au point)
 		MetaFileLoader mfl = new MetaFileLoader();
 		InputStream is = mfl.getInputStream("nx/ccam/CAM1401.xml");
-		DocumentBuilderFactory fac = DocumentBuilderFactory.newDefaultInstance();
+		DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = fac.newDocumentBuilder();
 		InputSource isrc = new InputSource(is);
 		Document doc = builder.parse(isrc);
