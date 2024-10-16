@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * RSS : résumés standardisés de sortie
+ * Utilisé dans le MCO.
  * @author hkaradimas
  *
  */
@@ -13,6 +14,9 @@ extends FszNodeReadStrategy
 {
   static Logger lg = LogManager.getLogger(FszNodeReadStrategyRSS1.class);
   
+  /**
+   * Constructeur
+   */
   public FszNodeReadStrategyRSS1() { super("RSS1");  }
 
   @Override

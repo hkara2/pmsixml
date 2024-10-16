@@ -14,14 +14,25 @@ import fr.gpmsi.pmsixml.FszGroupMeta;
 import fr.gpmsi.pmsixml.MetaFileLoader;
 import fr.gpmsi.pmsixml.RhsReader;
 
+/**
+ * Tests pour les Groupes de champs
+ */
 public class FszGroupTest {
 
+  /**
+   * Préparation
+   * @throws Exception _
+   */
   @BeforeEach
   public void setUp() throws Exception {
 	Configurator.initialize(new DefaultConfiguration());
     //BasicConfigurator.configure();
   }
 
+  /**
+   * Tester la copie de noeud
+   * @throws Exception _
+   */
   @Test
   public void testNodeCopy()
       throws Exception 

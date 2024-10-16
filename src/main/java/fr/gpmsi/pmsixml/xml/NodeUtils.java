@@ -3,6 +3,9 @@ package fr.gpmsi.pmsixml.xml;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+/**
+ * Petite classe utilitaire pour aider dans la manipulation des noeuds Node du XML.
+ */
 public class NodeUtils {
 
 	public static final String getAttribute(NamedNodeMap map, String name) {

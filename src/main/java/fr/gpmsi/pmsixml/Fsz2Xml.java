@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
  * <p>
  * Application simple permettant de convertir des champs fixes (Fixed SiZe) en XML,
  * en utilisant les noms fournis par les métadonnées.
- * Arguments en ligne de commande :
+ * Arguments en ligne de commande : 
  * <ul>
  * <li>-in &lt;fichier-d-entree&gt;
  * <li>-out &lt;fichier-de-sortie&gt;
@@ -74,7 +74,7 @@ public class Fsz2Xml
     }//while
     File metaFile = new File(fszMetaName);
     if (metaFile.exists()) {
-      //C'est un nom de métafichier, comme par ex. "C:\t\resources\fichcompmed2018.csv"
+      //C'est un nom de fichier de métadonnées, comme par ex. "C:\t\resources\fichcompmed2018.csv"
       //Le répertoire sera le parent du fichier, par ex. "C:\t\resources"
       //Le nom sera le nom du fichier moins le suffixe, ex. "fichcompmed2018"
       mfl = new MetaFileLoader(metaFile.getAbsoluteFile().getParentFile());
@@ -97,7 +97,7 @@ public class Fsz2Xml
     RsCsvHelper rh = new RsCsvHelper();
     
     if (inFilePath == null) {
-      throw new IOException("No input file given !");
+      throw new IOException("Pas de fichier d'entree donne !");
     }
     FileInputStream fis = new FileInputStream(inFilePath);
     FileOutputStream fos = new FileOutputStream(outFilePath);
@@ -160,6 +160,14 @@ public class Fsz2Xml
   	bw.write(sb.toString());
   }
   
+  /**
+   * Emettre le contenu en tant que .csv
+   * @param g Le groupe pour lequel on veut émettre du csv
+   * @param h Un objet qui aide à donner les bonnes options que l'on veut pour le csv
+   * @param line Une ligne qui est émise à la fin pour le groupe "P"
+   * @throws IOException _
+   * @throws ParseException _
+   */
   public void emitCsv(FszGroup g, RsCsvHelper h, String line)
       throws IOException, ParseException 
   {

@@ -15,21 +15,40 @@ extends Exception
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructeur
+	 */
 	public FieldSizeException() {
 	}
 
+	/**
+	 * Constructeur
+	 * @param message
+	 */
 	public FieldSizeException(String message) {
 		super(message);
 	}
 
+	/**
+	 * Constructeur
+	 * @param cause _
+	 */
 	public FieldSizeException(Throwable cause) {
 		super(cause);
 	}
 
+	/**
+	 * Constructeur
+	 * @param message _
+	 * @param cause _
+	 */
 	public FieldSizeException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/**
+	 * Constructeur
+	 */
 	public FieldSizeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}

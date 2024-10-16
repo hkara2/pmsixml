@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * RSA : résumés de sortie anonymisés
+ * Utilisé dans le SSR/SMR
  * @author hkaradimas
  *
  */
@@ -11,6 +12,7 @@ public class FszNodeReadStrategyRSA1
 extends FszNodeReadStrategy 
 {
 
+  /** Constructeur */
   public FszNodeReadStrategyRSA1() { super("RSA1");  }
 
   @Override

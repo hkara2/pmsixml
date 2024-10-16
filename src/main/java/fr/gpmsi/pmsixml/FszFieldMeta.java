@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Méta information sur un champ, ce qui permet de définir ce que contient ce champ, et 
- * d'utiliser ces informations pour les calculs et la présentation.
+ * d'utiliser ces informations pour la lecture, les calculs et la présentation.
  * 
  * <p>
  * champs csv utilisés (S = String, I = Integer), avec leur numero (commence à 0) :
@@ -232,6 +232,10 @@ extends FszMeta
     return fieldGroupName;
   }
   
+  /**
+   * Définir le nom du groupe
+   * @param fieldGroupName Le nom
+   */
   public void setFieldGroupName(String fieldGroupName) {
     this.fieldGroupName = fieldGroupName;
   }
@@ -245,6 +249,10 @@ extends FszMeta
     return longName;
   }
   
+  /**
+   * Définir le nom long du champ
+   * @param longName Le nom long
+   */
   public void setLongName(String longName) {
     this.longName = longName;
   }
@@ -259,6 +267,10 @@ extends FszMeta
     return stdName;
   }
   
+  /**
+   * Définir le nom standard
+   * @param stdName Le nom standard
+   */
   public void setStdName(String stdName) {
     this.stdName = stdName;
   }
@@ -272,6 +284,10 @@ extends FszMeta
     return size;
   }
   
+  /**
+   * Définir la taille du champ
+   * @param size La taille
+   */
   public void setSize(Integer size) {
     this.size = size;
   }
@@ -286,6 +302,10 @@ extends FszMeta
     return start;
   }
   
+  /**
+   * Définir la position de début du champ (tel que donné dans les documents de l'ATIH)
+   * @param start Le numéro de position
+   */
   public void setStart(Integer start) {
     this.start = start;
   }
@@ -300,6 +320,10 @@ extends FszMeta
     return end;
   }
   
+  /**
+   * Définir la position de fin (telle que donnée dans les documents de l'ATIH)
+   * @param end Le numéro de position de fin
+   */
   public void setEnd(Integer end) {
     this.end = end;
   }
@@ -313,6 +337,10 @@ extends FszMeta
     return mandatory;
   }
   
+  /**
+   * Définir si ce champ est obligatoire ou pas (cf. {@link #getMandatory()}
+   * @param mandatory La valeur de la 7ème colonne (normalement O (Obligatoire) ou F (Facultatif))
+   */
   public void setMandatory(String mandatory) {
     this.mandatory = mandatory;
   }
@@ -329,6 +357,10 @@ extends FszMeta
     return typeOrig;
   }
   
+  /**
+   * Définir le type de données original (cf. {@link #getOriginalType()}
+   * @param type Le type
+   */
   public void setOriginalType(String type) {
     this.typeOrig = type;
   }
@@ -346,6 +378,11 @@ extends FszMeta
   public String getPreferredType() {
     return typePref;
   }
+  
+  /**
+   * Définir le type préféré (cf. {@link #getPreferredType()}
+   * @param type La lettre du type
+   */
   public void setPreferredType(String type) {
     this.typePref = type;
   }
@@ -363,6 +400,11 @@ extends FszMeta
   public String getAlignment() {
     return alignment;
   }
+  
+  /**
+   * Définir l'alignement (cf. {@link #getAlignment()}
+   * @param alignment
+   */
   public void setAlignment(String alignment) {
     this.alignment = alignment;
   }
@@ -380,9 +422,15 @@ extends FszMeta
   public String getFilling() {
     return filling;
   }
+  
+  /**
+   * Définir le remplissage (cf. {@link #getFilling()}
+   * @param filling Le caractère de remplissage
+   */
   public void setFilling(String filling) {
     this.filling = filling;
   }
+  
   /**
    * Retourner les remarques. Dans les remarques, il ne doit pas y avoir de retour à la ligne,
    * c'est à dire que le texte de la remarque doit tenir sur une seule ligne.
@@ -405,6 +453,10 @@ extends FszMeta
     return remarks.replace("\\n", newline);
   }
   
+  /**
+   * Définir les remarques formatées (cf. {@link #getRemarks()}
+   * @param remarks
+   */
   public void setRemarks(String remarks) {
     this.remarks = remarks;
   }
@@ -424,6 +476,10 @@ extends FszMeta
     return fieldCounter;
   }
 
+  /**
+   * Définir le nom du compteur (cf. {@link #getFieldCounter()}
+   * @param fieldCounter Le nom du compteur
+   */
   public void setFieldCounter(String fieldCounter) {
     this.fieldCounter = fieldCounter;
   }
@@ -541,6 +597,10 @@ extends FszMeta
     return precision;
   }
 
+  /**
+   * Définir la précision (cf. {@link #getPrecision()}
+   * @param precision
+   */
   public void setPrecision(int precision) {
     this.precision = precision;
   }
@@ -553,6 +613,10 @@ extends FszMeta
     return scale;
   }
 
+  /**
+   * Définir l'échelle (cf. {@link #getScale()}
+   * @param scale
+   */
   public void setScale(int scale) {
     this.scale = scale;
   }
@@ -567,6 +631,10 @@ extends FszMeta
     return multiplicativeFactor;
   }
 
+  /**
+   * Définir le facteur multiplicatif (cf. {@link #getMultiplicativeFactor()}
+   * @param multiplicativeFactor Le facteur multiplicatif
+   */
   public void setMultiplicativeFactor(BigDecimal multiplicativeFactor) {
     this.multiplicativeFactor = multiplicativeFactor;
   }

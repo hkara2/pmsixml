@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Transformer un fichier RSS en fichier XML.
+ * Obsolète ; il vaut mieux passer par l'utilisation de la librairie gpmsi.
  * @author hkaradimas
  *
  */

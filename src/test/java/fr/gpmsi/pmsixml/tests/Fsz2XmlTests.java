@@ -10,8 +10,14 @@ import org.junit.jupiter.api.Test;
 
 import fr.gpmsi.pmsixml.Fsz2Xml;
 
+/**
+ * Tests
+ */
 public class Fsz2XmlTests /*extends TestCase*/ {
 
+	/**
+	 * Constructeur simple
+	 */
 	public Fsz2XmlTests() {
 		//BasicConfigurator.configure();
 		Configurator.initialize(new DefaultConfiguration());
@@ -24,6 +30,10 @@ public class Fsz2XmlTests /*extends TestCase*/ {
 	//	Configurator.initialize(new DefaultConfiguration());
 	//}
 
+	/**
+	 * Test simple avec un rss de test t01rss017.txt
+	 * @throws Exception
+	 */
 	@Test
 	public void test1()
 			throws Exception 
@@ -33,6 +43,10 @@ public class Fsz2XmlTests /*extends TestCase*/ {
 		Fsz2Xml.main(args);
 	}
 	
+	/**
+	 * Test simple avec un vidhosp de test t01vhV011.txt 
+	 * @throws Exception
+	 */
 	@Test
     public void test2()
         throws Exception 

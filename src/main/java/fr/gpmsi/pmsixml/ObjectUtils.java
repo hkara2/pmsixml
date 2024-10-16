@@ -7,6 +7,9 @@ package fr.gpmsi.pmsixml;
  */
 public class ObjectUtils {
 
+	/**
+	 * Constructeur simple
+	 */
 	public ObjectUtils() {
 	}
 

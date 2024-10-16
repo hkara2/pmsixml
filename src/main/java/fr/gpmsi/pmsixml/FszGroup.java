@@ -108,6 +108,10 @@ extends FszNode
   @Override
   public List<FszNode> getChildren() { return children; }
   
+  /**
+   * Ajouter un noeud enfant
+   * @param child Le noeud enfant
+   */
   public void addChild(FszNode child) {
     children.add(child); 
 	String name = child.getMeta().getStdName();
@@ -277,15 +281,29 @@ extends FszNode
     return container;
   }
 
+  /**
+   * Définir si ce groupe est un conteneur
+   * @param container true si c'est un conteneur
+   */
   public void setContainer(boolean container) {
     this.container = container;
   }
   
+  /**
+   * Retourner la valeur du compteur
+   * @param counterName Le nom du compteur
+   * @return La valeur du compteur
+   */
   public Integer getCounterValue(String counterName) {
     Integer cv = countersByName.get(counterName);
     return cv;
   }
   
+  /**
+   * Définir la valeur du compteur
+   * @param counterName Le nom du compteur
+   * @param value La valeur du compteur
+   */
   public void setCounterValue(String counterName, Integer value) {
     countersByName.put(counterName, value);
     FszField counterField = getCounterField(counterName);
@@ -338,12 +356,31 @@ extends FszNode
    */
   public Map<String, Integer> getCountersByName() { return countersByName; }
   
+  /**
+   * Retourner une Map avec la liste des noms des champs de compteur par nom de compteur 
+   * @return La Map
+   */
   public Map<String, String> getCounterFieldsByName() { return counterFieldsByName; }
   
+  /**
+   * Retourner le noeud enfant nommé
+   * @param name Le nom du noeud enfant à retourner
+   * @return Le noeud enfant
+   */
   public FszNode getChild(String name) { return childrenByName.get(name); }
   
+  /**
+   * Retourner le groupe enfant nommé
+   * @param name Le nom du groupe
+   * @return Le groupe enfant
+   */
   public FszGroup getChildGroup(String name) { return (FszGroup) getChild(name); }
   
+  /**
+   * Retourner le champ enfant nommé
+   * @param name Le nom du champ à retourner
+   * @return Le champ enfant
+   */
   public FszField getChildField(String name) { return (FszField) getChild(name); }
   
   /**
@@ -512,7 +549,13 @@ extends FszNode
         if (typ.equals("N")) {
           BigDecimal bd = fnd.getValueAsBigDecimal();
           if (bd == null) ps.setNull(ix, Types.NUMERIC);
-          else ps.setBigDecimal(ix, bd);
+          else {
+            //240904 hk ici on convertit la valeur dans sa vraie valeur, donc si c'est un nombre au
+            //format 1+4 , 10654 deviendra 1.0654
+            //bien y penser lors de la déclaration des types, ainsi que lors du traitement des résultats !
+            bd = fnd.getCorrectedValue();
+            ps.setBigDecimal(ix, bd);
+          }
           oval = bd;
         }
         else if (typ.equals("D")) {

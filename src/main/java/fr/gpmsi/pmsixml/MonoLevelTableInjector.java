@@ -25,6 +25,17 @@ public class MonoLevelTableInjector {
   
   boolean truncatedInputAccepted = true;
   
+  /**
+   * Injecter dans une table JDBC le contenu apporté par le Reader, en utilisant le MonoLevelReader pour la transformation.
+   * @param rdr Le Reader à utiliser pour lire les données
+   * @param mlr L'objet MonoLevelReader à utiliser
+   * @param tableName Le nom de la table à utiliser dans les requêtes
+   * @throws IOException Si erreur E/S
+   * @throws FieldParseException Si erreur d'analyse
+   * @throws MissingMetafileException Si un fichier de métadonnées n'a pas été trouvé
+   * @throws ParseException Si erreur d'analyse
+   * @throws SQLException Si erreur SQL lors des opérations de base de données
+   */
   public void inject(Reader rdr, MonoLevelReader mlr, String tableName)
       throws IOException, FieldParseException, MissingMetafileException, ParseException, SQLException
   {
@@ -48,7 +59,7 @@ public class MonoLevelTableInjector {
   }
   
   /**
-   * Injecter un groups, en utilisant INSERT. Le commit n'est pas fait.
+   * Injecter un groupe mono-niveau, en utilisant INSERT. Le commit n'est pas fait.
    * Le PreparedStatement est réutilisé, donc tous les groupes injectés doivent être de même structure.
    * @param mono Le {@link FszGroup} qui contient le groupe mono-niveau
    * @param tableName Le nom de la table dans laquelle injecter
@@ -119,16 +130,28 @@ public class MonoLevelTableInjector {
     }
   }//inject
 
+  /**
+   * Fermeture de l'injecteur 
+   * @throws SQLException Si erreur de base de données pendant la fermeture
+   */
   public void close()
       throws SQLException
   {
     if (insPs != null) insPs.close();
   }
 
+  /**
+   * Retourner la connexion
+   * @return la connexion
+   */
   public Connection getConnection() {
     return cxn;
   }
 
+  /**
+   * Définir la connexion JDBC à utiliser
+   * @param connection La connexion
+   */
   public void setConnection(Connection connection) {
     this.cxn = connection;
   }
@@ -142,6 +165,11 @@ public class MonoLevelTableInjector {
     return truncatedInputAccepted;
   }
 
+  /**
+   * Est-ce que les entrées tronquées (c'est à dire les lignes trop courtes) sont acceptées.
+   * Par défaut c'est oui.
+   * @param truncatedInputAccepted true si les entrées tronquées sont acceptées
+   */
   public void setTruncatedInputAccepted(boolean truncatedInputAccepted) {
     this.truncatedInputAccepted = truncatedInputAccepted;
   }

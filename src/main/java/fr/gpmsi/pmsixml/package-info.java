@@ -3,7 +3,7 @@
  * définis par l'ATIH.
  * 
  * <p>
- * Les métadonnées sont stockées dans un répertoire extérieur et aussi en tant que "resources"
- * dans le package <tt>fr.gpmsi.pmsixml</tt> . 
+ * Les métadonnées sont stockées  dans un répertoire extérieur et aussi en tant que "resources"
+ * dans le package <code>fr.gpmsi.pmsixml</code> . 
  */
 package fr.gpmsi.pmsixml;

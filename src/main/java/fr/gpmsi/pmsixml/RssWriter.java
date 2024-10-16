@@ -2,6 +2,7 @@ package fr.gpmsi.pmsixml;
 
 /**
  * Ecrire un RSS à partir d'un FszGroup.
+ * Obsolète ; utiliser plutôt la librairie Gpmsi.
  * @author hkaradimas
  *
  */

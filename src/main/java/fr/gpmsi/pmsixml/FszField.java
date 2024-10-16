@@ -20,6 +20,9 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Un noeud de type champ, qui contient une valeur.
+ * Le contenu du champ est une chaîne de caractère, qui correspond à ce qui se trouve sur la ligne
+ * de codage à contenu fixe.
+ * Ce noeud champ est de type feuille, il n'a jamais d'enfants.
  * @author hkaradimas
  *
  */
@@ -40,6 +43,10 @@ extends FszNode
   /** position dans la ligne source (commence à 0) */
   int pos;
   
+  /**
+   * Constructeur
+   * @param meta Les métadonnées du champ
+   */
   public FszField(FszFieldMeta meta) {
     this.meta = meta;
   }
@@ -393,6 +400,10 @@ extends FszNode
     }
   }
   
+  /**
+   * Lecture du champ à partir de la chaîne d'entrée.
+   * Utilise la longueur qui est indiquée dans les métadonnées.
+   */
   @Override
   public void read(InputString in) 
           throws FieldParseException 

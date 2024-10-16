@@ -22,6 +22,18 @@ java {
   withSourcesJar() //nous voulons aussi un jar avec le code source
 }
 
+javadoc {
+	options.encoding = 'UTF-8'
+}
+
+//Forcer UTF-8 partout pour le code source java (IMPORTANT !)
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+	options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+}
+
 //le numero de version est construit a partir des deux proprietes presentes dans 
 //gradle.properties (qui est lu automatiquement par Gradle)
 //N.B. Chacune des deux propriétés suivantes comporte leurs points

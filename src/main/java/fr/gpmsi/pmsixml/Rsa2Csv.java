@@ -21,8 +21,32 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Exemple de classe qui émet un RSA sous forme de fichier .csv pour les principaux champs.
- * 
+ * Exemple de classe qui émet un RSA sous forme de fichier .csv pour les principaux champs.<br>
+ * Pour le groupe principal il y a un fichier RSA.csv <br>
+ * Le fichier RSA.csv contient comme dernier champ la ligne du RSA au format ATIH telle qu'elle a été lue<br>
+ * Pour chaque sous-groupe il y a un fichier csv :
+ * <ul>
+ * <li><code>RU</code> : RUM
+ * <li><code>SR</code> : Suppléments de radiothérapie
+ * <li><code>DA</code> : Diagnostics associés du RUM
+ * <li><code>ZA</code> : Zone d'actes du RUM
+ * </ul>
+ * Cela donne des fichiers qui peuvent être utilisés en tant que table.<br>
+ * Un système d'identifiants est utilisé qui permet de faire le chaînage père-enfant.<br>
+ * Ces numéros sont uniques dans le temps, ce qui permet de les utiliser comme clé primaire si
+ * on veut importer les données dans une table de base de données.
+ * <br>
+ * Un fichier SLI.csv (pour Session Locale d'Import) est émis à la fin, et contient les données d'import :
+ * <ul>
+ * <li>Numéro unique
+ * <li>Date d'import
+ * <li>Nombre de RSA traités
+ * <li>Nombre de RUMs traités
+ * </ul>
+ * <p>
+ * Laissé à titre d'illustration.
+ * Il est maintenant plus facile d'utiliser la librairie gpmsi.
+ * </p>
  * @author hkaradimas
  *
  */
@@ -60,6 +84,24 @@ public class Rsa2Csv
     return str == null || str.trim().equals("");
   }
   
+  /**
+   * Initialisation avec des arguments.
+   * <dl>
+   * <dt>-in &lt;fichier_entree&gt;</dt>
+   *   <dd>Fichier qui contient le RSA au format ATIH</dd>
+   * <dt>-outdir &lt;repertoire_de_sortie&gt;</dt>
+   *   <dd>répertoire qui contiendra les fichiers .csv</dd>
+   * <dt>-enc &lt;encodage&gt;</dt>
+   *   <dd>définit l'encodage de sortie<dd/>
+   * <dt>-prefix &lt;préfixe&gt;</dt>
+   *   <dd>Donne le préfixe que porteront tous les fichiers .csv en sortie<dd/>
+   * <dt>-debug</dt>
+   *   <dd>Active le mode débogage</dd>
+   * </dl>
+   * Par défaut l'encodage est "UTF-8" et le préfixe est la date courante, au format "yyMMddHHmm".
+   * @param argsp Les arguments d'initialisation
+   * @throws Exception _
+   */
   void init(String[] argsp)
     throws Exception
   {
@@ -145,6 +187,15 @@ public class Rsa2Csv
     }
   }
 
+  /**
+   * Emet les colonnes initiales de l'en-ête, selon le groupe qui est émis.<br>
+   * Pour les fichiers RSA.csv, AG.csv, SR.csv, RU.csv, DA.csv, ZA.csv, le premier champ émis 
+   * est une clé, qui commence par K, et le deuxième champ émis est la clé du parent
+   * qui contient cet enregistrement.
+   * @param gm La définition de groupe
+   * @param bw Le {@link BufferedWriter} dans lequel ces informations seront écrites
+   * @throws IOException Si erreur E/S
+   */
   public void emitCsvHeader(FszGroupMeta gm, BufferedWriter bw)
       throws IOException 
   {
@@ -182,6 +233,16 @@ public class Rsa2Csv
     bw.newLine();
   }
   
+  /**
+   * Envoyer les informations du groupe, dans les différents flux de .csv<br>
+   * S'occupe d'appeler {@link #emitCsvHeader(FszGroupMeta, BufferedWriter)} si {@link RsCsvHelper#isHeaderEmitted(String)} est false.
+   * @param g Le groupe à émettre
+   * @param h L'objet d'assistance de sortie
+   * @param line La ligne qui contient le RSA
+   * @param linenr Le numéro de ligne 
+   * @throws IOException Si erreur E/S
+   * @throws ParseException Si erreur d'analyse
+   */
   public void emitCsv(FszGroup g, RsCsvHelper h, String line, int linenr)
       throws IOException, ParseException 
   {
@@ -232,7 +293,7 @@ public class Rsa2Csv
       }
       else {
         h.advanceIdCounter();
-        //it's group meta, call emitCsv recursively
+        //c'est une métadonnée de groupe, appeler emitCsv récursivement
         emitCsv((FszGroup)child, h, line, linenr);
       }
     }
@@ -271,6 +332,13 @@ public class Rsa2Csv
     return args.nextArgument();
   }
 
+  /**
+   * Méthode principale.
+   * Crée un objet {@link Rsa2Csv}, appelle {@link Rsa2Csv#init(String[])} avec les arguments, 
+   * puis enfin appelle {@link Rsa2Csv#run()}
+   * @param args Les arguments
+   * @throws Exception _
+   */
   public static void main(String[] args)
       throws Exception 
   {

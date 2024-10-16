@@ -1,5 +1,9 @@
 package fr.gpmsi.pmsixml;
 
+/**
+ * Fabrique de stratégie de lecture des noeuds.
+ * A partir du nom de noeud, donne l'objet stratégie à utiliser
+ */
 public class FszNodeReadStrategyFactory {
   
   /**
@@ -18,7 +22,8 @@ public class FszNodeReadStrategyFactory {
    * @param d
    * @return
    */
-  static FszNodeReadStrategy makeFszNodeReadStrategy(String d) {
+  @SuppressWarnings("deprecation")
+static FszNodeReadStrategy makeFszNodeReadStrategy(String d) {
     if (d == null) return null;
     d = d.toUpperCase();
     if (d.equals("RHS") || d.equals("RHS1")) return new FszNodeReadStrategyRHS1();

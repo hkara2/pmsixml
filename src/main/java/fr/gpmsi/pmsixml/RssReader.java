@@ -15,7 +15,14 @@ import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.DefaultConfiguration;
 
 /**
- * Lecteur de RSS
+ * Lecteur de RSS.
+ * Après avoir créé l'objet lecteur de RSS, il faut lui indiquer à partir de quel répertoire
+ * il doit charger les métadonnées. Cela se fait en appelant la méthode {@link #setMetasDir(File)}.
+ * Par défaut l'objet lecteur accepte les lignes tronquées, c'est à dire les lignes qui font moins
+ * que la longueur requise.
+ * Si ce n'est pas ce que l'on veut, appeler la méthode {@link #setTruncatedInputAccepted(boolean)} avec
+ * la valeur false.
+ * 
  * @author hk
  *
  */
@@ -33,6 +40,13 @@ public class RssReader
   
   int lineNr = -1;
   
+  /**
+   * Constructeur. Charge par défaut les métadonnées "016" et "017" pour vérifier que le chargement
+   * des métadonnées est correctement configuré.
+   * @throws FieldParseException Si il y a eu une erreur lors de la lecture des métadonnées de base
+   * @throws IOException Si il y a eu une erreur d'E/S
+   * @throws MissingMetafileException Si un des fichiers de métadonnées n'a pas été trouvé
+   */
   public RssReader()
       throws FieldParseException, IOException, MissingMetafileException 
   {
@@ -67,6 +81,14 @@ public class RssReader
     return loadMeta(name);
   }
 
+  /**
+   * Appelle {@link #readOne(String, int)} avec rss, -1 .
+   * @param rss cf. {@link #readOne(String, int)}
+   * @return cf. {@link #readOne(String, int)}
+   * @throws FieldParseException cf. {@link #readOne(String, int)}
+   * @throws IOException cf. {@link #readOne(String, int)}
+   * @throws MissingMetafileException cf. {@link #readOne(String, int)}
+   */
   public FszNode readOne(String rss)
       throws FieldParseException, IOException, MissingMetafileException 
   {
@@ -74,10 +96,10 @@ public class RssReader
   }
   
   /**
-   * Lire une ligne de RSS (un RUM).
-   * @param rss La ligne de RUM (du RSS) à lire
+   * Lire une ligne de fichier RSS (un RUM).
+   * @param rss La ligne de RSS qui contient le RUM
    * @param lineNr Le numero de ligne
-   * @return Un noeud de type conteneur qui contient le RSS.
+   * @return Un noeud de type conteneur ({@link FszGroup}) qui contient le RSS.
    * @throws FieldParseException Si erreur d'analyse de champ
    * @throws IOException Si erreur d'entrée-sortie
    * @throws MissingMetafileException Si le fichier de métadonnées n'a pas été retrouvé
@@ -110,6 +132,11 @@ public class RssReader
     }
   }
   
+  /**
+   * Etait utilisé pour les tests, ne fait rien maintenant.
+   * @param args Arguments
+   * @throws Exception Si erreur
+   */
   public static void main(String[] args)
       throws Exception
   {
@@ -118,18 +145,35 @@ public class RssReader
     //Logger.getRootLogger().setLevel(Level.DEBUG);
   }
 
+  /**
+   * Retourner le répertoire des fichiers de métadonnées.
+   * @return Le répertoire qui contient les fichiers de métadonnées
+   */
   public File getMetasDir() {
     return metasDir;
   }
 
+  /**
+   * Définir le répertoire qui contient les fichiers de métadonnées.
+   * @param metasDir Le répertoire à partir duquel seront lues les fichiers de métadonnées
+   */
   public void setMetasDir(File metasDir) {
     this.metasDir = metasDir;
   }
+  
 
+  /**
+   * Est-ce que les lignes tronquées sont acceptées
+   * @return true si c'est le cas (c'est la valeur par défaut), false sinon.
+   */
   public boolean isTruncatedInputAccepted() {
     return truncatedInputAccepted;
   }
 
+  /**
+   * Définir si les lignes tronquées sont acceptées 
+   * @param truncatedInputAccepted boolean
+   */
   public void setTruncatedInputAccepted(boolean truncatedInputAccepted) {
     this.truncatedInputAccepted = truncatedInputAccepted;
   }

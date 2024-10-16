@@ -1,8 +1,14 @@
 package fr.gpmsi.pmsixml;
 
+/**
+ * Test simple pour vérifier que cela se lance bien.
+ */
 public class Rhs2CsvTest
 {
 
+  /**
+   * Constructeur simple
+   */
   public Rhs2CsvTest() {
   }
 
@@ -11,10 +17,19 @@ public class Rhs2CsvTest
     Rhs2Csv.main(args);
   }
   
+  /**
+   * Lancement du test
+   * @throws Exception _
+   */
   public void run() throws Exception {
     test1();
   }
   
+  /**
+   * Méthode main() qui crée un {@link Rhs2CsvTest} puis appelle {@link #run()}
+   * @param args Les arguments
+   * @throws Exception _
+   */
   public static void main(String[] args) throws Exception {
     Rhs2CsvTest app = new Rhs2CsvTest();
     app.run();

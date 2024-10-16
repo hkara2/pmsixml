@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * RHS1 : Résumés Hebdomadaires Standardisés.
+ * Utilisé dans le SSR/SMR
  * @author hkaradimas
  *
  */
@@ -13,6 +14,7 @@ extends FszNodeReadStrategy
 {
   static Logger lg = LogManager.getLogger(FszNodeReadStrategyRSS1.class);
   
+    /** Constructeur */
 	public FszNodeReadStrategyRHS1() { super("RHS1");	}
 
 	@Override

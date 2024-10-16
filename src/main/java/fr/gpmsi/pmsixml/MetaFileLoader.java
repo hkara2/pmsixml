@@ -87,7 +87,10 @@ public class MetaFileLoader {
 	    }
 	    ins = MetaFileLoader.class.getResourceAsStream("/"+FszMeta.PREFIX_DIR+"/"+resourceName);
 	    if (ins == null) {
-	      throw new MissingMetafileException("Ne trouve pas la ressource '"+resourceName+"'");
+	      String msg1 = "";
+	      if (metaFilesDir != null) msg1 = ", ni dans le repertoire '"+metaFilesDir+"', ni dans ";	      
+	      else msg1 = " dans ";
+	      throw new MissingMetafileException("Ne trouve pas la resource '"+resourceName+"'"+msg1+"/"+FszMeta.PREFIX_DIR);
 	    }
 	    return ins;
 	}

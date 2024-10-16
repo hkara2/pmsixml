@@ -159,7 +159,7 @@ Historique des versions :
 1.14.6 221027 hk
     Ajout des librairies apache commons io et aagbl
 2.0.1 221122 hk
-    Refactoring pour avoir tout ce qui concerne groovy dans fr.karadimas.gpmsi
+    Refactoring pour avoir tout ce qui concerne groovy dans fr. karadimas.gpmsi
     Cela va casser les scripts pmsi actuels.
 2.0.2 230102 hk
     Ajout rsa227

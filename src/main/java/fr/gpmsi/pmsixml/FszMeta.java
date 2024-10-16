@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Classe abstraite implémentée par les objets de métadonnées de champs.
+ * Classe abstraite implémentée par les objets de métadonnées de champs et de groupe.
  * Les objets qui héritent de cette classe implémentents et/ou spécialisent les méthodes 
  * selon leur but.
  * @author hkaradimas
@@ -15,7 +15,9 @@ public class FszMeta
 {
   static Logger lg = LogManager.getLogger(FszMeta.class);
   
-  public static final String PREFIX = "fr.gpmsi.pmsixml"; 
+  /** Préfixe pour les resources */
+  public static final String PREFIX = "fr.gpmsi.pmsixml";
+  /** Préfixe pour le répertoire des resources */
   public static final String PREFIX_DIR = "fr/gpmsi/pmsixml"; 
 	
   private static boolean loadDebuggingEnabled = false;

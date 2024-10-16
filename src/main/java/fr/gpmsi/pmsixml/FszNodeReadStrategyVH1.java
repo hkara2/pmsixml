@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * VH : vidhosp.
  * Strategie de lecture des Vidhosp.
+ * Utilisé dans le SSR/SMR et le MCO.
  * @author hkaradimas
  *
  */
@@ -15,6 +16,9 @@ extends FszNodeReadStrategy
 {
   static Logger lg = LogManager.getLogger(FszNodeReadStrategyVH1.class);
   
+    /**
+     * Constructeur
+     */
 	public FszNodeReadStrategyVH1() { super("VH1");	}
 
 	@Override

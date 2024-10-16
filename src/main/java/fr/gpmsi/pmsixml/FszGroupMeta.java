@@ -142,6 +142,10 @@ extends FszMeta
     return getOrLoadMeta(name, null);
   }
   
+  /**
+   * Constructeur
+   * @param name Le nom du groupe
+   */
   public FszGroupMeta(String name) {
     this.groupName = name;
   }
@@ -209,6 +213,10 @@ extends FszMeta
     return counterField;
   }
 
+  /**
+   * Donner la définition du champ de compteur
+   * @param counterField Le champ de compteur
+   */
   public void setCounterField(FszFieldMeta counterField) {
     this.counterField = counterField;
   }

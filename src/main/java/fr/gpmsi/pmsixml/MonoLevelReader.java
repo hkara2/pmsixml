@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Lecteur pour des fichiers fsz (à positions fixes) qui n'ont qu'un seul niveau
- * (donc pas de sous-niveau), comme les fichiers d'ATU, de TRA, etc.
+ * (donc pas de sous-niveau), comme les fichiers FICHCOMP d'ATU, les VIDHOSP, les TRA, etc.
  * Il suffit d'instancier un objet MonoLevelReader, puis de définir metasDir et metaName.
  * A noter que pour lire un VIDHOSP il vaut mieux utiliser un FszReader
  * @author hkaradimas
@@ -29,6 +29,9 @@ public class MonoLevelReader {
   
   boolean truncatedInputAccepted = true;
   
+  /**
+   * Constructeur simple
+   */
   public MonoLevelReader() {
   }
 
@@ -72,6 +75,15 @@ public class MonoLevelReader {
     return loadMeta(name);
   }
    
+  /**
+   * Lecture d'un contenu mono-niveau
+   * @param str Le contenu à lire
+   * @param linenr Le numéro de la ligne
+   * @return un objet de groupe qui résulte de la lecture du contenu
+   * @throws FieldParseException Si erreur d'analyse
+   * @throws IOException Si erreur E/S
+   * @throws MissingMetafileException Si un fichier de métadonnées n'a pas été trouvé
+   */
   public FszGroup readMonoLevel(String str, int linenr)
       throws FieldParseException, IOException, MissingMetafileException
   {
@@ -145,6 +157,10 @@ public class MonoLevelReader {
     return truncatedInputAccepted;
   }
 
+  /**
+   * Est-ce qu'on accepte des entrées tronquées
+   * @param truncatedInputAccepted true si c'est le cas
+   */
   public void setTruncatedInputAccepted(boolean truncatedInputAccepted) {
     this.truncatedInputAccepted = truncatedInputAccepted;
   }

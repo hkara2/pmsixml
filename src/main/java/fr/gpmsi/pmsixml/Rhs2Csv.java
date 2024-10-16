@@ -23,6 +23,9 @@ import org.apache.logging.log4j.core.config.DefaultConfiguration;
 
 /**
  * Application pour transformer un fichier RHS en fichier .csv
+ * Donné à titre d'exemple ; il est maintenant plus facile d'utiliser un script groovy à l'aide de 
+ * fr.gpmsi
+ * 
  * @author hkaradimas
  *
  */
@@ -95,6 +98,12 @@ public class Rhs2Csv
     }
   }
   
+  /**
+   * Emettre la ligne d'en-tête 
+   * @param gm La définition de groupe
+   * @param bw Le BufferedWriter sur lequel émettre
+   * @throws IOException _
+   */
   public void emitCsvHeader(FszGroupMeta gm, BufferedWriter bw)
       throws IOException 
   {
@@ -175,6 +184,14 @@ public class Rhs2Csv
     }
   }
 
+  /**
+   * Emettre la ligne d'en-tête
+   * @param g Le groupe pour lequel on veut émettre l'en-tête
+   * @param h Un objet d'assistance pour donner les paramètres à utiliser
+   * @param line La ligne qui contient le RHS, elle sera ajoutée en dernier
+   * @throws IOException Si erreur E/S
+   * @throws ParseException Si problème lors de l'analyse du format
+   */
   public void emitCsv(FszGroup g, RsCsvHelper h, String line)
       throws IOException, ParseException 
   {
@@ -254,6 +271,11 @@ public class Rhs2Csv
     return args.nextArgument();
   }
 
+  /**
+   * Méthode main(), initialise les journaux et appelle {@link Rhs2Csv#init(String[])} , puis {@link Rhs2Csv#run()}
+   * @param args Les arguments
+   * @throws Exception _
+   */
   public static void main(String[] args)
       throws Exception 
   {

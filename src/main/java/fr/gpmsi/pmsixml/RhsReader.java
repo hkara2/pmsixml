@@ -16,6 +16,16 @@ import org.apache.logging.log4j.core.config.DefaultConfiguration;
 
 /**
  * Lecteur de RHS.
+ * Configurer l'objet lecteur en lui indiquant quel répertoire il doit utiliser,
+ * à l'aide de la méthode {@link #setMetasDir(File)}.
+ * Lancer ensuite la lecture à l'aide d'une des méthodes de lecture :
+ * <ul>
+ * <li>{@link #readOne(String)}
+ * <li>{@link #readOne(String, boolean)}
+ * <li>{@link #readOne(String, int, boolean)}
+ * </ul>
+ * 
+ * Avant lancement
  * @author hk
  *
  */
@@ -31,6 +41,12 @@ public class RhsReader
 
   int lineNr = -1;
   
+  /**
+   * Constructeur
+   * @throws FieldParseException _
+   * @throws IOException _
+   * @throws MissingMetafileException _
+   */
   public RhsReader()
       throws FieldParseException, IOException, MissingMetafileException 
   {
@@ -65,18 +81,46 @@ public class RhsReader
     return loadMeta(name);
   }
   
+  /**
+   * Appelle {@link #readOne(String, int, boolean)} avec rhs, -1, acceptTruncated
+   * @param rhs La ligne qui contient le RHS à lire
+   * @param acceptTruncated idem
+   * @return idem
+   * @throws FieldParseException idem
+   * @throws IOException idem
+   * @throws MissingMetafileException idem
+   */
   public FszNode readOne(String rhs, boolean acceptTruncated) 
       throws FieldParseException, IOException, MissingMetafileException
   {
     return readOne(rhs, -1, acceptTruncated);
   }
   
+  /**
+   * Appelle {@link #readOne(String, int, boolean)} avec rhs, -1, false.
+   * @param rhs Le RHS à lire
+   * @return Un noeud de groupe qui contient le RHS.
+   * @throws FieldParseException idem
+   * @throws IOException idem
+   * @throws MissingMetafileException idem
+   */
   public FszNode readOne(String rhs) 
   		throws FieldParseException, IOException, MissingMetafileException
   {
   	return readOne(rhs, -1, false);
   }
   
+  /**
+   * Lecture d'un RHS (une ligne qui contient un RHS).
+   * @param rhs La ligne qui contient le RHS
+   * @param lineNr Le numéro de la ligne RHS
+   * @param acceptTruncated Est-ce que l'on accepte des lignes tronquées (qui n'ont pas la longueur définie dans les métadonnées) ?
+   * @return Un noeud de groupe qui contient le RHS
+   * @throws FieldParseException Si il y a eu une erreur lors de l'analyse du GHS
+   * @throws IOException Si il y a eu une erreur d'E/S
+   * @throws MissingMetafileException Si le fichier de métadonnées requis par le RHS n'a pas été trouvé, ni dans le
+   * répertoire des métadonnées, ni dans les fichiers resource.
+   */
   public FszNode readOne(String rhs, int lineNr, boolean acceptTruncated)
       throws FieldParseException, IOException, MissingMetafileException 
   {
@@ -114,6 +158,11 @@ public class RhsReader
     }
   }
   
+  /**
+   * laissé pour raisons futures
+   * @param args _
+   * @throws Exception _
+   */
   public static void main(String[] args)
       throws Exception
   {
@@ -122,18 +171,34 @@ public class RhsReader
     //Logger.getRootLogger().setLevel(Level.DEBUG);
   }
 
+  /**
+   * Retourner le répertoire des fichiers de métadonnées
+   * @return le répertoire
+   */
   public File getMetasDir() {
     return metasDir;
   }
 
+  /**
+   * Définir le répertoire des métadonnées
+   * @param metasDir Le répertoire
+   */
   public void setMetasDir(File metasDir) {
     this.metasDir = metasDir;
   }
 
+  /**
+   * Retourner le numéro de ligne
+   * @return Le numéro de ligne
+   */
   public int getLineNr() {
     return lineNr;
   }
 
+  /**
+   * Définir le numéro de ligne qui contient ce RHS. Permet en cas de problème de rapporter le numéro de ligne.
+   * @param lineNr Le numéro de ligne
+   */
   public void setLineNr(int lineNr) {
     this.lineNr = lineNr;
   }

@@ -19,14 +19,26 @@ extends DefChamp
 	DefChamp champARepeter;
 	boolean numeroter = false; //si true, on numerote les elements
 	
+	/**
+	 * Retourner le numéro minimum
+	 * @return Le numéro minimum
+	 */
 	public int getMin() {
 		return _min;
 	}
 	
+	/**
+	 * Définir le numéro minimum
+	 * @param _min Le numéro minimum
+	 */
 	public void setMin(int _min) {
 		this._min = _min;
 	}
 	
+	/**
+	 * Définir le numéro minimum
+	 * @param _min Une String qui contient le numéro minimum
+	 */
 	public void setMin(String _min) {
 		if (_min == null) {
 			this._min = 0;
@@ -42,14 +54,26 @@ extends DefChamp
 		}
 	}
 	
+	/**
+	 * Retourner le numéro maximum
+	 * @return Le numéro maximum
+	 */
 	public int getMax() {
 		return _max;
 	}
 	
+	/**
+	 * Définir le numéro maximum
+	 * @param _max Le numéro maximum
+	 */ 
 	public void setMax(int _max) {
 		this._max = _max;
 	}
 	
+	/**
+	 * Définir le numéro maximum
+	 * @param _max Le numéro maximum
+	 */
 	public void setMax(String _max) {
 		if (_max == null) {
 			this._max = 0;
@@ -65,13 +89,20 @@ extends DefChamp
 		}
 	}
 
+	/**
+	 * Retourner le champ à répéter
+	 * @return Le champ
+	 */
 	public DefChamp getChampARepeter() {
 		return champARepeter;
 	}
 
+	/**
+	 * Définir le champ à répéter
+	 * @param champARepeter Le champ
+	 */
 	public void setChampARepeter(DefChamp champARepeter) {
 		this.champARepeter = champARepeter;
 	}
-	
 	
 }

@@ -6,6 +6,9 @@ import java.util.Calendar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Définition de champ
+ */
 public class DefChamp {
 	static Logger lg = LogManager.getLogger();
 	

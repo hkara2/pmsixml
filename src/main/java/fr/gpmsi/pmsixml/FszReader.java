@@ -7,20 +7,22 @@ import java.util.HashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import fr.gpmsi.pmsixml.nx.Nx2Xml;
+
 /**
- * Lecteur de Fixed SiZe Record (enregistrement à champ fixe).
+ * Lecteur de Fixed SiZe Record (enregistrement à champs fixes).
  * Chaque enregistrement à champs fixes est soit "mono-niveau", c'est à dire que
  * c'est une liste de champs, sans sous-champs ni sous-groupes, soit "multi-niveaux", c'est à
  * dire qu'il y a une méthode pour représenter les champs enfantsDefChamp.
  * La stratégie de lecture est donc à adapter selon la représentation des niveaux.
  * Les stratégies possibles sont :
  * <ul>
- * <li>MONO pour les fichiers mono-niveaux
- * <li>RHS1 pour les résumés hospitaliers de sortie
- * <li>RSA1 pour les résumés de sortie anonymisés
- * <li>RSS1 pour les résumés standardisés de sortie
+ * <li>MONO pour les fichiers mono-niveaux (FICHCOMP, VIDHOSP, ...)
+ * <li>RHS1 pour les résumés hospitaliers de sortie (RHS)
+ * <li>RSA1 pour les résumés de sortie anonymisés (RSA)
+ * <li>RSS1 pour les résumés standardisés de sortie (RSS)
  * <li>VH1 pour les fichiers vid hosp
- * <li>NX1 pour les fichiers NX
+ * <li>NX1 pour les fichiers NX (ne plus utiliser, cf. package fr.gpmsi.pmsixml.nx
  * </ul>
  * Le nom de la stratégie est contenu dans dans le fichier de métadonnées, dans la
  *  ligne dont la première colonne est 
@@ -36,6 +38,7 @@ import org.apache.logging.log4j.Logger;
  *     FszGroup gn = (FszGroup) fszr.readOne(instr);
  * </pre>
  * @see FszNodeReadStrategyFactory 
+ * @see Nx2Xml
  * @author hk
  *
  */
@@ -53,6 +56,10 @@ public class FszReader
   
   FszNodeReadStrategy nrStrategy;
   
+  /**
+   * Retourner le chargeur de fichiers de métadonnées
+   * @return Le {@link MetaFileLoader}
+   */
   public MetaFileLoader getMetaLoader() {
     return metaLoader;
   }
@@ -61,6 +68,15 @@ public class FszReader
     this.metaLoader = metaLoader;
   }
 
+  /**
+   * Constructeur
+   * @param metaLoader Le chargeur du fichier de métadonnées
+   * @param metaName Le nom du fichier des métadonnées
+   * @param readStrategyDescriptor Le code descripteur de la stratégie de lecture
+   * @throws FieldParseException _
+   * @throws IOException _
+   * @throws MissingMetafileException _
+   */
   public FszReader(MetaFileLoader metaLoader, String metaName, String readStrategyDescriptor)
       throws FieldParseException, IOException, MissingMetafileException 
   {
@@ -69,7 +85,15 @@ public class FszReader
     this.descriptor = readStrategyDescriptor;
     nrStrategy = FszNodeReadStrategyFactory.makeFszNodeReadStrategy(descriptor);
   }
-    
+  
+  /**
+   * Constructeur
+   * @param metaLoader Le chargeur du fichier de métadonnées
+   * @param readStrategyDescriptor Le code descripteur de la stratégie de lecture
+   * @throws FieldParseException _
+   * @throws IOException _
+   * @throws MissingMetafileException _
+   */
   public FszReader(MetaFileLoader metaLoader, String readStrategyDescriptor)
       throws FieldParseException, IOException, MissingMetafileException 
   {
@@ -116,6 +140,10 @@ public class FszReader
     return metaName;
   }
 
+  /**
+   * Définir le nom du fichier de métadonnées à utiliser (cf. {@link #getMetaName()}
+   * @param metaName Le nom du fichier
+   */
   public void setMetaName(String metaName) {
     this.metaName = metaName;
   }

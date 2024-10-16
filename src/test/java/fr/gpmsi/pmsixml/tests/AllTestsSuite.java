@@ -18,6 +18,9 @@ package fr.gpmsi.pmsixml.tests;
 })
 */
 
+/**
+ * Suite de tests
+ */
 //@Suite
 public class AllTestsSuite {
 
