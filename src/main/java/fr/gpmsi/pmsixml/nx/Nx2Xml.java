@@ -3,7 +3,6 @@ package fr.gpmsi.pmsixml.nx;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -42,11 +41,18 @@ import fr.gpmsi.pmsixml.MissingMetafileException;
  * obtiendra aussi un fichier de 1,5 MO !
  */
 public class Nx2Xml {
+    /**
+     * Objet Logger pour l'envoi des logs.
+     */
 	public static Logger lg = LogManager.getLogger();
 	private static final boolean TRACE_RECHERCHE = false;
 	private static final boolean TRACE_LECT_LIGNES = false;
 	
-	public static int lineNr; //variable "globale", utilisée pour indiquer les erreurs dans les autres classes -> ne pas lancer de multiples instances concurrentes !
+	/**
+	 * variable "globale", utilisée pour indiquer les erreurs dans les autres 
+	 * classes -&gt; ne pas lancer de multiples instances concurrentes !
+	 */
+	public static int lineNr; 
 	
 	File nxFile;
 	File xmlFile;
@@ -66,6 +72,11 @@ public class Nx2Xml {
 	String metaFileName;
 	String metaFilePath; //si non null, forcera l'utilisation de ce fichier
 	
+	/**
+	 * Initialisation
+	 * @param nxFilePath Chemin du fichier NX à convertir en XML
+	 * @param xmlFilePath Chemin du fichier XML résultat
+	 */
 	public void init(String nxFilePath, String xmlFilePath) {
 		nxFile = new File(nxFilePath);
 		xmlFile = new File(xmlFilePath);

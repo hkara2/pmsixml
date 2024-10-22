@@ -9,6 +9,9 @@ import org.apache.logging.log4j.core.config.AppenderRef;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 
+/**
+ * Deuxième appli de test pour Appenders log4j
+ */
 public class Log4j2Appenders2 {
   static Logger lg = LogManager.getLogger();
 

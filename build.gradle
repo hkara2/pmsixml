@@ -1,7 +1,22 @@
+/*
+ * Configuration de build pour gradle.
+ * Pour construire le projet : gradlew build
+ */
 
 plugins {
-  id 'java'
-  id 'distribution'
+  //id 'java'
+  id 'java-library'  //specialise "java" pour la distribution de librairies
+  //id 'distribution'
+  id 'java-library-distribution' //specialise "distribution" pour la distribution de librairies java
+}
+
+distributions {
+    main {
+        distributionBaseName = 'pmsixml'
+        //contents {
+        //    from { 'distrib' }
+        //}
+    }
 }
 
 //https://github.com/gradle/gradle/issues/17236
@@ -79,11 +94,11 @@ task myJavadocs(type: Javadoc) {
 /**
  * Tâche qui exécute jekyll en tant que commande (doit être installé et dans le PATH)
  */
-task jekyll(type: Exec) {
-    println "Starting Jekyll generation"
-    commandLine = ['cmd', '/C', 'jekyll', 'build', '--destination', '../../build/docs'] 
-    workingDir = file('./src/doc/')
-}
+//task jekyll(type: Exec) {
+//    println "Starting Jekyll generation"
+//    commandLine = ['cmd', '/C', 'jekyll', 'build', '--destination', '../../build/docs'] 
+//    workingDir = file('./src/doc/')
+//}
 
 /**
  * Construire la distribution

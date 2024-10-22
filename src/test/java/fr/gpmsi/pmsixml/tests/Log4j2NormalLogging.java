@@ -3,9 +3,16 @@ package fr.gpmsi.pmsixml.tests;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Appli de test de log normal.
+ */
 public class Log4j2NormalLogging {
   static Logger lg = LogManager.getLogger();
   
+  /**
+   * Lancement de l'appli
+   * @param args Arguments (non utilisés)
+   */
   public static void main(String[] args) {
     /*
      * Config of log4j2.xml is :

@@ -15,8 +15,15 @@ import org.w3c.dom.NodeList;
 
 import fr.gpmsi.pmsixml.xml.NodeUtils;
 
+/**
+ * Objet qui contient les métadonnées NX lues pour une version de format
+ * donnée (pas testé pour les anciens formats d'avant 2020).
+ */
 public class NxMeta {
 	
+    /**
+     * Logger à utiliser pour les traces
+     */
 	public static Logger lg = LogManager.getLogger();
 	static final boolean TRACE_META_LOADING = false;
 
@@ -272,6 +279,7 @@ public class NxMeta {
 	 * @param line La ligne à utiliser pour lire l'enregistrement
 	 * @return Une Map avec quelques enregistrements lus depuis l'enregistrement 000. Les enregistrements qui
 	 *   sont toujours lus sont "PROGRAMME_EMETTEUR" (pos 20), "IDENTIFICATION_FICHIER" (pos 50), "NUMERO_VERSION" (pos 90)
+     * @throws IllegalArgumentException Si la ligne est incompatible avec le format NX
 	 */
 	public static Map<String, String> enregistrement000(String line)
 	throws IllegalArgumentException

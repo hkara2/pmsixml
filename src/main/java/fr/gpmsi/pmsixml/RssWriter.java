@@ -8,6 +8,9 @@ package fr.gpmsi.pmsixml;
  */
 public class RssWriter {
 
+    /**
+     * constructeur simple
+     */
 	public RssWriter() {
 	}
 

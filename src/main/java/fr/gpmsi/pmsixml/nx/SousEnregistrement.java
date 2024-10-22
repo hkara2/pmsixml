@@ -2,14 +2,29 @@ package fr.gpmsi.pmsixml.nx;
 
 import java.util.ArrayList;
 
+/**
+ * Un sous-enregistrement NX
+ */
 public class SousEnregistrement {
 	DefSousEnregistrement def;
 	
 	ArrayList<Champ> champs = new ArrayList<Champ>();
 
+	/**
+	 * Ajouter un champ
+	 * @param c Le champ à ajouter
+	 */
 	public void addChamp(Champ c) {
 		champs.add(c);
 	}
+	
+	/**
+	 * Ajouter un champ en le construisant depuis la ligne à la position
+	 *   donnée
+	 * @param def La définition du champ
+	 * @param line Le numéro de la ligne
+	 * @param p La position à partir de laquelle faire l'analyse
+	 */
 	public void addChamp(DefChamp def, String line, Position p) {
 		Champ c = def.makeChamp(line, p);
 		if (c != null) addChamp(c);

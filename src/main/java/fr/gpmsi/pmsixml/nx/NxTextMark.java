@@ -43,6 +43,16 @@ public class NxTextMark {
 		md.emettreMarques(wr); wr.write("\r\n");
 	}
 	
+	/**
+	 * Lancement de l'application
+	 * @throws MissingMetafileException Si il manque un fichier de définition
+	 * @throws ParserConfigurationException Si il y a une erreur dans la configuration de l'analyseur XML
+	 * @throws SAXException Si il y a une erreur lors du parcours du XML
+	 * @throws IOException Si il y a une erreur d'E/S
+	 * @throws NxMetaParseException Si il y a une erreur dans les fichiers de définition NX/XML
+	 * @throws NxParseException Si il y a une erreur lors de l'analyse des données NX
+	 * @throws TransformerException Si il y a une erreur lors de la transformation du XML
+	 */
 	public void run()
 			throws MissingMetafileException, ParserConfigurationException, SAXException, IOException, NxMetaParseException, NxParseException, TransformerException
 	{
@@ -92,11 +102,22 @@ public class NxTextMark {
 		}//BufferedWriter
 	}
 	
+	/**
+	 * Initialisation de l'application
+	 * @param inputFile Fichier NX en entrée
+	 * @param outputFile Fichier texte en sortie
+	 */
 	public void init(File inputFile, File outputFile) {
 		this.nxFile = inputFile;
 		this.outputFile = outputFile;
 	}
 	
+	/**
+	 * Lancement de l'application
+	 * @param args Paramètres de lancement. Il faut deux arguments, le chemin
+	 *   du fichier nx en entrée et le chemin du fichier nx en sortie.
+	 * @throws Exception Si erreur lors du lancement ou de l'exécution
+	 */
 	public static void main(String[] args) 
 	throws Exception
 	{
@@ -108,7 +129,11 @@ public class NxTextMark {
 
 		NxTextMark app = new NxTextMark();
 		//app.init("C:\\Users\\Harry\\Downloads\\classement\\PMSI\\Ameli\\NX\\CCAM\\CACTOT07500\\CACTOT07500", "files-for-tests\\tmp-out\\CACTOT07500.XML");
-		app.init(new File("files-for-tests\\nx\\CCAM1.txt"), new File("files-for-tests\\tmp-out\\CCAM1_with_marks.txt"));
+		//app.init(new File("files-for-tests\\nx\\CCAM1.txt"), new File("files-for-tests\\tmp-out\\CCAM1_with_marks.txt"));
+		if (args.length != 2) {
+		    throw new Exception("Il faut exactement deux arguments au lancement");
+		}
+		app.init(new File(args[0]), new File(args[1]));
 		app.run();
 	}
 

@@ -23,7 +23,7 @@ extends Exception
 
 	/**
 	 * Constructeur
-	 * @param message
+	 * @param message _
 	 */
 	public FieldSizeException(String message) {
 		super(message);
@@ -46,9 +46,13 @@ extends Exception
 		super(message, cause);
 	}
 
-	/**
-	 * Constructeur
-	 */
+	 /**
+	  * Constructeur
+	  * @param message Le message
+	  * @param cause L'exception de départ
+	  * @param enableSuppression Autoriser la suppression
+	  * @param writableStackTrace Peut-on écrire dans la Stack Trace
+	  */
 	public FieldSizeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}

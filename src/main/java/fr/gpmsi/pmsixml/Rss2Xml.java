@@ -113,6 +113,12 @@ public class Rss2Xml
     
   }
 
+  /**
+   * Envoyer du XML dans le Writer wr pour le noeud nd. 
+   * @param nd Le noeud (groupe ou champ) 
+   * @param wr Le Writer dans lequel écrire
+   * @throws IOException Si erreur E/S
+   */
   public void emitXml(FszNode nd, Writer wr) 
   		throws IOException 
   {
@@ -136,6 +142,14 @@ public class Rss2Xml
   	wr.write(sb.toString());
   }
   
+  /**
+   * Emettre du csv pour le groupe g
+   * @param g Le groupe qui contient les infos à émettre
+   * @param h L'objet d'assistance csv
+   * @param line Le numéro de la ligne qui correspond au groupe
+   * @throws IOException Si erreur E/S
+   * @throws ParseException Si erreur d'analyse
+   */
   public void emitCsv(FszGroup g, RsCsvHelper h, String line)
       throws IOException, ParseException 
   {

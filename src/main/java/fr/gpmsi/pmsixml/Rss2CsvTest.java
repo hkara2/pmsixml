@@ -4,9 +4,11 @@ package fr.gpmsi.pmsixml;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.DefaultConfiguration;
 
+/** Classe de test */
 public class Rss2CsvTest
 {
 
+  /** constructeur simple */
   public Rss2CsvTest() {
   }
 
@@ -17,10 +19,19 @@ public class Rss2CsvTest
     Rss2Csv.main(args);
   }
   
+  /**
+   * exécution
+   * @throws Exception Si erreur
+   */
   public void run() throws Exception {
     test1();
   }
   
+  /**
+   * Lancement en tant qu'application
+   * @param args Paramètres en ligne de commande
+   * @throws Exception Si erreur lors de l'exécution
+   */
   public static void main(String[] args) throws Exception {
   	//BasicConfigurator.configure();
   	Configurator.initialize(new DefaultConfiguration());

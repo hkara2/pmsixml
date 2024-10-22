@@ -295,7 +295,9 @@ public class DefEnregistrement {
 	}
 
 	/**
-	 * Convertir cet enregistrement en une String de forme "Enregistrement <nom>  type <type>  rub <rubriqueMax>"
+	 * Convertir cet enregistrement en une String de forme
+	 * "Enregistrement &lt;nom&gt;  type &lt;type&gt;  rub &lt;rubriqueMax&gt;"
+	 * @return La String 
 	 */
 	@Override
 	public String toString() {

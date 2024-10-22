@@ -9,6 +9,9 @@ import org.apache.logging.log4j.core.config.AppenderRef;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 
+/**
+ * Appli de test des Appenders Log4j
+ */
 public class Log4j2Appenders {
 
   static Logger lg = LogManager.getLogger();
@@ -52,6 +55,10 @@ public class Log4j2Appenders {
     lg2.error("Hello from lg2");
   }
   
+  /**
+   * Lancement de la classe pour tests
+   * @param args
+   */
   public static void main(String[] args) {
     new Log4j2Appenders().run();
   }

@@ -12,10 +12,17 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 
+/**
+ * Le Writer qui va écrire en XML dans le fichier de sortie.
+ */
 public class XmlWriter {
 	
 	Transformer transf;
 	
+	/**
+	 * Constructeur simple
+	 * @throws TransformerConfigurationException Si erreur de configuration du transformer XML
+	 */
 	public XmlWriter()
 			throws TransformerConfigurationException 
 	{
@@ -28,6 +35,12 @@ public class XmlWriter {
 		
 	}
 
+	/**
+	 * Ecrire dans le fichier
+	 * @param doc Le document XML à écrire
+	 * @param myFile Le fichier vers lequel écrire
+	 * @throws TransformerException Si il y a eu une erreur lors de la transformation
+	 */
 	void writeToFile(Document doc, File myFile)
 			throws TransformerException
 	{

@@ -403,7 +403,7 @@ extends FszMeta
   
   /**
    * Définir l'alignement (cf. {@link #getAlignment()}
-   * @param alignment
+   * @param alignment L'alignement
    */
   public void setAlignment(String alignment) {
     this.alignment = alignment;
@@ -455,7 +455,7 @@ extends FszMeta
   
   /**
    * Définir les remarques formatées (cf. {@link #getRemarks()}
-   * @param remarks
+   * @param remarks Les remarques, on peut utiliser \n pour représenter une fin de ligne
    */
   public void setRemarks(String remarks) {
     this.remarks = remarks;
@@ -599,7 +599,7 @@ extends FszMeta
 
   /**
    * Définir la précision (cf. {@link #getPrecision()}
-   * @param precision
+   * @param precision La précision
    */
   public void setPrecision(int precision) {
     this.precision = precision;
@@ -615,7 +615,7 @@ extends FszMeta
 
   /**
    * Définir l'échelle (cf. {@link #getScale()}
-   * @param scale
+   * @param scale L'échelle
    */
   public void setScale(int scale) {
     this.scale = scale;

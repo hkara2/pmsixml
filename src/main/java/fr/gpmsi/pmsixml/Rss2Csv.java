@@ -22,9 +22,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Transformer un fichier RSS en fichier .csv avec les principaux champs présents.
+ * Transformer un fichier RSS en fichier .csv avec les principaux champs
+ * présents.
  * @author hkaradimas
- *
  */
 public class Rss2Csv
 {
@@ -60,6 +60,20 @@ public class Rss2Csv
     return str == null || str.trim().equals("");
   }
   
+  /**
+   * Initialisation avec arguments en ligne.
+   * <dl>
+   * <dt>-in &lt;fichier_entree&gt;</dt><dd>Fichier d'entrée</dd>
+   * <dt>-outdir &lt;repertoire_de_sortie&gt;</dt><dd>designe le repertoire de sortie</dd>
+   * <dt>-enc &lt;nom_encodage&gt;</dt><dd>donne l'encodage a utiliser pour les fichiers de sortie</dd>
+   * <dt>-debug</dt><dd>active les messages de debogage</dd>
+   * <dt>-useidf</dt><dd>utiliser le format de date iso (aaaa-mm-jj). Par defaut le format francais (jj/mm/aaaa) est utilise</dd>
+   * <dt>-help</dt><dd>afficher l'aide puis sortir</dd>
+   * <dt>-prefix &lt;prefixe_a_utiliser&gt;</dt><dd>designe le prefixe a utiliser pour les noms de fichier</dd>
+   * </dl>
+   * @param argsp Liste des arguments
+   * @throws Exception Si erreur lors de l'initialisation
+   */
   void init(String[] argsp)
   		throws Exception
   {
@@ -114,6 +128,12 @@ public class Rss2Csv
   	System.out.println(sb.toString());
   }
   
+  /**
+   * Emettre l'en-tête pour le csv, avec les noms de colonnes 
+   * @param gm La définition du groupe
+   * @param bw Le writer dans lequel écrire
+   * @throws IOException Si erreur E/S
+   */
   public void emitCsvHeader(FszGroupMeta gm, BufferedWriter bw)
       throws IOException 
   {
@@ -198,6 +218,14 @@ public class Rss2Csv
     }
   }
 
+  /**
+   * Emettre la ligne d'en-tête csv avec les noms de colonne.
+   * @param g Le groupe de champs
+   * @param h L'objet pour aider à trouver les définitions
+   * @param line La ligne qui correspond au groupe
+   * @throws IOException Si erreur E/S
+   * @throws ParseException Si erreur analyse
+   */
   public void emitCsv(FszGroup g, RsCsvHelper h, String line)
       throws IOException, ParseException 
   {
@@ -278,6 +306,11 @@ public class Rss2Csv
     return args.nextArgument();
   }
 
+  /**
+   * Lancement en tant qu'application
+   * @param args Arguments
+   * @throws Exception Si erreur d'exécution
+   */
   public static void main(String[] args)
       throws Exception 
   {

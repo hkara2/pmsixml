@@ -13,14 +13,27 @@ import fr.gpmsi.pmsixml.FszGroup;
 import fr.gpmsi.pmsixml.RsaReader;
 import fr.gpmsi.pmsixml.RsaWriter;
 
+/**
+ * Tests d'écriture de RSA(s)
+ */
 public class RsaWriterTest {
 
+    /**
+     * RSA de test, 1
+     */
 	public static String rsa1 = RsaReaderTest.rsa1;
+    /**
+     * RSA de test, 2
+     */
 	public static String rsa2 = RsaReaderTest.rsa2;
 	
 	/** @apiNote Si true des messages sont imprimes en plus */
 	public static boolean DEBUG = false;
 	
+	/**
+	 * Premier test avec RSA numéro 1
+	 * @throws Exception _
+	 */
 	@Test
 	public void test1()
 			throws Exception
@@ -74,9 +87,17 @@ public class RsaWriterTest {
 		}
 	}
 	
+	/**
+	 * Constructeur simple
+	 */
 	public RsaWriterTest() {
 	}
 
+	/**
+	 * Lancement de tests en tant qu'application
+	 * @param args Arguments (non utilisé)
+	 * @throws Exception _
+	 */
 	public static void main(String[] args) throws Exception {
 		//BasicConfigurator.configure();
 		Configurator.initialize(new DefaultConfiguration());

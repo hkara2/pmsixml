@@ -13,11 +13,23 @@ import org.apache.logging.log4j.Logger;
  */
 public class RsaWriter {
   static Logger lg = LogManager.getLogger(RsaWriter.class);
+  /**
+   * Mettre à TRUE si des traces détaillées sont souhaitées pendant le développement
+   */
   public static final boolean DEBUG = false;
   
+  /**
+   * Constructeur simple
+   */
 	public RsaWriter() {
 	}
 
+	/**
+	 * Mettre à jour le compteur du parent avec le nombre des enfants de g.
+	 * @param parent Le groupe parent
+	 * @param g Le groupe
+	 * @param counterName Le nom du compteur
+	 */
 	public void updateCounter(FszGroup parent, FszGroup g, String counterName) {
 		List<FszNode> children = g.getChildren();
 		int childCount = children.size();
@@ -30,6 +42,12 @@ public class RsaWriter {
 		}
 	}
 	
+	/**
+	 * Ecrire le groupe dans le StringBuffer
+	 * @param g Le groupe
+	 * @param sb Le StringBuffer
+	 * @throws FieldSizeException Si erreur de taille de champ
+	 */
 	public void writeGroup(FszGroup g, StringBuffer sb)
 			throws FieldSizeException
 	{
@@ -37,6 +55,12 @@ public class RsaWriter {
 		for (FszNode child : children) child.toText(sb);
 	}
 	
+	/**
+	 * Ecrire le RSA dans le StringBuffer
+	 * @param rsa Le RSA
+	 * @param sb Le StringBuffer
+	 * @throws FieldSizeException Si erreur de taille de champ
+	 */
 	public void writeRsa(FszGroup rsa, StringBuffer sb)
 			throws FieldSizeException
 	{

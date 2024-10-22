@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 import fr.gpmsi.pmsixml.FszNode;
 import fr.gpmsi.pmsixml.RsfaceReader;
 
+/**
+ * Tests de lecture de RSF-ACE
+ */
 public class RsfaceReaderTest
 {
 	static Logger lg = LogManager.getLogger(RsfaceReaderTest.class);
@@ -22,6 +25,10 @@ public class RsfaceReaderTest
 		Configurator.initialize(new DefaultConfiguration());
 	}
 	
+	/**
+	 * Premier test de lecture
+	 * @throws Exception _
+	 */
 	@Test
 	public void testA()
 	throws Exception
@@ -35,8 +42,4 @@ public class RsfaceReaderTest
 		lg.info("nd:"+sb);
 	}
 	    
-	public static void main(String[] args) {
-		
-	}
-
 }

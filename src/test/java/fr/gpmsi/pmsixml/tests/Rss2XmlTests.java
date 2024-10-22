@@ -9,14 +9,24 @@ import org.junit.jupiter.api.Test;
 
 import fr.gpmsi.pmsixml.Rss2Xml;
 
+/**
+ * Tests de transformation de RSS(s) vers du XML
+ */
 public class Rss2XmlTests {
 
+    /**
+     * Préparation
+     */
 	@BeforeEach
 	public void setUp() {
 		//BasicConfigurator.configure();
 		Configurator.initialize(new DefaultConfiguration());
 	}
 
+	/**
+	 * Premier test, ne teste que si ça s'exécute sans erreur
+	 * @throws Exception _
+	 */
 	@Test
 	public void test1()
 			throws Exception 

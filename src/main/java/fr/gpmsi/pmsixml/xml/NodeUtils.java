@@ -8,14 +8,16 @@ import org.w3c.dom.Node;
  */
 public class NodeUtils {
 
+    /**
+     * Renvoyer l'attribut
+     * @param map Une Map avec les Node(s)
+     * @param name Le nom de l'attribut
+     * @return La valeur de l'attribut ou null si l'attribut n'existe pas
+     */
 	public static final String getAttribute(NamedNodeMap map, String name) {
 		if (map == null) return null;
 		Node attNode = map.getNamedItem(name);
 		if (attNode == null) return null;
 		return attNode.getNodeValue();	
-	}
-	
-	public static final String getText(Node parent) {
-		return null;
 	}
 }

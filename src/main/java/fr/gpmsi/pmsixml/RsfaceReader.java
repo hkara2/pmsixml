@@ -30,9 +30,16 @@ public class RsfaceReader
   
   boolean truncatedInputAccepted = true;
   
+  /**
+   * Constructeur simple
+   */
   public RsfaceReader() {
   }
 
+  /**
+   * Constructeur avec l'année du format RSF-ACE
+   * @param yearOfFormat L'année sur 4 chiffres
+   */
   public RsfaceReader(String yearOfFormat) {
   	this.yearOfFormat = yearOfFormat;
   }
@@ -74,6 +81,15 @@ public class RsfaceReader
     return loadMeta(letter);
   }
     
+  /**
+   * Lire un RSF-ACE depuis une String
+   * @param str La String à partir de laquelle on veut lire
+   * @param linenr Le numéro de ligne de cette String dans le fichier
+   * @return Un FszGroup qui contient le RSA
+   * @throws FieldParseException Si erreur d'analyse
+   * @throws IOException Si erreur E/S
+   * @throws MissingMetafileException Si un fichier de définition n'a pas été trouvé
+   */
   public FszGroup readRSFACE(String str, int linenr)
       throws FieldParseException, IOException, MissingMetafileException
   {
@@ -96,29 +112,50 @@ public class RsfaceReader
     return rsface;
   }
   
-  public static void main(String[] args) {
-  }
-
+  /**
+   * Retourner le repertoire des métadonnées
+   * @return Le répertoire
+   */
   public File getMetasDir() {
     return metasDir;
   }
 
+  /**
+   * Définir le répertoire des métadonnées
+   * @param metasDir Le répertoire
+   */
   public void setMetasDir(File metasDir) {
     this.metasDir = metasDir;
   }
 
-	public String getYearOfFormat() {
-		return yearOfFormat;
-	}
+  /**
+   * Retourner l'année du format RSF-ACE à utiliser
+   * @return L'année sur 4 chiffres
+   */
+  public String getYearOfFormat() {
+  	return yearOfFormat;
+  }
 
-	public void setYearOfFormat(String yearOfFormat) {
-		this.yearOfFormat = yearOfFormat;
-	}
+  /**
+   * Définir l'année du format RSF-ACE à utiliser
+   * @param yearOfFormat L'année sur 4 chiffres
+   */
+  public void setYearOfFormat(String yearOfFormat) {
+	this.yearOfFormat = yearOfFormat;
+  }
 
+  /**
+   * Est-ce qu'on accepte les enregistrements tronqués ?
+   * @return true (défaut) ou false
+   */
   public boolean isTruncatedInputAccepted() {
     return truncatedInputAccepted;
   }
 
+  /**
+   * Est-ce qu'on accepte les enregistrements tronqués ?
+   * @param truncatedInputAccepted La valeur boolean à utiliser
+   */
   public void setTruncatedInputAccepted(boolean truncatedInputAccepted) {
     this.truncatedInputAccepted = truncatedInputAccepted;
   }

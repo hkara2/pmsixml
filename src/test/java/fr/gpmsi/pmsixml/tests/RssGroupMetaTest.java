@@ -8,14 +8,25 @@ import org.junit.jupiter.api.Test;
 import fr.gpmsi.pmsixml.FszGroupMeta;
 import fr.gpmsi.pmsixml.MetaFileLoader;
 
+/**
+ * Tests de la lecture des métadonnées de groupe.
+ */
 public class RssGroupMetaTest {
 
+    /**
+     * Préparation, initialise juste les logs
+     * @throws Exception _
+     */
   @BeforeEach
   public void setUp() throws Exception {
     //BasicConfigurator.configure();
     Configurator.initialize(new DefaultConfiguration());
   }
 
+  /**
+   * Teste la lecture de métadonnées de RSS de type 017 (format 17 non groupé)
+   * @throws Exception _
+   */
   @Test
   public void testReadRssMeta() 
       throws Exception

@@ -5,6 +5,9 @@ import org.apache.logging.log4j.Logger;
 
 import fr.gpmsi.pmsixml.Log4j2Utils;
 
+/**
+ * Troisième appli de test d'appenders Log4j
+ */
 public class Log4j2Appenders3 {
   static Logger lg = LogManager.getLogger();
 

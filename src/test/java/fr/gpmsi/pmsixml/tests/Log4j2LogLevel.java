@@ -8,6 +8,7 @@ import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 
 /**
+ * Appli de test pour changer les log level.
  * Normalement le niveau est "error", ici on peut le changer par programme.
  * cf.
  * https://logging.apache.org/log4j/log4j-2.4/faq.html#set_logger_level_from_code
@@ -19,6 +20,10 @@ public class Log4j2LogLevel {
 
   static Logger lg = LogManager.getLogger();
   
+  /**
+   * Lancement de l'appli
+   * @param args Arguments (non utilisé)
+   */
   public static void main(String[] args) {
     LoggerContext context = (LoggerContext) LogManager.getContext(false); //must use "false"
     Configuration config = context.getConfiguration();

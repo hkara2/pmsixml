@@ -18,17 +18,34 @@ import fr.gpmsi.pmsixml.FszReader;
 import fr.gpmsi.pmsixml.InputString;
 import fr.gpmsi.pmsixml.MetaFileLoader;
 
+/**
+ * Tests de lecture de VID-HOSP
+ */
 public class VhReadTest {
 
+  /**
+   * VIDHOSP de test 1
+   */
   public static final String VH1_14  = "2880391471039590129020120222012345678           V0149100194472220191223003675R10  1 0000100000000000000008000000025523700000000255237100000900140521             020120220000000000 01234567810009110000                                                  2        02012022911000 0201202205012022000000000                                                999FRA999999023844                                                                                                     00";
+  /**
+   * VIDHOSP de test 2
+   */
   public static final String VH1_14B = "2991299341198850189301219992012345679           V0149100194472991299341198855R30  1 0000100000000000000008000000033188400000000331884100000                      010920220000000000 01234567910009110000                                                  1                000000 0109202204092022000000000                                                999FRA000615909580        123456789012345                                                                              00";
   
+  /**
+   * Préparation (initialise les logs)
+   * @throws Exception
+   */
   @BeforeEach
   public void setUp() throws Exception {
     //BasicConfigurator.configure();
 	  Configurator.initialize(new DefaultConfiguration());
   }
 
+  /**
+   * Teste la lecture du VIDHOSP 1
+   * @throws Exception _
+   */
   @Test
   public void testReadVh1()
       throws Exception 
@@ -46,8 +63,8 @@ public class VhReadTest {
   }
   
   /**
-   * Lire un VIDHOSP et voir si la lecture 
-   * @throws Exception
+   * Lire un VIDHOSP et voir si la lecture de différents champs fonctionne
+   * @throws Exception _
    */
   @Test
   public void testReadVh2()
@@ -72,6 +89,10 @@ public class VhReadTest {
     assertEquals("13+2", format, "Attendu pour le format 13+2");
   }
   
+  /**
+   * Test de lecture du NADL (à écrire)
+   * @throws Exception _
+   */
   @Test
   public void testReadNadl() throws Exception {
     

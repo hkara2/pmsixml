@@ -12,14 +12,26 @@ import fr.gpmsi.pmsixml.FszNode;
 import fr.gpmsi.pmsixml.RhsReader;
 import fr.gpmsi.pmsixml.RhsWriter;
 
+/**
+ * Test d'écriture des RHS
+ */
 public class RhsWriterTest {
 
+  /**
+   * Préparation, initialise les logs
+   * @throws Exception _
+   */
   @BeforeEach
   public void setUp() throws Exception {
     //BasicConfigurator.configure();
     Configurator.initialize(new DefaultConfiguration());
   }
 
+  /**
+   * Fait un test de lecture puis d'écriture d'un RHS au format M9 non
+   * groupé (M09)
+   * @throws Exception _
+   */
   @Test
   public void testRhsReadWrite1()
       throws Exception
@@ -36,6 +48,11 @@ public class RhsWriterTest {
     assertEquals(rhsTxt, sb.toString(), "Les deux chaines doivent etre identiques");
   }
 
+  /**
+   * Fait un test de lecture puis d'écriture d'un RHS au format A groupé
+   * (M1A)
+   * @throws Exception _
+   */
   @Test
   public void testRhsReadWrite2()  
       throws Exception

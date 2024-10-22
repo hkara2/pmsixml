@@ -14,7 +14,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * Emetteur XML qui envoie le XML pour les données NX.
+ */
 public class XmlEmitter {
+    /**
+     * Le logger log4j
+     */
 	public static Logger lg = LogManager.getLogger(XmlEmitter.class);
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -23,6 +29,10 @@ public class XmlEmitter {
 	DocumentBuilder db;
 	Element root;
 	
+	/**
+	 * Constructeur simple
+	 * @throws ParserConfigurationException Si le constructeur XML est mal configuré
+	 */
 	public XmlEmitter()
 			throws ParserConfigurationException
 	{
@@ -33,8 +43,18 @@ public class XmlEmitter {
 		doc.appendChild(root);
 	}
 
+	/**
+	 * Retourner l'élément racine
+	 * @return L'élément racine
+	 */
 	public Element getRoot() { return root; }
 	
+	/**
+	 * Envoyer l'enregistrement en tant que noeud, 
+	 * rattaché au noeud attach_node
+	 * @param e L'élément à envoyer
+	 * @param attach_node Le noeud auquel rattacher
+	 */
 	public void emit(Enregistrement e, Node attach_node) {
 		//lg.debug("Enregistrement "+e+", nom:"+e.definition.nom);
 		Element e_nd = doc.createElement(e.definition.nom);

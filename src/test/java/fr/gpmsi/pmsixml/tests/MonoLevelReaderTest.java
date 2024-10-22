@@ -12,8 +12,18 @@ import fr.gpmsi.pmsixml.FszGroup;
 import fr.gpmsi.pmsixml.MissingMetafileException;
 import fr.gpmsi.pmsixml.MonoLevelReader;
 
+/**
+ * Test de lecture mono-niveau d'un fichier (ne marche qu'au CHSE, à adapter)
+ */
 public class MonoLevelReaderTest {
 
+    /**
+     * Lancement de l'appli
+     * @param args ignoré
+     * @throws FieldParseException Si erreur lors de l'analyse des champs
+     * @throws IOException Si erreur E/S
+     * @throws MissingMetafileException Si données de définition manquantes
+     */
   public static void main(String[] args)
       throws FieldParseException, IOException, MissingMetafileException
   {

@@ -7,14 +7,17 @@ package fr.gpmsi.pmsixml;
  */
 public class Rulers {
 
+    /**
+     * Constructeur simple
+     */
 	public Rulers() {
 	}
 
 	/**
-	 * Make a ruler (a series of numbers to count chars)
-	 * @param size The size of the ruler (= the end)
-	 * @param start The start of the ruler (0 or 1)
-	 * @param every When to increment (every 1, 10, 100, etc.)
+	 * Faire une "règle" (une série de nombre qui aidera à compter les caractères)
+	 * @param size La taille de la règle en nombre de caractères
+	 * @param start Le début de la règle (0 ou 1)
+	 * @param every La taille de l'incrément (tous les 1, 10, 100, etc.)
 	 * @return La règle
 	 */
 	public static final String makeRuler(int size, int start, int every) {
@@ -33,6 +36,14 @@ public class Rulers {
 		return sb.toString();
 	}
 	
+	/**
+	 * Faire un texte qui peut servir de "règle", à copier coller au dessus
+	 * d'une ligne de RSS par exemple, pour vérifier tous les débuts de
+	 * champs.
+	 * Débute à 0, et met un chiffre tous les 10 caractères
+	 * @param size La largeur de la règle en caractères
+	 * @return Le texte qui représente la règle
+	 */
 	public static final String makeRuler(int size) { return makeRuler(size, 0, 1); }
 	
 }

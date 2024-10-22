@@ -14,6 +14,9 @@ import org.junit.jupiter.api.Test;
 import fr.gpmsi.pmsixml.FszNode;
 import fr.gpmsi.pmsixml.RhsReader;
 
+/**
+ * Test de lecture de RHS
+ */
 public class RhsReaderTest
 //extends TestCase
 {
@@ -25,6 +28,10 @@ public class RhsReaderTest
 		Configurator.initialize(new DefaultConfiguration());
 	}
 	
+	/**
+	 * Test de lecture d'un RHS 
+	 * @throws Exception Si erreur lors de l'analyse
+	 */
 	@Test
 	public void testOne()
 	throws Exception
@@ -39,6 +46,10 @@ public class RhsReaderTest
 
 	}
 	
+	/**
+	 * 
+	 * @throws Exception _
+	 */
 	@Test
 	public void testOneWithTruncated()
 	throws Exception
@@ -53,6 +64,10 @@ public class RhsReaderTest
 
 	}
 	
+	/**
+	 * 
+	 * @throws Exception _
+	 */
 	@Test
     public void testOneWithActs()
     throws Exception
@@ -67,6 +82,10 @@ public class RhsReaderTest
 
     }
 	
+	/**
+	 * 
+	 * @throws Exception _
+	 */
 	@Test
     public void testOneTruncatedWithActs()
     throws Exception
@@ -82,6 +101,10 @@ public class RhsReaderTest
 
     }
     
+	/**
+	 * Lancement des tests en tant qu'appli (ne fait rien pour l'instant)
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 	}
