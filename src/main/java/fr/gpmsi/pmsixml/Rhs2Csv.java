@@ -64,6 +64,11 @@ public class Rhs2Csv
     return str == null || str.trim().equals("");
   }
   
+  /**
+   * Constructeur simple
+   */
+  public Rhs2Csv() {}
+  
   void init(String[] argsp) throws Exception
   {
   	usnf.setGroupingUsed(false);

@@ -17,8 +17,9 @@ import org.apache.logging.log4j.Logger;
  * Recherche et charge un fichier de métadonnées Fsz par nom et un répertoire donné.
  * Exemple d'utilisation :
  * <pre>
- *       meta = FszGroupMeta.getOrLoadMeta("fichcompmed2020");
- *       fichcompmed = meta.getFirstChildGroupMeta();
+ *       MetaFileLoader mfl = new MetaFileLoader(new File("C:\\metadonnees_locales"));
+ *       FszGroupMeta gmeta = mfl.getOrLoadMeta("/fr/gpmsi/pmsixml/fichcompmed2020.csv");
+ *       fichcompmed = gmeta.getFirstChildGroupMeta();
  *       g = fichcompmed.makeBlankInstance();
  *       g.NADL.value = '900123456';
  *       //etc.
@@ -47,7 +48,7 @@ public class MetaFileLoader {
 	}
 
 	/**
-	 * 
+	 * retourner le répertoire des métadonnées
 	 * @return Le répertoire des métadonnées
 	 */
 	public File getMetaFilesDir() {
@@ -55,7 +56,7 @@ public class MetaFileLoader {
 	}
 
 	/**
-	 * 
+	 * Définir le répertoire des métadonnées
 	 * @param metaFilesDir Le répertoire des métadonnées
 	 */
 	public void setMetaFilesDir(File metaFilesDir) {
@@ -63,10 +64,12 @@ public class MetaFileLoader {
 	}
 
 	/**
-	 * Rechercher un InputStream, soit par le metaFilesDir (qui est toujours recherché en premier)
+	 * Rechercher un InputStream spécial pour pmsixml, soit par le metaFilesDir (qui est toujours recherché en premier)
 	 * soit par les resources, qui sont dans le jar de distribution.
-	 * Pour les resources, le préfixe "/fr/gpmsi/pmsixml/" est ajouté devant le nom de ressource
-	 * @param resourceName le nom de la ressource à rechercher
+	 * Pour les resources, si le nom de resource ne commence pas par un "/", alors le préfixe "/fr/gpmsi/pmsixml/"
+	 * est ajouté devant le nom de ressource . Sinon le nom est laissé tel quel (déconseillé, un mot de warning est mis dans
+	 * le log).
+	 * @param resourceName le nom de la ressource à rechercher. Devrait contenir le préfixe /fr/gpmsi/pmsixml/ .
 	 * @return Le {@link InputStream} correspondant
 	 * @throws FileNotFoundException Si la ressource n'a pas été retrouvée dans le système de fichiers
 	 * @throws MissingMetafileException Si le fichier de métadonnées n'existe pas dans les ressources de fichier
@@ -85,7 +88,12 @@ public class MetaFileLoader {
 	        }
 	        else return ins;
 	    }
-	    ins = MetaFileLoader.class.getResourceAsStream("/"+FszMeta.PREFIX_DIR+"/"+resourceName);
+	    String resourcePath = resourceName;
+	    if (!resourcePath.startsWith("/")) {
+	      lg.warn("Ajout du prefixe /"+FszMeta.PREFIX_DIR+"/ devant '"+resourcePath+"', corriger l'appel pour que ce prefixe soit ajoute d'emblee");
+	      resourcePath = "/"+FszMeta.PREFIX_DIR+"/"+resourcePath;
+	    }
+	    ins = MetaFileLoader.class.getResourceAsStream(resourcePath);
 	    if (ins == null) {
 	      String msg1 = "";
 	      if (metaFilesDir != null) msg1 = ", ni dans le repertoire '"+metaFilesDir+"', ni dans ";	      
@@ -96,7 +104,7 @@ public class MetaFileLoader {
 	}
     
   /**
-   * Charger un FszGroupMeta par son nom
+   * Charger un FszGroupMeta par son nom (doit avoir le préfixe /fr/gpmsi/pmsixml/)
    * @param name le nom de la métadonnée de groupe
    * @return La métadonnée du groupe
    * @throws FieldParseException Si erreur d'analyse de la définition
@@ -122,10 +130,10 @@ public class MetaFileLoader {
   
   /**
    * Rechercher un fichier meta soit en ressource, soit dans le répertoire des fichiers meta.
-   * Ex : getOrLoadMeta("/tra2016.csv").
+   * Ex : getOrLoadMeta("/fr/gpmsi/pmsixml/tra2016.csv").
    * Le FszGroupMeta est mis en cache, et donc si il est demandé à nouveau par cette méthode,
    * il est pris directement dans le cache.
-   * @param name Le nom du fichier meta
+   * @param name Le nom du fichier meta (doit avoir le préfixe /fr/gpmsi/pmsixml/)
    * @return Le {@link FszGroupMeta} trouvé
    * @throws FieldParseException si erreur d'analyse du fichier meta retrouvé
    * @throws IOException Si erreur E/S

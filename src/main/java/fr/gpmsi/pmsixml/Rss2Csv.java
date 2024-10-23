@@ -61,6 +61,12 @@ public class Rss2Csv
   }
   
   /**
+   * Constructeur simple
+   */
+  public Rss2Csv() {
+  }
+  
+  /**
    * Initialisation avec arguments en ligne.
    * <dl>
    * <dt>-in &lt;fichier_entree&gt;</dt><dd>Fichier d'entrée</dd>

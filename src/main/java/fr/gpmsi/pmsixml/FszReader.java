@@ -118,7 +118,7 @@ public class FszReader
     if (metaName == null) metaName = nrStrategy.readMetaName(in);
     //ajouter si besoin le .csv final et / ou le "/" initial
     if (!metaName.toLowerCase().endsWith(".csv")) metaName = metaName + ".csv";
-    if (!metaName.startsWith("/")) metaName = "/"+metaName;
+    if (!metaName.startsWith("/")) metaName = "/"+FszMeta.PREFIX_DIR+"/"+metaName;
     FszGroupMeta meta = getMetaLoader().getOrLoadMeta(metaName);
     //lg.debug("Loaded meta:"+meta);
     FszGroupMeta rumMeta = meta.getFirstChildGroupMeta();

@@ -54,6 +54,9 @@ public class Fsz2Xml
     public String nextArgument() { return args[p++]; }
   }
 
+  /** Constructeur simple */
+  public Fsz2Xml() {}
+  
   void init(String[] argsp) throws Exception
   {
     args = new Arguments(argsp);
@@ -85,7 +88,7 @@ public class Fsz2Xml
       if (!fszMetaName.toLowerCase().endsWith(".csv")) {
         fszMetaName = fszMetaName + ".csv";
       }
-      if (!fszMetaName.startsWith("/")) fszMetaName = "/"+fszMetaName;
+      if (!fszMetaName.startsWith("/")) fszMetaName = "/"+FszMeta.PREFIX_DIR+"/"+fszMetaName;
       meta = mfl.loadMeta(fszMetaName);
     }
   }

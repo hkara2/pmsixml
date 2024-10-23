@@ -11,6 +11,12 @@ public class SousEnregistrement {
 	ArrayList<Champ> champs = new ArrayList<Champ>();
 
 	/**
+	 * Constructeur simple
+	 */
+	public SousEnregistrement() {
+    }
+	
+	/**
 	 * Ajouter un champ
 	 * @param c Le champ à ajouter
 	 */

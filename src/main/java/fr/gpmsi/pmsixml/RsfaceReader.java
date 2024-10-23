@@ -57,7 +57,7 @@ public class RsfaceReader
   {
     String metaName = yearOfFormat+letter.toLowerCase();
     FszGroupMeta meta = new FszGroupMeta(metaName);
-    String resourceName = "/rsface"+metaName+".csv";
+    String resourceName = "/fr/gpmsi/pmsixml/rsface"+metaName+".csv";
     MetaFileLoader ldr = new MetaFileLoader(metasDir);
     InputStream ins = ldr.getInputStream(resourceName);
     if (ins == null) throw new MissingMetafileException("Fichier meta non trouve : "+resourceName);

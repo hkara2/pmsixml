@@ -16,6 +16,9 @@ public class DefSousEnregistrement {
 
 	ArrayList<DefChamp> champs = new ArrayList<DefChamp>();
 	
+	/** Constructeur simple */
+	public DefSousEnregistrement() {}
+	
 	/**
 	 * Ajouter une définition de sous-enregistrement
 	 * @param def La définition

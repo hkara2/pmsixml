@@ -19,6 +19,9 @@ extends DefChamp
 	DefChamp champARepeter;
 	boolean numeroter = false; //si true, on numerote les elements
 	
+	/** Constructeur simple */
+	public DefRepetition() {}
+	
 	/**
 	 * Retourner le numéro minimum
 	 * @return Le numéro minimum

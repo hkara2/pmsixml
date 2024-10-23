@@ -62,6 +62,9 @@ extends FszMeta
   
   static Pattern numFormatPattern = Pattern.compile("(\\d+)\\+(\\d+)"); //pour vérifier ce qu'il y a dans la colonne "format"
   
+  /** constructeur simple */
+  public FszFieldMeta() {}
+  
   @Override
   public boolean isFieldMeta() { return true; }
   

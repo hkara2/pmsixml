@@ -80,7 +80,8 @@ extends FszMeta
    * ressources, soit à partir du répertoire des métadonnées indiqué dans l'appel.
    * Les métadonnées sont stockées dans une table, pour que la recherche ne se
    * fasse pas à chaque fois à nouveau.
-   * @param name Le nom du fichier de métadonnées à rechercher
+   * @param name Le nom simple du fichier de métadonnées à rechercher (ex : 'rss016'), le préfixe /fr/gpmsi/pmsixml/
+   * et le suffixe '.csv' sont ajoutés dans cette méthode
    * @param metasDir Le répertoire dans lequel rechercher des fichiers de définitions.
    *     Peut être null. Si non null, la recherche des métadonnées se fera d'abord dans
    *     ce répertoire, puis dans les ressources.
@@ -94,7 +95,7 @@ extends FszMeta
   {
     FszGroupMeta meta = new FszGroupMeta(name);
     MetaFileLoader ldr = new MetaFileLoader(metasDir);
-    String resourcePath = name.toLowerCase()+".csv";
+    String resourcePath = "/fr/gpmsi/pmsixml/" + name.toLowerCase()+".csv";
     InputStream ins = ldr.getInputStream(resourcePath);
     Reader rdr = new InputStreamReader(ins, "UTF-8");
     try {

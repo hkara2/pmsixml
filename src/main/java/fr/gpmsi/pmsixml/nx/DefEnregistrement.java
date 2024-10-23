@@ -39,6 +39,9 @@ public class DefEnregistrement {
 	//listeEnfants, dans l'ordre. Peuvent être DefChamp ou DefSousEnregistrement.
 	LinkedList<Object> enfants = new LinkedList<Object>();
 	
+	/** Constructeur simple */
+	public DefEnregistrement() {}
+	
 	/**
 	 * Produire un enregistrement à partir de la ligne au format NX.
 	 * @param line Ligne au format NX

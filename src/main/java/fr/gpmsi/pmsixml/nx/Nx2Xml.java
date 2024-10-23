@@ -41,6 +41,7 @@ import fr.gpmsi.pmsixml.MissingMetafileException;
  * obtiendra aussi un fichier de 1,5 MO !
  */
 public class Nx2Xml {
+  
     /**
      * Objet Logger pour l'envoi des logs.
      */
@@ -71,6 +72,9 @@ public class Nx2Xml {
 	
 	String metaFileName;
 	String metaFilePath; //si non null, forcera l'utilisation de ce fichier
+	
+	/** Constructeur simple */
+	public Nx2Xml() {}
 	
 	/**
 	 * Initialisation
@@ -326,7 +330,7 @@ public class Nx2Xml {
 				}
 				else {
 					//trouver le bon fichier des métadonnées dans les resources
-					InputStream is = mfl.getInputStream("nx/" + metaFileName);
+					InputStream is = mfl.getInputStream("/fr/gpmsi/pmsixml/nx/" + metaFileName);
 					isrc = new InputSource(is);
 				}
 				Document doc = builder.parse(isrc);

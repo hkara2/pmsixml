@@ -60,7 +60,7 @@ public class RhsReader
   {
     FszGroupMeta meta = new FszGroupMeta(name);
     MetaFileLoader ldr = new MetaFileLoader(metasDir);
-    String resourceName = "/rhs"+name.toLowerCase()+".csv";
+    String resourceName = "/fr/gpmsi/pmsixml/rhs"+name.toLowerCase()+".csv";
     InputStream ins = ldr.getInputStream(resourceName);
     Reader rdr = new InputStreamReader(ins, "UTF-8");
     try {

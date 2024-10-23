@@ -36,4 +36,7 @@ static FszNodeReadStrategy makeFszNodeReadStrategy(String d) {
     return null;
   }
 
+  /** Constructeur privé car on ne doit utiliser que les méthodes statiques */
+  private FszNodeReadStrategyFactory() {}
+  
 }

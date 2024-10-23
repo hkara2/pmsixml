@@ -13,13 +13,13 @@ extends Exception
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
+	 * Constructeur simple
 	 */
 	public NxMetaParseException() {
 	}
 
 	/**
-	 * 
+	 * Constructeur avec message
 	 * @param message Le message
 	 */
 	public NxMetaParseException(String message) {
@@ -27,7 +27,7 @@ extends Exception
 	}
 
 	/**
-	 * 
+	 * Constructeur à partir d'une exception
 	 * @param cause L'exception qui cause cette exception
 	 */
 	public NxMetaParseException(Throwable cause) {
@@ -35,7 +35,7 @@ extends Exception
 	}
 
 	/**
-	 * 
+	 * Constructeur avec message et exception de départ
 	 * @param message Le message
 	 * @param cause La cause
 	 */
@@ -44,7 +44,7 @@ extends Exception
 	}
 
 	/**
-	 * 
+	 * constructeur complet
 	 * @param message Le message
 	 * @param cause La cause
 	 * @param enableSuppression Autoriser la suppression si true

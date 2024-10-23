@@ -30,6 +30,9 @@ public class NxMeta {
 	//DefChamp champ;
 	HashMap<String, List<DefEnregistrement>> defEnregistrementsByType = new HashMap<String, List<DefEnregistrement>>();
 	
+	/** Constructeur simple */
+	public NxMeta() {}
+	
 	/**
 	 * Retourner les définitions d'enregistrement pour le type nommé
 	 * @param type Le type

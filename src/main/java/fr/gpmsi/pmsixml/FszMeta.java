@@ -24,6 +24,8 @@ public class FszMeta
   	
   private FszNodeReadStrategy readStrategy;
   
+  FszMeta() {}
+  
   /**
    * Est-ce une métadonnée pour un simple champ
    * @return true si c'est une métadonnée pour un champ

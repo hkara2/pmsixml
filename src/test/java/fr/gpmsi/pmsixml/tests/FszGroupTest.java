@@ -40,7 +40,7 @@ public class FszGroupTest {
     String rhsStr = "          M1A910019447M0A2096   018564888           059096Z0151 28042017        2611196129158012804201771          2720171111111611750A        Z5188   G931            44444405002002   Z741    F411    G408    R2630   F323    ALT+145         30 01030720171 1   ALT+145         30 01050720171 1   ";
     StringBuffer sb = new StringBuffer();
     MetaFileLoader mfl = new MetaFileLoader();
-    FszGroupMeta fgm = mfl.loadMeta("/rhsm1b.csv");
+    FszGroupMeta fgm = mfl.loadMeta("/fr/gpmsi/pmsixml/rhsm1b.csv");
     RhsReader rrd = new RhsReader();
     FszGroup rhs = (FszGroup) rrd.readOne(rhsStr);
     FszGroup dst = fgm.getFirstChildGroupMeta().makeBlankInstance();

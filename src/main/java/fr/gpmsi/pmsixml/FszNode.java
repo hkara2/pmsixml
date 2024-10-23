@@ -20,6 +20,9 @@ abstract
 public class FszNode
 {
   FszGroup parent;
+  
+  /** constructeur simple */
+  public FszNode() {}
     
   /**
    * est-ce un noeud simple
@@ -46,7 +49,7 @@ public class FszNode
   abstract public boolean isContainer();
   
   /**
-   * 
+   * Retourner la métadonnées qui définit ce noeud
    * @return la métadonnée qui définit ce noeud.
    */
   abstract public FszMeta getMeta();

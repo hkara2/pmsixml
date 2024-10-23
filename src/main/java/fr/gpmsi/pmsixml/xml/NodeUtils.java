@@ -20,4 +20,7 @@ public class NodeUtils {
 		if (attNode == null) return null;
 		return attNode.getNodeValue();	
 	}
+	
+	/** constructeur privé car seulement méthodes statiques */
+	private NodeUtils() {}
 }

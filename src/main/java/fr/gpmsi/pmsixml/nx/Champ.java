@@ -20,6 +20,9 @@ public class Champ {
 	BigDecimal valeurNum;
 	Date valeurDate;
 	
+	/** Constructeur simple */
+	public Champ() {}
+	
 	/**
 	 * Joindre les deux champs.
 	 * Pour valeurNum et valeurDate, on vérifie juste que les valeurs sont identiques.

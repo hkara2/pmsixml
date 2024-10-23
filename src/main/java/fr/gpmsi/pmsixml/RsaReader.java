@@ -50,7 +50,7 @@ public class RsaReader
     FszGroupMeta meta = new FszGroupMeta(name);
     //240913 hk les resources sont maintenant dans fr.gpmsi.pmsixml et plus à la racine
     //normalement le MetaFileLoader s'en occupe
-    String resourceName = "rsa"+name+".csv";
+    String resourceName = "/fr/gpmsi/pmsixml/rsa"+name+".csv";
     MetaFileLoader ldr = new MetaFileLoader(metasDir);
     InputStream ins = ldr.getInputStream(resourceName);
     Reader rdr = new InputStreamReader(ins, "UTF-8");

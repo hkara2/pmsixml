@@ -15,8 +15,14 @@ extends Exception
    */
   private static final long serialVersionUID = -8840601289040557999L;
   
+  /**
+   * Code erreur
+   */
   int errorCode = -1;
   
+  /**
+   * Numéro de ligne
+   */
   int lineNr = -1; 
   
   /**

@@ -9,13 +9,13 @@ import java.net.URL;
 public class ListClasspath {
 
   /**
-   * 
+   * Constructeur simple 
    */
-	public ListClasspath() {
-	}
+  public ListClasspath() {
+  }
 
 	/**
-	 * 
+	 * Lancer l'exécution 
 	 */
 	private void run() {
 		URL u = ListClasspath.class.getResource("/root.txt");
@@ -25,7 +25,7 @@ public class ListClasspath {
 	}
 	
 	/**
-	 * 
+	 * Méthode main
 	 * @param args Arguments
 	 */
 	public static void main(String[] args) {

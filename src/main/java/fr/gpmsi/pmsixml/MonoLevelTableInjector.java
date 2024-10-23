@@ -25,6 +25,9 @@ public class MonoLevelTableInjector {
   
   boolean truncatedInputAccepted = true;
   
+  /** constructeur simple */
+  public MonoLevelTableInjector() {}
+  
   /**
    * Injecter dans une table JDBC le contenu apporté par le Reader, en utilisant le MonoLevelReader pour la transformation.
    * @param rdr Le Reader à utiliser pour lire les données

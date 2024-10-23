@@ -32,6 +32,9 @@ public class Enregistrement {
 	
 	boolean fusionne = false; //si true, a deja ete fusionne, avancer encore sur le precedent jusqu'a trouver celui qui est à l'origine de la fusion
 	
+	/** constructeur simple */
+	public Enregistrement() {}
+	
 	/**
 	 * Rechercher un enregistrement précédent pour type-rub-seq, ou type-rub, ou juste type.
 	 * @param typeRubSeq Le "type-rubrique-séquence" à rechercher (ex : "101-01-01")

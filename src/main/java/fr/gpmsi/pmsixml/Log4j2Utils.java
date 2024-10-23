@@ -95,6 +95,8 @@ public class Log4j2Utils {
    * @author hkaradimas
    */
   public static class FileAppenderAttributes {
+    /** constructeur simple */
+    public FileAppenderAttributes() {}
     /** Le nom de l'appender */
     public String name;
     /** Le nom du fichier */
@@ -104,4 +106,6 @@ public class Log4j2Utils {
     /** La disposition des messages (par défaut PatternLayout.createDefaultLayout()) */
     public Layout<?> layout = PatternLayout.createDefaultLayout();
   }
+  
+  private Log4j2Utils() {}
 }

@@ -75,6 +75,12 @@ public class Rsa2Csv
     public String nextArgument() { return args[p++]; }
   }
 
+
+  /**  
+   * Constructeur simple
+   */
+  public Rsa2Csv() {}
+  
   /**
    * Méthode triviale pour tester si une chaîne est vide.
    * @param str La chaîne à tester

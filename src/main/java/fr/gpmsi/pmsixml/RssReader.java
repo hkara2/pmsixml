@@ -60,7 +60,7 @@ public class RssReader
   {
     FszGroupMeta meta = new FszGroupMeta(name);
     MetaFileLoader ldr = new MetaFileLoader(metasDir);
-    String resourceName = "/rss"+name+".csv";
+    String resourceName = "/fr/gpmsi/pmsixml/rss"+name+".csv"; //depuis la v.3.0.0 il y a un préfixe pour les "resource"
     InputStream ins = ldr.getInputStream(resourceName);
     Reader rdr = new InputStreamReader(ins, "UTF-8");
     try {

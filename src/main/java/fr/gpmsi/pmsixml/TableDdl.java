@@ -23,6 +23,12 @@ import org.apache.logging.log4j.Logger;
  */
 public class TableDdl {
   static Logger lg = LogManager.getLogger(TableDdl.class);
+
+  /**
+   * Constructeur simple
+   */
+  public TableDdl() {
+  }
   
   /**
    * Emettre l'instruction DDL (<code>CREATE TABLE </code> ...) qui correspond à une définition de groupe.

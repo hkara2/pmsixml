@@ -40,6 +40,12 @@ public class Rss2Xml
     public String nextArgument() { return args[p++]; }
   }
 
+  /**
+   * Constructeur simple
+   */
+  public Rss2Xml() {
+  }
+  
   void init(String[] argsp)
 		  throws Exception
   {

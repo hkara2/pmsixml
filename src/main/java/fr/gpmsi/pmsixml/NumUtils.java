@@ -47,4 +47,6 @@ public class NumUtils {
     return true;
   }
   
+  /** Constructeur privé car cette classe n'a que des méthodes statiques */
+  private NumUtils() {}
 }

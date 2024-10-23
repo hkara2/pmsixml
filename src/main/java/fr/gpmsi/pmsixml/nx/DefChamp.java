@@ -23,6 +23,9 @@ public class DefChamp {
 	int lng; //longueur du champ
 	int ech; //echelle lorsque c'est un nombre (par défaut 0)
 	
+	/** Constructeur simple */
+	public DefChamp() {}
+	
 	/**
 	 * Crée le champ, et ajuste la position p
 	 * @param line La ligne à analyser
@@ -74,7 +77,7 @@ public class DefChamp {
 	}
 	
 	/**
-	 * 
+	 * Retourner la longueur du champe
 	 * @return La longueur du champ
 	 */
 	public int getLng() {
@@ -107,7 +110,7 @@ public class DefChamp {
 	}
 	
 	/**
-	 * 
+	 * Retourner l'échelle du nombre qui est dans ce champ, c'est à dire le nombre de décimales après la virgule
 	 * @return L'échelle du champ si c'est un nombre. Par défaut : 0.
 	 */
 	public int getEch() {

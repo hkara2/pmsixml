@@ -9,5 +9,6 @@ public class ListeChamps {
 	DefChamp definition;
 	List<String> listeStrings;
 	List<Long> listeLongs;
-
+	/** constructeur simple */
+	public ListeChamps() {}
 }

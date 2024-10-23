@@ -32,7 +32,7 @@ public class RssGroupMetaTest {
       throws Exception
   {
     MetaFileLoader mfl = new MetaFileLoader();
-    FszGroupMeta fgm = mfl.loadMeta("/rss017.csv");
+    FszGroupMeta fgm = mfl.loadMeta("/fr/gpmsi/pmsixml/rss017.csv");
     StringBuffer sb = new StringBuffer();
     fgm.dump(sb);
     System.out.println(""+sb);
