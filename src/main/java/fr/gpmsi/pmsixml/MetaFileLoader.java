@@ -7,7 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URL;
+import java.security.CodeSource;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 //import org.apache.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -145,6 +150,46 @@ public class MetaFileLoader {
     FszGroupMeta meta = metasByName.get(name);
     if (meta != null) return meta;
     return loadMeta(name);
+  }
+  
+  private static boolean isCompatibleResource(String rp) {
+    final String[] suffixes = {".txt",".csv",".ods",".xml",".png",".jpg",".jpeg",};
+    for (String suffix : suffixes) {
+      if (rp.endsWith(suffix)) return true;
+    }
+    return false;
+  }
+  
+  /**
+   * Lire la liste de tous les fichiers 'resource', qui se trouvent dans
+   * fr.gpmsi.pmsixml et qui sont de type .txt, .csv, .ods, .xml, .png, .jpg, .jpeg
+   * 
+   * @return Un tableau avec la liste des fichiers ou null si le jar n'a pas été trouvé
+   * @throws IOException Si erreur E/S
+   */
+  public static String[] listResourceFiles() throws IOException {
+      ArrayList<String> filePaths = new ArrayList<String>();
+      CodeSource src = MetaFileLoader.class.getProtectionDomain().getCodeSource();
+      if (src != null) {
+        URL jar = src.getLocation();
+        //System.out.println("URL:"+jar);
+        ZipInputStream zip = new ZipInputStream(jar.openStream());
+        while(true) {
+          ZipEntry e = zip.getNextEntry();
+          if (e == null)
+            break;
+          String name = e.getName();
+          //System.out.println(name);
+          if (name.startsWith("fr/gpmsi/pmsixml") && isCompatibleResource(name)) {
+              filePaths.add(name);
+          }
+        }//while
+        return filePaths.toArray(new String[0]);
+      } 
+      else {
+        /* Fail... */
+        return null;
+      }      
   }
   
 }
