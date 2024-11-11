@@ -35,10 +35,20 @@ java {
   targetCompatibility = JavaVersion.VERSION_1_8
   withJavadocJar()
   withSourcesJar() //nous voulons aussi un jar avec le code source
+  //Les deux jars seront dans disponibles dans build\libs
 }
 
 javadoc {
-	options.encoding = 'UTF-8'
+    source = sourceSets.main.allJava
+    options {
+        encoding = 'UTF-8'
+        overview "$projectDir/src/main/java/overview.html"
+        //pour adresser les javadocs de java, il _faut_ utiliser linksOffline.
+        //il faut aussi télécharger à la main le fichier "package-list" et le mettre dans un répertoire local. Je l'ai mis dans doc/java8-package-list/
+        linksOffline 'https://docs.oracle.com/javase/8/docs/api/', "$projectDir/doc/java8-package-list/"
+        linksOffline 'https://javadoc.io/doc/org.apache.logging.log4j/log4j-core/2.20.0/', "$projectDir/doc/log4j-core-2.20.0-package-list/"
+        linksOffline 'https://javadoc.io/doc/org.apache.logging.log4j/log4j-api/2.20.0/', "$projectDir/doc/log4j-api-2.20.0-package-list/"
+    }
 }
 
 //Forcer UTF-8 partout pour le code source java (IMPORTANT !)
