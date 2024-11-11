@@ -8,6 +8,9 @@ import org.apache.logging.log4j.Logger;
  * VH : vidhosp.
  * Strategie de lecture des Vidhosp.
  * Utilisé dans le SSR/SMR et le MCO.
+ * C'est une stratégie de lecture mono-niveau, excepté qu'à la fin
+ * il y a une lecture d'une liste de DMT (Discipline Médico-Tarifaire),
+ * et qu'un numéro de version est inclus à une position fixe.
  * @author hkaradimas
  *
  */
