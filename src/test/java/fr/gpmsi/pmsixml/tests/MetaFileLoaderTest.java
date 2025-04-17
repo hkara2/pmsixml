@@ -1,10 +1,6 @@
 package fr.gpmsi.pmsixml.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
-
-import org.junit.jupiter.api.Test;
 
 import fr.gpmsi.pmsixml.MetaFileLoader;
 
