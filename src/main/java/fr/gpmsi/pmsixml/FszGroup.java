@@ -212,12 +212,28 @@ extends FszNode
    * Lire les groupes enfant depuis le String en entrée.
    * 
    * @param is le String à partir duquel on veut lire
-   * @param name Le nom des groupes à récupérer
+   * @param name Le nom des groupes à récupérer et aussi le nom du compteur à utiliser.
    * @param optional True si le sous-groupe est optionnel. S'il n'est pas optionnel, une erreur sera ecrite dans le log indiquant que le meta est manquant.
    * @return Un groupe conteneur qui contient tous les groupes enfant
    * @throws FieldParseException _
    */
   public FszGroup readSubGroups(InputString is, String name, boolean optional)
+      throws FieldParseException
+  {
+    return readSubGroups(is, name, name, optional);
+  }
+  
+  /**
+   * Lire les groupes enfant depuis le String en entrée.
+   * 
+   * @param is le String à partir duquel on veut lire
+   * @param name Le nom des groupes à récupérer
+   * @param counterName Le nom du compteur à utiliser (parfois ce n'est pas le même nom que le groupe)
+   * @param optional True si le sous-groupe est optionnel. S'il n'est pas optionnel, une erreur sera ecrite dans le log indiquant que le meta est manquant.
+   * @return Un groupe conteneur qui contient tous les groupes enfant
+   * @throws FieldParseException _
+   */
+  public FszGroup readSubGroups(InputString is, String name, String counterName, boolean optional)
       throws FieldParseException
   {
     FszGroup g;
@@ -228,9 +244,9 @@ extends FszNode
     }
     g = new FszGroup(cgMeta); //Créer un conteneur pour contenir tous ces enfantsDefChamp identiques
     g.setContainer(true);
-    Integer counter = getCounterValue(name); //récupérer la valeur du compteur, qui doit avoir été lue dans les champs précédente et mis dans la Map
+    Integer counter = getCounterValue(counterName); //récupérer la valeur du compteur, qui doit avoir été lue dans les champs précédente et mis dans la Map
     if (counter == null) {
-      if (!optional) lg.error("Compteur non trouve pour "+name);
+      if (!optional) lg.error("Compteur non trouve pour "+counterName);
       return g;
     }
     //lg.debug("Compteur "+name+" : " + counter);
