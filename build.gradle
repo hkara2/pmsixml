@@ -1,6 +1,7 @@
 /*
  * Configuration de build pour gradle.
  * Pour construire le projet : gradlew build
+ * Pour la totale (construction + refaire javadocs + distribution) : gradlew build javadoc dist
  */
 
 plugins {
