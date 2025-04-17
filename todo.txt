@@ -22,4 +22,4 @@
        de ce qui est purement pmsixml sera plus facile et n'aura pas de dépendance.
 221226 Créer un fichier de métadonnées Ameli NX et une stratégie de lecture de ces
        métadonnées.       
-              
+250417 Faire le décodeur pour format AH1 (ANOHOSP avec champs variables de contrôle et valeurs DMT)

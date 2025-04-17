@@ -183,7 +183,9 @@ Historique des versions :
     Passage sur git.
     Changement des noms de paquet qui sont maintenant org.gpmsi.pmsixml
     pmsixml fait maintenant partir de gpmsi, en tant que sous-projet séparé.
-    
+3.1.0 250417 hk
+    Ajout VIDHOSP 014 et 015. Ajout ANOHOSP 013,014,015. (prise en charge format AH1 reste encore à faire)
+        
 _
 
 
