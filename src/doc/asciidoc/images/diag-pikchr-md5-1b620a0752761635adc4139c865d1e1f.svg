@@ -1,0 +1,27 @@
+<svg class='pikchr' preserveAspectRatio='xMidYMid meet' viewBox='0 0 290.995 243.36' xmlns='http://www.w3.org/2000/svg'>
+<path d='M2,52L93,52L93,2L2,2Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='47' y='17'>FszGroup</text>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='47' y='37'>racine</text>
+<path d='M47,52L47,74' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<polygon points='83,74 72,78 72,69' style='fill:rgb(0,0,0)'/>
+<path d='M47,74L78,74' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<path d='M83,89L187,89L187,59L83,59Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='135' y='74'>FszField(s)</text>
+<path d='M47,63L47,113' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<polygon points='83,113 72,118 72,109' style='fill:rgb(0,0,0)'/>
+<path d='M47,113L78,113' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<path d='M83,128L196,128L196,98L83,98Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='140' y='113'>FszGroup(s)</text>
+<path d='M140,128L140,150' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<polygon points='176,150 164,154 164,146' style='fill:rgb(0,0,0)'/>
+<path d='M140,150L170,150' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<path d='M176,165L280,165L280,135L176,135Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='228' y='150'>FszField(s)</text>
+<path d='M140,139L140,190' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<polygon points='176,190 164,194 164,185' style='fill:rgb(0,0,0)'/>
+<path d='M140,190L170,190' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<path d='M176,205L288,205L288,174L176,174Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='232' y='190'>FszGroup(s)</text>
+<path d='M232,205L232,241' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);stroke-dasharray:2.16,7.2;'/>
+</svg>
+
