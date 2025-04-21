@@ -15,7 +15,7 @@ Les documents sont dans le répertoire "docs".
 
 La documentation principale est écrite au format [asciidoc](https://asciidoctor.org/), dans le fichier `pmsixml.adoc`,
 puis transformée en html (fichier [pmsixml.html](https://htmlpreview.github.io/?https://github.com/hkara2/pmsixml/blob/master/src/doc/asciidoc/pmsixml.html ) 
-et pdf (fichier [pmsixml.pdf](docs/pmsixml.pdf) )
+et pdf (fichier [pmsixml.pdf](src/docs/pmsixml.pdf) )
 
 <hr>
 
