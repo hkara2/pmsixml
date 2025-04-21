@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
  * @author hkaradimas
  *
  */
-@SuppressWarnings("deprecation")
+//@SuppressWarnings("deprecation")
 public abstract class FszNodeReadStrategy 
 {
 	static Logger lg = LogManager.getLogger(FszNodeReadStrategy.class);
