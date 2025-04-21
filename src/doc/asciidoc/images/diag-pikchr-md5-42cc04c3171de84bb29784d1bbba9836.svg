@@ -1,0 +1,36 @@
+<svg class='pikchr' preserveAspectRatio='xMidYMid meet' viewBox='0 0 800.181 252' xmlns='http://www.w3.org/2000/svg'>
+<circle cx='795' cy='17' r='2.16' style='fill:rgb(128,128,128);stroke-width:2.16;stroke:rgb(128,128,128);'/>
+<path d='M2,32L130,32L130,2L2,2Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='66' y='17'>Document NX</text>
+<path d='M66,32L66,54' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<polygon points='102,54 90,58 90,49' style='fill:rgb(0,0,0)'/>
+<path d='M66,54L96,54' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<path d='M102,69L245,69L245,38L102,38Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='174' y='54'>Enregistrement</text>
+<path d='M174,69L174,90' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<polygon points='210,90 198,95 198,86' style='fill:rgb(0,0,0)'/>
+<path d='M174,90L204,90' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<path d='M210,105L397,105L397,75L210,75Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='303' y='90'>Sous-enregistrement</text>
+<path d='M303,105L303,127' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<polygon points='339,127 328,131 328,123' style='fill:rgb(0,0,0)'/>
+<path d='M303,127L333,127' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<path d='M339,142L431,142L431,112L339,112Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='385' y='127'>Champ(s)</text>
+<path d='M174,90L174,162' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<polygon points='210,162 198,167 198,158' style='fill:rgb(0,0,0)'/>
+<path d='M174,162L204,162' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<path d='M210,177L302,177L302,147L210,147Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='256' y='162'>Champ(s)</text>
+<path d='M174,162L174,198' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<polygon points='210,198 198,203 198,194' style='fill:rgb(0,0,0)'/>
+<path d='M174,198L204,198' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<path d='M210,213L423,213L423,183L210,183Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='316' y='198'>Collection(s) de champs</text>
+<path d='M174,198L174,234' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<polygon points='210,234 198,239 198,230' style='fill:rgb(0,0,0)'/>
+<path d='M174,234L204,234' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<path d='M210,249L375,249L375,219L210,219Z' style='fill:none;stroke-width:2.16;stroke:rgb(0,0,0);'/>
+<text dominant-baseline='central' fill='rgb(0,0,0)' text-anchor='middle' x='292' y='234'>Enregistrement(s)</text>
+</svg>
+
