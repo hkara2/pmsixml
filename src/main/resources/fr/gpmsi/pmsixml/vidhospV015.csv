@@ -77,8 +77,8 @@ DMT;Mode de traitement ;MDT;2;;;O;A;A;Gauche/Espace;;;
 DMT;Date de début de séjour ;DTDSJ;8;;;O ;N;D;Droite/Zéro;ATTENTION format différent de B2 JJMMAAAA ;;
 DMT;Date de fin de séjour ;DTFSJ;8;;;O ;N;D;Droite/Zéro;ATTENTION format différent de B2 JJMMAAAA ;;
 DMT;Quantité;QUSP;3;;;O;N;N;Droite/Zéro;Durée de séjour en MCO et HAD / Nombre de jours de présence en SMR et PSY;;
-DMT;Prix unitaire ;PU;7;;;O ;N;N;Droite/Zéro;5+2 ;5+2 ;
-DMT;Base de remboursement ;BR;8;;;O ;N;N;Droite/Zéro;6+2 ;6+2 ;
+DMT;Prix unitaire ;PU;7;;;O ;N;N;Droite/Zéro;5+2 ;;5+2 
+DMT;Base de remboursement ;BR;8;;;O ;N;N;Droite/Zéro;6+2 ;;6+2 
 DMT;Taux applicable à la prestation ;TXAP;3;;;O ;N;N;Droite/Zéro;;;
-DMT;Montant remboursable par la caisse ;MRC;8;;;O ;N;N;Droite/Zéro;6+2 ;6+2 ;
+DMT;Montant remboursable par la caisse ;MRC;8;;;O ;N;N;Droite/Zéro;6+2 ;;6+2 
 S:;VH1;;;;;;;;;;;
