@@ -35,7 +35,8 @@ public abstract class FszNodeReadStrategy
         declare(new FszNodeReadStrategyRSS1());
         declare(new FszNodeReadStrategyRHS1());
         declare(new FszNodeReadStrategyVH1());
-        declare(new FszNodeReadStrategyNX1()); //hk 230115
+        //declare(new FszNodeReadStrategyNX1()); //hk 230115
+        declare(new FszNodeReadStrategyAH1()); //hk 250420
 	}
 	
 	/**
