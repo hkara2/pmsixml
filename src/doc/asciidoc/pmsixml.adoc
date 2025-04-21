@@ -1,6 +1,6 @@
 = PMSIXML
 Harry KARADIMAS
-3.1, July 29, 2022: documentation PMSIXML
+3.1, April 21, 2025: documentation PMSIXML
 :toc: 
 :toc-title: Table des matières
 :icons: font
@@ -68,6 +68,8 @@ de champs (FszGroup), qui forment une arborescence :
 
 [pikchr]
 ....
+D1: dot invisible; dot color gray at 14cm right of D1; move to D1
+
 box "FszGroup" "racine" fit
 line down 30% from last box.s
 arrow right 50%
@@ -179,6 +181,9 @@ Voici en gros l'organisation des éléments modélisés :
 
 [pikchr]
 ....
+#point à droite pour éviter le redimensionnement
+D1: dot invisible; dot color gray at 14cm right of D1; move to D1
+#suite du graphique
 box "Document NX" fit
 line down 30% from last box.s
 arrow right 50%
