@@ -1,6 +1,6 @@
 = PMSIXML
-Harry KARADIMAS <harry.karadimas@wanadoo.fr>
-3.0, July 29, 2022: documentation PMSIXML
+Harry KARADIMAS
+3.1, July 29, 2022: documentation PMSIXML
 :toc: 
 :toc-title: Table des matières
 :icons: font
@@ -53,9 +53,73 @@ Voici par exemple un extrait du fichier `formats_mco_2024.xlsx`, dans l'onglet "
 
 image::extrait-format-mco-2024.png[Extrait pour MCO 2024]
 
-On voit bien qu'il y a des champs fusionnés, des cellules à plusieurs lignes, en gros tout cela n'obéit pas à une structure prévisible.
+On voit bien qu'il y a des champs fusionnés, des cellules à plusieurs lignes,
+en gros tout cela n'obéit pas à une structure prévisible et facile à exploiter
+informatiquement.
 
-== La structure des métadonnées PMSI
+== Modélisation des éléments PMSI
+
+Le modèle objet des éléments PMSI est juste suffisant pour modéliser les
+éléments textuels courants que l'on rencontre dans les enregistrements
+à position fixe du PMSI.
+L'abréviation Fsz désigne "Fixed-Size" pour dire "position fixe".
+Les données du PMSI sont rangées dans des champs (FszField) et des groupes
+de champs (FszGroup), qui forment une arborescence :
+
+[pikchr]
+....
+box "FszGroup" "racine" fit
+line down 30% from last box.s
+arrow right 50%
+box "FszField(s)" fit
+line down 70% from last line
+arrow right 50%
+box "FszGroup(s)" fit
+line down 30% from last box.s
+arrow right 50%
+box "FszField(s)" fit
+line down 70% from last line
+arrow right 50%
+box "FszGroup(s)" fit
+line down 50% from last box.s dotted
+....
+
+Les définitions de champs et de groupes sont lues dans des objets Meta. Ces objets Meta sont ensuite utilisés lors de la lecture des fichiers de données.
+Voici un bout de la hiérarchie :
+
+[uml]
+----
+FszNode <|-- FszField
+FszNode <|-- FszGroup
+abstract FszMeta
+FszMeta <|-- FszFieldMeta
+FszMeta <|-- FszGroupMeta
+FszGroupMeta -- FszGroup
+FszFieldMeta -- FszField
+----
+
+Les métadonnées sont lues par un objet _MetaFileLoader_.
+
+L'objet MetaFileLoader est configuré avec un chemin de répertoire dans lequel
+il va chercher les fichiers de métadonnées. Si le fichier de métadonnées
+n'est pas trouvé, il va chercher dans les fichiers _resource_ qui sont
+dans le _jar_ de pmsixml. Ainsi une définition locale a toujours priorité
+sur une définition de pmsixml, vous pouvez donc faire vos propres métadonnées
+si cela est nécessaire (changement du nom compact, ajout de champs, etc.)
+
+La lecture des données est faite par un objet _FszReader_. Cet objet va
+utiliser une _stratégie_ pour lire les métadonnées, puis les données.
+La stratégie va déterminer notamment comment lire les métadonnées ; par
+exemple pour un RSS, il faut lire la version dans les caractères 9 à 12,
+et ensuite on saura quel fichier de métadonnées il faut charger.
+Avec le bon fichier de métadonnées chargé, la lecture s'effectuera correctement
+normalement. L'objet stratégie donne aussi la stratégie de lecture ; par
+exemple pour le RSS on commence par lire les champs ; ensuite on lit
+les sous-groupes "DA" (en utilisant le compteur "DA" pour savoir combien
+en lire), puis les sous-groupes "DAD" (compteur "DAD"), puis les sous-groupes
+"ZA" (compteur "ZA")
+
+== La structure des métadonnées PMSI dans PmsiXml
 
 Dans Pmsixml, les métadonnées PMSI sont enregistrées au format .ods 
 (format table Libre Office), et au format .csv, avec un un nombre fixe
@@ -65,12 +129,12 @@ côté du fichier PDF ou du fichier excel distribué par l'ATIH, et de
 pouvoir ainsi faire la vérifiation rapidement et fiablement, voire
 même de faire du copier-coller.
 
-Voici un extrati du contenu du fichier `rss022.ods` qui a été construit
+Voici un extrait du contenu du fichier `rss022.ods` qui a été construit
 à partir des métadonnées publiées par l'ATIH :
 
 image::extrait-format-rss022.png[Extrait de rss022.xml]
 
-Quelques colonnes ont été ajoutées :
+Quelques colonnes ont été ajoutées par rapport à ce qu'on trouve à l'ATIH :
 
 .Colonnes supplémentaires
 * *Typ* : un code de type d'enregistrement ou de sous-enregistrement
@@ -85,19 +149,19 @@ par l'ATIH, le type D (pour les dates)
 
 Voici l'ensemble des colonnes qui doivent être présentes dans un fichier de métadonnées pour un format PMSI :
 
-. Typ : 
-. Libellé : 
-. Nomc : 
-. Taille : 
-. Début : 
-. Fin : 
-. Obligatoire[1] : 
-. Type[2] : 
-. TypePref : 
+. Typ : Nom du groupe de champs (voir javadoc de `fr.gpmsi.pmsixml.FszNode`)
+. Libellé : Nom long du champ tel qu'on le trouve dans la doc ATIH
+. Nomc : Nom compact du champ, idéalement moins de 10 caractères, juste des lettres et chiffres, sera utilisé comme nom de variable et de colonne
+. Taille : nombre de caractères du champ, repris de l'ATIH
+. Début : numéro de la colonne du 1er caractère du champ (commence à 1), repris de l'ATIH
+. Fin : numéro de la colonne du dernier caractère du champ (commence à 1), repris de l'ATIH
+. Obligatoire[1] : O ou N, repris de l'ATIH
+. Type[2] : N pour nombre, A pour alpha, repris de l'ATIH
+. TypePref : N pour nombre, A pour alpha, D pour date JJMMAAAA
 . Cadrage/Remplissage[3] : 
-. Remarques : 
-. Compteur : 
-. Format : 
+. Remarques : remarques données par l'ATIH. Doit tenir sur une ligne. Si on doit indiquer un passage à la ligne, mettre "\n", ce sera remplaçé par un passage à la ligne dans la plupart des outils qui utilisent les métadonnées
+. Compteur : nom qui est utilisé par l'analyseur pour stocker le nombre qui se trouve dans ce champ. Ce compteur sera ensuite rappelé pour avoir le nombre d'éléments à lire.
+. Format : vide ou x+y pour indiquer position d'un nombre à virgule (par ex. 5+2) correspond à l'info donnée par l'ATIH ou la norme B2
 
 
 == Les métadonnées pour le format NX
@@ -111,9 +175,33 @@ un format XML, qui décrit chaque champ dans chaque enregistrement,
 mais précise également comment chaque enregistrement doit être
 ajouté, par rapport aux enregistrements précédents.
 
-``` pikchr
-box
-```
+Voici en gros l'organisation des éléments modélisés :
+
+[pikchr]
+....
+box "Document NX" fit
+line down 30% from last box.s
+arrow right 50%
+box "Enregistrement" fit
+line down 30% from last box.s 
+B:arrow right 50%
+box "Sous-enregistrement" fit
+line down 30% from last box.s
+arrow right 50%
+box "Champ(s)" fit
+line down from B.w
+arrow right 50%
+box "Champ(s)" fit
+line down 50% from last line.s
+arrow right 50%
+box "Collection(s) de champs" fit
+line down 50% from last line.s
+arrow right 50%
+box "Enregistrement(s)" fit
+
+....
+
+C'est encore un travail en cours ; les définitions risquent encore de changer.
 
 == Chargement des métadonnées
 
@@ -125,93 +213,101 @@ Si cette métadonnée n'est pas retrouvée dans le répertoire, on la cherche al
 en "_resource_", c'est à dire dans les fichiers qui ont été distribués avec
 pmsixml.
 
+Ces fichiers de métadonnées sont dans le fichier jar de pmsixml
+(par ex. pmsixml-3.1.0.jar)
+, dans le sous-répertoire `fr\gpmsi\pmsixml\` 
+
 Dans la majorité des cas, il n'est pas nécessaire de fournir votre fichier
 métadonnées, les fichiers qui sont en _resource_ sont suffisants. Mais la
 possibilité existe, et permet par exemple de donner un format qui n'aurait
 pas encore été fourni par Pmsixml (il en manque encore pas mal à vrai dire,
 si il y a des volontaires pour s'occuper des fichiers HAD et PSY par exemple ...).
 
+== Exemples d'utilisation de PmsiXml
 
-== First level heading
+=== Application démo
 
-This is a paragraph with a *bold* word and an _italicized_ word.
+Dans les sources il y a une petite classe de démo d'utilisation de lecture de Rss pour montrer une utilisation simple de lecture de RSS :
 
-.Image caption
-image::sample-image.png[I am the image alt text.]
-
-This is another paragraph.footnote:[I am footnote text and will be displayed at the bottom of the article.]
-
-=== Second level heading
-
-.Unordered list title
-* list item 1
-** nested list item
-*** nested nested list item 1
-*** nested nested list item 2
-* list item 2
-
-This is a paragraph.
-
-.Example block title
-====
-Content in an example block is subject to normal substitutions.
-====
-
-.Sidebar title
-****
-Sidebars contain aside text and are subject to normal substitutions.
-****
-
-==== Third level heading
-
-[#id-for-listing-block]
-.Listing block title
+[java]
 ----
-Content in a listing block is subject to verbatim substitutions.
-Listing block content is commonly used to preserve code input.
+package fr.gpmsi.pmsixml;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+/**
+ * Démonstration très simple d'utilisation de RssReader.
+ * Lit un fichier de RUMs/RSS et imprime pour chaque ligne (RUM) le numéro de RUM, le numéro de RSS, le numéro de dossier administratif.
+ * 
+ */
+public class RssReaderDemo {
+
+    /**
+     * Mini application de démo pour analyser un fichier de RSS (groupés ou non)
+     * @param args Il ne doit y avoir qu'un seul argument, le chemin du fichier à analyser
+     * @throws IOException si erreur E/S
+     * @throws FieldParseException Si erreur dans les métadonnées
+     * @throws MissingMetafileException Si pas de métadonnées trouvées pour un RUM/RSS
+     */
+    public static void main(String[] args)
+    throws IOException, FieldParseException, MissingMetafileException
+    {
+        RssReader rdr = new RssReader();
+        String fichierRss = args[0];
+        try (FileReader fr = new FileReader(fichierRss)) {
+            BufferedReader br = new BufferedReader(fr);
+            System.out.println("Num.dossier;Num.RSS;Num.RUM");
+            String rss;
+            int lineNr = 1;
+            while ((rss = br.readLine()) != null) {
+                FszGroup gn = (FszGroup) rdr.readOne(rss, lineNr);
+                String nrss = gn.getChildField("NRSS").getValue();
+                String nrum = gn.getChildField("NRUM").getValue();
+                String nadl = gn.getChildField("NADL").getValue();
+                System.out.println(nadl+";"+nrss+";"+nrum);
+                lineNr++;
+            }
+        }
+    }
+
+}
 ----
 
-===== Fourth level heading
+Voici en gros ce que fait l'application :
 
-.Table title
-|===
-|Column heading 1 |Column heading 2
+Elle crée un objet `RssReader` 
 
-|Column 1, row 1
-|Column 2, row 1
+Pour chaque ligne du fichier Rum/Rss, elle appelle le lecteur de RSS,
+en lui passant la ligne qui vient d'être lue.
+Le lecteur de Rss, si tout s'est bien passé, ramène un objet `FszGroup` 
+qui va contenir tout ce qui a été lu.
 
-|Column 1, row 2
-|Column 2, row 2
-|===
+On peut interroger cet objet pour récupérer les infos de chaque champ,
+en utilisant son nom compact.
 
-====== Fifth level heading
+Par exemple si on veut le numér de RSS on va rechercher le champ
+appelé "NRSS", en faisant `gn.getChildField("NRSS")`.
+Cet appel envoie un objet qui représente le champ; pour accéder à la valeur
+brute, il faut encore appeler `getValue()` , d'où la séquence complète
+d'appel qui est :
+`gn.getChildField("NRSS").getValue()` 
 
-[quote, firstname lastname, movie title]
-____
-I am a block quote or a prose excerpt.
-I am subject to normal substitutions.
-____
+Les appels sont les mêmes pour le numéro de RUM ("NRUM") et le
+numéro de dossier ("NADL" car dans les docs ATIH et Ameli c'est "numéro
+administratif de dossier local", mais dans les hôpitaux on utilise aussi
+IEP, NDA, NDOSS, etc. Je suis resté sur NADL).
 
-[verse, firstname lastname, poem title and more]
-____
-I am a verse block.
-  Indents and endlines are preserved in verse blocks.
-____
+=== Tests de la librairie
 
-== First level heading
+Dans le répertoire source src\test\java il y a les tests utilisés pour 
+un certain nombre d'objets de la librairie, ils montrent les
+utilisations possibles de la librairie.
 
-TIP: There are five admonition labels: Tip, Note, Important, Caution and Warning.
+=== Javadoc
 
-// I am a comment and won't be rendered.
+La référence de documentation est toujours dans la documentation javadoc
+des classes de la librairie.
 
-. ordered list item
-.. nested ordered list item
-. ordered list item
-
-The text at the end of this sentence is cross referenced to <<_third_level_heading,the third level heading>>
-
-== First level heading
-
-This is a link to the https://docs.asciidoctor.org/home/[Asciidoctor documentation].
-This is an attribute reference {url-quickref}[that links this text to the AsciiDoc Syntax Quick Reference].
 
