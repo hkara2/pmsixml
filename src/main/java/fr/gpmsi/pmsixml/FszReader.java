@@ -28,7 +28,7 @@ import fr.gpmsi.pmsixml.nx.Nx2Xml;
  *  ligne dont la première colonne est 
  * "S:", située en général en fin de fichier de métadonnées.
  * Le nom est utilisé pour charger l'objet <code>FszNodeReadStrategy</code> approprié.
- * Exemple de code pour lire un VIDHOSP :
+ * Exemple de code pour lire un VIDHOSP (NB : avant la version 014) :
  * <pre>
  *     MonoLevelReader app = new MonoLevelReader();
  *     MetaFileLoader mfl = new MetaFileLoader();
