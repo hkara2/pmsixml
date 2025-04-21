@@ -20,6 +20,9 @@
 # Eclipse Core
 .project
 
+# Asciidoctor diagram cached files
+.asciidoctor/diagram
+
 # Eclipse classpath for the project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
