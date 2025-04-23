@@ -14,9 +14,9 @@ fichier PMSI fournis par ATIH, Ameli, et autres.
 Les documents sont dans le répertoire "docs".
 
 La documentation principale est écrite au format [asciidoc](https://asciidoctor.org/), dans le fichier `pmsixml.adoc`,
-puis transformée en html ([pmsixml.html](https://htmlpreview.github.io/?https://github.com/hkara2/pmsixml/blob/master/src/doc/asciidoc/pmsixml.html) )
-et pdf ([pmsixml.pdf](src/doc/asciidoc/pmsixml.pdf) )
+puis transformée en html et pdf.
 
+Une copie de la documentation est disponible sur [github pages](https://hkara2.github.io/pmsixml/)
 <hr>
 
 
