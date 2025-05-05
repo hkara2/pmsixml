@@ -11,6 +11,11 @@ import java.io.IOException;
  */
 public class RssReaderDemo {
 
+    /** constructeur sans arguments */
+    RssReaderDemo() {
+        //vide
+    }
+    
     /**
      * Mini application de démo pour analyser un fichier de RSS (groupés ou non)
      * @param args Il ne doit y avoir qu'un seul argument, le chemin du fichier à analyser
