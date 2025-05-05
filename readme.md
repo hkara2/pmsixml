@@ -6,7 +6,7 @@ pmsixml est au départ une librairie destinée à gérer les formats texte
 à position fixe du PMSI, de manière à pouvoir produire à partir des fichiers
 PMSI des fichiers XML pour un traitement plus aisé dans d'autres outils.
 
-La librairie a été créée début 2016 par Harry Karadimas au CHU Henri Mondor,
+La librairie a été créé mi 2016 par Harry Karadimas alors qu'il était parti du CHU Henri Mondor,
 pour explorer les possibilités d'ajouter des métadonnnées aux différents
 fichier PMSI fournis par ATIH, Ameli, et autres.
 
@@ -25,7 +25,7 @@ utiliser la librairie, ce qui a ouvert beaucoup plus de possilités. Cette
 partie a été externalisée dans un projet séparé appelé gpmsi.
 
 L'ensemble du projet a été rebaptisé en interne Obélisque (pour tous ceux qui 
-n'ont pas encore accès à la potion des druides) mais le nom pmxixml reste
+ne pouvaient pas profiter de la potion des druides) mais le nom pmxixml reste
 malgré tout.
 
 Les différents scripts sont utilisés au CHSE depuis le début de 2017.
@@ -52,14 +52,11 @@ pour générer le jar à distribuer.
 gradle javadoc
 pour générer la documentation javadoc
 
-gradle jekyll
-pour générer la documentation html
-
 gradle dist
 pour contruire une distribution dans le repertoire dist
 
 Pour faire l'ensemble :
-gradle build jar javadoc jekyll dist
+gradle build jar javadoc dist
 
 (recopier à la main le jar produit dans gpmsi lorsque le jar est prêt à
 être utilisé)
