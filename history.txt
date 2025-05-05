@@ -186,6 +186,8 @@ Historique des versions :
 3.1.0 250417 hk
     Ajout VIDHOSP 014 et 015. Ajout ANOHOSP 013,014,015. (prise en charge format AH1 reste encore à faire)
     Passage sur GitHub.
+3.1.1 250505 hk
+    Ajout format SMR RHS M1D.
 _
 
 
