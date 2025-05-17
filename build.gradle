@@ -20,15 +20,17 @@ distributions {
     }
 }
 
+//hk: desactive car plus besoin, j'ai trouve ce qui causait des "duplicates" lors du jar des sources
 //https://github.com/gradle/gradle/issues/17236
-task sourcesJar(type: Jar) {
-  duplicatesStrategy = 'include'
-  //classifier = 'sources'
-  from sourceSets.main.allSource
-}
+//task deactivated_sourcesJar(type: Jar) {
+//  duplicatesStrategy = 'include'
+//  //classifier = 'sources'
+//  from sourceSets.main.allSource
+//}
 
+//hk: desactive car plus besoin, j'ai trouve ce qui causait des "duplicates" lors du jar des sources
 //en cas de doublon de fichier, ne pas déclencher d'erreur, juste écraser
-processResources.duplicatesStrategy='include'
+//processResources.duplicatesStrategy='include'
 
 java {
   //pour java, nous voulons que l'exécution puisse se faire sur java 8
@@ -37,6 +39,12 @@ java {
   withJavadocJar()
   withSourcesJar() //nous voulons aussi un jar avec le code source
   //Les deux jars seront dans disponibles dans build\libs
+}
+
+//hk:desactive car plus besoin, j'ai trouve ce qui causait des "duplicates" lors du jar des sources
+//astuce pour forcer la "duplicatesStrategy" sur le task implicite "sourcesJar"
+tasks.named("sourcesJar") {
+    //duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 javadoc {
@@ -86,11 +94,12 @@ test {
 }
 
 sourceSets {
-    main {
-        resources {
-            srcDirs "src/main/resources"
-        }
-    }
+    //hk: desactive car cause en fait des "duplicates" lors du deploiement des sources !
+    //main {
+    //    resources {
+    //        srcDirs "src/main/resources"
+    //    }
+    //}
     test {
         resources {
             srcDirs "src/main/resources"
@@ -145,7 +154,25 @@ task dist {
                 //filelist(dir: "src/doc/asciidoc", 
                 //         files: "pmsixml.adoc,pmsixml.html,pmsixml.pdf")
             }
+            
+            //copier aussi le jar avec les sources
+            copy(todir: "dist/$destdir/src", filtering: "false", overwrite: "true", preservelastmodified: true) {
+                filelist(dir: "build/libs", 
+                         files: "pmsixml-${version}-sources.jar")
+            }
 
         }//ant
     }//doLast
 }//task dist
+
+/**
+ * creation d'un zip de distribution
+ * doit etre lance a la main
+ */
+task zip(type:Zip, dependsOn :[dist]) {
+    version = "$version" //redondant
+    from "dist/v$version"
+    archiveBaseName = "pmsixml-dist"
+    destinationDirectory = new File("dist")
+}
+
