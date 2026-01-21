@@ -230,6 +230,7 @@ extends FszNode
   {
     FszFieldMeta m = (FszFieldMeta) getMeta();
     String typ = m.getPreferredType();
+    if (typ == null) typ = "A"; //si pas précisé on prend A
     if (typ.equals("N")) {
       if (value == null || value.trim().equals("")) return "";
       else {
@@ -243,6 +244,39 @@ extends FszNode
       else return fdf.format(getValueAsEuropeanDate()); //convertir en date puis à nouveau en texte avec le format de date français 
     }
     else {
+      return getValueAsText();
+    }
+    
+  }
+  
+  /**
+   * Retourne la valeur en tant qu'objet.
+   * Si le type est N, retourne null si la valeur est vide (ne contient que des espaces) sinon un nombre
+   * Si le type est D, retourne null si la valeur est vide (ne contient que des espaces ou que des zéros), sinon un objet java.util.Date
+   * Sinon retourne le texte tel quel sans les espaces supplémentaires (jamais null dans ce cas)
+   * @return l'objet qui représente la valeur, null si vide et pas de type texte
+   * @throws ParseException Si erreur d'analyse (notamment de la date)
+   */
+  public Object getValueAsObject()
+      throws ParseException
+  {
+    FszFieldMeta m = (FszFieldMeta) getMeta();
+    String typ = m.getPreferredType();
+    if (typ == null) typ = "A"; //si pas précisé on prend A
+    if (typ.equals("N")) {
+      if (value == null || value.trim().equals("")) return null;
+      else {
+        return toInt(); //convertir en nombre
+      }
+    }
+    else if (typ.equals("D")) {
+      if (value == null || value.trim().equals("")) return null;
+      Date val = getValueAsEuropeanDate();
+      if (val == null) return null; //on n'a pas réussi à convertir la date (par ex "00000000" dans les champs du RSF), renvoyer tel quel.
+      else return val; //retourner la valeur de la date en objet de type date 
+    }
+    else {
+      //par défaut retourner un objet texte
       return getValueAsText();
     }
     
