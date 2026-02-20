@@ -193,6 +193,9 @@ Historique des versions :
 3.1.3 260121 hk
     Correction bug FszField#getFormattedValue() qui ne gérait pas le null pour preferredType
     Ajout d'une méthode FszField#getValueAsObject() pour récupérer la valeur en tant qu'objet    
+3.1.4 260220 hk
+    Correction description format ANOHOSP 15 qui est A15
+    Ajout VIDHOSP / ANOHOSP V16
     _
 
 
