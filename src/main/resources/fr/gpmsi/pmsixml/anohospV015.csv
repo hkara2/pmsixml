@@ -1,7 +1,7 @@
 Typ;Libellé;Nomc;Taille;Début;Fin;Obligatoire[1];Type[2];TypePref;Cadrage/Remplissage[3];Remarques;Compteur;Format
 AH;Signature de version ;SIGVER;8;1;8;O;A;A;;;;
 AH;Clé d'intégrité ;CLEINTG;8;9;16;O;A;A;;;;
-AH;N° format VID-HOSP (3 derniers caractères) ;FMTVH;3;17;19;O;A;A;;'014';;
+AH;N° format ANO-HOSP « A15 » (A + 2 derniers caractères du Vid-hosp);FMTVH;3;17;19;O;A;A;;A15;;
 AH;Code retour contrôle ' n° immatriculation assuré ' ;RNIA;1;20;20;O;A;A;;;;
 AH;Code retour contrôle ' date de naissance ' ;RDNAIS;1;21;21;O;A;A;;;;
 AH;Code retour contrôle ' sexe ' ;RSEXE;1;22;22;O;A;A;;;;
