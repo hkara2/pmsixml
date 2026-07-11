@@ -196,10 +196,13 @@ Historique des versions :
 3.1.4 260220 hk
     Correction description format ANOHOSP 15 qui est A15
     Ajout VIDHOSP / ANOHOSP V16
-3.1.5 260614 hk
+3.1.5 260305 hk
+    Ajout RSS 023/123
+    MAJ types de fichiers en A pour beaucoup de champs, pour mieux coller
+    aux fichiers ATIH (260619)
+3.1.6 260614 hk
     Quelques modifications pour le traitement des fichiers NX.
     
-    _
 
 
 
