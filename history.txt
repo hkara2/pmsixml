@@ -196,6 +196,9 @@ Historique des versions :
 3.1.4 260220 hk
     Correction description format ANOHOSP 15 qui est A15
     Ajout VIDHOSP / ANOHOSP V16
+3.1.5 260614 hk
+    Quelques modifications pour le traitement des fichiers NX.
+    
     _
 
 
