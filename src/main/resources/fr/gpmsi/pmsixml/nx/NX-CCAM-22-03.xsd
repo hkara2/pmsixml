@@ -1,34 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:element name="NX">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="ENR">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="CHAMP" maxOccurs="unbounded">
-								<xs:complexType>
-									<xs:attribute name="NOM" use="required" fixed="" />
-									<xs:attribute name="NOMLONG" use="required" />
-									<xs:attribute name="TYPE" use="required">
-										<xs:simpleType>
-											<xs:restriction base="xs:string">
-												<xs:enumeration value="A" />
-												<xs:enumeration value="N" />
-											</xs:restriction>
-										</xs:simpleType>
-									</xs:attribute>
-									<xs:attribute name="LNG" type="xs:integer" use="required" />
-									<xs:attribute name="DESCRIPTION" use="required" />
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-						<xs:attribute name="NOM" use="required" />
-						<xs:attribute name="NOMLONG" use="required" />
-						<xs:attribute name="TYP" type="xs:integer" use="required" />
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+
+    <xs:complexType name="CHAMP">
+        <xs:attribute name="NOM" use="required" />
+        <xs:attribute name="NOMLONG" use="required" />
+        <xs:attribute name="TYPE" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="A" />
+                    <xs:enumeration value="N" />
+                    <xs:enumeration value="D" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="LNG" type="xs:integer" use="required" />
+        <xs:attribute name="ECH" type="xs:integer" />
+        <xs:attribute name="DESCRIPTION" use="required" />
+        <xs:attribute name="TRAITER-CRLF" />
+        <xs:attribute name="ZERO" />
+    </xs:complexType>
+
+    <xs:element name="NX">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ENR" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="DESCRIPTION" minOccurs="0"/>
+                            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                                <xs:element name="REPETITION" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="CHAMP" type="CHAMP" />
+                                        </xs:sequence>
+                                        <xs:attribute name="NOM" use="required" />
+                                        <xs:attribute name="NOMLONG" />
+                                        <xs:attribute name="MIN"/>
+                                        <xs:attribute name="MAX"/>
+                                        <xs:attribute name="DESCRIPTION"/>
+                                        <xs:attribute name="NUMEROTER"/>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element name="CHAMP" type="CHAMP" minOccurs="0" maxOccurs="unbounded"/>
+                                <xs:element name="SOUS-ENR" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="DESCRIPTION" minOccurs="0" />
+                                            <xs:element name="CHAMP" type="CHAMP" minOccurs="0" maxOccurs="unbounded" />
+                                        </xs:sequence>
+                                        <xs:attribute name="NOM" use="required" />
+                                        <xs:attribute name="NOMLONG" use="required" />
+                                        <xs:attribute name="MIN" />
+                                        <xs:attribute name="MAX" />
+                                        <xs:attribute name="DESCRIPTION" />
+                                        <xs:attribute name="LNG" type="xs:integer" />
+                                    </xs:complexType>
+                                </xs:element><!-- SOUS-ENR -->
+                            </xs:choice>
+                        </xs:sequence>
+                        <xs:attribute name="NOM" use="required" />
+                        <xs:attribute name="NOMLONG" use="required" />
+                        <xs:attribute name="TYP" type="xs:integer" use="required" />
+                        <xs:attribute name="RUB" type="xs:integer" />
+                        <xs:attribute name="RUBMIN" type="xs:integer" />
+                        <xs:attribute name="RUBMAX" type="xs:integer" />
+                        <xs:attribute name="SEQ" type="xs:integer" />
+                        <xs:attribute name="SEQMIN" type="xs:integer" />     
+                        <xs:attribute name="SEQMAX" type="xs:integer" />
+                        <xs:attribute name="LNG" type="xs:integer" />
+                        <xs:attribute name="FUSIONNE-SUR" type="xs:string" />
+                        <!-- <xs:attribute name="DESCRIPTION" type="xs:string" />  -->
+                        <xs:attribute name="ETEND" type="xs:string" />
+                        <xs:attribute name="LIEN" type="xs:string" />
+                    </xs:complexType>
+                </xs:element><!-- ENR -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
