@@ -5,3 +5,7 @@ et premiers nettoyages.
 Import dans le fichier Excel nx-ccam-22_01_saisie_tables.xlsx
 nettoyage des colonnes, numérotation des occurences.
 (en cours)
+
+#260302 hk
+nx pour ghs : https://www.ameli.fr/essonne/content/norme-d-exportation-des-informations-ghs-ght-062025
+https://www.ameli.fr/essonne/content/classification-des-ghs-012026
