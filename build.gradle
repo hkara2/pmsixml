@@ -68,7 +68,7 @@ tasks.withType(JavaCompile) {
 	options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
 }
 
-//le numero de version est construit a partir des deux proprietes presentes dans 
+//le numero de version est construit a partir des deux proprietes presentes dans
 //gradle.properties (qui est lu automatiquement par Gradle)
 //N.B. Chacune des deux propriétés suivantes comporte leurs points
 version = "$PROJECT_VERSION$PROJECT_SUB_VERSION"
@@ -116,7 +116,7 @@ task myJavadocs(type: Javadoc) {
  */
 //task jekyll(type: Exec) {
 //    println "Starting Jekyll generation"
-//    commandLine = ['cmd', '/C', 'jekyll', 'build', '--destination', '../../build/docs'] 
+//    commandLine = ['cmd', '/C', 'jekyll', 'build', '--destination', '../../build/docs']
 //    workingDir = file('./src/doc/')
 //}
 
@@ -147,17 +147,17 @@ task dist {
             copy(todir: "dist/$destdir/docs/javadoc", filtering: "false", overwrite: "true", preservelastmodified: true) {
                 fileset(dir: "build/docs/javadoc/")
             }
-            
+
             //copier les documents générés manuellement
             copy(todir: "dist/$destdir/docs", filtering: "false", overwrite: "true", preservelastmodified: true) {
                 fileset(dir:  "src/doc/asciidoc")
-                //filelist(dir: "src/doc/asciidoc", 
+                //filelist(dir: "src/doc/asciidoc",
                 //         files: "pmsixml.adoc,pmsixml.html,pmsixml.pdf")
             }
-            
+
             //copier aussi le jar avec les sources
             copy(todir: "dist/$destdir/src", filtering: "false", overwrite: "true", preservelastmodified: true) {
-                filelist(dir: "build/libs", 
+                filelist(dir: "build/libs",
                          files: "pmsixml-${version}-sources.jar")
             }
 
