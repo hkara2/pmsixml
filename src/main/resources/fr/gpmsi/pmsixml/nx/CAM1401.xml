@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE NX><!-- Ajouté pour ne pas avoir de warning dans Eclipse. Plus tard je ferait peut être un document .xsd pour spécifier la structure. -->
+<!-- DOCTYPE NX-CCAM-22-03 --><!-- Ajouté pour ne pas avoir de warning dans Eclipse. Plus tard je ferait peut être un document .xsd pour spécifier la structure. -->
+
 <!--
 Définition de ce qu'il faut lire comme contenu NX d'un fichier CCAM.
 Note :
@@ -8,8 +9,10 @@ Les éléments peuvent contenir '-' comme séparateur, mais les noms qui sont da
 		<!-- 
 		<CHAMP NOM="" NOMLONG="" TYPE="A" LNG="" DESCRIPTION="" />
 		-->
-<NX><!-- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="NX-CCAM-22-03.xsd" -->
+<!-- <NX> -->		
+<NX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="NX-CCAM-22-03.xsd" >
+    
 	<ENR TYP="000" NOM="DEBUT" NOMLONG="Début de fichier">
 		<CHAMP NOM="TYPE_EMETTEUR" NOMLONG="Type d’émetteur" TYPE="A" LNG="2" DESCRIPTION="Non contrôlé" />		
 		<CHAMP NOM="NUMERO_EMETTEUR" NOMLONG="Numéro d’émetteur" TYPE="N" LNG="14" DESCRIPTION="Valeur ‘0000000100000’" />
@@ -34,6 +37,7 @@ Les éléments peuvent contenir '-' comme séparateur, mais les noms qui sont da
 	</ENR>
 	<!++ Pour copier/coller (fin) -->
 	
+	<!--   -->
 	<ENR TYP="001" RUB="01" SEQMIN="01" SEQMAX="99" NOM="TB01" NOMLONG="table TB01 - 'Modes de traitement impliquant un taux d'hospitalisation'">
 	  <DESCRIPTION>
  		    Cet enregistrement, qui est facultatif, regroupe toutes les informations contenues dans la
@@ -753,8 +757,6 @@ Cet enregistrement, qui est obligatoire, comporte les libellés des Disciplines 
 Tarifaire (table TB14) . Il existe autant d'enregistrements 084-01-01 que de DMT.
 Les occurrences sont triées par DMT croissante.
 	  </DESCRIPTION>
-Code de la DMT N 3 Code de la Discipline Médico Tarifaire
-Libellé de la DMT A 100 Libellé de la Discipline Médico Tarifaire
       <CHAMP NOM="CODE_DMT" NOMLONG="Code de la DMT"    TYPE="N" LNG="3"   DESCRIPTION="Code de la Discipline Médico Tarifaire" />
 	  <CHAMP NOM="LIBELLE"  NOMLONG="Libellé de la DMT" TYPE="A" LNG="100" DESCRIPTION="Libellé de la Discipline Médico Tarifaire" />
 	</ENR>
