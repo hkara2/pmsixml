@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- DOCTYPE NX-CCAM-22-03 --><!-- Ajouté pour ne pas avoir de warning dans Eclipse. Plus tard je ferait peut être un document .xsd pour spécifier la structure. -->
+<!-- 260711 modifs pour essayer de faire correspondre noms de champs avec noms de colonne des tables lorsque c'est possible -->
 
 <!--
 Définition de ce qu'il faut lire comme contenu NX d'un fichier CCAM.

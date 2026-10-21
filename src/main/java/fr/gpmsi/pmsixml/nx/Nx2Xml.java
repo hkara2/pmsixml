@@ -47,7 +47,7 @@ public class Nx2Xml {
      */
 	public static Logger lg = LogManager.getLogger();
 	private static final boolean TRACE_RECHERCHE = false;
-	private static final boolean TRACE_LECT_LIGNES = false;
+	private static final boolean TRACE_LECT_LIGNES = true;
 	
 	/**
 	 * variable "globale", utilisée pour indiquer les erreurs dans les autres 
@@ -401,7 +401,7 @@ public class Nx2Xml {
 	 * Point de lancement de la conversion nx vers xml.
 	 * Il y a deux arguments obligatoires : le chemin vers le fichier NX à convertir, et le chemin vers le fichier XML qui résulte de la conversion.
 	 * Si un troisième argument est fourni, ce doit être un fichier de métadonnées qui fait correspondre les champs NX avec une structure XML à générer.
-	 * Normalement ce fichier est trouvé automatiquement à l'aide des informations de l'enregistrement 000 et chargé dans les ressources.
+	 * Normalement ce fichier est trouvé automatiquement à l'aide des informations de l'enregistrement 000 et chargé depuis les ressources.
 	 * @param args Les arguments
 	 * @throws Exception Si erreur
 	 */

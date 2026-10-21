@@ -316,15 +316,15 @@ public class NxMeta {
 		if (line == null || line.length() != 128) {
 			throw new IllegalArgumentException("L'argument line ne contient pas un enregistrement NX");
 		}
-		String typeDEnregistrement = line.substring(0, 0+3);
+		String typeDEnregistrement = line.substring(1-1, 0+3);
 		if (!typeDEnregistrement.equals("000")) {
 			throw new IllegalArgumentException("L'argument line ne contient pas un enregistrement de type 000");
 		}
 		//remplir les valeurs. Ici on met 1 de moins que dans le tableau puisque le 1er caractère a l'indice 0 en java.
 		HashMap<String, String> m = new HashMap<String, String>();
-		m.put("PROGRAMME_EMETTEUR", line.substring(19, 19+6));
-		m.put("IDENTIFICATION_FICHIER", line.substring(49, 49+3));
-		m.put("NUMERO_VERSION", line.substring(89, 89+4));
+		m.put("PROGRAMME_EMETTEUR", line.substring(20-1, 19+6));
+		m.put("IDENTIFICATION_FICHIER", line.substring(50-1, 49+3));
+		m.put("NUMERO_VERSION", line.substring(90-1, 89+4));
 		//dans l'avenir, je rajouterai peut-être la lecture du reste des champs
 		return m;
 	}
