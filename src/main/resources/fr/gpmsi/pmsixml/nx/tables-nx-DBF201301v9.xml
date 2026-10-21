@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TABLES>
+<!--
+Nom Commentaire
+R_AAP_PMSI Table des données du PMSI pour l'acte/activité/phase
+R_ACTE Acte ou groupement d'actes
+R_ACTE_CLASSE_DMT Classes de DMT de l'acte
+R_ACTE_CMUC Forfait CMUC - un acte peut avoir plusieurs couple Forfait/Indice.
+R_ACTE_COND_GEN Conditions générales de l'acte
+R_ACTE_EXO_TM Liste des Code exonération ticket modérateur de l'acte
+R_ACTE_FORFAIT Forfaits applicables à un code acte
+R_ACTE_IVITE Activité d'un acte
+R_ACTE_IVITE_PHASE Phase d'une activité d'un acte
+R_ACTE_NAT_ASS Natures d'assurances du code acte
+R_ACTE_PRESCRIPTEUR Catégorie de spécialités prescripteurs permises pour l'acte
+R_ACTIVITE liste des activités de l'acte
+R_ACTIVITE_AGRE_RADIO Agréments radio autorisés pour l'activité
+R_ACTIVITE_EXECUTANT Catégorie de spécialités exécutants permises pour l'activité
+R_ACTIVITE_EXTENSION Extensions documentaires de l'activité
+R_ACTIVITE_MODIFICATEUR Modificateurs d'une activité d'un acte
+R_ACTIVITE_PHASE_DENT Dents incompatibles avec l'acte/activité/phase
+R_ACTIVITE_PHASE_DOM Majorations DOM pour un acte/activité/phase
+R_ACTIVITE_RMO Table des Références médicales opposables de l'activité.
+R_AGRE_RADIO Liste des Types d'agrément radio utilisés en Base CCAM
+R_ASSOCIATIONS associations médicales de codes avec règles
+R_CATE_SPEC Liste des Catégories de spécialités
+R_CATEGORIE_MEDIC Liste des Catégories médicale
+R_CLASSE_DMT Liste des Classes de DMT
+R_COMPAT_EXO_TM compatibilités entre codes exonération TM
+R_COND_GEN Liste des Conditions générales
+R_CONTEXT_BN Code Contexte Bénéficiaire (assuré)
+R_CONTEXT_PS Contexte Professionnel de Santé
+R_DENT Liste des codes des dents
+R_DOM Liste des départements d'outre-mer
+R_EXO_TM Codification exonération ticket modérateur
+R_EXTENSION Liste des extensions documentaires
+R_FORFAIT Liste des Forfaits techniques ou consommables applicables à l'acte
+R_FRAIS_DEP Liste des Codifications Frais Déplacement
+R_GLOSSAIRE Glossaire des termes indexés dans les champs textes
+R_INCOMPATIBILITES Incompatibilités médicales de codes
+R_MENU Arborescence de l acte dans la ccam
+R_NAT_ASS Liste des Natures d'assurance permise
+R_NOTE_ACTE Note associée à un acte
+R_NOTE_MENU Note associée à un niveau de l'arborescence
+R_PAIEMENT Liste des Codifications des modalités de paiement des séances
+R_PHASE Liste des Codifications des phases d'activité
+R_PROCEDURE Codes des procédures intégrant cet acte
+R_PU_BASE Prix Unitaire de Base de l acte/activité/phase
+R_REGROUPEMENT Liste des Codes Regroupements de codes actes
+R_REMBOURSEMENT Liste des Modes d'admission au remboursement
+R_RMO Liste des références médicales opposables
+R_TB01 Table des modes de traitement impliquant un taux d'hospitalisation.
+R_TB02 Associations non prévues Le coef asso. non prévu doit etre rattaché a une grille Tarifaire.
+R_TB03 Règles Tarifaires Le coef asso. prévu doit être rattaché à une grille Tarifaire.
+R_TB04 spécialités exécutants et prescripteurs
+R_TB05 Association des natures de prestations aux forfaits
+R_TB06 Compatibilités entre codes modificateurs et âge du bénéficiaire
+R_TB07 seuil minimum pour exonération TM
+R_TB08 jours fériés spécifiques par caisse
+R_TB09 Compatibilités entre modificateurs
+R_TB10 Cohérence des modificateurs entre les différents codes activités
+R_TB11 Coefficient/forfait des codes modificateurs. Doit être rattaché à une grille tarifaire.
+R_TB12 réduction base de remboursement pour non conventionnés
+R_TB13 natures de prestation caractérisant le codage CCAM
+R_TB14 DMT regroupées dans les classes
+R_TB15 Codes modificateurs donnant lieu à information aux OC
+R_TB17 dates d'obligation du codage CCAM pour les natures de prestations NGAP
+R_TB18 localisations des dents
+R_TB19 nombre de modificateurs tarifants
+R_TB20 table de transcodage des évolutions des codifications
+R_TB21 Forfait CMUC Pour connaitre le seuil max(Indice Tarifaire).
+R_TB22 Affectation de la Grille en fonction des Contextes
+R_TB23 Grille Tarifaire Libellé et détail des Grilles Tarifaire
+R_TYPE Codification du Type d'Acte
+R_TYPE_NOTE Liste des Types de note possibles
+R_UNITE_OEUVRE Table de valeurs des unités d'oeuvre
+-->
+
+  <TABLE NAME="R_AAP_PMSI" DESCRIPTION="Table des données du PMSI pour l'acte/activité/phase">
+    <COLUMN NAME="AAP_COD" TYPE="VARCHAR" MAX-LENGTH="16" DESCRIPTION="CCAM n° 1+2+4 Code phase de l'activité de l'acte (code interne activité + code interne phase)"/>
+    <COLUMN NAME="ICR" TYPE="NUMBER" PRECISION="4" DESCRIPTION="CCAM n° 48 Indice de coût relatif"/>
+    <COLUMN NAME="CLASSANT" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 51 Caractère Classant"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTE" DESCRIPTION="Acte ou groupement d'actes">
+    <COLUMN NAME="COD_ACTE" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 1 Code semi-structuré de l'acte"/>
+    <COLUMN NAME="DT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de l'acte"/>
+    <COLUMN NAME="MENU_COD" TYPE="NUMBER" PRECISION="6" DESCRIPTION="code du niveau de l'arborescence"/>
+    <COLUMN NAME="FRAIDP_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 41 Code frais déplacement"/>
+    <COLUMN NAME="TYPE_COD" TYPE="NUMBER" PRECISION="1" DESCRIPTION="CCAM n° 9 Code type d'acte"/>
+    <COLUMN NAME="COD_STRUCT" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 5 Code Structuré de l'Acte"/>
+    <COLUMN NAME="NOM_COURT" TYPE="VARCHAR" MAX-LENGTH="70" DESCRIPTION="CCAM n° 7 Libellé court de l'acte"/>
+    <COLUMN NAME="NOM_LONG" TYPE="VARCHAR" MAX-LENGTH="4000" DESCRIPTION="CCAM n° 8 Libellé exhaustif de l'acte"/>
+    <COLUMN NAME="SEXE" TYPE="NUMBER" PRECISION="1" DESCRIPTION="CCAM n° 15 Sexe Compatible 0 : Sans Objet 1 : Homme 2 : Femme"/>
+    <COLUMN NAME="DT_CREATION" TYPE="DATE" DESCRIPTION="CCAM n° 18 Date de création de l'acte"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION="CCAM n° 19 Date de suppression du code acte"/>
+    <COLUMN NAME="ENTENTE" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 24 Entente préalable"/>
+    <COLUMN NAME="DT_EFFET" TYPE="DATE" DESCRIPTION="CCAM n°26 Date d'Effet des informations historisées"/>
+    <COLUMN NAME="DT_ARRETE" TYPE="DATE" DESCRIPTION='CCAM n° 27 Date de l&apos;arrêté ministériel "tarification"'/>
+    <COLUMN NAME="DT_JO" TYPE="DATE" DESCRIPTION='CCAM n° 28 Date de publication au JO "tarification"'/>
+    <COLUMN NAME="MFIC_PLACE" TYPE="NUMBER" PRECISION="12" SCALE="6" DESCRIPTION="CCAM n° 17 Position de l'acte dans le dernier niveau de l'Arborescence"/>
+    <COLUMN NAME="PRECEDENT" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 49 Code de l'Acte précédent si celui-ci a été recodifié"/>
+    <COLUMN NAME="SUIVANT" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 50 Code de l'Acte suivant s'il y a eu recodification"/>
+    <COLUMN NAME="REMBOU_COD" TYPE="NUMBER" PRECISION="1" DESCRIPTION="Code mode de remboursement"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTE_CMUC" DESCRIPTION="Forfait CMUC - un acte peut avoir plusieurs couple Forfait/Indice.">
+    <COLUMN NAME="CLE_FORFAITAIRE" TYPE="NUMBER" PRECISION="4" DESCRIPTION="Clé technique entre la table et la Table TB21"/>
+    <COLUMN NAME="ACTE_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="ACTE_COD CCAM n° 1 Code semi-structuré de l'acte"/>
+    <COLUMN NAME="MODIF_DT" TYPE="DATE" DESCRIPTION="date de mise à jour de l'acte"/> <!-- erreur dans le PDF qui a mis MODIF-DT et pas MODIF_DT -->
+  </TABLE>
+
+  <TABLE NAME="R_ACTE_CLASSE_DMT" DESCRIPTION="Classes de DMT de l'acte">
+    <COLUMN NAME="ACTE_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="code semi structuré de l'acte"/>
+    <COLUMN NAME="CLDMT_COD" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="CCAM n° 41.1 Classe de DMT autorisée pour la réalisation de l'acte"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTE_COND_GEN" DESCRIPTION="Conditions générales de l'acte">
+    <COLUMN NAME="ACTE_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 1 Code semi-structuré de l'acte"/>
+    <COLUMN NAME="CONDGE_COD" TYPE="NUMBER" PRECISION="4" DESCRIPTION="CCAM n° 10 Code condition générale"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTE_EXO_TM" DESCRIPTION="Liste des Code exonération ticket modérateur de l'acte">
+    <COLUMN NAME="ACTE_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 1 Code semi-structuré de l'acte"/>
+    <COLUMN NAME="ACDT_MODIF" TYPE="DATE" DESCRIPTION="Date de mise à jour de l'acte"/>
+    <COLUMN NAME="EXOTM_COD" TYPE="NUMBER" PRECISION="1" DESCRIPTION="CCAM n° 25 Code exonération ticket modérateur"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTE_FORFAIT" DESCRIPTION="Forfaits applicables à un code acte">
+    <COLUMN NAME="ACTE_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 1 Code semi-structuré de l'acte"/>
+    <COLUMN NAME="ACDT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de l'acte"/>
+    <COLUMN NAME="FORFAI_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 34 Code type de forfait"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTE_IVITE" DESCRIPTION="Commentaire Activité d'un acte">
+    <!-- Sur la doc des dbf c'est marqué CODE_AA mais je pense que c'est une erreur,
+      - 1. parce que toutes les autres colonnes code sont préfixées COD_
+      - 2. dans le fichier dbf, la colonne est bien COD_AA
+      -->
+    <COLUMN NAME="COD_AA" TYPE="VARCHAR" MAX-LENGTH="14" DESCRIPTION="CCAM n° 1+2 Code activité interne = Code Acte + Code Activité"/>
+    <COLUMN NAME="DT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de l'activité de l'acte"/>
+    <COLUMN NAME="ACTE_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 1 Code semi-structuré de l'acte"/>
+    <COLUMN NAME="ACDT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de l'acte "/>
+    <COLUMN NAME="ACTIV_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 2 Code Activité"/>
+    <COLUMN NAME="REGROU_COD" TYPE="VARCHAR" MAX-LENGTH="3" DESCRIPTION="CCAM n° 42 Identifie le groupe de codes"/>
+    <COLUMN NAME="CATMED_COD" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="CCAM n° 12 Code catégorie médicale"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTE_IVITE_PHASE" DESCRIPTION="Commentaire Phase d'une activité d'un acte">
+    <COLUMN NAME="COD_AAP" TYPE="VARCHAR" MAX-LENGTH="16" DESCRIPTION="CCAM n° 1+2+4 Code Phase interne de l'activité de l'acte (Code interne Activité + Code Phase)"/>
+    <COLUMN NAME="DT_MODIF" TYPE="DATE" DESCRIPTION="date modification de la phase"/>
+    <COLUMN NAME="AA_COD" TYPE="VARCHAR" MAX-LENGTH="14" DESCRIPTION="CCAM n° 1+2 Code activité interne = Code Acte + Code Activité"/>
+    <COLUMN NAME="AADT_MODIF" TYPE="DATE" DESCRIPTION="Date de mise à jour de l'activité de l'acte"/>
+    <COLUMN NAME="UOEUVR_COD" TYPE="VARCHAR" MAX-LENGTH="3" DESCRIPTION="CCAM n° 29 Code de l'unité d'oeuvre"/>
+    <COLUMN NAME="UOEDT_EFFET" TYPE="DATE" DESCRIPTION="date d'effet de l'unité d'oeuvre"/>
+    <COLUMN NAME="PAIEM_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 33 Code modalité de paiement des séances"/>
+    <COLUMN NAME="PHASE_COD" TYPE="NUMBER" PRECISION="2" DESCRIPTION="CCAM n° 4 Code phase de traitement"/>
+    <COLUMN NAME="NB_SEANCES" TYPE="NUMBER" PRECISION="2" DESCRIPTION="CCAM n° 23 Nombre maximum de séances par période"/>
+    <COLUMN NAME="COEFFICIENT" TYPE="NUMBER" PRECISION="6" SCALE="2" DESCRIPTION="CCAM n° 30 Coefficient de l'acte"/>
+    <COLUMN NAME="PU_BASE" TYPE="NUMBER" PRECISION="6" SCALE="2" DESCRIPTION="CCAM n° 37 Prix Unitaire de base de l'acte. Ce champ n'est plus renseigné dans cette table mais dans la table R_PU_BASE."/>
+    <COLUMN NAME="SUPPLEMENT_CAB" TYPE="NUMBER" PRECISION="6" SCALE="2" DESCRIPTION="CCAM n° 39 Montant monétaire de charges supplémentaires liées à l'exécution en cabinet"/>
+    <COLUMN NAME="NB_DENTS" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="CCAM n° 43 Nombre de dents à traiter"/>
+    <COLUMN NAME="AGE_MIN" TYPE="NUMBER" PRECISION="3" DESCRIPTION="CCAM n° 45 Age minimum requis pour l'acte"/>
+    <COLUMN NAME="AGE_MAX" TYPE="NUMBER" PRECISION="3" DESCRIPTION="CCAM n° 46 Age maximum requis pour l'acte"/>
+    <COLUMN NAME="SCORE" TYPE="NUMBER" PRECISION="6" SCALE="2" DESCRIPTION="CCAM n° 37.1 Score de travail médical"/>
+    <COLUMN NAME="PRATIQUE" TYPE="NUMBER" PRECISION="6" SCALE="2" DESCRIPTION="CCAM n° 37.2 Coût de la pratique"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_ACTE_NAT_ASS" DESCRIPTION="Natures d'assurances du code acte">
+    <COLUMN NAME="ACTE_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 1 Code semi-structuré de l'acte"/>
+    <COLUMN NAME="NATASS_COD" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="CCAM n° 30.1 Code nature d'assurance"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTE_PRESCRIPTEUR" DESCRIPTION="Catégorie de spécialités prescripteurs permises pour l'acte">
+    <COLUMN NAME="ACTE_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 1 Code semi-structuré de l'acte"/>
+    <COLUMN NAME="ACDT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de l'acte "/>
+    <COLUMN NAME="CATSPE_COD" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="CCAM n° 31 Code catégorie de spécialité prescripteurs permises"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTIVITE" DESCRIPTION="liste des activités de l'acte  ">
+    <COLUMN NAME="COD_ACTIV" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="Code Activité"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libellé de l'activité"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTIVITE_AGRE_RADIO" DESCRIPTION="Commentaire Agréments radio autorisés pour l'activité">
+    <COLUMN NAME="AA_CODE" TYPE="VARCHAR" MAX-LENGTH="14" DESCRIPTION="CCAM n° 1+2 Code activité interne = Code Acte + Code Activité"/>
+    <COLUMN NAME="AGRAD_COD" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="CCAM n° 40 Code agrément radio"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_ACTIVITE_EXECUTANT" DESCRIPTION="Catégorie de spécialités exécutants permises pour l'activité">
+    <COLUMN NAME="AA_COD" TYPE="VARCHAR" MAX-LENGTH="14" DESCRIPTION="CCAM n° 1+2 Code activité interne = Code Acte + Code Activité"/>
+    <COLUMN NAME="AADT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de l'activité de l'acte"/>
+    <COLUMN NAME="CATSPE_COD" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="CCAM n° 32 Code catégorie de spécialité exécutants permises"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTIVITE_EXTENSION" DESCRIPTION="Commentaire Extensions documentaires de l'activité">
+    <COLUMN NAME="AA_COD" TYPE="VARCHAR" MAX-LENGTH="14" DESCRIPTION="CCAM n° 1+2 Code activité interne = Code Acte + Code Activité"/>
+    <COLUMN NAME="EXTENS_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 3 Code de l'extension documentaire"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTIVITE_MODIFICATEUR" DESCRIPTION="Modificateurs d'une activité d'un acte">
+    <COLUMN NAME="AA_CODE" TYPE="VARCHAR" MAX-LENGTH="14" DESCRIPTION="CCAM n° 1+2 Code activité interne = Code Acte + Code Activité"/>
+    <COLUMN NAME="AADT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de l'activité de l'acte"/>
+    <COLUMN NAME="MODIFI_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 6 Code modificateur de l'acte"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTIVITE_PHASE_DENT" DESCRIPTION="Dents incompatibles avec l'acte/activité/phase">
+    <COLUMN NAME="AAP_COD" TYPE="VARCHAR" MAX-LENGTH="16" DESCRIPTION="CCAM n° 1+2+4 Code Phase interne de l'activité de l'acte (Code interne Activité + Code Phase)"/>
+    <COLUMN NAME="DEN_NUMERO" TYPE="NUMBER" PRECISION="2" DESCRIPTION="CCAM n° 44 Numéro de la dent incompatible"/>
+  </TABLE>
+
+  <TABLE NAME="R_ACTIVITE_PHASE_DOM" DESCRIPTION="Majorations DOM pour un acte/activité/phase">
+    <COLUMN NAME="AAP_COD" TYPE="VARCHAR" MAX-LENGTH="16" DESCRIPTION="CCAM n° 1+2+4 Code Phase interne de l'activité de l'acte (Code interne Activité + Code Phase)"/>
+    <COLUMN NAME="APDT_MODIF" TYPE="DATE" DESCRIPTION="Date modification de la phase"/>
+    <COLUMN NAME="DOM_COD" TYPE="NUMBER" PRECISION="3" DESCRIPTION="Code DOM"/>
+    <COLUMN NAME="MAJORATION" TYPE="NUMBER" PRECISION="4" SCALE="3" DESCRIPTION="CCAM n° 47 Majoration DOM"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_ACTIVITE_RMO" DESCRIPTION="Table des Références médicales opposables de l'activité.">
+    <COLUMN NAME="AA_COD" TYPE="VARCHAR" MAX-LENGTH="14" DESCRIPTION="CCAM n° 1+2 Code activité interne = Code Acte + Code Activité"/>
+    <COLUMN NAME="AADT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de l'activité de l'acte"/>
+    <COLUMN NAME="INTERN_COD" TYPE="NUMBER" PRECISION="4" DESCRIPTION="code interne de la RMO"/>
+  </TABLE>
+
+  <TABLE NAME="R_AGRE_RADIO" DESCRIPTION="Liste des Types d'agrément radio utilisés en Base CCAM">
+      <!-- Sur la doc des dbf c'est marqué CODE_AGRA mais je pense que c'est une erreur,
+      - 1. parce que toutes les autres colonnes code sont préfixées COD_
+      - 2. dans le fichier dbf, la colonne est COD_AGRAD
+      -->
+    <COLUMN NAME="COD_AGRAD" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="Code agrément radio"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libellé agrément radio"/>
+  </TABLE>
+
+  <TABLE NAME="R_ASSOCIATIONS" DESCRIPTION="associations médicales de codes avec règles">
+    <COLUMN NAME="AA_CODE1" TYPE="VARCHAR" MAX-LENGTH="14" DESCRIPTION="CCAM n° 1+2 Code activité interne = Code Acte + Code Activité"/>
+    <COLUMN NAME="DT_MODIF1" TYPE="DATE" DESCRIPTION="date de mise à jour de l'activité de l'acte"/>
+    <COLUMN NAME="AA_CODE2" TYPE="VARCHAR" MAX-LENGTH="14" DESCRIPTION="CCAM n° 13 Code Activité interne = Code Acte + Code Activité"/>
+    <COLUMN NAME="DT_MODIF2" TYPE="DATE" DESCRIPTION="date de mise à jour de l'activité de l'acte"/>
+    <COLUMN NAME="REGLE_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n°36 code règle tarifaire"/>
+  </TABLE>
+
+  <TABLE NAME="R_CATEGORIE_MEDIC" DESCRIPTION="Liste des Catégories médicales">
+    <COLUMN NAME="COD_CATMED" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="Code Catégorie Médicale"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libellé de la catégorie médicale"/>
+  </TABLE>
+
+  <TABLE NAME="R_CATE_SPEC" DESCRIPTION="Liste des Catégories de spécialités ">
+    <COLUMN NAME="COD_CATSPE" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="code catégorie de spécialité"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libellé de la catégorie de spécialité"/>
+  </TABLE>
+
+  <TABLE NAME="R_CLASSE_DMT" DESCRIPTION="Liste des Classes de DMT ">
+    <COLUMN NAME="COD_CLDMT" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="Code Classe de DMT autorisée"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libellé de la classe de DMT"/>
+  </TABLE>
+
+  <TABLE NAME="R_COMPAT_EXO_TM" DESCRIPTION="compatibilités entre codes exonération TM">
+    <COLUMN NAME="EXOTM_COD1" TYPE="NUMBER" PRECISION="1" DESCRIPTION="code exonération ticket modérateur"/>
+    <COLUMN NAME="EXOTM_COD2" TYPE="NUMBER" PRECISION="1" DESCRIPTION="code exonération ticket modérateur"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_COND_GEN" DESCRIPTION="Liste des Conditions générales">
+    <COLUMN NAME="COD_CONDGE" TYPE="NUMBER" PRECISION="4" DESCRIPTION="Code Condition Générale"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="4000" DESCRIPTION="libellé condition générale"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_CONTEXT_BN" DESCRIPTION="Code Contexte Bénéficaire (assuré)">
+    <COLUMN NAME="COD_CONTXTBEN" TYPE="NUMBER" PRECISION="4" DESCRIPTION="Code du Contexte Bénéficaire"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="117" DESCRIPTION="Libelle du code Contexte du Bénéficaire"/>
+  </TABLE>
+
+  <TABLE NAME="R_CONTEXT_PS" DESCRIPTION="Contexte Professionnel de Santé">
+    <COLUMN NAME="COD_CONTXTPS" TYPE="NUMBER" PRECISION="4" DESCRIPTION="Code Contexte du Professionnel de Santé"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="117" DESCRIPTION="Libelle du contexte du Professionnel de Santé"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_DENT" DESCRIPTION="Liste des codes des dents">
+    <COLUMN NAME="NUMERO_DEN" TYPE="NUMBER" PRECISION="2" DESCRIPTION="numéro de la dent"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="80" DESCRIPTION="Identification de la dent"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_DOM" DESCRIPTION="Liste des départements d'outre mer">
+    <COLUMN NAME="COD_DOM" TYPE="NUMBER" PRECISION="3" DESCRIPTION="code DOM"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="50" DESCRIPTION="libellé DOM"/>
+  </TABLE>
+                       
+  <TABLE NAME="R_EXO_TM" DESCRIPTION="Codification exonération ticket modérateur">
+    <COLUMN NAME="COD_EXOTM" TYPE="NUMBER" PRECISION="1" DESCRIPTION="Code Exonération Ticket Modérateur"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="80" DESCRIPTION="libellé exonération ticket modérateur"/>
+  </TABLE>
+
+  <TABLE NAME="R_EXTENSION" DESCRIPTION="Liste des extensions documentaires">
+    <COLUMN NAME="COD_EXTENS" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="Code de l'extension documentaire"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="description de l'extension documentaire"/>
+  </TABLE>
+
+  <TABLE NAME="R_FORFAIT" DESCRIPTION="Liste des Forfaits techniques ou consommables applicables à l'acte">
+    <COLUMN NAME="COD_FORFAI" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="Code Type de Forfait"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libellé du forfait"/>
+  </TABLE>
+
+  <TABLE NAME="R_FRAIS_DEP" DESCRIPTION="Liste des Codifications Frais Déplacement">
+    <COLUMN NAME="COD_FRAIDP" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="Code Frais Déplacement"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="80" DESCRIPTION="libellé frais déplacement"/>
+  </TABLE>
+
+  <TABLE NAME="R_GLOSSAIRE" DESCRIPTION="Glossaire des termes indexés dans les champs textes">
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="50" DESCRIPTION="libellé identifié dans la base"/>
+    <COLUMN NAME="DEFINITION" TYPE="VARCHAR" MAX-LENGTH="2000" DESCRIPTION="définition du libellé du glossaire"/>
+  </TABLE>
+
+  <TABLE NAME="R_INCOMPATIBILITES" DESCRIPTION="Incompatibilités médicales de codes">
+    <COLUMN NAME="ACTE_COD1" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="code semi structuré de l'acte"/>
+    <COLUMN NAME="DT_MODIF1" TYPE="DATE" DESCRIPTION="date de mise à jour de l'acte"/>
+    <COLUMN NAME="ACTE_COD2" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 14 Code semi structuré de l'acte"/>
+    <COLUMN NAME="DT_MODIF2" TYPE="DATE" DESCRIPTION="date de mise à jour de l'acte"/>
+  </TABLE>
+
+  <TABLE NAME="R_MENU" DESCRIPTION="Arborescence de l acte dans la ccam">
+    <COLUMN NAME="COD_MENU" TYPE="NUMBER" PRECISION="6" DESCRIPTION="CCAM n ° 16 Code du Niveau de l'Arborescence"/>
+    <COLUMN NAME="RANG" TYPE="NUMBER" PRECISION="6" DESCRIPTION="rang dans la liste des éléments du même niveau"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="254" DESCRIPTION="libellé du niveau de l'arborescence"/>
+    <COLUMN NAME="COD_PERE" TYPE="NUMBER" PRECISION="6" DESCRIPTION="code du niveau de l'arborescence"/>
+  </TABLE>
+
+  <TABLE NAME="R_NAT_ASS" DESCRIPTION="Liste des Natures d'assurance permise">
+    <COLUMN NAME="COD_NATASS" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="Code Nature d'Assurance"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libellé nature d'assurance"/>
+  </TABLE>
+
+  <TABLE NAME="R_NOTE_ACTE" DESCRIPTION="Note associée à un acte">
+    <COLUMN NAME="ACTE_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 1 Code semi-structuré de l'acte"/>
+    <COLUMN NAME="ACDT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de l'acte"/>
+    <COLUMN NAME="ORDRE_NOTE" TYPE="NUMBER" PRECISION="4" DESCRIPTION="numéro de la note dans le type"/>
+    <COLUMN NAME="TYPNOT_COD" TYPE="NUMBER" PRECISION="2" DESCRIPTION="code de type de note"/>
+    <COLUMN NAME="TEXTE_NOTE" TYPE="VARCHAR" MAX-LENGTH="4000" DESCRIPTION="CCAM n°11 texte de la note de l'acte"/>
+    <COLUMN NAME="RENVOI_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="code semi structuré de l'acte"/>
+  </TABLE>
+
+  <TABLE NAME="R_NOTE_MENU" DESCRIPTION="Note associée à un niveau de l'arborescence">
+    <COLUMN NAME="MENU_COD" TYPE="NUMBER" PRECISION="6" DESCRIPTION="CCAM n ° 16 Code du Niveau de l'Arborescence"/>
+    <COLUMN NAME="ORDRE_NOTE" TYPE="NUMBER" PRECISION="4" DESCRIPTION="numéro de la note dans le type"/>
+    <COLUMN NAME="TYPNOT_COD" TYPE="NUMBER" PRECISION="2" DESCRIPTION="code de type de note"/>
+    <COLUMN NAME="TEXTE_NOTE" TYPE="VARCHAR" MAX-LENGTH="4000" DESCRIPTION="texte de la note du niveau de l'arborescence"/>
+    <COLUMN NAME="RENVOI_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="code semi structuré de l'acte"/>
+  </TABLE>
+
+  <TABLE NAME="R_PAIEMENT" DESCRIPTION="Liste des Codifications des modalités de paiement des séances">
+    <COLUMN NAME="COD_PAIEMT" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="Code modalité de paiement des séances"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="80" DESCRIPTION="libellé modalité de paiement des séances"/>
+  </TABLE>
+
+  <TABLE NAME="R_PHASE" DESCRIPTION="Liste des Codifications des phases d'activité">
+    <COLUMN NAME="COD_PHASE" TYPE="NUMBER" PRECISION="2" DESCRIPTION="Code Phase de traitement"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="80" DESCRIPTION="libellé phase de traitement"/>
+  </TABLE>
+
+  <TABLE NAME="R_PROCEDURE" DESCRIPTION="Codes des procédures intégrant cet acte">
+    <COLUMN NAME="ACTE_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 1 Code semi-structuré de l'acte"/>
+    <COLUMN NAME="ACDT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de l'acte"/>
+    <COLUMN NAME="PROC_COD" TYPE="VARCHAR" MAX-LENGTH="13" DESCRIPTION="CCAM n° 9.1 Code semi structuré de la Procédure"/>
+    <COLUMN NAME="PRDT_MODIF" TYPE="DATE" DESCRIPTION="date de mise à jour de la procédure"/>
+  </TABLE>
+
+  <TABLE NAME="R_PU_BASE" DESCRIPTION="Prix Unitaire de Base de l acte/activité/phase">
+    <COLUMN NAME="AAP_COD" TYPE="VARCHAR" MAX-LENGTH="16" DESCRIPTION="CCAM n° 1+2+4 Code Phase interne de l'activité de l'acte (Code interne Activité + Code Phase)"/>
+    <COLUMN NAME="APDT_MODIF" TYPE="DATE" DESCRIPTION="Date modification de la phase"/>
+    <COLUMN NAME="GRILLE_COD" TYPE="NUMBER" PRECISION="3" DESCRIPTION="Code de la grille Pour chaque Acte, nous devons retrouver un P.Unitaire de Base de chacune des phases de chacune des activité dans chacune des grille."/>
+    <COLUMN NAME="PU_BASE" TYPE="NUMBER" PRECISION="6" SCALE="2" DESCRIPTION="Prix Unitaire de Base CCAM N° 37 Pour chaque Acte, nous devons retrouver un P.Unitaire de Base de chacune des phases de chacune des activité dans chacune des grille."/>
+  </TABLE>
+
+  <TABLE NAME="R_REGROUPEMENT" DESCRIPTION="Liste des Codes Regroupements de codes actes">
+    <COLUMN NAME="COD_REGROU" TYPE="VARCHAR" MAX-LENGTH="3" DESCRIPTION="Code Regroupement de Codes Actes"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="descriptif du groupe"/>
+  </TABLE>
+
+  <TABLE NAME="R_REMBOURSEMENT" DESCRIPTION="Liste des Modes d'admission au remboursement">
+    <COLUMN NAME="COD_REMBOU" TYPE="NUMBER" PRECISION="1" DESCRIPTION="Code mode de remboursement"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="80" DESCRIPTION="libellé mode de remboursement"/>
+  </TABLE>
+
+  <TABLE NAME="R_RMO" DESCRIPTION="Liste des références médicales opposables">
+    <COLUMN NAME="COD_INTERN" TYPE="NUMBER" PRECISION="4" DESCRIPTION="code interne de la RMO"/>
+    <COLUMN NAME="TITRE" TYPE="VARCHAR" MAX-LENGTH="80" DESCRIPTION="titre de la RMO"/>
+    <COLUMN NAME="TEXTE" TYPE="VARCHAR" MAX-LENGTH="4000" DESCRIPTION="CCAM n° 21 Texte de la RMO"/>
+    <COLUMN NAME="REF_RMO" TYPE="VARCHAR" MAX-LENGTH="5" DESCRIPTION="CCAM n° 20 Réference RMO"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB01" DESCRIPTION="Table des modes de traitement impliquant un taux d'hospitalisation.">
+    <COLUMN NAME="MODE_TRAIT" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="Code du Mode de traitement."/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="Date de Début."/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION="Date de Fin."/>
+  </TABLE>
+
+  <TABLE NAME="R_TB02" DESCRIPTION="Associations non prévues Le coef asso. non prévu doit etre rattaché a une grille Tarifaire.">
+    <COLUMN NAME="COD_ASSONP" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="code association non prévue"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date d'effet du coefficient association non prévue"/>
+    <COLUMN NAME="GRILLE_COD" TYPE="NUMBER" PRECISION="3" DESCRIPTION="code grille"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libellé association non prévue"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+    <COLUMN NAME="COEF" TYPE="NUMBER" PRECISION="4" SCALE="3" DESCRIPTION="coefficient association non prévue"/>
+  </TABLE>
+
+  <TABLE NAME="R_TB03" DESCRIPTION="Règles Tarifaires Le coef asso. prévu doit etre rattaché a une grille Tarifaire.">
+    <COLUMN NAME="COD_REGLE" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 36 Code Règle Tarifaire"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date d'effet de la règle"/>
+    <COLUMN NAME="GRILLE_COD" TYPE="NUMBER" PRECISION="3" DESCRIPTION="code grille"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="500" DESCRIPTION="règle tarifaire"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+    <COLUMN NAME="COEF" TYPE="NUMBER" PRECISION="4" SCALE="3" DESCRIPTION="coefficient associé à la règle"/>
+  </TABLE>
+
+  <TABLE NAME="R_TB04" DESCRIPTION="spécialités exécutants et prescripteurs">
+    <COLUMN NAME="COD_SPECIA" TYPE="VARCHAR" MAX-LENGTH="3" DESCRIPTION="code spécialité"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date d'effet de l'association specialité + catégorie"/>
+    <COLUMN NAME="CATSPE_COD" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="code catégorie de spécialité"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libellé de la spécialité"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB05" DESCRIPTION="Association des natures de prestations aux forfaits">
+    <COLUMN NAME="FORFAI_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="code forfait"/>
+    <COLUMN NAME="COD_NATURE" TYPE="VARCHAR" MAX-LENGTH="3" DESCRIPTION="code nature prestation"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date de début de l'association nature de prestation/type de forfait"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION="date de fin de l'association nature de prestation/type de"/>
+  </TABLE>
+
+  <TABLE NAME="R_TB06" DESCRIPTION="Compatibilités entre codes modificateurs et age du bénéficiaire">
+    <COLUMN NAME="MODIFI_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 6 Code modificateur de l'acte"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="Date d' effet des compatibilités entre age et modificateur"/>
+    <COLUMN NAME="UNI_AGEMIN" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="Unité de temps de l'age min du modificateur"/>
+    <COLUMN NAME="AGE_MIN" TYPE="NUMBER" PRECISION="3" DESCRIPTION="Age minimum du bénéficaire"/>
+    <COLUMN NAME="UNI_AGEMAX" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="Unité de temps de l'age max"/>
+    <COLUMN NAME="AGE_MAX" TYPE="NUMBER" PRECISION="3" DESCRIPTION="Age maximum du bénéficaire"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+  </TABLE>
+
+  <TABLE NAME="R_TB07" DESCRIPTION="seuil minimum pour exonération TM">
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date d'effet du seuil d'exonération TM"/>
+    <COLUMN NAME="METROPOLE" TYPE="NUMBER" PRECISION="7" SCALE="2" DESCRIPTION="valeur du seuil minimum d'exonération du ticket modérateur pour la métropole"/>
+    <COLUMN NAME="ANTILLES" TYPE="NUMBER" PRECISION="7" SCALE="2" DESCRIPTION="valeur du seuil minimum d'exonération du ticket modérateur pour les antilles"/>
+    <COLUMN NAME="REUNION" TYPE="NUMBER" PRECISION="7" SCALE="2" DESCRIPTION="valeur du seuil minimum d'exonération du ticket modérateur pour la réunion"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+    <COLUMN NAME="GUYANE" TYPE="NUMBER" PRECISION="7" SCALE="2" DESCRIPTION="valeur du seuil minimum d'exonération du ticket modérateur pour la guyane"/>
+  </TABLE>
+
+  <TABLE NAME="R_TB08" DESCRIPTION="jours fériés spécifiques par caisse">
+    <COLUMN NAME="COD_CAISSE" TYPE="NUMBER" PRECISION="3" DESCRIPTION="code caisse concernée par les jours fériés"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date d'effet du jour férié"/>
+    <COLUMN NAME="JOUR_FERIE" TYPE="NUMBER" PRECISION="8" DESCRIPTION="date du jour férié sous forme numérique"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION="date fin du jour férié"/>
+    <COLUMN NAME="TYPE_JOUR" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="type du jour férié (fixe, variable)"/>
+  </TABLE>
+
+  <TABLE NAME="R_TB09" DESCRIPTION="Compatibilités entre modificateurs">
+    <COLUMN NAME="MODIF_COD1" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="CCAM n° 6 Code modificateur de l'acte+"/>
+    <COLUMN NAME="MODIF_COD2" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="CCAM n° 6 Code modificateur de l'acte"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="Date d'effet de la compatibilité entre les modificateurs"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION="date de fin de la compatibilité entre les modificateurs"/>
+  </TABLE>
+
+  <TABLE NAME="R_TB10" DESCRIPTION="Cohérence des modificateurs entre les différents codes activités">
+    <COLUMN NAME="MODIFI_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 6 Code modificateur de l'acte"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="Date d'effet de la cohérence des modificateurs"/>
+    <COLUMN NAME="TOP_CTRLE" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="Indication déclenchement contrôle cohérence du modificateur"/>
+    <COLUMN NAME="TOP_MULTIP" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="Présence multiple du modificateur possible dans une même facture"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+  </TABLE>
+
+  <TABLE NAME="R_TB11" DESCRIPTION="Commentaire Coefficient/forfait des codes modificateurs. Doit être rattaché à une grille tarifaire.">
+    <COLUMN NAME="COD_MODIFI" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 6 Code modificateur de l'acte"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="Date d' effet du modificateur"/>
+    <COLUMN NAME="GRILLE_COD" TYPE="NUMBER" PRECISION="3" DESCRIPTION=""/>
+    <COLUMN NAME="COEF" TYPE="NUMBER" PRECISION="4" SCALE="3" DESCRIPTION="Taux associé au modificateur"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="Libellé explicatif du modificateur"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+    <COLUMN NAME="FORFAIT" TYPE="NUMBER" PRECISION="7" SCALE="2" DESCRIPTION="Forfait associé au modificateur"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB12" DESCRIPTION="réduction base de remboursement pour non conventionnés">
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date d'effet de la réduction base de remboursement pour non conventionnés"/>
+    <COLUMN NAME="FORFAIT_RNC" TYPE="NUMBER" PRECISION="7" SCALE="2" DESCRIPTION="forfait pour la réduction base de remboursement pour non conventionnés"/>
+    <COLUMN NAME="COEF_RNC" TYPE="NUMBER" PRECISION="4" SCALE="3" DESCRIPTION="taux pour la réduction base de remboursement pour non conventionnés"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB13" DESCRIPTION="natures de prestation caractérisant le codage CCAM">
+    <COLUMN NAME="COD_NATURE" TYPE="VARCHAR" MAX-LENGTH="3" DESCRIPTION="code nature prestation"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date début de la nature de prestation"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION="date fin de la nature de prestation"/>
+    <COLUMN NAME="TOP_LC" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="top équivalent lettre clé de la nature de prestation"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB14" DESCRIPTION="DMT regroupées dans les classes">
+    <COLUMN NAME="COD_DMT" TYPE="NUMBER" PRECISION="3" DESCRIPTION="code DMT"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date d'effet de l'association DMT/classe de DMT"/>
+    <COLUMN NAME="CLDMT_COD" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION=""/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libellé DMT"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB15" DESCRIPTION="Codes modificateurs donnant lieu à information aux OC (organismes complémentaires)">
+    <COLUMN NAME="MODIFI_COD" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="CCAM n° 6 Code modificateur de l'acte"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="Date début info OC du modificateur"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION="date fin info OC du modificateur"/>
+    <COLUMN NAME="COD_MODOC" TYPE="VARCHAR" MAX-LENGTH="1" DESCRIPTION="Code modificateur transmis au organismes complémentaires"/>
+  </TABLE>
+  
+<!-- N.B. il n'y a pas de TB16 -->
+
+  <TABLE NAME="R_TB17" DESCRIPTION="dates d'obligation du codage CCAM pour les natures de prestations NGAP">
+    <COLUMN NAME="COD_NATURE" TYPE="VARCHAR" MAX-LENGTH="3" DESCRIPTION="code nature prestation"/>
+    <COLUMN NAME="SPECIA_COD" TYPE="VARCHAR" MAX-LENGTH="3" DESCRIPTION="code spécialité"/>
+    <COLUMN NAME="DT_OBLIGAT" TYPE="DATE" DESCRIPTION="date d'obligation du codage CCAM pour les natures de prestations NGAP"/>
+  </TABLE>
+
+  <TABLE NAME="R_TB18" DESCRIPTION="localisations des dents">
+    <COLUMN NAME="LOC_DENT" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="localisation de la dent"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date d'effet de la localisation de la dent"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB19" DESCRIPTION="nombre de modificateurs tarifants">
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date d'effet du nombre de modificateurs tarifants"/>
+    <COLUMN NAME="NB_MODIFICATEURS" TYPE="NUMBER" PRECISION="1" DESCRIPTION="nombre de modificateurs tarifants"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB20" DESCRIPTION="table de transcodage des évolutions des codifications">
+    <COLUMN NAME="CONCEPT" TYPE="VARCHAR" MAX-LENGTH="5" DESCRIPTION="type de codification"/>
+    <COLUMN NAME="CODE" TYPE="VARCHAR" MAX-LENGTH="10" DESCRIPTION="code permanent"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="date d'effet du transcodage"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION=""/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB21" DESCRIPTION="Forfait CMUC CCAM n°52 Pour connaitre le seuil max(Indice Tarifaire).">
+    <COLUMN NAME="CLE_FORFAITAIRE" TYPE="NUMBER" PRECISION="4" DESCRIPTION="Clé technique entre la table et la Table R_ACTE_CMUC"/>
+    <COLUMN NAME="COD_CMUC" TYPE="VARCHAR" MAX-LENGTH="3" DESCRIPTION="Code Forfaitaire"/>
+    <COLUMN NAME="DT_D" TYPE="DATE" DESCRIPTION="date de début de validité forfait/indice tarifaire."/>
+    <COLUMN NAME="INDICE_TARIFAIRE" TYPE="VARCHAR" MAX-LENGTH="2" DESCRIPTION="Valeur de l'Indice Tarifaire"/>
+    <COLUMN NAME="DT_F" TYPE="DATE" DESCRIPTION="date de fin de validité forfait/indice tarifaire. "/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB22" DESCRIPTION="Affectation de la Grille en fonction des Contextes">
+    <COLUMN NAME="COD_CONTXTPS" TYPE="NUMBER" PRECISION="4" DESCRIPTION="Code du Contexte du Professionnel de Santé"/>
+    <COLUMN NAME="COD_CONTXTBEN" TYPE="NUMBER" PRECISION="4" DESCRIPTION="Code du Contexte du Bénéficiaire"/>
+    <COLUMN NAME="GRILLE_COD" TYPE="NUMBER" PRECISION="3" DESCRIPTION="Code de la Grille"/>
+    <COLUMN NAME="DT_DEBUT" TYPE="DATE" DESCRIPTION="Date de Début, pour historisation"/>
+    <COLUMN NAME="DT_FIN" TYPE="DATE" DESCRIPTION="date fin"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TB23" DESCRIPTION="Grille Tarifaire Libellé et détail des Grilles Tarifaire">
+    <COLUMN NAME="COD_GRILLE" TYPE="NUMBER" PRECISION="3" DESCRIPTION="Code de la Grille"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="libelle de la grille"/>
+    <COLUMN NAME="DEFINITION" TYPE="VARCHAR" MAX-LENGTH="250" DESCRIPTION="Description de la Grille Tarifaire"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TYPE" DESCRIPTION="Codification du Type d'Acte">
+    <COLUMN NAME="COD_TYPE" TYPE="NUMBER" PRECISION="1" DESCRIPTION="Code Type Acte"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="80" DESCRIPTION="libellé type acte"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_TYPE_NOTE" DESCRIPTION="Liste des Types de note possibles">
+    <COLUMN NAME="COD_TYPNOT" TYPE="NUMBER" PRECISION="2" DESCRIPTION="code de type de note"/>
+    <COLUMN NAME="LIBELLE" TYPE="VARCHAR" MAX-LENGTH="100" DESCRIPTION="CCAM n° 11 Libellé de type de note"/>
+  </TABLE>
+
+
+  <TABLE NAME="R_UNITE_OEUVRE" DESCRIPTION="Table de valeurs des unités d'oeuvre">
+    <COLUMN NAME="COD_UOEUVR" TYPE="VARCHAR" MAX-LENGTH="3" DESCRIPTION="Code de l'unité d'oeuvre"/>
+    <COLUMN NAME="DT_EFFET" TYPE="DATE" DESCRIPTION="date d'effet de l'unité d'oeuvre"/>
+    <COLUMN NAME="VALEUR" TYPE="NUMBER" PRECISION="6" SCALE="2" DESCRIPTION="valeur associée à l'unité d'oeuvre"/>
+  </TABLE>
+
+</TABLES>
